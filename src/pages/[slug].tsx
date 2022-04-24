@@ -23,6 +23,7 @@ export const getStaticPaths = async () => {
   const items = await getPostEntries()
   const paths = items.map((item) => {
     return {
+      // @ts-ignore
       params: { slug: item.fields.slug },
     }
   })
@@ -35,6 +36,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const items = await getPostEntries()
   const post = items.find((item) => {
+    // @ts-ignore
     return item.fields.slug == params.slug
   })
   return {
