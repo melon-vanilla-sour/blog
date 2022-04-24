@@ -1,5 +1,6 @@
 .next
 .vscode
+.env
 
 node_modules
 trace
