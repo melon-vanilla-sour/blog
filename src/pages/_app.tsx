@@ -9,6 +9,7 @@ const theme = extendTheme({
         marginBottom: '30px',
         textDecoration: 'underline',
         textUnderlineOffset: '5px',
+        textAlign: 'center',
       },
     },
   },
