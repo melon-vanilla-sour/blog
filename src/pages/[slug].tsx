@@ -2,13 +2,16 @@ import type { NextPage, InferGetStaticPropsType, GetStaticPaths } from 'next'
 import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import ErrorPage from 'next/error'
 import { buildClient } from '../lib/contentful'
 import { EntryCollection } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 
-import { Center, Heading } from '@chakra-ui/react'
+import { Center, Heading, Box } from '@chakra-ui/react'
+
+import Base from '../../components/base'
 
 const client = buildClient()
 
@@ -70,12 +73,14 @@ const renderOptions = {
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
       // render the EMBEDDED_ASSET as you need
       return (
-        <Image
-          src={`https:${node.data.target.fields.file.url}`}
-          height={node.data.target.fields.file.details.image.height / 2}
-          width={node.data.target.fields.file.details.image.width / 2}
-          alt={node.data.target.fields.description}
-        />
+        <Box mt="10px" mb="10px">
+          <Image
+            src={`https:${node.data.target.fields.file.url}`}
+            height={node.data.target.fields.file.details.image.height / 2}
+            width={node.data.target.fields.file.details.image.width / 2}
+            alt={node.data.target.fields.description}
+          />
+        </Box>
       )
     },
   },
@@ -88,19 +93,16 @@ const Post = ({ post }) => {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>{post.fields.title}</title>
       </Head>
-      <Center>
-        <main>
-          <Heading>Melon Vanilla Sour</Heading>
-          <Heading size="lg">{post.fields.title}</Heading>
-          <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
-          <span onClick={() => router.back()}>Click here to go back</span>
-        </main>
-      </Center>
-    </div>
+      <Base>
+        <Heading size="lg">{post.fields.title}</Heading>
+        <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
+        <Link href="/">View all posts</Link>
+      </Base>
+    </>
   )
 }
 
