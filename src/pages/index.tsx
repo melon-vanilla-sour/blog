@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
@@ -29,7 +29,16 @@ function HomePage({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
-        <Text>Web Developer</Text>
+        <Box mt={15}>
+          <Center>
+            <Text>Web Developer</Text>
+          </Center>
+          <SimpleGrid mt={25} columns={4} spacing={8}>
+            <img width="100px" src="icons/javascript.svg" alt="javascript-icon" />
+            <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
+            <img width="100px" src="icons/react.svg" alt="javascript-icon" />
+          </SimpleGrid>
+        </Box>
       </Base>
     </>
   )
