@@ -3,8 +3,8 @@ import Link from 'next/link'
 
 const Base = ({ children }) => {
   return (
-    <div>
-      <VStack w="200px" position="absolute" height="full" justify="center">
+    <Box background="#ECECEC">
+      <VStack w="200px" position="fixed" height="full" justify="center">
         <Link href="/">
           <Text cursor="pointer">About Me</Text>
         </Link>
@@ -27,6 +27,7 @@ const Base = ({ children }) => {
           display="flex"
           flexDirection="column"
           alignItems="center"
+          background="white"
         >
           <Heading textDecoration="underline" textUnderlineOffset="5px">
             Melon Vanilla Sour
@@ -34,7 +35,7 @@ const Base = ({ children }) => {
           <>{children}</>
         </Box>
       </Center>
-    </div>
+    </Box>
   )
 }
 

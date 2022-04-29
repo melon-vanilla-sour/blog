@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Center, Heading, Box } from '@chakra-ui/react'
+import { Center, Heading, Box, HStack, VStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
@@ -30,14 +30,16 @@ const PostThumbnail = ({ post }) => {
   const createdAt = dayjs(post.sys.createdAt)
 
   return (
-    <Box key={post.sys.id} border="2px solid" p="6" mt="6" mb="6" rounded="md">
+    <Box key={post.sys.id} p="6" mt="6" mb="6" rounded="md">
       <Link href={`/${post.fields.slug}`}>
         <a>
-          <Box height="200px" position="relative">
+          <Box height="200px" position="relative" alignItems="start">
             {thumbnailFactory(post)}
           </Box>
-          <h2>{post.fields.title}</h2>
-          <p>Posted on {createdAt.format('DD/MM/YYYY')}</p>
+          <VStack mt={5}>
+            <h2>{post.fields.title}</h2>
+            <p>Posted on {createdAt.format('DD/MM/YYYY')}</p>
+          </VStack>
         </a>
       </Link>
     </Box>
