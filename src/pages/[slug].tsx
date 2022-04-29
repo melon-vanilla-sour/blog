@@ -100,7 +100,7 @@ const Post = ({ post }) => {
       <Base>
         <Heading size="lg">{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
-        <Link href="/">View all posts</Link>
+        <Link href="/blog">View all posts</Link>
       </Base>
     </>
   )

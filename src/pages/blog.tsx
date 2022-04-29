@@ -2,7 +2,7 @@ import { Heading } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
-import { Center, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, SimpleGrid } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 import Head from 'next/head'
@@ -20,7 +20,7 @@ export const getStaticProps = async () => {
   }
 }
 
-function HomePage({ posts }) {
+function Blog({ posts }) {
   return (
     <>
       <Head>
@@ -29,10 +29,12 @@ function HomePage({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
-        <Text>Web Developer</Text>
+        <SimpleGrid columns={[1, 1, 2]} spacing={4} w="full">
+          {posts && posts.map((post) => <PostThumbnail post={post}></PostThumbnail>)}
+        </SimpleGrid>
       </Base>
     </>
   )
 }
 
-export default HomePage
+export default Blog
