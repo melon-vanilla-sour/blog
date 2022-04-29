@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prod": "next build && next start"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "contentful": "^9.1.24",
+    "dayjs": "^1.11.1",
     "dotenv": "^16.0.0",
     "framer-motion": "^6.2.8",
     "next": "^12.1.0",
