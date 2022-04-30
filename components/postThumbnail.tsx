@@ -30,16 +30,18 @@ const PostThumbnail = ({ post }) => {
   const createdAt = dayjs(post.sys.createdAt)
 
   return (
-    <Box key={post.sys.id} p="6" mt="6" mb="6" rounded="md">
+    <Box key={post.sys.id}>
       <Link href={`/${post.fields.slug}`}>
         <a>
-          <Box height="200px" position="relative" alignItems="start">
-            {thumbnailFactory(post)}
-          </Box>
-          <VStack mt={5}>
-            <h2>{post.fields.title}</h2>
-            <p>Posted on {createdAt.format('DD/MM/YYYY')}</p>
-          </VStack>
+          <HStack>
+            <Box height="200px" width="300px" position="relative">
+              {thumbnailFactory(post)}
+            </Box>
+            <VStack alignItems="start">
+              <h2>{post.fields.title}</h2>
+              <p>Posted on {createdAt.format('DD/MM/YYYY')}</p>
+            </VStack>
+          </HStack>
         </a>
       </Link>
     </Box>

@@ -2,7 +2,7 @@ import { Heading } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
-import { Center, SimpleGrid } from '@chakra-ui/react'
+import { Center, SimpleGrid, VStack } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 import Head from 'next/head'
@@ -29,9 +29,9 @@ function Blog({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
-        <SimpleGrid columns={[1, 1, 2]} spacing={4} w="full">
+        <VStack alignItems="start">
           {posts && posts.map((post) => <PostThumbnail post={post}></PostThumbnail>)}
-        </SimpleGrid>
+        </VStack>
       </Base>
     </>
   )
