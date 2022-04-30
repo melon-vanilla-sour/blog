@@ -7,9 +7,11 @@ import ErrorPage from 'next/error'
 import { buildClient } from '../lib/contentful'
 import { EntryCollection } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Center, Heading, Box } from '@chakra-ui/react'
+import { Center, Heading, Box, Text } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 
@@ -81,6 +83,32 @@ const renderOptions = {
             alt={node.data.target.fields.description}
           />
         </Box>
+      )
+    },
+    [BLOCKS.PARAGRAPH]: (node, children) => {
+      if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
+        return <div>{children}</div>
+      }
+      return <p>{children}</p>
+    },
+  },
+  renderMark: {
+    [MARKS.CODE]: (text) => {
+      text = text.split('\n')
+      const language = text.shift() // コードブロックの1行目の言語指定をClassに利用後削除
+      text = text.join('\n')
+
+      // const value = text.reduce((acc, cur) => {
+      //   if (typeof cur !== 'string' && cur.type === 'br') {
+      //     return acc + '\n'
+      //   }
+      //   return acc + cur
+      // }, '')
+
+      return (
+        <SyntaxHighlighter language={language} style={monokai} showLineNumbers wrapLongLines="true">
+          {text}
+        </SyntaxHighlighter>
       )
     },
   },
