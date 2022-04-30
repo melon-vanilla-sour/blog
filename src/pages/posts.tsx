@@ -29,6 +29,7 @@ function Blog({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
+        <Heading mb="40px">Posts</Heading>
         <VStack alignItems="start">
           {posts && posts.map((post) => <PostThumbnail post={post}></PostThumbnail>)}
         </VStack>
