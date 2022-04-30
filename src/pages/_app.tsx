@@ -5,10 +5,6 @@ const theme = extendTheme({
   components: {
     Heading: {
       baseStyle: {
-        marginTop: '15px',
-        marginBottom: '15px',
-        // textDecoration: 'underline',
-        // textUnderlineOffset: '5px',
         textAlign: 'center',
       },
     },
