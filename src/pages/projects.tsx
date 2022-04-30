@@ -1,6 +1,7 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Heading, HStack, VStack } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { Center, SimpleGrid, Text } from '@chakra-ui/react'
 
@@ -16,9 +17,22 @@ function Projects() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
-        <Box mt={15}>
-          <Text>Coming Soon...</Text>
-        </Box>
+        <Heading mb="40px">Projects</Heading>
+        <VStack alignItems="start">
+          <a href="https://holoview.vercel.app/" target="_blank">
+            <a>
+              <HStack>
+                <Box height="200px" width="300px" position="relative">
+                  <Image src="/projects/holoview-thumbnail.png" layout="fill" objectFit="contain" />
+                </Box>
+                <VStack alignItems="start">
+                  <h2>Holoview</h2>
+                  <p>A page to watch Hololive VTubers</p>
+                </VStack>
+              </HStack>
+            </a>
+          </a>
+        </VStack>
       </Base>
     </>
   )
