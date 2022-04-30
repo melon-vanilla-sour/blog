@@ -11,7 +11,7 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Center, Heading, Box, Text } from '@chakra-ui/react'
+import { Center, Heading, Box, Text, Button } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 
@@ -128,7 +128,9 @@ const Post = ({ post }) => {
       <Base>
         <Heading size="lg">{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
-        <Link href="/blog">View all posts</Link>
+        <Link href="/blog">
+          <Button colorScheme="twitter">View all posts</Button>
+        </Link>
       </Base>
     </>
   )
