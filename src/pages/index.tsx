@@ -29,14 +29,31 @@ function HomePage({ posts }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Base>
-        <Box mt={15}>
-          <Center>
-            <Text>Web Developer</Text>
-          </Center>
+        <Box>
+          <Heading mb="40px">About Me</Heading>
+          <Text>Web Developer</Text>
+          <br />
+
+          <Text>Contact: melonvanillasour@gmail.com</Text>
+          <br />
+          <Text>I'm pretty good with these things</Text>
+
           <SimpleGrid mt={25} columns={4} spacing={8}>
             <img width="100px" src="icons/javascript.svg" alt="javascript-icon" />
-            <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
+            <a href="https://nextjs.org/" target="_blank">
+              <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
+            </a>
             <img width="100px" src="icons/react.svg" alt="javascript-icon" />
+            <img width="100px" src="icons/chakraui.svg" alt="javascript-icon" />
+            <a href="https://nodejs.org/en/" target="_blank">
+              <img width="100px" src="icons/nodedotjs.svg" alt="javascript-icon" />
+            </a>
+          </SimpleGrid>
+
+          <Text>I'm ok with these things</Text>
+          <SimpleGrid mt={25} columns={4} spacing={8}>
+            <img width="100px" src="icons/ruby.svg" alt="javascript-icon" />
+            <img width="100px" src="icons/php.svg" alt="javascript-icon" />
           </SimpleGrid>
         </Box>
       </Base>
