@@ -1,7 +1,12 @@
 import { Center, Heading, Box, VStack, Text, Flex, HStack } from '@chakra-ui/react'
+import { useColorMode } from '@chakra-ui/color-mode'
 import Link from 'next/link'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { IconButton } from '@chakra-ui/button'
 
 const Navigation = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
     <VStack
       w="200px"
@@ -21,6 +26,9 @@ const Navigation = () => {
       <Link href="/projects">
         <Text cursor="pointer">Projects</Text>
       </Link>
+      <IconButton mt={4} aria-label="Toggle Mode" onClick={toggleColorMode}>
+        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+      </IconButton>
     </VStack>
   )
 }
