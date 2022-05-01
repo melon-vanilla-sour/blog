@@ -20,7 +20,7 @@ function Projects() {
         <Heading mb="40px">Projects</Heading>
         <VStack alignItems="start">
           <a href="https://holoview.vercel.app/" target="_blank">
-            <a>
+            <Box _hover={{ transform: 'translate(-8px, 0px)' }} transition="all 0.1s ease-out">
               <HStack>
                 <Box height="200px" width="300px" position="relative">
                   <Image src="/projects/holoview-thumbnail.png" layout="fill" objectFit="contain" />
@@ -30,7 +30,7 @@ function Projects() {
                   <p>A page to watch Hololive VTubers</p>
                 </VStack>
               </HStack>
-            </a>
+            </Box>
           </a>
         </VStack>
       </Base>

@@ -2,7 +2,7 @@ import { Box, Heading } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
-import { Center, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, SimpleGrid, Text, Image } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 import Head from 'next/head'
@@ -39,7 +39,13 @@ function HomePage({ posts }) {
           <Text>I'm pretty good with these things</Text>
 
           <SimpleGrid mt={25} columns={4} spacing={8}>
-            <img width="100px" src="icons/javascript.svg" alt="javascript-icon" />
+            <Image
+              width="100px"
+              src="icons/javascript.svg"
+              alt="javascript-icon"
+              _hover={{ transform: 'translate(0px, -10px)' }}
+              transition="all 0.1s ease-out"
+            />
             <a href="https://nextjs.org/" target="_blank">
               <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
             </a>

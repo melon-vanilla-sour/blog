@@ -30,7 +30,11 @@ const PostThumbnail = ({ post }) => {
   const createdAt = dayjs(post.sys.createdAt)
 
   return (
-    <Box key={post.sys.id}>
+    <Box
+      key={post.sys.id}
+      _hover={{ transform: 'translate(-8px, 0px)' }}
+      transition="all 0.1s ease-out"
+    >
       <Link href={`/${post.fields.slug}`}>
         <a>
           <HStack>

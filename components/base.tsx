@@ -1,4 +1,4 @@
-import { Center, Heading, Box, VStack, Text, Flex, HStack } from '@chakra-ui/react'
+import { Center, Heading, Box, VStack, Text, Flex, HStack, SlideFade } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import MobileNavigation from './MobileNavigation'
@@ -23,7 +23,9 @@ const Base = ({ children }) => {
           alignItems="center"
           background="white"
         >
-          <Box>{children}</Box>
+          <SlideFade in={true}>
+            <Box>{children}</Box>
+          </SlideFade>
         </Box>
       </Center>
       <MobileNavigation></MobileNavigation>
