@@ -16,6 +16,11 @@ const theme = extendTheme({
         textAlign: 'center',
       },
     },
+    Text: {
+      baseStyle: {
+        marginY: '10px',
+      },
+    },
   },
 })
 

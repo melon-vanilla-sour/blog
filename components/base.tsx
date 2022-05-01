@@ -1,4 +1,14 @@
-import { Center, Heading, Box, VStack, Text, Flex, HStack, SlideFade } from '@chakra-ui/react'
+import {
+  Center,
+  Heading,
+  Box,
+  VStack,
+  Text,
+  Flex,
+  HStack,
+  SlideFade,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 
 import MobileNavigation from './MobileNavigation'
@@ -10,9 +20,9 @@ const Base = ({ children }) => {
       <Navigation />
       <Center flex="1">
         <Box
-          boxShadow="24px 24px 48px #d1d1d1, -24px -24px 48px #ffffff"
-          paddingTop="60px"
-          paddingBottom="60px"
+          // boxShadow="24px 24px 48px #d1d1d1, -24px -24px 48px #ffffff"
+          boxShadow="2xl"
+          paddingY={'60px'}
           mt="6"
           mb="6"
           rounded="md"
@@ -21,7 +31,7 @@ const Base = ({ children }) => {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          background="white"
+          background={useColorModeValue('white', 'gray.800')}
         >
           <SlideFade in={true}>
             <Box>{children}</Box>

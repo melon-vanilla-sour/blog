@@ -34,6 +34,8 @@ const PostThumbnail = ({ post }) => {
       key={post.sys.id}
       _hover={{ transform: 'translate(-8px, 0px)' }}
       transition="all 0.1s ease-out"
+      boxShadow="md"
+      padding={4}
     >
       <Link href={`/${post.fields.slug}`}>
         <a>
