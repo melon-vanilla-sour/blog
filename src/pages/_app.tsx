@@ -1,15 +1,8 @@
+import '@fontsource/rubik/800.css'
+
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
-// Theme Customization
-const theme = extendTheme({
-  components: {
-    Heading: {
-      baseStyle: {
-        textAlign: 'center',
-      },
-    },
-  },
-})
+import theme from '../../theme'
 
 export default function MyApp({ Component, pageProps }) {
   return (
