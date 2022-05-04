@@ -15,7 +15,7 @@ const MobileNavigation = () => {
       <Link href="/">
         <Text cursor="pointer">About Me</Text>
       </Link>
-      <Link href="/blog">
+      <Link href="/posts">
         <Text cursor="pointer">Blog</Text>
       </Link>
       <Link href="/projects">
