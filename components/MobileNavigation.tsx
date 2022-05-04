@@ -7,10 +7,10 @@ const MobileNavigation = () => {
       w="100%"
       position="fixed"
       bottom="0px"
-      justify="center"
       display={['flex', 'flex', 'none']}
       backgroundColor="white"
-      border="1px solid"
+      boxShadow="dark-lg"
+      justify="space-around"
     >
       <Link href="/">
         <Text cursor="pointer">About Me</Text>

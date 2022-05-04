@@ -32,6 +32,7 @@ const Base = ({ children }) => {
           flexDirection="column"
           alignItems="center"
           background={useColorModeValue('white', 'gray.800')}
+          borderRadius="md"
         >
           <SlideFade in={true}>
             <Box>{children}</Box>

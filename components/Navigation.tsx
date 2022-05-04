@@ -9,12 +9,13 @@ const Navigation = () => {
 
   return (
     <VStack
-      w="200px"
+      w={['0', '0', '150px', '190px']}
       position="fixed"
       height="full"
       justify="start"
       display={['none', 'none', 'flex']}
       paddingTop="20vh"
+      paddingLeft={8}
     >
       <Heading size="md">Melon Vanilla Sour</Heading>
       <Link href="/">

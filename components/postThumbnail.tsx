@@ -4,14 +4,6 @@ import { Center, Heading, Box, HStack, VStack, useColorModeValue } from '@chakra
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
-const getThumbnailUrl = (post) => {
-  for (let node of post.fields.content.content) {
-    if (node.nodeType == 'embedded-asset-block') {
-      return node.data.target.fields.file.url
-    }
-  }
-}
-
 const thumbnailFactory = (post, index) => {
   for (let node of post.fields.content.content) {
     if (node.nodeType == 'embedded-asset-block') {
@@ -32,19 +24,21 @@ const PostThumbnail = ({ post, index }) => {
 
   return (
     <Box
-      key={post.sys.id}
-      _hover={{ transform: 'translate(-8px, 0px)' }}
+      // _hover={{ transform: 'translate(-8px, 0px)' }}
+
+      filter={'saturate(130%)'}
       transition="all 0.1s ease-out"
       boxShadow="md"
       padding={4}
       background={useColorModeValue('white', 'gray.700')}
+      _hover={useColorModeValue({ background: 'gray.100' }, { background: 'gray.600' })}
       borderRadius="sm"
-      maxWidth="800px"
+      minWidth={['0px', '600px', '600px', '800px']}
     >
       <Link href={`/${post.fields.slug}`}>
         <a>
           <HStack>
-            <Box height="200px" width="300px" position="relative">
+            <Box height="200px" width={'300px'} position="relative">
               {thumbnailFactory(post, index)}
             </Box>
             <VStack alignItems="start">
