@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
@@ -30,8 +30,19 @@ function Blog({ posts }) {
       </Head>
       <Base>
         <Heading mb="40px">Posts</Heading>
+        <Box mb={4}>
+          <HStack justifyContent="center">
+            <Link href="/categories">
+              <Button>Categories</Button>
+            </Link>
+            {/* <Link href="/tags"> */}
+            <Button>Tags</Button>
+            {/* </Link> */}
+          </HStack>
+        </Box>
         <VStack alignItems="start">
-          {posts && posts.map((post) => <PostThumbnail post={post}></PostThumbnail>)}
+          {posts &&
+            posts.map((post, index) => <PostThumbnail post={post} index={index}></PostThumbnail>)}
         </VStack>
       </Base>
     </>
