@@ -3,7 +3,7 @@ import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { Center, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 import Head from 'next/head'
@@ -25,10 +25,18 @@ function Projects() {
               transition="all 0.1s ease-out "
               boxShadow="md"
               padding={4}
+              maxWidth="800px"
+              borderRadius="sm"
+              background={useColorModeValue('white', 'gray.700')}
             >
               <HStack>
                 <Box height="200px" width="300px" position="relative">
-                  <Image src="/projects/holoview-thumbnail.png" layout="fill" objectFit="contain" />
+                  <Image
+                    src="/projects/holoview-thumbnail.png"
+                    layout="fill"
+                    objectFit="contain"
+                    priority={true}
+                  />
                 </Box>
                 <VStack alignItems="start">
                   <h2>Holoview</h2>

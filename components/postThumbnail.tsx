@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { Center, Heading, Box, HStack, VStack } from '@chakra-ui/react'
+import { Center, Heading, Box, HStack, VStack, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
@@ -12,7 +12,7 @@ const getThumbnailUrl = (post) => {
   }
 }
 
-const thumbnailFactory = (post) => {
+const thumbnailFactory = (post, index) => {
   for (let node of post.fields.content.content) {
     if (node.nodeType == 'embedded-asset-block') {
       return (
@@ -20,13 +20,14 @@ const thumbnailFactory = (post) => {
           src={`https:${node.data.target.fields.file.url}`}
           layout="fill"
           objectFit="contain"
+          priority={index < 5 ? true : false}
         ></Image>
       )
     }
   }
 }
 
-const PostThumbnail = ({ post }) => {
+const PostThumbnail = ({ post, index }) => {
   const createdAt = dayjs(post.sys.createdAt)
 
   return (
@@ -36,12 +37,15 @@ const PostThumbnail = ({ post }) => {
       transition="all 0.1s ease-out"
       boxShadow="md"
       padding={4}
+      background={useColorModeValue('white', 'gray.700')}
+      borderRadius="sm"
+      maxWidth="800px"
     >
       <Link href={`/${post.fields.slug}`}>
         <a>
           <HStack>
             <Box height="200px" width="300px" position="relative">
-              {thumbnailFactory(post)}
+              {thumbnailFactory(post, index)}
             </Box>
             <VStack alignItems="start">
               <h2>{post.fields.title}</h2>
