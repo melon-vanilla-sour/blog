@@ -3,7 +3,6 @@ import { Html, Head, Main, NextScript } from 'next/document'
 import { ColorModeScript } from '@chakra-ui/react'
 
 import theme from '../../theme'
-import Script from 'next/script'
 
 export default function Document() {
   return (
@@ -16,14 +15,6 @@ export default function Document() {
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
-        <NextScript />
-        {/* Remove overscrolling behavior for Safari */}
-        <Script id="safari-overscroll-none" strategy="afterInteractive">
-          {`document.addEventListener('touchmove', function(event){
-              event.preventDefault();
-            }, { passive: false });
-          `}
-        </Script>
       </body>
     </Html>
   )
