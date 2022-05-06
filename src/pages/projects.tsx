@@ -31,8 +31,8 @@ function Projects() {
                 <Image src={holoview} layout="fill" objectFit="contain" priority={true} />
               </Box>
               <VStack alignItems="start">
-                <h2>Holoview</h2>
-                <p>A page to watch Hololive VTubers</p>
+                <Heading size="md">HoloView</Heading>
+                <Text>A page to watch Hololive VTubers</Text>
               </VStack>
             </HStack>
           </Box>

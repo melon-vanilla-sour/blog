@@ -49,7 +49,7 @@ const PostThumbnail = ({ post, index }) => {
             </VStack>
           </HStack>
           <Box display={['block', 'none', 'none']}>
-            <Heading size="sm">{post.fields.title}</Heading>
+            <Heading size="md">{post.fields.title}</Heading>
             <Text align="center">Posted on {createdAt.format('DD/MM/YYYY')}</Text>
           </Box>
         </a>
