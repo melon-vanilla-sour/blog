@@ -25,6 +25,7 @@ const Base = ({ children }) => {
           paddingY={'60px'}
           mt="6"
           mb="6"
+          px={2}
           rounded="md"
           width={['100%', '100%', '70%']}
           minH="calc(100vh)"
