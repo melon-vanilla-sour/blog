@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Heading, useColorModeValue } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
@@ -43,8 +43,7 @@ function HomePage({ posts }) {
               width="100px"
               src="icons/javascript.svg"
               alt="javascript-icon"
-              _hover={{ transform: 'translate(0px, -10px)' }}
-              transition="all 0.1s ease-out"
+              _hover={useColorModeValue({ background: 'gray.600' }, { background: 'gray.300' })}
             />
             <a href="https://nextjs.org/" target="_blank">
               <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
