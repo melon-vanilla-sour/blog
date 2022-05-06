@@ -7,7 +7,8 @@ const theme = extendTheme({
   styles: {
     global: {
       'html, body': {
-        overscrollBehaviorY: 'none',
+        overscrollBehavior: 'none',
+        // background: 'black',
       },
     },
   },
