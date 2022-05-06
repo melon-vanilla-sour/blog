@@ -18,7 +18,7 @@ export default function Document() {
         <Main />
         <NextScript />
         {/* Remove overscrolling behavior for Safari */}
-        <Script strategy="afterInteractive">
+        <Script id="safari-overscroll-none" strategy="afterInteractive">
           {`document.addEventListener('touchmove', function(event){
               event.preventDefault();
             }, { passive: false });
