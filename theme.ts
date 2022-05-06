@@ -4,6 +4,13 @@ import { extendTheme } from '@chakra-ui/react'
 
 // Theme Customization
 const theme = extendTheme({
+  styles: {
+    global: {
+      html: {
+        overscrollBehaviorY: 'none',
+      },
+    },
+  },
   fonts: {
     heading: 'rubik, sans-serif',
   },
