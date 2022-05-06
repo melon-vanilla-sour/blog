@@ -75,7 +75,7 @@ const renderOptions = {
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
       // render the EMBEDDED_ASSET as you need
       return (
-        <Box mt="10px" mb="10px">
+        <Box mt="10px" mb="10px" filter={'saturate(120%) brightness(110%)'}>
           <Image
             src={`https:${node.data.target.fields.file.url}`}
             height={node.data.target.fields.file.details.image.height / 1.7}
@@ -87,9 +87,13 @@ const renderOptions = {
     },
     [BLOCKS.PARAGRAPH]: (node, children) => {
       if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
-        return <div>{children}</div>
+        return (
+          <Box mt="10px" mb="10px">
+            {children}{' '}
+          </Box>
+        )
       }
-      return <p>{children}</p>
+      return <Text>{children}</Text>
     },
   },
   renderMark: {
@@ -129,7 +133,7 @@ const Post = ({ post }) => {
         <Heading size="lg">{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
         <Link href="/posts">
-          <Button colorScheme="twitter">View all posts</Button>
+          <Button>View all posts</Button>
         </Link>
       </Base>
     </>
