@@ -1,33 +1,25 @@
 import Image from 'next/image'
 
-import { Center, Heading, Box, HStack, VStack, useColorModeValue } from '@chakra-ui/react'
+import { Center, Heading, Box, HStack, VStack, useColorModeValue, Text } from '@chakra-ui/react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
+import { getPlaiceholder } from 'plaiceholder'
 
-const thumbnailFactory = (post, index) => {
+const getThumbnailURI = (post) => {
   for (let node of post.fields.content.content) {
     if (node.nodeType == 'embedded-asset-block') {
-      return (
-        <Image
-          src={`https:${node.data.target.fields.file.url}`}
-          layout="fill"
-          objectFit="contain"
-          priority={index < 5 ? true : false}
-        ></Image>
-      )
+      return `https:${node.data.target.fields.file.url}`
     }
   }
 }
 
 const PostThumbnail = ({ post, index }) => {
   const createdAt = dayjs(post.sys.createdAt)
+  const thumbnailURI = getThumbnailURI(post)
 
   return (
     <Box
       // _hover={{ transform: 'translate(-8px, 0px)' }}
-
-      filter={'saturate(130%)'}
-      transition="all 0.1s ease-out"
       boxShadow="md"
       padding={4}
       background={useColorModeValue('white', 'gray.700')}
@@ -38,14 +30,28 @@ const PostThumbnail = ({ post, index }) => {
       <Link href={`/${post.fields.slug}`}>
         <a>
           <HStack>
-            <Box height="200px" width={'300px'} position="relative">
-              {thumbnailFactory(post, index)}
+            <Box
+              height="200px"
+              width={'300px'}
+              position="relative"
+              filter={'saturate(130%) brightness(110%)'}
+            >
+              <Image
+                src={thumbnailURI}
+                layout="fill"
+                objectFit="contain"
+                priority={index < 5 ? true : false}
+              ></Image>
             </Box>
-            <VStack alignItems="start">
-              <h2>{post.fields.title}</h2>
-              <p>Posted on {createdAt.format('DD/MM/YYYY')}</p>
+            <VStack alignItems="start" display={['none', 'flex', 'flex']}>
+              <Heading size="md">{post.fields.title}</Heading>
+              <Text>Posted on {createdAt.format('DD/MM/YYYY')}</Text>
             </VStack>
           </HStack>
+          <Box display={['block', 'none', 'none']}>
+            <Heading size="sm">{post.fields.title}</Heading>
+            <Text align="center">Posted on {createdAt.format('DD/MM/YYYY')}</Text>
+          </Box>
         </a>
       </Link>
     </Box>
