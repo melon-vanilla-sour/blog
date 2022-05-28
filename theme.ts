@@ -1,6 +1,13 @@
 import '@fontsource/rubik/800.css'
 
-import { extendTheme } from '@chakra-ui/react'
+import { extendTheme, useColorModeValue } from '@chakra-ui/react'
+
+const glass = {
+  // bg: useColorModeValue('rgba( 255, 255, 255, 0.65 )', 'rgba( 255, 255, 255, 0.65 )'),
+  bg: 'rgba( 255, 255, 255, 0.65 )',
+  backdropFilter: 'blur( 10px )',
+  border: '1px solid rgba( 255, 255, 255, 0.5 )',
+}
 
 // Theme Customization
 const theme = extendTheme({
@@ -8,7 +15,6 @@ const theme = extendTheme({
     global: {
       'html, body': {
         overscrollBehavior: 'none',
-        // background: 'black',
       },
     },
   },
@@ -18,7 +24,12 @@ const theme = extendTheme({
   initialColorMode: 'light',
   useSystemColorMode: false,
   components: {
-    Button: { baseStyle: { _focus: { boxShadow: 'none' } } },
+    Button: {
+      baseStyle: { _focus: { boxShadow: 'none' } },
+      variants: {
+        solid: glass,
+      },
+    },
     Heading: {
       baseStyle: {
         textAlign: 'center',
