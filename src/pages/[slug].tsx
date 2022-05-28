@@ -80,7 +80,7 @@ const renderOptions = {
         <Box mt="10px" mb="10px" filter={'saturate(120%) brightness(110%)'}>
           <Image
             src={`https:${node.data.target.fields.file.url}`}
-            height={node.data.target.fields.file.details.image.height / 1.7}
+            // height={node.data.target.fields.file.details.image.height / 1.7}
             width={node.data.target.fields.file.details.image.width / 1.7}
             alt={node.data.target.fields.description}
           />
