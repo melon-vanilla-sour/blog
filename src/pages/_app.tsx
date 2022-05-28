@@ -10,12 +10,12 @@ export default function MyApp({ Component, pageProps }) {
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
       {/* Remove overscrolling behavior for Safari */}
-      <Script id="safari-overscroll-none">
+      {/* <Script id="safari-overscroll-none">
         {`document.addEventListener('touchmove', function(event){
               event.preventDefault();
             }, { passive: false });
           `}
-      </Script>
+      </Script> */}
     </ChakraProvider>
   )
 }
