@@ -1,6 +1,15 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 
-import { Center, Heading, Box, HStack, VStack, useColorModeValue, Text } from '@chakra-ui/react'
+import {
+  Center,
+  Heading,
+  Box,
+  HStack,
+  VStack,
+  useColorModeValue,
+  Text,
+  Image,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import { getPlaiceholder } from 'plaiceholder'
@@ -36,12 +45,13 @@ const PostThumbnail = ({ post, index }) => {
               position="relative"
               filter={'saturate(130%) brightness(110%)'}
             >
-              <Image
+              {/* <Image
                 src={thumbnailURI}
                 layout="fill"
                 objectFit="contain"
                 priority={index < 5 ? true : false}
-              ></Image>
+              ></Image> */}
+              <Image src={thumbnailURI} maxW={'300px'}></Image>
             </Box>
             <VStack alignItems="start" display={['none', 'flex', 'flex']}>
               <Heading size="md">{post.fields.title}</Heading>

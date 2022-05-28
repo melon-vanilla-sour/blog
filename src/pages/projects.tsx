@@ -28,7 +28,7 @@ function Projects() {
           >
             <HStack>
               <Box height="200px" width="300px" position="relative">
-                <Image src={holoview} layout="fill" objectFit="contain" priority={true} />
+                <Image src={holoview} layout="fill" objectFit="contain" priority />
               </Box>
               <VStack alignItems="start">
                 <Heading size="md">HoloView</Heading>

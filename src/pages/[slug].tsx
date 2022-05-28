@@ -1,17 +1,19 @@
 import type { NextPage, InferGetStaticPropsType, GetStaticPaths } from 'next'
-import Image from 'next/image'
+// import Image from 'next/image'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
+
 import { buildClient } from '../lib/contentful'
 import { EntryCollection } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Center, Heading, Box, Text, Button, SlideFade } from '@chakra-ui/react'
+import { Center, Heading, Box, Text, Button, SlideFade, Image } from '@chakra-ui/react'
 
 import Base from '../../components/base'
 
