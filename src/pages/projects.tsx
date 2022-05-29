@@ -19,7 +19,8 @@ function Projects() {
           <Box
             // _hover={{ transform: 'translate(-8px, 0px)' }}
             // transition="all 0.1s ease-out "
-            background={useColorModeValue('white', 'gray.700')}
+            // background={useColorModeValue('white', 'gray.700')}
+            className="glass"
             _hover={useColorModeValue({ background: 'gray.100' }, { background: 'gray.600' })}
             boxShadow="md"
             padding={4}

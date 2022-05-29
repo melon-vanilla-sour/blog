@@ -45,11 +45,9 @@ const Base = ({ children }) => {
       <Navigation />
       <Center flex="1">
         <Box
-          // boxShadow="24px 24px 48px #d1d1d1, -24px -24px 48px #ffffff"
-          boxShadow="md"
+          // boxShadow="md"
           paddingY={'60px'}
-          mt="6"
-          mb="6"
+          my="6"
           px={2}
           rounded="md"
           width={['100%', '100%', '70%']}
@@ -59,12 +57,7 @@ const Base = ({ children }) => {
           alignItems="center"
           // background={useColorModeValue('white', 'gray.800')}
           borderRadius="md"
-          background={useColorModeValue(
-            'rgba( 255, 255, 255, 0.65 )',
-            'rgba( 255, 255, 255, 0.05 )'
-          )}
-          backdropFilter={'blur( 10px )'}
-          border="1px solid rgba( 255, 255, 255, 0.5 )"
+          // className="glass"
         >
           <SlideFade in={true}>
             <Box>{children}</Box>

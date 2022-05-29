@@ -4,9 +4,9 @@ import { extendTheme, useColorModeValue } from '@chakra-ui/react'
 
 const glass = {
   // bg: useColorModeValue('rgba( 255, 255, 255, 0.65 )', 'rgba( 255, 255, 255, 0.65 )'),
-  bg: 'rgba( 255, 255, 255, 0.65 )',
-  backdropFilter: 'blur( 10px )',
-  border: '1px solid rgba( 255, 255, 255, 0.5 )',
+  bg: 'rgba( 255, 255, 255, 0.1 )',
+  backdropFilter: 'blur( 4px )',
+  border: '1px solid rgba( 255, 255, 255, 0.3 )',
 }
 
 // Theme Customization
@@ -15,6 +15,9 @@ const theme = extendTheme({
     global: {
       'html, body': {
         overscrollBehavior: 'none',
+      },
+      '.glass': {
+        ...glass,
       },
     },
   },
@@ -27,18 +30,29 @@ const theme = extendTheme({
     Button: {
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
-        solid: glass,
+        solid: (props) => ({
+          ...glass,
+          _hover: { bg: props.colorMode === 'dark' ? 'gray.500' : 'gray.300' },
+        }),
       },
     },
     Heading: {
-      baseStyle: {
+      baseStyle: (props) => ({
         textAlign: 'center',
-      },
+        textShadow:
+          props.colorMode === 'dark'
+            ? '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
+            : '',
+      }),
     },
     Text: {
-      baseStyle: {
+      baseStyle: (props) => ({
         marginY: '10px',
-      },
+        textShadow:
+          props.colorMode === 'dark'
+            ? '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
+            : '',
+      }),
     },
   },
 })

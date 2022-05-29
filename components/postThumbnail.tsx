@@ -31,13 +31,11 @@ const PostThumbnail = ({ post, index }) => {
       // _hover={{ transform: 'translate(-8px, 0px)' }}
       boxShadow="md"
       padding={4}
-      background={useColorModeValue('rgba( 255, 255, 255, 0.65 )', 'rgba( 255, 255, 255, 0.05 )')}
       _hover={useColorModeValue({ background: 'gray.200' }, { background: 'gray.600' })}
       borderRadius="sm"
-      minWidth={['0px', '600px', '600px', '800px']}
-      // background={'rgba( 255, 255, 255, 0.65 )'}
-      backdropFilter={'blur( 10px )'}
-      border="1px solid rgba( 255, 255, 255, 0.5 )"
+      // maxWidth={['400px', '600px', '600px', '800px']}
+      width="100%"
+      className="glass"
     >
       <Link href={`/${post.fields.slug}`}>
         <a>
