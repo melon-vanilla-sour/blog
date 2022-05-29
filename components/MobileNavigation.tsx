@@ -21,10 +21,11 @@ const MobileNavigation = () => {
       position="fixed"
       bottom="0px"
       display={['flex', 'flex', 'none']}
-      boxShadow="2xl"
+      // boxShadow="2xl"
       justify="space-around"
-      // background={useColorModeValue('white', 'gray.800')}
-      className="glass"
+      background={useColorModeValue('white', 'gray.800')}
+      // className="glass"
+      borderTop="1px solid rgba( 255, 255, 255, 0.3 )"
     >
       <Link href="/">
         <Text cursor="pointer" w={'100%'} textAlign="center">

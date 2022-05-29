@@ -23,7 +23,7 @@ const Base = ({ children }) => {
         clipPath={'url(#curvedGradient)'}
         backgroundImage={useColorModeValue(
           'linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)',
-          'linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)'
+          'linear-gradient(135deg, #5eb0e4 0%, #6f76d8 100%)'
         )}
         width="100%"
         h="100%"

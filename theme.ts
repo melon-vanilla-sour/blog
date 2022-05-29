@@ -39,19 +39,11 @@ const theme = extendTheme({
     Heading: {
       baseStyle: (props) => ({
         textAlign: 'center',
-        textShadow:
-          props.colorMode === 'dark'
-            ? '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
-            : '',
       }),
     },
     Text: {
       baseStyle: (props) => ({
         marginY: '10px',
-        textShadow:
-          props.colorMode === 'dark'
-            ? '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000'
-            : '',
       }),
     },
   },

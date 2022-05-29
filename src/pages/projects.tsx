@@ -21,7 +21,7 @@ function Projects() {
             // transition="all 0.1s ease-out "
             // background={useColorModeValue('white', 'gray.700')}
             className="glass"
-            _hover={useColorModeValue({ background: 'gray.100' }, { background: 'gray.600' })}
+            _hover={useColorModeValue({ background: 'gray.200' }, { background: 'gray.600' })}
             boxShadow="md"
             padding={4}
             minWidth={['0', '600px', '600px', '800px']}
