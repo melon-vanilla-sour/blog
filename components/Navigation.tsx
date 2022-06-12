@@ -21,7 +21,7 @@ const Navigation = () => {
       <Link href="/">
         <Text cursor="pointer">About Me</Text>
       </Link>
-      <Link href="/posts">
+      <Link href="/posts/1">
         <Text cursor="pointer">Posts</Text>
       </Link>
       <Link href="/projects">

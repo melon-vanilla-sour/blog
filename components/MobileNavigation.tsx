@@ -32,7 +32,7 @@ const MobileNavigation = () => {
           About Me
         </Text>
       </Link>
-      <Link href="/posts">
+      <Link href="/posts/1">
         <Text cursor="pointer" w={'100%'} textAlign="center">
           Posts
         </Text>

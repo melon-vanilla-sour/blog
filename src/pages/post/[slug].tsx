@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 
-import { buildClient } from '../lib/contentful'
+import { buildClient } from '../../lib/contentful'
 import { EntryCollection } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
@@ -15,7 +15,7 @@ import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { Center, Heading, Box, Text, Button, SlideFade, Image } from '@chakra-ui/react'
 
-import Base from '../../components/base'
+import Base from '../../../components/base'
 
 const client = buildClient()
 
@@ -134,7 +134,7 @@ const Post = ({ post }) => {
       <Base>
         <Heading size="lg">{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
-        <Link href="/posts">
+        <Link href="/posts/1">
           <Button>View all posts</Button>
         </Link>
       </Base>

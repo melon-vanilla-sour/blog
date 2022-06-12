@@ -10,3 +10,5 @@ export const buildClient = () => {
   })
   return client
 }
+
+export const postsPerPage = 10
