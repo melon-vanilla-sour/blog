@@ -11,27 +11,26 @@ import PostThumbnail from '../../components/postThumbnail'
 const client = buildClient()
 
 export const getStaticProps = async () => {
-  const { items } = await client.getEntries({
+  const { items: categories } = await client.getEntries({
     content_type: 'post',
     order: '-sys.createdAt',
     select: 'fields.category',
   })
-  return {
-    props: { categories: items },
-  }
-}
-
-function Blog({ categories }) {
   // Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
   categories.filter((category) => {
     category.fields != null
   })
+  return {
+    props: { categories: categories },
+  }
+}
 
+function Blog({ categories }) {
   // Filter duplicates
-  const filteredCategories = []
+  const nonDuplicateCategories = []
   categories.map((category) => {
-    if (!filteredCategories.includes(category.fields.category)) {
-      filteredCategories.push(category.fields.category)
+    if (!nonDuplicateCategories.includes(category.fields.category)) {
+      nonDuplicateCategories.push(category.fields.category)
     }
   })
 
@@ -45,7 +44,10 @@ function Blog({ categories }) {
         </HStack>
       </Box>
       <VStack alignItems="start">
-        {filteredCategories && filteredCategories.map((category) => <Text>{category}</Text>)}
+        {nonDuplicateCategories &&
+          nonDuplicateCategories.map((category) => (
+            <Link href={`/categories/${category}`}>{category}</Link>
+          ))}
       </VStack>
     </Base>
   )
