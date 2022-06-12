@@ -7,6 +7,7 @@ import { Center, SimpleGrid, VStack } from '@chakra-ui/react'
 import Base from '../../../components/base'
 import Head from 'next/head'
 import PostThumbnail from '../../../components/postThumbnail'
+import Pagination from '../../../components/Pagination'
 
 const client = buildClient()
 
@@ -62,11 +63,7 @@ function Posts({ posts, totalPages, currentPage }) {
             <PostThumbnail post={post} index={index} key={post.sys.id}></PostThumbnail>
           ))}
       </VStack>
-      <HStack>
-        {[...Array(totalPages)].map((page, index) => (
-          <Link href={`/posts/${index + 1}`}>{(index + 1).toString()}</Link>
-        ))}
-      </HStack>
+      <Pagination {...totalPages}></Pagination>
     </Base>
   )
 }
