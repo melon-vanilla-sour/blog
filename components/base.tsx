@@ -36,34 +36,25 @@ const Base = ({ children }) => {
               transform="scale(2,2)"
               d="M0 244L53.3 215.2C106.7 186.3 213.3 128.7 320 114.3C426.7 100 533.3 129 640 131.7C746.7 134.3 853.3 110.7 906.7 98.8L960 87L960 0L906.7 0C853.3 0 746.7 0 640 0C533.3 0 426.7 0 320 0C213.3 0 106.7 0 53.3 0L0 0Z"
               fill="#000000"
-              stroke-linecap="round"
-              stroke-linejoin="miter"
+              strokeLinecap="round"
+              strokeLinejoin="miter"
             ></path>
           </clipPath>
         </svg>
       </Box>
-      <Navigation />
-      <Center flex="1">
-        <Box
-          // boxShadow="md"
-          paddingY={'60px'}
-          my="6"
-          px={2}
-          rounded="md"
-          width={['100%', '100%', '70%']}
-          minH="calc(100vh)"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          // background={useColorModeValue('white', 'gray.800')}
-          borderRadius="md"
-          // className="glass"
-        >
-          <SlideFade in={true}>
-            <Box>{children}</Box>
-          </SlideFade>
-        </Box>
-      </Center>
+      {/* <Navigation /> */}
+      <Box
+        paddingY={'60px'}
+        paddingX={4}
+        minH="calc(100vh)"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        borderRadius="md"
+      >
+        {/* <SlideFade in={true}>{children}</SlideFade> */}
+        {children}
+      </Box>
       <MobileNavigation></MobileNavigation>
     </Box>
   )

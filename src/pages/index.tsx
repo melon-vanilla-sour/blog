@@ -8,18 +8,6 @@ import Base from '../../components/base'
 import Head from 'next/head'
 import PostThumbnail from '../../components/postThumbnail'
 
-const client = buildClient()
-
-export const getStaticProps = async () => {
-  const { items } = await client.getEntries({
-    content_type: 'post',
-    order: '-sys.createdAt',
-  })
-  return {
-    props: { posts: items },
-  }
-}
-
 function HomePage({ posts }) {
   return (
     <>
@@ -45,12 +33,12 @@ function HomePage({ posts }) {
               alt="javascript-icon"
               _hover={useColorModeValue({ background: 'gray.600' }, { background: 'gray.300' })}
             />
-            <a href="https://nextjs.org/" target="_blank">
+            <a href="https://nextjs.org/">
               <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
             </a>
             <img width="100px" src="icons/react.svg" alt="javascript-icon" />
             <img width="100px" src="icons/chakraui.svg" alt="javascript-icon" />
-            <a href="https://nodejs.org/en/" target="_blank">
+            <a href="https://nodejs.org/en/">
               <img width="100px" src="icons/nodedotjs.svg" alt="javascript-icon" />
             </a>
           </SimpleGrid>

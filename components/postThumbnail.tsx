@@ -9,6 +9,7 @@ import {
   useColorModeValue,
   Text,
   Image,
+  Flex,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import dayjs from 'dayjs'
@@ -28,18 +29,17 @@ const PostThumbnail = ({ post, index }) => {
 
   return (
     <Box
-      // _hover={{ transform: 'translate(-8px, 0px)' }}
       boxShadow="md"
       padding={4}
       _hover={useColorModeValue({ background: 'gray.200' }, { background: 'gray.600' })}
-      borderRadius="sm"
-      // maxWidth={['400px', '600px', '600px', '800px']}
-      width="100%"
+      borderRadius="lg"
+      w="full"
+      maxW="1000px"
       className="glass"
     >
-      <Link href={`/${post.fields.slug}`}>
+      <Link href={`/post/${post.fields.slug}`}>
         <a>
-          <HStack>
+          <Flex justifyContent="center">
             <Box
               height="200px"
               width={'300px'}
@@ -52,13 +52,20 @@ const PostThumbnail = ({ post, index }) => {
                 objectFit="contain"
                 priority={index < 5 ? true : false}
               ></Image> */}
-              <Image src={thumbnailURI} maxW={'300px'}></Image>
+              <Image src={thumbnailURI} maxW={'300px'} alt="Post Thumbnail"></Image>
             </Box>
-            <VStack alignItems="start" display={['none', 'flex', 'flex']}>
+            <Flex
+              flexDir="column"
+              alignItems="center"
+              justifyContent="center"
+              display={['none', 'flex', 'flex']}
+              flex="1"
+              paddingStart={1}
+            >
               <Heading size="md">{post.fields.title}</Heading>
               <Text>Posted on {createdAt.format('DD/MM/YYYY')}</Text>
-            </VStack>
-          </HStack>
+            </Flex>
+          </Flex>
           <Box display={['block', 'none', 'none']}>
             <Heading size="md">{post.fields.title}</Heading>
             <Text align="center">Posted on {createdAt.format('DD/MM/YYYY')}</Text>
