@@ -20,7 +20,7 @@ const MobileNavigation = () => {
       w="100%"
       position="fixed"
       bottom="0px"
-      display={['flex', 'flex', 'none']}
+      display={{ base: 'flex', md: 'none' }}
       // boxShadow="2xl"
       justify="space-around"
       background={useColorModeValue('white', 'gray.800')}

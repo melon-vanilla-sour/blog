@@ -1,21 +1,11 @@
-import {
-  Center,
-  Heading,
-  Box,
-  VStack,
-  Text,
-  Flex,
-  HStack,
-  SlideFade,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Box, SlideFade, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import Head from 'next/head'
 
 import MobileNavigation from '../MobileNavigation'
 import Navigation from '../Navigation'
 
-const Base = ({ children }) => {
+const Main = ({ children }) => {
   return (
     <>
       <Head>
@@ -50,7 +40,7 @@ const Base = ({ children }) => {
           </clipPath>
         </svg>
       </Box>
-      {/* <Navigation /> */}
+      <Navigation />
       <Box
         paddingY={'60px'}
         paddingX={4}
@@ -68,4 +58,4 @@ const Base = ({ children }) => {
   )
 }
 
-export default Base
+export default Main
