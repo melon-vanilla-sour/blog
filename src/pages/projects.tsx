@@ -5,14 +5,14 @@ import Image from 'next/image'
 
 import { Center, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
 
-import Base from '../../components/base'
+import Base from '../../components/layout/base'
 import Head from 'next/head'
 
 import holoview from '../../public/projects/holoview-thumbnail.png'
 
 function Projects() {
   return (
-    <Base>
+    <>
       <Heading mb="40px">Projects</Heading>
       <VStack alignItems="start">
         <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
@@ -48,7 +48,7 @@ function Projects() {
           </Box>
         </a>
       </VStack>
-    </Base>
+    </>
   )
 }
 

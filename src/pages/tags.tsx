@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 import { Center, SimpleGrid, VStack, Text } from '@chakra-ui/react'
 
-import Base from '../../components/base'
+import Base from '../../components/layout/base'
 import Head from 'next/head'
-import PostThumbnail from '../../components/postThumbnail'
+import Card from '../../components/Card'
 
 // const client = buildClient()
 
@@ -38,7 +38,7 @@ function Tags({ categories }) {
   //   })()
 
   return (
-    <Base>
+    <>
       {/* <Heading mb="40px">Tags</Heading>
       <Box mb={4}>
         <HStack justifyContent="center">
@@ -49,7 +49,7 @@ function Tags({ categories }) {
       <VStack alignItems="start">
         {filteredTags && filteredTags.map((tag) => <Text>{tag}</Text>)}
       </VStack> */}
-    </Base>
+    </>
   )
 }
 

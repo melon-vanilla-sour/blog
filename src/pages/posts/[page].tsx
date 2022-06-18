@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 import { Center, SimpleGrid, VStack } from '@chakra-ui/react'
 
-import Base from '../../../components/base'
+import Base from '../../../components/layout/base'
 import Head from 'next/head'
-import PostThumbnail from '../../../components/postThumbnail'
+import Card from '../../../components/Card'
 import Pagination from '../../../components/Pagination'
 
 const client = buildClient()
@@ -47,7 +47,7 @@ export const getStaticProps = async ({ params }) => {
 
 function Posts({ posts, totalPages, currentPage }) {
   return (
-    <Base>
+    <>
       <Heading mb="40px">Posts</Heading>
       <Box mb={4}>
         <HStack justifyContent="center">
@@ -59,12 +59,10 @@ function Posts({ posts, totalPages, currentPage }) {
       </Box>
       <VStack alignItems="center" w="full">
         {posts &&
-          posts.map((post, index) => (
-            <PostThumbnail post={post} index={index} key={post.sys.id}></PostThumbnail>
-          ))}
+          posts.map((post, index) => <Card post={post} index={index} key={post.sys.id}></Card>)}
       </VStack>
       <Pagination {...totalPages}></Pagination>
-    </Base>
+    </>
   )
 }
 

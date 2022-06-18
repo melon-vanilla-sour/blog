@@ -10,13 +10,21 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import Link from 'next/link'
+import Head from 'next/head'
 
-import MobileNavigation from './MobileNavigation'
-import Navigation from './Navigation'
+import MobileNavigation from '../MobileNavigation'
+import Navigation from '../Navigation'
 
 const Base = ({ children }) => {
   return (
-    <Box>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Melon Sour's homepage" />
+        <meta name="author" content="Melon Sour" />
+        <meta property="og:type" content="website" />
+        <title>Melon Sour</title>
+      </Head>
       <Box
         id="test"
         position={'absolute'}
@@ -56,7 +64,7 @@ const Base = ({ children }) => {
         {children}
       </Box>
       <MobileNavigation></MobileNavigation>
-    </Box>
+    </>
   )
 }
 

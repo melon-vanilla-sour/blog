@@ -23,7 +23,7 @@ const getThumbnailURI = (post) => {
   }
 }
 
-const PostThumbnail = ({ post, index }) => {
+const Card = ({ post, index }) => {
   const createdAt = dayjs(post.sys.createdAt)
   const thumbnailURI = getThumbnailURI(post)
 
@@ -76,4 +76,4 @@ const PostThumbnail = ({ post, index }) => {
   )
 }
 
-export default PostThumbnail
+export default Card

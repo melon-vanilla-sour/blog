@@ -15,7 +15,7 @@ import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { Center, Heading, Box, Text, Button, SlideFade, Image } from '@chakra-ui/react'
 
-import Base from '../../../components/base'
+import Base from '../../../components/layout/base'
 
 const client = buildClient()
 
@@ -128,16 +128,13 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <Head>
-        <title>{post.fields.title}</title>
-      </Head>
-      <Base>
+      <>
         <Heading size="lg">{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
         <Link href="/posts/1">
           <Button>View all posts</Button>
         </Link>
-      </Base>
+      </>
     </>
   )
 }

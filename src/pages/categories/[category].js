@@ -1,5 +1,5 @@
 import { buildClient } from '../../lib/contentful'
-import Base from '../../../components/base'
+import Base from '../../../components/layout/base'
 import Pagination from '../../../components/Pagination'
 import { Heading } from '@chakra-ui/react'
 
@@ -41,10 +41,10 @@ export const getStaticProps = async ({ params }) => {
 
 function Category({ category }) {
   return (
-    <Base>
+    <>
       <Heading mb="40px">{category}</Heading>
       <Pagination></Pagination>
-    </Base>
+    </>
   )
 }
 
