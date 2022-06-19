@@ -1,6 +1,7 @@
 import '@fontsource/rubik/800.css'
 
-import { extendTheme, useColorModeValue } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
+import { mode } from '@chakra-ui/theme-tools'
 
 const glass = {
   // bg: useColorModeValue('rgba( 255, 255, 255, 0.65 )', 'rgba( 255, 255, 255, 0.65 )'),
@@ -11,38 +12,43 @@ const glass = {
 
 // Theme Customization
 const theme = extendTheme({
+  initialColorMode: 'light',
+  useSystemColorMode: false,
   styles: {
-    global: {
-      'html, body': {
-        overscrollBehavior: 'none',
+    global: (props) => ({
+      body: {
+        bg: mode('blue.200', 'gray.900')(props),
       },
       '.glass': {
         ...glass,
       },
-    },
+    }),
   },
   fonts: {
     heading: 'rubik, sans-serif',
   },
-  initialColorMode: 'light',
-  useSystemColorMode: false,
   components: {
     Button: {
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
         solid: (props) => ({
           ...glass,
-          _hover: { bg: props.colorMode === 'dark' ? 'gray.500' : 'gray.300' },
+          // [`@media hover and _hover`]: {
+          //   bg: props.colorMode === 'dark' ? 'red.500' : 'red.600',
+          // },
+          _hover: {
+            bg: mode('blue.300', 'gray.600')(props),
+          },
         }),
       },
     },
     Heading: {
-      baseStyle: (props) => ({
+      baseStyle: () => ({
         textAlign: 'center',
       }),
     },
     Text: {
-      baseStyle: (props) => ({
+      baseStyle: () => ({
         marginY: '10px',
       }),
     },
