@@ -31,7 +31,7 @@ const Card = ({ post, index }) => {
     <Box
       boxShadow="md"
       padding={4}
-      _hover={useColorModeValue({ background: 'gray.200' }, { background: 'gray.600' })}
+      _hover={useColorModeValue({ background: 'blue.300' }, { background: 'gray.600' })}
       borderRadius="lg"
       w="full"
       maxW="1000px"

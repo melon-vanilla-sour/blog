@@ -15,7 +15,7 @@ const Main = ({ children }) => {
         <meta property="og:type" content="website" />
         <title>Melon Sour</title>
       </Head>
-      <Box
+      {/* <Box
         id="test"
         position={'absolute'}
         clipPath={'url(#curvedGradient)'}
@@ -39,7 +39,7 @@ const Main = ({ children }) => {
             ></path>
           </clipPath>
         </svg>
-      </Box>
+      </Box> */}
       <Navigation />
       <Box
         paddingY={'60px'}
