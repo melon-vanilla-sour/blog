@@ -23,7 +23,7 @@ const Navigation = () => {
         <Text cursor="pointer">Projects</Text>
       </Link>
       <Spacer />
-      <IconButton mt={4} aria-label="Toggle Mode" onClick={toggleColorMode}>
+      <IconButton aria-label="Toggle Mode" onClick={toggleColorMode}>
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </IconButton>
     </Flex>

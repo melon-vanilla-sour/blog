@@ -34,7 +34,6 @@ const Card = ({ post, index }) => {
       _hover={useColorModeValue({ background: 'blue.300' }, { background: 'gray.600' })}
       borderRadius="lg"
       w="full"
-      maxW="1000px"
       className="glass"
     >
       <Link href={`/post/${post.fields.slug}`}>
