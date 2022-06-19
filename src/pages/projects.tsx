@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 import { Center, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
 
-import Base from '../../components/layout/base'
+import Base from '../components/layout/base'
 import Head from 'next/head'
 
 import holoview from '../../public/projects/holoview-thumbnail.png'
@@ -21,7 +21,7 @@ function Projects() {
             // transition="all 0.1s ease-out "
             // background={useColorModeValue('white', 'gray.700')}
             className="glass"
-            _hover={useColorModeValue({ background: 'gray.200' }, { background: 'gray.600' })}
+            _hover={useColorModeValue({ background: 'blue.300' }, { background: 'gray.600' })}
             boxShadow="md"
             padding={4}
             borderRadius="sm"

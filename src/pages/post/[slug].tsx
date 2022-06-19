@@ -15,7 +15,7 @@ import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { Center, Heading, Box, Text, Button, SlideFade, Image } from '@chakra-ui/react'
 
-import Base from '../../../components/layout/base'
+import Base from '../../components/layout/base'
 
 const client = buildClient()
 
@@ -56,7 +56,6 @@ export const getStaticProps = async ({ params }) => {
 const renderOptions = {
   renderNode: {
     [INLINES.EMBEDDED_ENTRY]: (node, children) => {
-      // target the contentType of the EMBEDDED_ENTRY to display as you need
       if (node.data.target.sys.contentType.sys.id === 'blogPost') {
         return (
           <a href={`/blog/${node.data.target.fields.slug}`}> {node.data.target.fields.title}</a>
@@ -64,7 +63,6 @@ const renderOptions = {
       }
     },
     [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-      // target the contentType of the EMBEDDED_ENTRY to display as you need
       if (node.data.target.sys.contentType.sys.id === 'codeBlock') {
         return (
           <pre>
@@ -75,9 +73,15 @@ const renderOptions = {
     },
 
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-      // render the EMBEDDED_ASSET as you need
       return (
-        <Box mt="10px" mb="10px" filter={'saturate(120%) brightness(110%)'}>
+        <Box
+          mt="10px"
+          mb="10px"
+          filter={'saturate(110%) brightness(110%)'}
+          borderRadius={16}
+          overflow="hidden"
+          boxShadow="md"
+        >
           <Image
             src={`https:${node.data.target.fields.file.url}`}
             // height={node.data.target.fields.file.details.image.height / 1.7}
