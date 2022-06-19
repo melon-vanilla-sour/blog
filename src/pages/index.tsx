@@ -12,7 +12,7 @@ function HomePage({ posts }) {
   return (
     <>
       <Box>
-        <Heading my={4}>About Me</Heading>
+        <Heading my={8}>About Me</Heading>
         <Text>Web Developer</Text>
         <br />
 

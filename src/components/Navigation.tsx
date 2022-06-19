@@ -8,19 +8,31 @@ const Navigation = () => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
-    <Flex w="full" display={{ base: 'none', md: 'flex' }} alignItems="center" paddingX={8}>
-      <Heading size="md">Melon Vanilla Sour</Heading>
+    <Flex
+      w="full"
+      display={{ base: 'none', md: 'flex' }}
+      alignItems="center"
+      paddingX={8}
+      className="navigation"
+    >
+      <Heading size="xs">Melon Vanilla Sour</Heading>
       <Spacer />
       <Link href="/">
-        <Text cursor="pointer">About Me</Text>
+        <Heading size="xs" cursor="pointer">
+          About Me
+        </Heading>
       </Link>
       <Spacer />
       <Link href="/posts/1">
-        <Text cursor="pointer">Posts</Text>
+        <Heading size="xs" cursor="pointer">
+          Posts
+        </Heading>
       </Link>
       <Spacer />
       <Link href="/projects">
-        <Text cursor="pointer">Projects</Text>
+        <Heading size="xs" cursor="pointer">
+          Projects
+        </Heading>
       </Link>
       <Spacer />
       <IconButton aria-label="Toggle Mode" onClick={toggleColorMode}>

@@ -94,7 +94,11 @@ const renderOptions = {
       if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
         return <Box pb={8}>{children} </Box>
       }
-      return <Text pb={8}>{children}</Text>
+      return (
+        <Text pb={8} fontSize="lg">
+          {children}
+        </Text>
+      )
     },
   },
   renderMark: {
@@ -128,10 +132,10 @@ const Post = ({ post }) => {
   return (
     <>
       <>
-        <Heading my={4}>{post.fields.title}</Heading>
+        <Heading my={8}>{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
         <Link href="/posts/1">
-          <Button>View all posts</Button>
+          <Button w={40}>View all posts</Button>
         </Link>
       </>
     </>

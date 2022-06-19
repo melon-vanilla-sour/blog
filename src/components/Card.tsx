@@ -31,16 +31,16 @@ const Card = ({ post, index }) => {
     <Box
       boxShadow="md"
       paddingBottom={2}
+      bg={useColorModeValue('white', 'gray.700')}
       _hover={useColorModeValue(
-        { background: 'blue.300', transform: 'scale(1.02)' },
-        { background: 'gray.700', transform: 'scale(1.02)' }
+        { transform: 'scale(1.02)', boxShadow: 'lg' },
+        { background: 'gray.700', transform: 'scale(1.02)', boxShadow: 'lg' }
       )}
       transition="transform .1s"
       // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
       borderRadius="lg"
       overflow="hidden"
       w="full"
-      className="glass"
       boxSizing="content-box"
     >
       <Link href={`/post/${post.fields.slug}`}>

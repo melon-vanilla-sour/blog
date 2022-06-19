@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, VStack, Flex } from '@chakra-ui/react'
+import { Box, Heading, HStack, VStack, Flex, Grid } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -13,15 +13,22 @@ import holoview from '../../public/projects/holoview-thumbnail.png'
 function Projects() {
   return (
     <>
-      <Heading my={4}>Projects</Heading>
-      <VStack alignItems="center" w="full">
+      <Heading my={8}>Projects</Heading>
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         <Box
           boxShadow="md"
-          padding={4}
-          _hover={useColorModeValue({ background: 'blue.300' }, { background: 'gray.600' })}
+          paddingBottom={2}
+          _hover={useColorModeValue(
+            { background: 'blue.300', transform: 'scale(1.02)' },
+            { background: 'gray.700', transform: 'scale(1.02)' }
+          )}
+          transition="transform .1s"
+          // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
           borderRadius="lg"
+          overflow="hidden"
           w="full"
           className="glass"
+          boxSizing="content-box"
         >
           <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
             <Flex>
@@ -36,23 +43,27 @@ function Projects() {
               </Box>
               <Flex
                 flexDir="column"
-                alignItems="center"
+                alignItems="start"
                 justifyContent="center"
-                display={['none', 'flex', 'flex']}
+                display="flex"
                 flex="1"
-                paddingStart={1}
+                padding={3}
               >
-                <Heading size="md">HoloView</Heading>
+                <Heading
+                  fontSize={{ base: 'md', md: 'lg' }}
+                  textAlign="start"
+                  // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                  minH="2.6em"
+                  noOfLines={2}
+                >
+                  HoloView
+                </Heading>
                 <Text>A page to watch Hololive VTubers</Text>
               </Flex>
             </Flex>
-            <Box display={['block', 'none', 'none']}>
-              <Heading size="md">HoloView</Heading>
-              <Text align="center">A page to watch Hololive VTubers</Text>
-            </Box>
           </a>
         </Box>
-      </VStack>
+      </Grid>
     </>
   )
 }

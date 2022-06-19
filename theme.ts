@@ -4,11 +4,12 @@ import { extendTheme } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 
 const glass = {
-  // bg: useColorModeValue('rgba( 255, 255, 255, 0.65 )', 'rgba( 255, 255, 255, 0.65 )'),
   bg: 'rgba( 255, 255, 255, 0.1 )',
   backdropFilter: 'blur( 4px )',
   border: '1px solid rgba( 255, 255, 255, 0.3 )',
 }
+
+const CREAM = '#fff6e3'
 
 // Theme Customization
 const theme = extendTheme({
@@ -17,7 +18,7 @@ const theme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: mode('blue.200', 'gray.900')(props),
+        bg: mode(CREAM, 'gray.800')(props),
       },
       '.glass': {
         ...glass,
@@ -32,12 +33,10 @@ const theme = extendTheme({
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
         solid: (props) => ({
-          ...glass,
-          // [`@media hover and _hover`]: {
-          //   bg: props.colorMode === 'dark' ? 'red.500' : 'red.600',
-          // },
+          bg: mode('white', 'gray.700')(props),
+          boxShadow: 'md',
           _hover: {
-            bg: mode('blue.300', 'gray.700')(props),
+            bg: mode('orange.200', 'teal.500')(props),
           },
         }),
       },
