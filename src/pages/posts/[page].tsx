@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
 import { buildClient, postsPerPage } from '../../lib/contentful'
 import Link from 'next/link'
 
@@ -57,10 +57,14 @@ function Posts({ posts, totalPages, currentPage }) {
           <Button>Tags</Button>
         </HStack>
       </Box>
-      <VStack alignItems="center" w="full">
+      <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         {posts &&
-          posts.map((post, index) => <Card post={post} index={index} key={post.sys.id}></Card>)}
-      </VStack>
+          posts.map((post, index) => (
+            <GridItem>
+              <Card post={post} index={index} key={post.sys.id}></Card>
+            </GridItem>
+          ))}
+      </Grid>
       <Pagination {...totalPages}></Pagination>
     </>
   )

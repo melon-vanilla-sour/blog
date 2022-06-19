@@ -27,7 +27,7 @@ const Main = ({ children }) => {
         <Navigation />
         {children}
       </Flex>
-      <MobileNavigation></MobileNavigation>
+      <MobileNavigation />
     </>
   )
 }

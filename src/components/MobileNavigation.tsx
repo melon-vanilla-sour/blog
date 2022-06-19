@@ -1,12 +1,9 @@
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import {
-  Center,
+  Spacer,
   Heading,
-  Box,
-  VStack,
   Text,
   Flex,
-  HStack,
   IconButton,
   useColorMode,
   useColorModeValue,
@@ -16,36 +13,30 @@ import Link from 'next/link'
 const MobileNavigation = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   return (
-    <HStack
-      w="100%"
-      position="fixed"
-      bottom="0px"
+    <Flex
+      w="full"
       display={{ base: 'flex', md: 'none' }}
-      // boxShadow="2xl"
-      justify="space-around"
-      background={useColorModeValue('white', 'gray.800')}
-      // className="glass"
-      borderTop="1px solid rgba( 255, 255, 255, 0.3 )"
+      alignItems="center"
+      paddingX={8}
+      position="fixed"
+      bottom={2}
     >
       <Link href="/">
-        <Text cursor="pointer" w={'100%'} textAlign="center">
-          About Me
-        </Text>
+        <Text cursor="pointer">About Me</Text>
       </Link>
+      <Spacer />
       <Link href="/posts/1">
-        <Text cursor="pointer" w={'100%'} textAlign="center">
-          Posts
-        </Text>
+        <Text cursor="pointer">Posts</Text>
       </Link>
+      <Spacer />
       <Link href="/projects">
-        <Text cursor="pointer" w={'100%'} textAlign="center">
-          Projects
-        </Text>
+        <Text cursor="pointer">Projects</Text>
       </Link>
+      <Spacer />
       <IconButton aria-label="Toggle Mode" onClick={toggleColorMode}>
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </IconButton>
-    </HStack>
+    </Flex>
   )
 }
 

@@ -30,45 +30,51 @@ const Card = ({ post, index }) => {
   return (
     <Box
       boxShadow="md"
-      padding={4}
-      _hover={useColorModeValue({ background: 'blue.300' }, { background: 'gray.600' })}
+      paddingBottom={2}
+      _hover={useColorModeValue(
+        { background: 'blue.300', transform: 'scale(1.02)' },
+        { background: 'gray.700', transform: 'scale(1.02)' }
+      )}
+      transition="transform .1s"
+      // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
       borderRadius="lg"
+      overflow="hidden"
       w="full"
       className="glass"
+      boxSizing="content-box"
     >
       <Link href={`/post/${post.fields.slug}`}>
         <a>
-          <Flex justifyContent="center">
-            <Box
-              height="200px"
-              width={'300px'}
-              position="relative"
-              filter={'saturate(130%) brightness(110%)'}
-            >
+          <Flex direction="column">
+            <Box position="relative" filter={'saturate(130%) brightness(110%)'}>
               {/* <Image
                 src={thumbnailURI}
                 layout="fill"
                 objectFit="contain"
                 priority={index < 5 ? true : false}
               ></Image> */}
-              <Image src={thumbnailURI} maxW={'300px'} alt="Post Thumbnail"></Image>
+              <Image src={thumbnailURI} alt="Post Thumbnail"></Image>
             </Box>
             <Flex
               flexDir="column"
-              alignItems="center"
+              alignItems="start"
               justifyContent="center"
-              display={['none', 'flex', 'flex']}
+              display="flex"
               flex="1"
-              paddingStart={1}
+              padding={3}
             >
-              <Heading size="md">{post.fields.title}</Heading>
-              <Text>Posted on {createdAt.format('DD/MM/YYYY')}</Text>
+              <Heading
+                fontSize={{ base: 'md', md: 'lg' }}
+                textAlign="start"
+                // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                minH="2.6em"
+                noOfLines={2}
+              >
+                {post.fields.title}
+              </Heading>
+              <Text>{createdAt.format('DD/MM/YYYY')}</Text>
             </Flex>
           </Flex>
-          <Box display={['block', 'none', 'none']}>
-            <Heading size="md">{post.fields.title}</Heading>
-            <Text align="center">Posted on {createdAt.format('DD/MM/YYYY')}</Text>
-          </Box>
         </a>
       </Link>
     </Box>

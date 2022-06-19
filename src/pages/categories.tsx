@@ -36,7 +36,7 @@ function Blog({ categories }) {
 
   return (
     <>
-      <Heading mb="40px">Categories</Heading>
+      <Heading my={4}>Categories</Heading>
       <Box mb={4}>
         <HStack justifyContent="center">
           <Button>Categories</Button>

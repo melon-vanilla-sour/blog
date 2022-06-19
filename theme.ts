@@ -37,7 +37,7 @@ const theme = extendTheme({
           //   bg: props.colorMode === 'dark' ? 'red.500' : 'red.600',
           // },
           _hover: {
-            bg: mode('blue.300', 'gray.600')(props),
+            bg: mode('blue.300', 'gray.700')(props),
           },
         }),
       },
@@ -48,9 +48,7 @@ const theme = extendTheme({
       }),
     },
     Text: {
-      baseStyle: () => ({
-        marginY: '10px',
-      }),
+      baseStyle: () => ({}),
     },
   },
 })

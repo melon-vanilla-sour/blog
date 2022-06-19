@@ -75,10 +75,9 @@ const renderOptions = {
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
       return (
         <Box
-          mt="10px"
-          mb="10px"
+          mb={8}
           filter={'saturate(110%) brightness(110%)'}
-          borderRadius={16}
+          borderRadius={12}
           overflow="hidden"
           boxShadow="md"
         >
@@ -93,13 +92,9 @@ const renderOptions = {
     },
     [BLOCKS.PARAGRAPH]: (node, children) => {
       if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
-        return (
-          <Box mt="10px" mb="10px">
-            {children}{' '}
-          </Box>
-        )
+        return <Box pb={8}>{children} </Box>
       }
-      return <Text>{children}</Text>
+      return <Text pb={8}>{children}</Text>
     },
   },
   renderMark: {
@@ -133,7 +128,7 @@ const Post = ({ post }) => {
   return (
     <>
       <>
-        <Heading size="lg">{post.fields.title}</Heading>
+        <Heading my={4}>{post.fields.title}</Heading>
         <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
         <Link href="/posts/1">
           <Button>View all posts</Button>
