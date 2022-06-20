@@ -16,24 +16,32 @@ const MobileNavigation = () => {
     <Flex
       w="full"
       display={{ base: 'flex', md: 'none' }}
-      alignItems="center"
-      paddingX={8}
+      paddingX={4}
       position="fixed"
-      bottom={2}
+      bottom="0"
+      background="white"
+      alignItems="center"
+      boxShadow="md"
     >
       <Link href="/">
-        <Text cursor="pointer">About Me</Text>
+        <Text cursor="pointer" fontWeight="semibold">
+          About
+        </Text>
       </Link>
       <Spacer />
       <Link href="/posts/1">
-        <Text cursor="pointer">Posts</Text>
+        <Text cursor="pointer" fontWeight="semibold">
+          Posts
+        </Text>
       </Link>
       <Spacer />
       <Link href="/projects">
-        <Text cursor="pointer">Projects</Text>
+        <Text cursor="pointer" fontWeight="semibold">
+          Projects
+        </Text>
       </Link>
       <Spacer />
-      <IconButton aria-label="Toggle Mode" onClick={toggleColorMode}>
+      <IconButton aria-label="Toggle Mode" onClick={toggleColorMode} boxShadow="none">
         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
       </IconButton>
     </Flex>

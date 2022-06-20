@@ -9,16 +9,22 @@ const glass = {
   border: '1px solid rgba( 255, 255, 255, 0.3 )',
 }
 
-const CREAM = '#fff6e3'
+const colors = {
+  brand: {
+    primary: '',
+    secondary: '#fff6e3',
+  },
+}
 
 // Theme Customization
 const theme = extendTheme({
   initialColorMode: 'light',
   useSystemColorMode: false,
+  colors: { ...colors },
   styles: {
     global: (props) => ({
       body: {
-        bg: mode(CREAM, 'gray.800')(props),
+        bg: mode(colors.brand.secondary, 'gray.800')(props),
       },
       '.glass': {
         ...glass,
@@ -36,7 +42,7 @@ const theme = extendTheme({
           bg: mode('white', 'gray.700')(props),
           boxShadow: 'md',
           _hover: {
-            bg: mode('orange.200', 'teal.500')(props),
+            bg: mode('orange.200', 'green.500')(props),
           },
         }),
       },
