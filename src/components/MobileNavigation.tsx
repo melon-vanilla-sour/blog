@@ -15,7 +15,7 @@ const MobileNavigation = () => {
   return (
     <Flex
       w="full"
-      display={{ base: 'flex', md: 'none' }}
+      display={{ base: 'flex', sm: 'none' }}
       paddingX={4}
       position="fixed"
       bottom="0"

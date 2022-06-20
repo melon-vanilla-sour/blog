@@ -10,7 +10,7 @@ const Navigation = () => {
   return (
     <Flex
       w="full"
-      display={{ base: 'none', md: 'flex' }}
+      display={{ base: 'none', sm: 'flex' }}
       alignItems="center"
       paddingX={8}
       className="navigation"
