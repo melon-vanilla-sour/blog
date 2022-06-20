@@ -19,7 +19,7 @@ const MobileNavigation = () => {
       paddingX={4}
       position="fixed"
       bottom="0"
-      background="white"
+      background={colorMode == 'light' ? 'white' : 'gray.700'}
       alignItems="center"
       boxShadow="md"
     >
