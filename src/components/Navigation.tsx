@@ -1,4 +1,4 @@
-import { Center, Heading, Box, VStack, Text, Flex, HStack, Spacer } from '@chakra-ui/react'
+import { Heading, Flex, Spacer } from '@chakra-ui/react'
 import { useColorMode } from '@chakra-ui/color-mode'
 import Link from 'next/link'
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'

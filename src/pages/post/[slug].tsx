@@ -1,6 +1,3 @@
-import type { NextPage, InferGetStaticPropsType, GetStaticPaths } from 'next'
-// import Image from 'next/image'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
@@ -13,9 +10,7 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Center, Heading, Box, Text, Button, SlideFade, Image } from '@chakra-ui/react'
-
-import Base from '../../components/layout/base'
+import { Heading, Box, Text, Button, Image } from '@chakra-ui/react'
 
 const client = buildClient()
 

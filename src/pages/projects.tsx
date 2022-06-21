@@ -1,12 +1,7 @@
-import { Box, Heading, HStack, VStack, Flex, Grid } from '@chakra-ui/react'
+import { Box, Heading, Text, useColorModeValue, Flex, Grid } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 import Image from 'next/image'
-
-import { Center, SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react'
-
-import Base from '../components/layout/base'
-import Head from 'next/head'
 
 import holoview from '../../public/projects/holoview-thumbnail.png'
 

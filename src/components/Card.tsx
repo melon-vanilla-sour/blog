@@ -1,16 +1,8 @@
 // import Image from 'next/image'
 
-import {
-  Center,
-  Heading,
-  Box,
-  HStack,
-  VStack,
-  useColorModeValue,
-  Text,
-  Image,
-  Flex,
-} from '@chakra-ui/react'
+import { Heading, Box, useColorModeValue, Text, Image, Flex, Icon, Spacer } from '@chakra-ui/react'
+import { TbWriting, TbListDetails } from 'react-icons/tb'
+import { EditIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import { getPlaiceholder } from 'plaiceholder'
@@ -47,13 +39,10 @@ const Card = ({ post, index }) => {
         }
       )}
       transition="transform .1s"
-      // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
       borderRadius="lg"
       overflow="hidden"
       w="full"
       boxSizing="content-box"
-      // outline="solid 1px"
-      // outlineColor={useColorModeValue('orange.100', 'green.400')}
     >
       <Link href={`/post/${post.fields.slug}`}>
         <a>
@@ -84,7 +73,15 @@ const Card = ({ post, index }) => {
               >
                 {post.fields.title}
               </Heading>
-              <Text>{createdAt.format('DD/MM/YYYY')}</Text>
+
+              <Flex alignItems="center">
+                <Icon as={TbListDetails} marginEnd={2} />
+                {post.fields.category}
+              </Flex>
+              <Flex alignItems="center">
+                <Icon as={TbWriting} marginEnd={2} />
+                {createdAt.format('DD/MM/YYYY')}
+              </Flex>
             </Flex>
           </Flex>
         </a>

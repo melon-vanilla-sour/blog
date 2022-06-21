@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 import { Center, SimpleGrid, VStack, Text } from '@chakra-ui/react'
 
-import Base from '../components/layout/base'
 import Head from 'next/head'
 import Card from '../components/Card'
 

@@ -1,13 +1,5 @@
 import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import {
-  Spacer,
-  Heading,
-  Text,
-  Flex,
-  IconButton,
-  useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react'
+import { Spacer, Text, Flex, IconButton, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 
 const MobileNavigation = () => {
