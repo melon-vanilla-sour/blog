@@ -25,6 +25,7 @@ const theme = extendTheme({
     global: (props) => ({
       body: {
         bg: mode(colors.brand.secondary, 'gray.800')(props),
+        overflow: 'scroll',
       },
       '.glass': {
         ...glass,

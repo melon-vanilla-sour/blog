@@ -11,8 +11,8 @@ import Card from '../components/Card'
 function HomePage({ posts }) {
   return (
     <>
+      <Heading my={8}>About Me</Heading>
       <Box>
-        <Heading my={8}>About Me</Heading>
         <Flex flexDir="column" alignItems="center">
           <Text>Web Developer</Text>
           <br />
