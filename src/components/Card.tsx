@@ -33,8 +33,18 @@ const Card = ({ post, index }) => {
       paddingBottom={2}
       bg={useColorModeValue('white', 'gray.700')}
       _hover={useColorModeValue(
-        { transform: 'scale(1.02)', boxShadow: 'lg' },
-        { background: 'gray.700', transform: 'scale(1.02)', boxShadow: 'lg' }
+        {
+          transform: 'scale(1.02)',
+          boxShadow: 'lg',
+          outline: 'solid 1px',
+          outlineColor: 'orange.200',
+        },
+        {
+          transform: 'scale(1.02)',
+          boxShadow: 'lg',
+          outline: 'solid 1px',
+          outlineColor: 'gray.500',
+        }
       )}
       transition="transform .1s"
       // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
@@ -42,6 +52,8 @@ const Card = ({ post, index }) => {
       overflow="hidden"
       w="full"
       boxSizing="content-box"
+      // outline="solid 1px"
+      // outlineColor={useColorModeValue('orange.100', 'green.400')}
     >
       <Link href={`/post/${post.fields.slug}`}>
         <a>
