@@ -1,4 +1,5 @@
-import { Box, Heading, Text, useColorModeValue, Flex, Grid } from '@chakra-ui/react'
+import { Box, Heading, Text, useColorModeValue, Flex, Grid, GridItem, Icon } from '@chakra-ui/react'
+import { BiWrench } from 'react-icons/bi'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -10,51 +11,70 @@ function Projects() {
     <>
       <Heading my={8}>Projects</Heading>
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
-        <Box
-          boxShadow="md"
-          paddingBottom={2}
-          _hover={useColorModeValue({ transform: 'scale(1.02)' }, { transform: 'scale(1.02)' })}
-          transition="transform .1s"
-          // _hover={useColorModeValue({ outline: 'solid  black 2px ' }, { outline: 'solid white' })}
-          borderRadius="lg"
-          overflow="hidden"
-          w="full"
-          className="glass"
-          boxSizing="content-box"
-        >
-          <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
-            <Flex>
-              <Box height="200px" width="250px" position="relative">
-                <Image
-                  src={holoview}
-                  layout="fill"
-                  objectFit="contain"
-                  priority
-                  alt="Project Thumbnail"
-                />
-              </Box>
-              <Flex
-                flexDir="column"
-                alignItems="start"
-                justifyContent="center"
-                display="flex"
-                flex="1"
-                padding={3}
-              >
-                <Heading
-                  fontSize={{ base: 'md', md: 'lg' }}
-                  textAlign="start"
-                  // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
-                  minH="2.6em"
-                  noOfLines={2}
+        <GridItem>
+          <Box
+            boxShadow="md"
+            paddingBottom={2}
+            bg={useColorModeValue('white', 'gray.700')}
+            _hover={useColorModeValue(
+              {
+                transform: 'scale(1.02)',
+                boxShadow: 'lg',
+                outline: 'solid 1px',
+                outlineColor: 'orange.200',
+              },
+              {
+                transform: 'scale(1.02)',
+                boxShadow: 'lg',
+                outline: 'solid 1px',
+                outlineColor: 'gray.500',
+              }
+            )}
+            transition="transform .1s"
+            borderRadius="lg"
+            overflow="hidden"
+            w="full"
+            boxSizing="content-box"
+          >
+            <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
+              <Flex direction="column">
+                <Box position="relative" filter={'saturate(130%) brightness(110%)'}>
+                  {/* <Image
+                src={thumbnailURI}
+                layout="fill"
+                objectFit="contain"
+                priority={index < 5 ? true : false}
+              ></Image> */}
+                  <Image src={holoview} alt="Post Thumbnail"></Image>
+                </Box>
+                <Flex
+                  flexDir="column"
+                  alignItems="start"
+                  justifyContent="center"
+                  display="flex"
+                  flex="1"
+                  padding={3}
                 >
-                  HoloView
-                </Heading>
-                <Text>A page to watch Hololive VTubers</Text>
+                  <Heading
+                    fontSize={{ base: 'md', md: 'lg' }}
+                    textAlign="start"
+                    // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                    minH="2.6em"
+                    noOfLines={2}
+                  >
+                    HoloView
+                  </Heading>
+
+                  <Flex alignItems="center">A page to watch Hololive VTubers</Flex>
+                  <Flex alignItems="center">
+                    <Icon as={BiWrench} marginEnd={2} />
+                    React, Chakra UI, Vercel
+                  </Flex>
+                </Flex>
               </Flex>
-            </Flex>
-          </a>
-        </Box>
+            </a>
+          </Box>
+        </GridItem>
       </Grid>
     </>
   )

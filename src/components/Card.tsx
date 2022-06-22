@@ -2,6 +2,7 @@
 
 import { Heading, Box, useColorModeValue, Text, Image, Flex, Icon, Spacer } from '@chakra-ui/react'
 import { TbWriting, TbListDetails } from 'react-icons/tb'
+import { BiFolderOpen } from 'react-icons/bi'
 import { EditIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
 import dayjs from 'dayjs'
@@ -75,7 +76,7 @@ const Card = ({ post, index }) => {
               </Heading>
 
               <Flex alignItems="center">
-                <Icon as={TbListDetails} marginEnd={2} />
+                <Icon as={BiFolderOpen} marginEnd={2} />
                 {post.fields.category}
               </Flex>
               <Flex alignItems="center">
