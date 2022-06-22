@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Grid } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
@@ -42,12 +42,17 @@ function Blog({ categories }) {
           <Button>Tags</Button>
         </HStack>
       </Box>
-      <VStack alignItems="start">
+      <Grid templateColumns={{ base: 'repeat(4, 1fr)', sm: 'repeat(6, 1fr)' }} gap={6}>
         {nonDuplicateCategories &&
           nonDuplicateCategories.map((category) => (
-            <Link href={`/categories/${category}`}>{category}</Link>
+            <Link href={`/categories/${category}`}>
+              <Button w={40}>{category}</Button>
+            </Link>
           ))}
-      </VStack>
+        <Link href="/posts/1">
+          <Button w={40}>View all posts</Button>
+        </Link>
+      </Grid>
     </>
   )
 }

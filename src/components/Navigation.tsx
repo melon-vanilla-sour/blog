@@ -15,22 +15,22 @@ const Navigation = () => {
       paddingX={8}
       className="navigation"
     >
-      <Heading size="xs">Melon Vanilla Sour</Heading>
+      <Heading size="sm">Melon Vanilla Sour</Heading>
       <Spacer />
       <Link href="/">
-        <Heading size="xs" cursor="pointer">
-          About Me
+        <Heading size="sm" cursor="pointer">
+          About
         </Heading>
       </Link>
       <Spacer />
       <Link href="/posts/1">
-        <Heading size="xs" cursor="pointer">
+        <Heading size="sm" cursor="pointer">
           Posts
         </Heading>
       </Link>
       <Spacer />
       <Link href="/projects">
-        <Heading size="xs" cursor="pointer">
+        <Heading size="sm" cursor="pointer">
           Projects
         </Heading>
       </Link>

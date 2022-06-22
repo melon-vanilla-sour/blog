@@ -11,7 +11,7 @@ import Card from '../components/Card'
 function HomePage({ posts }) {
   return (
     <>
-      <Heading my={8}>About Me</Heading>
+      <Heading my={8}>About</Heading>
       <Box>
         <Flex flexDir="column" alignItems="center">
           <Text>Web Developer</Text>
@@ -20,10 +20,14 @@ function HomePage({ posts }) {
         </Flex>
         <Flex flexDir="column" alignItems="center">
           <Grid
-            my={{ base: 10, sm: 16 }}
+            my={{ base: 8, sm: 12 }}
             templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(4, 1fr)' }}
             gap={8}
             maxW="lg"
+            background={useColorModeValue('white', 'gray.700')}
+            padding={8}
+            borderRadius="lg"
+            boxShadow="md"
           >
             <Image
               width="100px"
@@ -46,10 +50,14 @@ function HomePage({ posts }) {
         </Flex>
         <Flex flexDir="column" alignItems="center">
           <Grid
-            my={{ base: 10, sm: 16 }}
+            my={{ base: 8, sm: 12 }}
             templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(4, 1fr)' }}
             gap={8}
             maxW="lg"
+            background={useColorModeValue('white', 'gray.700')}
+            padding={8}
+            borderRadius="lg"
+            boxShadow="md"
           >
             <img width="100px" src="icons/ruby.svg" alt="javascript-icon" />
             <img width="100px" src="icons/php.svg" alt="javascript-icon" />

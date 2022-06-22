@@ -42,7 +42,7 @@ export const getStaticProps = async ({ params }) => {
 function Category({ category }) {
   return (
     <>
-      <Heading mb="40px">{category}</Heading>
+      <Heading my={8}>{category}</Heading>
       <Pagination></Pagination>
     </>
   )

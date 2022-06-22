@@ -1,5 +1,3 @@
-import '@fontsource/rubik/800.css'
-
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Main from '../components/layout/base'
 
