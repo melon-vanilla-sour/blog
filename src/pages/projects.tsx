@@ -12,30 +12,7 @@ function Projects() {
       <Heading my={8}>Projects</Heading>
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         <GridItem>
-          <Box
-            boxShadow="md"
-            paddingBottom={2}
-            bg={useColorModeValue('white', 'gray.700')}
-            _hover={useColorModeValue(
-              {
-                transform: 'scale(1.02)',
-                boxShadow: 'lg',
-                outline: 'solid 1px',
-                outlineColor: 'orange.200',
-              },
-              {
-                transform: 'scale(1.02)',
-                boxShadow: 'lg',
-                outline: 'solid 1px',
-                outlineColor: 'gray.500',
-              }
-            )}
-            transition="transform .1s"
-            borderRadius="lg"
-            overflow="hidden"
-            w="full"
-            boxSizing="content-box"
-          >
+          <Box className="card">
             <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
               <Flex direction="column">
                 <Box position="relative" filter={'saturate(130%) brightness(110%)'}>
@@ -47,14 +24,7 @@ function Projects() {
               ></Image> */}
                   <Image src={holoview} alt="Post Thumbnail"></Image>
                 </Box>
-                <Flex
-                  flexDir="column"
-                  alignItems="start"
-                  justifyContent="center"
-                  display="flex"
-                  flex="1"
-                  padding={3}
-                >
+                <Flex className="cardText">
                   <Heading
                     fontSize={{ base: 'md', md: 'lg' }}
                     textAlign="start"

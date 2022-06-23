@@ -15,7 +15,9 @@ const Main = ({ children }) => {
         <title>Melon Sour</title>
       </Head>
       <Flex
-        paddingY={4}
+        paddingTop={4}
+        // Mobile needs extra padding to account for navigation bar height
+        paddingBottom={{ base: '16', sm: '4' }}
         paddingX={4}
         minH="calc(100vh)"
         display="flex"

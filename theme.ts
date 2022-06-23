@@ -7,6 +7,33 @@ const glass = {
   border: '1px solid rgba( 255, 255, 255, 0.3 )',
 }
 
+const card = {
+  boxShadow: 'md',
+  paddingBottom: 2,
+  transition: 'transform .1s',
+  borderRadius: 'lg',
+  overflow: 'hidden',
+  w: 'full',
+  boxSizing: 'content-box',
+}
+
+const cardText = {
+  flexDir: 'column',
+  alignItems: 'start',
+  justifyContent: 'center',
+  display: 'flex',
+  flex: 1,
+  padding: 3,
+}
+
+const iconGrid = {
+  gap: 8,
+  maxW: 'lg',
+  padding: 8,
+  borderRadius: 'lg',
+  boxShadow: 'md',
+}
+
 const colors = {
   brand: {
     primary: '',
@@ -28,6 +55,31 @@ const theme = extendTheme({
       },
       '.glass': {
         ...glass,
+      },
+      '.card': {
+        ...card,
+        bg: mode('white', 'gray.700')(props),
+        _hover: mode(
+          {
+            transform: 'scale(1.02)',
+            boxShadow: 'lg',
+            outline: 'solid 1px',
+            outlineColor: 'orange.200',
+          },
+          {
+            transform: 'scale(1.02)',
+            boxShadow: 'lg',
+            outline: 'solid 1px',
+            outlineColor: 'gray.500',
+          }
+        )(props),
+      },
+      '.cardText': {
+        ...cardText,
+      },
+      '.iconGrid': {
+        ...iconGrid,
+        background: mode('white', 'gray.700')(props),
       },
     }),
   },

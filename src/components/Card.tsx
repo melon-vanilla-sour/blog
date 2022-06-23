@@ -21,30 +21,7 @@ const Card = ({ post, index }) => {
   const thumbnailURI = getThumbnailURI(post)
 
   return (
-    <Box
-      boxShadow="md"
-      paddingBottom={2}
-      bg={useColorModeValue('white', 'gray.700')}
-      _hover={useColorModeValue(
-        {
-          transform: 'scale(1.02)',
-          boxShadow: 'lg',
-          outline: 'solid 1px',
-          outlineColor: 'orange.200',
-        },
-        {
-          transform: 'scale(1.02)',
-          boxShadow: 'lg',
-          outline: 'solid 1px',
-          outlineColor: 'gray.500',
-        }
-      )}
-      transition="transform .1s"
-      borderRadius="lg"
-      overflow="hidden"
-      w="full"
-      boxSizing="content-box"
-    >
+    <Box className="card">
       <Link href={`/post/${post.fields.slug}`}>
         <a>
           <Flex direction="column">
@@ -57,14 +34,7 @@ const Card = ({ post, index }) => {
               ></Image> */}
               <Image src={thumbnailURI} alt="Post Thumbnail"></Image>
             </Box>
-            <Flex
-              flexDir="column"
-              alignItems="start"
-              justifyContent="center"
-              display="flex"
-              flex="1"
-              padding={3}
-            >
+            <Flex className="cardText">
               <Heading
                 fontSize={{ base: 'md', md: 'lg' }}
                 textAlign="start"
