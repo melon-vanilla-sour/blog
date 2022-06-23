@@ -9,30 +9,37 @@ import Card from '../components/Card'
 
 const client = buildClient()
 
+const removeEmptyFields = (categories) => {
+  return [...categories].filter((category) => category.fields != null)
+}
+
+// Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
+const removeDuplicates = (categories) => {
+  const array = []
+  categories.map((category) => {
+    if (!array.includes(category.fields.category)) {
+      array.push(category.fields.category)
+    }
+  })
+  return array
+}
+
+const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+
 export const getStaticProps = async () => {
   const { items: categories } = await client.getEntries({
     content_type: 'post',
     order: '-sys.createdAt',
     select: 'fields.category',
   })
-  // Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
-  categories.filter((category) => {
-    category.fields != null
-  })
+  const nonEmptyCategories = removeEmptyFields(categories)
+  const uniqueNonEmptyCategories = removeDuplicates(nonEmptyCategories)
   return {
-    props: { categories: categories },
+    props: { categories: uniqueNonEmptyCategories },
   }
 }
 
 function Blog({ categories }) {
-  // Filter duplicates
-  const nonDuplicateCategories = []
-  categories.map((category) => {
-    if (!nonDuplicateCategories.includes(category.fields.category)) {
-      nonDuplicateCategories.push(category.fields.category)
-    }
-  })
-
   return (
     <>
       <Heading my={8}>Categories</Heading>
@@ -43,10 +50,10 @@ function Blog({ categories }) {
         </HStack>
       </Box>
       <Grid templateColumns={{ base: 'repeat(4, 1fr)', sm: 'repeat(6, 1fr)' }} gap={6}>
-        {nonDuplicateCategories &&
-          nonDuplicateCategories.map((category) => (
+        {categories &&
+          categories.map((category) => (
             <Link href={`/categories/${category}`}>
-              <Button w={40}>{category}</Button>
+              <Button w={40}>{capitalizeString(category)}</Button>
             </Link>
           ))}
         <Link href="/posts/1">

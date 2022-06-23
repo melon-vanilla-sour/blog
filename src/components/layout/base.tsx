@@ -27,7 +27,9 @@ const Main = ({ children }) => {
         margin="0 auto"
       >
         <Navigation />
-        {children}
+        <SlideFade in={true} offsetY="20px">
+          {children}
+        </SlideFade>
       </Flex>
       <MobileNavigation />
     </>
