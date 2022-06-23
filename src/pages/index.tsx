@@ -1,12 +1,4 @@
-import { Box, Flex, Grid, Heading, useColorModeValue } from '@chakra-ui/react'
-import { buildClient } from '../lib/contentful'
-import Link from 'next/link'
-
-import { Center, SimpleGrid, Text, Image } from '@chakra-ui/react'
-
-import Base from '../components/layout/base'
-import Head from 'next/head'
-import Card from '../components/Card'
+import { Box, Flex, Grid, Heading, useColorModeValue, Text, Image } from '@chakra-ui/react'
 
 function HomePage({ posts }) {
   return (

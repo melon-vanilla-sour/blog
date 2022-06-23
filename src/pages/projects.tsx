@@ -1,7 +1,5 @@
 import { Box, Heading, Text, useColorModeValue, Flex, Grid, GridItem, Icon } from '@chakra-ui/react'
 import { BiWrench } from 'react-icons/bi'
-import { buildClient } from '../lib/contentful'
-import Link from 'next/link'
 import Image from 'next/image'
 
 import holoview from '../../public/projects/holoview-thumbnail.png'

@@ -1,5 +1,4 @@
 import { buildClient } from '../../lib/contentful'
-import Base from '../../components/layout/base'
 import Pagination from '../../components/Pagination'
 import { Heading } from '@chakra-ui/react'
 

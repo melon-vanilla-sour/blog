@@ -2,11 +2,6 @@ import { Box, Button, Heading, HStack, Grid } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 
-import { Center, SimpleGrid, VStack, Text } from '@chakra-ui/react'
-
-import Head from 'next/head'
-import Card from '../components/Card'
-
 const client = buildClient()
 
 const removeEmptyFields = (categories) => {
