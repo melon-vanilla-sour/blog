@@ -12,6 +12,7 @@ const Main = ({ children }) => {
         <meta name="description" content="Melon Sour's homepage" />
         <meta name="author" content="Melon Sour" />
         <meta property="og:type" content="website" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <title>Melon Sour</title>
       </Head>
       <Flex
