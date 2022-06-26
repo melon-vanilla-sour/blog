@@ -1,4 +1,24 @@
 import { Box, Flex, Grid, Heading, useColorModeValue, Text, Image } from '@chakra-ui/react'
+import { constants } from 'buffer'
+
+interface TechIconProps {
+  site?: string
+  image: string
+  name: string
+}
+
+const TechIcon: React.FC<TechIconProps> = ({ site, image, name }) => {
+  return (
+    <Flex flexDir="column" w="80px">
+      <a href={site}>
+        <img src={image} />
+      </a>
+      <Text fontSize="sm" textAlign="center" marginTop={4}>
+        {name}
+      </Text>
+    </Flex>
+  )
+}
 
 function HomePage({ posts }) {
   return (
@@ -14,22 +34,13 @@ function HomePage({ posts }) {
           <Grid
             className="iconGrid"
             my={{ base: 8, sm: 12 }}
-            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(4, 1fr)' }}
+            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(6, 1fr)' }}
           >
-            <Image
-              width="100px"
-              src="icons/javascript.svg"
-              alt="javascript-icon"
-              _hover={useColorModeValue({ background: 'gray.600' }, { background: 'gray.300' })}
-            />
-            <a href="https://nextjs.org/">
-              <img width="100px" src="icons/nextdotjs.svg" alt="javascript-icon" />
-            </a>
-            <img width="100px" src="icons/react.svg" alt="javascript-icon" />
-            <img width="100px" src="icons/chakraui.svg" alt="javascript-icon" />
-            <a href="https://nodejs.org/en/">
-              <img width="100px" src="icons/nodedotjs.svg" alt="javascript-icon" />
-            </a>
+            <TechIcon image="icons/javascript.svg" name="Javascript" />
+            <TechIcon site="https://nextjs.org/" image="icons/nextdotjs.svg" name="Next.js" />
+            <TechIcon image="icons/react.svg" name="React" />
+            <TechIcon image="icons/chakraui.svg" name="Chakra UI" />
+            <TechIcon site="https://nodejs.org/en/" image="icons/nodedotjs.svg" name="Node.js" />
           </Grid>
         </Flex>
         <Flex flexDir="column" alignItems="center">
@@ -39,10 +50,10 @@ function HomePage({ posts }) {
           <Grid
             className="iconGrid"
             my={{ base: 8, sm: 12 }}
-            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(4, 1fr)' }}
+            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(6, 1fr)' }}
           >
-            <img width="100px" src="icons/ruby.svg" alt="javascript-icon" />
-            <img width="100px" src="icons/php.svg" alt="javascript-icon" />
+            <TechIcon image="icons/ruby.svg" name="Ruby" />
+            <TechIcon image="icons/php.svg" name="PHP" />
           </Grid>
         </Flex>
       </Box>
