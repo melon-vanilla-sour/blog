@@ -51,7 +51,7 @@ const theme = extendTheme({
       body: {
         bg: mode(colors.brand.secondary, 'gray.800')(props),
         overflow: 'scroll',
-        fontSize: 'lg',
+        fontSize: 'md',
       },
       '.glass': {
         ...glass,
@@ -84,7 +84,8 @@ const theme = extendTheme({
     }),
   },
   fonts: {
-    heading: 'Libre Franklin, sans-serif',
+    heading: 'Open Sans, sans-serif',
+    body: 'Open Sans',
   },
   components: {
     Button: {
@@ -102,7 +103,7 @@ const theme = extendTheme({
     Heading: {
       baseStyle: () => ({
         textAlign: 'center',
-        fontWeight: 'semibold',
+        fontWeight: 'bolder',
       }),
     },
     Text: {

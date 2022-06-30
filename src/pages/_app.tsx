@@ -1,3 +1,4 @@
+import '@fontsource/open-sans/400.css'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Main from '../components/layout/base'
 
