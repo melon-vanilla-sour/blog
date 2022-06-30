@@ -1,7 +1,8 @@
 import { buildClient } from '../../lib/contentful'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
-import { Heading, Link, Button, Grid, GridItem } from '@chakra-ui/react'
+import { Heading, Button, Grid, GridItem } from '@chakra-ui/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const client = buildClient()
