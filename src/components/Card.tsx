@@ -1,10 +1,8 @@
-// import Image from 'next/image'
-
-import { Heading, Box, useColorModeValue, Text, Image, Flex, Icon, Spacer } from '@chakra-ui/react'
-import { TbWriting, TbListDetails } from 'react-icons/tb'
+import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer } from '@chakra-ui/react'
+import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
-import { EditIcon } from '@chakra-ui/icons'
 import Link from 'next/link'
+import Image from 'next/future/image'
 import dayjs from 'dayjs'
 import { getPlaiceholder } from 'plaiceholder'
 
@@ -26,12 +24,6 @@ const Card = ({ post, index }) => {
         <a>
           <Flex direction="column">
             <Box position="relative" filter={'saturate(130%) brightness(110%)'}>
-              {/* <Image
-                src={thumbnailURI}
-                layout="fill"
-                objectFit="contain"
-                priority={index < 5 ? true : false}
-              ></Image> */}
               <Image src={thumbnailURI} alt="Post Thumbnail"></Image>
             </Box>
             <Flex className="cardText">

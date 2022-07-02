@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Image from 'next/future/image'
 import ErrorPage from 'next/error'
 
 import { buildClient } from '../../lib/contentful'
@@ -10,7 +11,7 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Heading, Box, Text, Button, Image } from '@chakra-ui/react'
+import { Heading, Box, Text, Button } from '@chakra-ui/react'
 
 const client = buildClient()
 
@@ -78,8 +79,6 @@ const renderOptions = {
         >
           <Image
             src={`https:${node.data.target.fields.file.url}`}
-            // height={node.data.target.fields.file.details.image.height / 1.7}
-            width={node.data.target.fields.file.details.image.width / 1.7}
             alt={node.data.target.fields.description}
           />
         </Box>
