@@ -59,20 +59,20 @@ const theme = extendTheme({
       '.card': {
         ...card,
         bg: mode('white', 'gray.700')(props),
-        _hover: mode(
-          {
-            transform: 'scale(1.02)',
-            boxShadow: 'lg',
-            outline: 'solid 1px',
-            outlineColor: 'orange.200',
-          },
-          {
-            transform: 'scale(1.02)',
-            boxShadow: 'lg',
-            outline: 'solid 1px',
-            outlineColor: 'gray.500',
-          }
-        )(props),
+        // _hover: mode(
+        //   {
+        //     transform: 'scale(1.02)',
+        //     boxShadow: 'lg',
+        //     outline: 'solid 1px',
+        //     outlineColor: 'orange.200',
+        //   },
+        //   {
+        //     transform: 'scale(1.02)',
+        //     boxShadow: 'lg',
+        //     outline: 'solid 1px',
+        //     outlineColor: 'gray.500',
+        //   }
+        // )(props),
       },
       '.cardText': {
         ...cardText,
@@ -94,9 +94,9 @@ const theme = extendTheme({
         solid: (props) => ({
           bg: mode('white', 'gray.700')(props),
           boxShadow: 'md',
-          _hover: {
-            bg: mode('orange.200', 'green.500')(props),
-          },
+          // _hover: {
+          //   bg: mode('orange.200', 'green.500')(props),
+          // },
         }),
       },
     },
