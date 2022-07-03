@@ -75,7 +75,7 @@ const renderOptions = {
         <Flex mb={8} filter={'saturate(110%) brightness(110%)'} justifyContent="center">
           <Image
             src={`https:${node.data.target.fields.file.url}`}
-            maxH="600px"
+            maxH={{ base: '300px', sm: '600px' }}
             borderRadius="10px"
             border="2px solid"
             borderColor={useColorModeValue('gray.700', 'gray.300')}
