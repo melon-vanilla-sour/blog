@@ -88,7 +88,7 @@ const renderOptions = {
         return <Box pb={8}>{children} </Box>
       }
       return (
-        <Text pb={8} fontSize="lg">
+        <Text pb={8} fontSize="md">
           {children}
         </Text>
       )
