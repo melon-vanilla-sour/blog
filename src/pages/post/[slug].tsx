@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Image from 'next/future/image'
 import ErrorPage from 'next/error'
 
 import { buildClient } from '../../lib/contentful'
@@ -11,7 +10,7 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Heading, Box, Text, Button } from '@chakra-ui/react'
+import { Heading, Box, Text, Button, Flex, Image, useColorModeValue } from '@chakra-ui/react'
 
 const client = buildClient()
 
@@ -69,19 +68,19 @@ const renderOptions = {
     },
 
     [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+      const imageWidth = node.data.target.fields.file.details.image.width
+      const imageHeight = node.data.target.fields.file.details.image.height
+      const maxHeight = '600px'
       return (
-        <Box
-          mb={8}
-          filter={'saturate(110%) brightness(110%)'}
-          borderRadius={12}
-          overflow="hidden"
-          boxShadow="md"
-        >
+        <Flex mb={8} filter={'saturate(110%) brightness(110%)'} justifyContent="center">
           <Image
             src={`https:${node.data.target.fields.file.url}`}
-            alt={node.data.target.fields.description}
+            maxH="600px"
+            borderRadius="10px"
+            border="2px solid"
+            borderColor={useColorModeValue('gray.700', 'gray.300')}
           />
-        </Box>
+        </Flex>
       )
     },
     [BLOCKS.PARAGRAPH]: (node, children) => {
@@ -122,7 +121,6 @@ const Post = ({ post }) => {
   if (!router.isFallback && !post.fields.slug) {
     return <ErrorPage statusCode={404} />
   }
-
   return (
     <>
       <>
