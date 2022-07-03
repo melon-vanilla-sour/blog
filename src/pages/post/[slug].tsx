@@ -77,8 +77,8 @@ const renderOptions = {
             src={`https:${node.data.target.fields.file.url}`}
             maxH={{ base: '350px', sm: '600px' }}
             borderRadius="10px"
-            border="2px solid"
-            borderColor={useColorModeValue('gray.700', 'gray.300')}
+            // border="2px solid"
+            // borderColor={useColorModeValue('gray.700', 'gray.300')}
           />
         </Flex>
       )

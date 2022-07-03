@@ -20,10 +20,10 @@ const MobileNavigation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInRight">
         <ModalOverlay />
         <ModalContent position="fixed" right="0px" marginTop="0px" height="100%" width="80%">
-          <ModalHeader>Go to Page</ModalHeader>
+          <ModalHeader mx="auto">Go to Page</ModalHeader>
           <Box flexGrow={1}></Box>
           <Center>
             <IconButton aria-label="Toggle Mode" onClick={toggleColorMode} boxShadow="none" my={2}>
@@ -33,27 +33,21 @@ const MobileNavigation = () => {
           <Flex flexDir="column" alignItems="center" onClick={onClose} my={2}>
             <Box my={2}>
               <Link href="/">
-                <Text cursor="pointer" fontWeight="semibold">
-                  About
-                </Text>
+                <Text cursor="pointer">About</Text>
               </Link>
             </Box>
             <Box my={2}>
               <Link href="/posts/1">
-                <Text cursor="pointer" fontWeight="semibold">
-                  Posts
-                </Text>
+                <Text cursor="pointer">Posts</Text>
               </Link>
             </Box>
             <Box my={2}>
               <Link href="/projects">
-                <Text cursor="pointer" fontWeight="semibold">
-                  Projects
-                </Text>
+                <Text cursor="pointer">Projects</Text>
               </Link>
             </Box>
           </Flex>
-          <IconButton aria-label="Close Navigation" boxShadow="none" my={2} onClick={onClose}>
+          <IconButton aria-label="Close Navigation" boxShadow="none" py={2} onClick={onClose}>
             <CloseIcon></CloseIcon>
           </IconButton>
         </ModalContent>
