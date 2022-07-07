@@ -49,7 +49,7 @@ const theme = extendTheme({
   styles: {
     global: (props) => ({
       body: {
-        bg: mode(colors.brand.secondary, 'gray.800')(props),
+        bg: mode('white', 'gray.800')(props),
         overflow: 'scroll',
         fontSize: 'md',
       },
