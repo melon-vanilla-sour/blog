@@ -23,7 +23,9 @@ const TechIcon: React.FC<TechIconProps> = ({ site, image, name }) => {
 function HomePage({ posts }) {
   return (
     <>
-      <Heading my={8}>About</Heading>
+      <Heading my={8} size="lg">
+        About
+      </Heading>
       <Box>
         <Flex flexDir="column" alignItems="center">
           <Text>Web Developer</Text>

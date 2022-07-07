@@ -7,7 +7,9 @@ import holoview from '../../public/projects/holoview-thumbnail.png'
 function Projects() {
   return (
     <>
-      <Heading my={8}>Projects</Heading>
+      <Heading my={8} size="lg">
+        Projects
+      </Heading>
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         <GridItem>
           <Box className="card">

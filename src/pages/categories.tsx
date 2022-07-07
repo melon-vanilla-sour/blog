@@ -37,7 +37,9 @@ export const getStaticProps = async () => {
 function Blog({ categories }) {
   return (
     <>
-      <Heading my={8}>Categories</Heading>
+      <Heading my={8} size="lg">
+        Categories
+      </Heading>
       <Box mb={8}>
         <HStack justifyContent="center">
           <Button>Categories</Button>

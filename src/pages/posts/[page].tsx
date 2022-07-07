@@ -44,7 +44,9 @@ export const getStaticProps = async ({ params }) => {
 function Posts({ posts, totalPages, currentPage }) {
   return (
     <>
-      <Heading my={8}>Posts</Heading>
+      <Heading my={8} size="lg">
+        Posts
+      </Heading>
       <Box mb={8}>
         <HStack justifyContent="center">
           <Link href="/categories">

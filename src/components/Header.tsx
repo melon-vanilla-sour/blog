@@ -37,7 +37,7 @@ const Header = () => {
       >
         <Link href="/">
           <Heading
-            size="md"
+            fontSize="md"
             cursor="pointer"
             fontWeight={currentPage == 'about' ? 'bold' : 'regular'}
           >
@@ -46,7 +46,7 @@ const Header = () => {
         </Link>
         <Link href="/posts/1">
           <Heading
-            size="md"
+            fontSize="md"
             cursor="pointer"
             fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}
           >
@@ -55,7 +55,7 @@ const Header = () => {
         </Link>
         <Link href="/projects">
           <Heading
-            size="md"
+            fontSize="md"
             cursor="pointer"
             fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}
           >
