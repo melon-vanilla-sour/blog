@@ -1,6 +1,7 @@
 import { Box, Button, Heading, HStack, Grid } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
+import { capitalizeString } from '../lib/utils'
 
 const client = buildClient()
 
@@ -18,8 +19,6 @@ const removeDuplicates = (categories) => {
   })
   return array
 }
-
-const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export const getStaticProps = async () => {
   const { items: categories } = await client.getEntries({
