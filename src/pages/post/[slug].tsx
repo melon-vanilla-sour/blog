@@ -35,7 +35,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
   const items = await getPostEntries()
   const post = items.find((item) => {
     // @ts-ignore

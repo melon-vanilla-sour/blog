@@ -19,7 +19,7 @@ const removeDuplicates = (categories) => {
   return array
 }
 
-const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+const capitalizeString = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export const getStaticProps = async () => {
   const { items: categories } = await client.getEntries({

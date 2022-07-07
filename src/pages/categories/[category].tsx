@@ -1,4 +1,4 @@
-import { buildClient } from '../../lib/contentful'
+import { buildClient, postsPerPage } from '../../lib/contentful'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 import { Heading, Button, Grid, GridItem } from '@chakra-ui/react'
@@ -9,7 +9,7 @@ const client = buildClient()
 // const router = useRouter()
 // const { pid } = router.query
 
-const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
+const capitalizeString = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 const removeEmptyFields = (categories) => {
   return [...categories].filter((category) => category.fields != null)
@@ -72,7 +72,7 @@ function Category({ category, posts }) {
           <Button w={40}>View all posts</Button>
         </Link>
       </Grid>
-      <Pagination></Pagination>
+      {/* <Pagination></Pagination> */}
     </>
   )
 }

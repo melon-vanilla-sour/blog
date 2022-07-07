@@ -1,5 +1,4 @@
 import { Box, Flex, Grid, Heading, useColorModeValue, Text, Image } from '@chakra-ui/react'
-import { constants } from 'buffer'
 
 interface TechIconProps {
   site?: string
@@ -7,7 +6,7 @@ interface TechIconProps {
   name: string
 }
 
-const TechIcon: React.FC<TechIconProps> = ({ site, image, name }) => {
+const TechIcon = ({ site, image, name }: TechIconProps) => {
   return (
     <Flex flexDir="column" w="80px">
       <a href={site}>

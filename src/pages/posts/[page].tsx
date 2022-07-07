@@ -30,7 +30,7 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }: { params: { page: number } }) => {
   const { items, total } = await getPostEntries({
     skip: (params.page - 1) * postsPerPage,
     limit: postsPerPage,
@@ -41,7 +41,16 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-function Posts({ posts, totalPages, currentPage }) {
+function Posts({
+  posts,
+  totalPages,
+  currentPage,
+}: {
+  posts: []
+  totalPages: number
+  currentPage: number
+}) {
+  debugger
   return (
     <>
       <Heading my={8}>Posts</Heading>
@@ -61,7 +70,7 @@ function Posts({ posts, totalPages, currentPage }) {
             </GridItem>
           ))}
       </Grid>
-      <Pagination {...totalPages}></Pagination>
+      <Pagination totalPages={totalPages}></Pagination>
     </>
   )
 }
