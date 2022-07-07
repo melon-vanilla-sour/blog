@@ -4,12 +4,11 @@ import Pagination from '../../components/Pagination'
 import { Heading, Button, Grid, GridItem } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { capitalizeString } from '../../lib/utils'
 
 const client = buildClient()
 // const router = useRouter()
 // const { pid } = router.query
-
-const capitalizeString = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 const removeEmptyFields = (categories) => {
   return [...categories].filter((category) => category.fields != null)

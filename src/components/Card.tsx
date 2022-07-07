@@ -6,6 +6,8 @@ import Image from 'next/future/image'
 import dayjs from 'dayjs'
 import { getPlaiceholder } from 'plaiceholder'
 
+import { capitalizeString } from '../lib/utils'
+
 const getThumbnailURI = (post) => {
   for (let node of post.fields.content.content) {
     if (node.nodeType == 'embedded-asset-block') {
@@ -39,9 +41,8 @@ const Card = ({ post, index }) => {
 
               <Flex alignItems="center">
                 <Icon as={BiFolderOpen} marginEnd={2} />
-                {post.fields.category}
-              </Flex>
-              <Flex alignItems="center">
+                {capitalizeString(post.fields.category)}
+                <Box mx={2}></Box>
                 <Icon as={TbWriting} marginEnd={2} />
                 {createdAt.format('DD/MM/YYYY')}
               </Flex>

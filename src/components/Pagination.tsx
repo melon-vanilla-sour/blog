@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Flex, Box, useColorMode, useColorModeValue } from '@chakra-ui/react'
 
-const Pagination = ({ totalPages }) => {
+const Pagination = ({ totalPages }: { totalPages: number }) => {
   return (
     <Flex mt={8} justifyContent="center">
       {[...Array(totalPages)].map((page, index) => (

@@ -2,7 +2,7 @@ import { Box, SlideFade, useColorModeValue, Flex } from '@chakra-ui/react'
 import Head from 'next/head'
 
 import MobileNavigation from '../MobileNavigation'
-import Navigation from '../Navigation'
+import Header from '../Header'
 
 const Main = ({ children }) => {
   return (
@@ -23,10 +23,10 @@ const Main = ({ children }) => {
         display="flex"
         flexDirection="column"
         borderRadius="md"
-        maxWidth="960px"
+        maxWidth="900"
         margin="0 auto"
       >
-        <Navigation />
+        <Header />
         <SlideFade in={true} offsetY="20px">
           {children}
         </SlideFade>

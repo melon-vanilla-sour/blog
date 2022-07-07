@@ -53,7 +53,9 @@ function Posts({
   debugger
   return (
     <>
-      <Heading my={8}>Posts</Heading>
+      <Heading my={8} size="lg">
+        Posts
+      </Heading>
       <Box mb={8}>
         <HStack justifyContent="center">
           <Link href="/categories">
