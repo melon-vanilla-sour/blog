@@ -46,11 +46,10 @@ function Posts({
   totalPages,
   currentPage,
 }: {
-  posts: []
+  posts
   totalPages: number
   currentPage: number
 }) {
-  debugger
   return (
     <>
       <Heading my={8} size="lg">
