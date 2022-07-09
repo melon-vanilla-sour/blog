@@ -11,6 +11,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { Heading, Box, Text, Button, Flex, Image, useColorModeValue } from '@chakra-ui/react'
+import dayjs from 'dayjs'
 
 const client = buildClient()
 
@@ -93,7 +94,15 @@ const renderOptions = {
         </Text>
       )
     },
+    [BLOCKS.HEADING_2]: (node, children) => {
+      return (
+        <Heading size="md" mb={2} textAlign="start">
+          {children}
+        </Heading>
+      )
+    },
   },
+
   renderMark: {
     [MARKS.CODE]: (text) => {
       text = text.split('\n')
@@ -123,13 +132,18 @@ const Post = ({ post }) => {
   }
   return (
     <>
-      <>
-        <Heading my={8}>{post.fields.title}</Heading>
-        <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
-        <Link href="/posts/1">
-          <Button w={40}>View all posts</Button>
-        </Link>
-      </>
+      <Flex>
+        <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
+          <Heading size="md" textAlign="start">
+            {post.fields.title}
+          </Heading>
+          {dayjs(post.sys.createdAt).format('DD/MM/YYYY')}
+        </Flex>
+      </Flex>
+      <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
+      <Link href="/posts/1">
+        <Button w={40}>View all posts</Button>
+      </Link>
     </>
   )
 }

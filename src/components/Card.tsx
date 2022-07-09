@@ -25,10 +25,24 @@ const Card = ({ post, index }) => {
       <Link href={`/post/${post.fields.slug}`}>
         <a>
           <Flex direction="column">
-            <Box position="relative" filter={'saturate(130%) brightness(110%)'}>
-              <Image src={thumbnailURI} alt="Post Thumbnail"></Image>
-            </Box>
-            <Flex className="cardText">
+            <Box
+              as={Image}
+              src={thumbnailURI}
+              alt="Post Thumbnail"
+              position="relative"
+              filter={'saturate(130%) brightness(110%)'}
+              w="420px"
+              h="240px"
+              objectFit="cover"
+            ></Box>
+            <Flex
+              flexDir="column"
+              alignItems="start"
+              justifyContent="center"
+              display="flex"
+              flex={1}
+              padding={3}
+            >
               <Heading
                 fontSize={{ base: 'md', md: 'lg' }}
                 textAlign="start"

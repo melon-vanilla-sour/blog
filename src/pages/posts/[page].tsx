@@ -66,7 +66,7 @@ function Posts({
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         {posts &&
           posts.map((post, index) => (
-            <GridItem>
+            <GridItem maxW="420px" margin="0 auto">
               <Card post={post} index={index} key={post.sys.id}></Card>
             </GridItem>
           ))}

@@ -17,14 +17,7 @@ const card = {
   boxSizing: 'content-box',
 }
 
-const cardText = {
-  flexDir: 'column',
-  alignItems: 'start',
-  justifyContent: 'center',
-  display: 'flex',
-  flex: 1,
-  padding: 3,
-}
+const cardText = {}
 
 const iconGrid = {
   gap: 8,
@@ -36,6 +29,7 @@ const iconGrid = {
 
 const colors = {
   brand: {
+    text: '#444444',
     primary: '',
     secondary: '#fff6e3',
   },
@@ -85,7 +79,7 @@ const theme = extendTheme({
   },
   fonts: {
     heading: 'Open Sans, sans-serif',
-    body: 'Open Sans',
+    body: 'Open Sans, sans-serif',
   },
   components: {
     Button: {
@@ -94,9 +88,6 @@ const theme = extendTheme({
         solid: (props) => ({
           bg: mode('white', 'gray.700')(props),
           boxShadow: 'md',
-          // _hover: {
-          //   bg: mode('orange.200', 'green.500')(props),
-          // },
         }),
       },
     },

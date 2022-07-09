@@ -1,5 +1,4 @@
 import { Heading, Flex, Box, Image } from '@chakra-ui/react'
-import { useColorMode } from '@chakra-ui/color-mode'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -8,7 +7,7 @@ const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
   const router = useRouter()
   const pathName = () => {
-    if (router.pathname.includes('posts')) {
+    if (router.pathname.includes('post')) {
       return 'posts'
     }
     if (router.pathname.includes('projects')) {
@@ -23,15 +22,13 @@ const Header = () => {
   return (
     <>
       <Flex margin="0 auto">
-        <Image src="/melon-sour.ico" w="64px" h="64px"></Image>
-        <Heading fontSize="4xl">Melon Sour</Heading>
+        <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
+        <Heading fontSize={{ base: '3xl', sm: '4xl' }}>Melon Sour</Heading>
       </Flex>
       <Flex
-        w="350px"
-        display={{ base: 'none', sm: 'flex' }}
+        w={{ base: '300px', sm: '350px' }}
         justifyContent="space-between"
-        paddingX={8}
-        className="navigation"
+        px={8}
         mx="auto"
         my={5}
       >
@@ -63,7 +60,12 @@ const Header = () => {
           </Heading>
         </Link>
       </Flex>
-      <Box className="underline" border="2.5px solid #444444" bg="#444444"></Box>
+      <Box
+        className="underline"
+        border="2.5px solid"
+        borderColor="brand.text"
+        bg="brand.text"
+      ></Box>
     </>
   )
 }
