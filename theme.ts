@@ -7,16 +7,6 @@ const glass = {
   border: '1px solid rgba( 255, 255, 255, 0.3 )',
 }
 
-const card = {
-  boxShadow: 'md',
-  paddingBottom: 2,
-  transition: 'transform .1s',
-  borderRadius: 'lg',
-  overflow: 'hidden',
-  w: 'full',
-  boxSizing: 'content-box',
-}
-
 const cardText = {}
 
 const iconGrid = {
@@ -51,22 +41,19 @@ const theme = extendTheme({
         ...glass,
       },
       '.card': {
-        ...card,
+        paddingBottom: 2,
+        boxShadow: 'md',
+        transition: '0.2s ease-in-out',
+        borderRadius: 'lg',
+        overflow: 'hidden',
+        w: 'full',
+        boxSizing: 'content-box',
         bg: mode('white', 'gray.700')(props),
-        // _hover: mode(
-        //   {
-        //     transform: 'scale(1.02)',
-        //     boxShadow: 'lg',
-        //     outline: 'solid 1px',
-        //     outlineColor: 'orange.200',
-        //   },
-        //   {
-        //     transform: 'scale(1.02)',
-        //     boxShadow: 'lg',
-        //     outline: 'solid 1px',
-        //     outlineColor: 'gray.500',
-        //   }
-        // )(props),
+        _hover: {
+          boxShadow: 'xs',
+          opacity: '1',
+          transition: '0.2s ease-in-out',
+        },
       },
       '.cardText': {
         ...cardText,

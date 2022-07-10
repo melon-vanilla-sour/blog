@@ -53,10 +53,11 @@ const Card = ({ post, index }) => {
                 {post.fields.title}
               </Heading>
 
-              <Flex alignItems="center">
+              <Flex alignItems="center" flexWrap="wrap" minH="2.6em">
                 <Icon as={BiFolderOpen} marginEnd={2} />
                 {capitalizeString(post.fields.category)}
                 <Box mx={2}></Box>
+
                 <Icon as={TbWriting} marginEnd={2} />
                 {createdAt.format('DD/MM/YYYY')}
               </Flex>

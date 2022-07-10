@@ -18,13 +18,14 @@ const Main = ({ children }) => {
       <Flex
         paddingTop={4}
         paddingBottom={{ base: '4', sm: '4' }}
-        paddingX={{ base: 2, sm: 4 }}
+        paddingX={{ base: 4, sm: 4 }}
         minH="calc(100vh)"
         display="flex"
         flexDirection="column"
         borderRadius="md"
         maxWidth="900"
         margin="0 auto"
+        overflow="hidden"
       >
         <Header />
         <SlideFade in={true} offsetY="20px">
