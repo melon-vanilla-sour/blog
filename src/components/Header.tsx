@@ -7,7 +7,11 @@ const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
   const router = useRouter()
   const pathName = () => {
-    if (router.pathname.includes('post')) {
+    if (
+      router.pathname.includes('post') ||
+      router.pathname.includes('categories') ||
+      router.pathname.includes('tags')
+    ) {
       return 'posts'
     }
     if (router.pathname.includes('projects')) {
