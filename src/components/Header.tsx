@@ -1,7 +1,14 @@
-import { Heading, Flex, Box, Image } from '@chakra-ui/react'
+import { Heading, Flex, Box, Image, chakra } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+
+const PageHeading = chakra(Heading, {
+  baseStyle: {
+    size: 'sm',
+    cursor: 'pointer',
+  },
+})
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
@@ -37,17 +44,11 @@ const Header = () => {
         my={5}
       >
         <Link href="/">
-          <Heading
-            fontSize="md"
-            cursor="pointer"
-            fontWeight={currentPage == 'about' ? 'bold' : 'regular'}
-          >
-            About
-          </Heading>
+          <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>About</PageHeading>
         </Link>
         <Link href="/posts/1">
           <Heading
-            fontSize="md"
+            size="sm"
             cursor="pointer"
             fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}
           >
@@ -56,7 +57,7 @@ const Header = () => {
         </Link>
         <Link href="/projects">
           <Heading
-            fontSize="md"
+            size="sm"
             cursor="pointer"
             fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}
           >
