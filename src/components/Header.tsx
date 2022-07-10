@@ -3,12 +3,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 
-const PageHeading = chakra(Heading, {
-  baseStyle: {
-    size: 'sm',
-    cursor: 'pointer',
-  },
-})
+const PageHeading = (props) => {
+  return <Heading size="sm" cursor="pointer" {...props}></Heading>
+}
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
@@ -47,22 +44,12 @@ const Header = () => {
           <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>About</PageHeading>
         </Link>
         <Link href="/posts/1">
-          <Heading
-            size="sm"
-            cursor="pointer"
-            fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}
-          >
-            Posts
-          </Heading>
+          <PageHeading fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}>Posts</PageHeading>
         </Link>
         <Link href="/projects">
-          <Heading
-            size="sm"
-            cursor="pointer"
-            fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}
-          >
+          <PageHeading fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}>
             Projects
-          </Heading>
+          </PageHeading>
         </Link>
       </Flex>
       <Box
