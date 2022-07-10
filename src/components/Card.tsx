@@ -16,12 +16,28 @@ const getThumbnailURI = (post) => {
   }
 }
 
+export const CardTextContainer = ({ children, ...props }) => {
+  return (
+    <Flex
+      flexDir="column"
+      alignItems="start"
+      justifyContent="center"
+      display="flex"
+      flex={1}
+      padding={3}
+      {...props}
+    >
+      {children}
+    </Flex>
+  )
+}
+
 const Card = ({ post, index }) => {
   const createdAt = dayjs(post.sys.createdAt)
   const thumbnailURI = getThumbnailURI(post)
 
   return (
-    <Box className="card">
+    <Box>
       <Link href={`/post/${post.fields.slug}`}>
         <a>
           <Flex direction="column">
@@ -35,14 +51,7 @@ const Card = ({ post, index }) => {
               h="240px"
               objectFit="cover"
             ></Box>
-            <Flex
-              flexDir="column"
-              alignItems="start"
-              justifyContent="center"
-              display="flex"
-              flex={1}
-              padding={3}
-            >
+            <CardTextContainer>
               <Heading
                 fontSize={{ base: 'md', md: 'lg' }}
                 textAlign="start"
@@ -61,7 +70,7 @@ const Card = ({ post, index }) => {
                 <Icon as={TbWriting} marginEnd={2} />
                 {createdAt.format('DD/MM/YYYY')}
               </Flex>
-            </Flex>
+            </CardTextContainer>
           </Flex>
         </a>
       </Link>

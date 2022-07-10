@@ -2,6 +2,8 @@ import { Box, Heading, Text, useColorModeValue, Flex, Grid, GridItem, Icon } fro
 import { BiWrench } from 'react-icons/bi'
 import Image from 'next/image'
 
+import { CardTextContainer } from '../components/Card'
+
 import holoview from '../../public/projects/holoview-thumbnail.png'
 
 function Projects() {
@@ -26,14 +28,7 @@ function Projects() {
                     h="240px"
                     objectFit="cover"
                   ></Box>
-                  <Flex
-                    flexDir="column"
-                    alignItems="start"
-                    justifyContent="center"
-                    display="flex"
-                    flex={1}
-                    padding={3}
-                  >
+                  <CardTextContainer>
                     <Heading
                       fontSize={{ base: 'md', md: 'lg' }}
                       textAlign="start"
@@ -49,7 +44,7 @@ function Projects() {
                       <Icon as={BiWrench} marginEnd={2} />
                       React, Chakra UI, Vercel
                     </Flex>
-                  </Flex>
+                  </CardTextContainer>
                 </Flex>
               </a>
             </a>
