@@ -37,7 +37,7 @@ const Card = ({ post, index }) => {
   const thumbnailURI = getThumbnailURI(post)
 
   return (
-    <Box>
+    <Box className="card">
       <Link href={`/post/${post.fields.slug}`}>
         <a>
           <Flex direction="column">
