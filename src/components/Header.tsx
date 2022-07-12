@@ -1,4 +1,4 @@
-import { Heading, Flex, Box, Image, chakra } from '@chakra-ui/react'
+import { Heading, Flex, Box, Image, chakra, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -55,8 +55,8 @@ const Header = () => {
       <Box
         className="underline"
         border="2.5px solid"
-        borderColor="brand.text"
-        bg="brand.text"
+        borderColor={useColorModeValue('brand.text', 'white')}
+        bg={useColorModeValue('brand.text', 'white')}
       ></Box>
     </>
   )

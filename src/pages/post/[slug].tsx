@@ -8,7 +8,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { monokai } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { Heading, Box, Text, Button, Flex, Image, useColorModeValue } from '@chakra-ui/react'
 import dayjs from 'dayjs'
@@ -117,7 +117,7 @@ const renderOptions = {
       // }, '')
 
       return (
-        <SyntaxHighlighter language={language} style={monokai} showLineNumbers wrapLongLines="true">
+        <SyntaxHighlighter language={language} style={dracula} showLineNumbers wrapLongLines="true">
           {text}
         </SyntaxHighlighter>
       )
