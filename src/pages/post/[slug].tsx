@@ -75,7 +75,7 @@ const renderOptions = {
       return (
         <Flex mb={8} filter={'saturate(110%) brightness(110%)'} justifyContent="center">
           <Image
-            src={`https:${node.data.target.fields.file.url}?fm=jpg&fl=progressive&h=600`}
+            src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
             maxH={{ base: '350px', sm: '600px' }}
             borderRadius="10px"
             // border="2px solid"
