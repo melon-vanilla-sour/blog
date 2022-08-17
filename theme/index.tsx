@@ -35,6 +35,9 @@ const overrides = {
         overflow: 'scroll',
         fontSize: 'md',
       },
+      code: {
+        fontSize: 'sm',
+      },
       '.glass': {
         ...glass,
       },
