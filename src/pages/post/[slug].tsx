@@ -10,7 +10,16 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
-import { Heading, Box, Text, Button, Flex, Image, useColorModeValue } from '@chakra-ui/react'
+import {
+  Heading,
+  Box,
+  Text,
+  Button,
+  Flex,
+  Image,
+  useColorModeValue,
+  Link as ChakraLink,
+} from '@chakra-ui/react'
 import dayjs from 'dayjs'
 
 const client = buildClient()
@@ -88,8 +97,9 @@ const renderOptions = {
       if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
         return <Box pb={8}>{children} </Box>
       }
+
       return (
-        <Text pb={8} fontSize="md">
+        <Text pb={6} fontSize="md">
           {children}
         </Text>
       )
@@ -99,6 +109,13 @@ const renderOptions = {
         <Heading size="md" mb={2} textAlign="start">
           {children}
         </Heading>
+      )
+    },
+    [INLINES.HYPERLINK]: (node, children) => {
+      return (
+        <ChakraLink href={node.data.uri} color="green.500" fontWeight="semibold">
+          {node.content[0].value}
+        </ChakraLink>
       )
     },
   },
