@@ -28,31 +28,18 @@ function HomePage({ posts }) {
       <Box>
         <Flex flexDir="column" alignItems="center">
           <Text>Web Developer</Text>
-          <br />
-          <Text>I'm pretty good with these things</Text>
         </Flex>
         <Flex flexDir="column" alignItems="center">
           <Grid
             className="iconGrid"
-            my={{ base: 8, sm: 12 }}
-            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(6, 1fr)' }}
+            my={{ base: 4, sm: 6 }}
+            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(5, 1fr)' }}
           >
             <TechIcon image="icons/javascript.svg" name="Javascript" />
             <TechIcon site="https://nextjs.org/" image="icons/nextdotjs.svg" name="Next.js" />
             <TechIcon image="icons/react.svg" name="React" />
             <TechIcon image="icons/chakraui.svg" name="Chakra UI" />
             <TechIcon site="https://nodejs.org/en/" image="icons/nodedotjs.svg" name="Node.js" />
-          </Grid>
-        </Flex>
-        <Flex flexDir="column" alignItems="center">
-          <Text>I'm ok with these things</Text>
-        </Flex>
-        <Flex flexDir="column" alignItems="center">
-          <Grid
-            className="iconGrid"
-            my={{ base: 8, sm: 12 }}
-            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(6, 1fr)' }}
-          >
             <TechIcon image="icons/ruby.svg" name="Ruby" />
             <TechIcon image="icons/php.svg" name="PHP" />
           </Grid>
