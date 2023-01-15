@@ -80,6 +80,7 @@ const overrides = {
       baseStyle: () => ({
         textAlign: 'center',
         fontWeight: 'bolder',
+        caretColor: 'transparent',
       }),
     },
     Text: {
