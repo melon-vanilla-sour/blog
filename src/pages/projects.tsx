@@ -1,6 +1,16 @@
-import { Box, Heading, Text, useColorModeValue, Flex, Grid, GridItem, Icon } from '@chakra-ui/react'
+import {
+  Box,
+  Heading,
+  Text,
+  useColorModeValue,
+  Flex,
+  Grid,
+  GridItem,
+  Icon,
+  Image,
+} from '@chakra-ui/react'
 import { BiWrench } from 'react-icons/bi'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 import { CardTextContainer } from '../components/Card'
 
@@ -9,10 +19,7 @@ import holoview from '../../public/projects/holoview-thumbnail.png'
 function Projects() {
   return (
     <>
-      <Heading my={8} size="lg">
-        Projects
-      </Heading>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
+      <Grid my={8} templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         <GridItem>
           <Box className="card">
             <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
@@ -20,7 +27,7 @@ function Projects() {
                 <Flex direction="column">
                   <Box
                     as={Image}
-                    src={holoview}
+                    src={holoview.src}
                     alt="Post Thumbnail"
                     position="relative"
                     filter={'saturate(130%) brightness(110%)'}

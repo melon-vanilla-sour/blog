@@ -1,8 +1,8 @@
-import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer } from '@chakra-ui/react'
+import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, Image } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
-import Image from 'next/future/image'
+// import Image from 'next/future/image'
 import dayjs from 'dayjs'
 import { getPlaiceholder } from 'plaiceholder'
 
