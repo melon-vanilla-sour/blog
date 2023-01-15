@@ -52,10 +52,7 @@ function Posts({
 }) {
   return (
     <>
-      <Heading my={8} size="lg">
-        Posts
-      </Heading>
-      <Box mb={8}>
+      <Box my={8}>
         <HStack justifyContent="center">
           <Link href="/categories">
             <Button>Categories</Button>

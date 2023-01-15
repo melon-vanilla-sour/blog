@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack, Grid } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Grid, useColorModeValue } from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
 import { capitalizeString } from '../lib/utils'
@@ -36,12 +36,9 @@ export const getStaticProps = async () => {
 function Blog({ categories }) {
   return (
     <>
-      <Heading my={8} size="lg">
-        Categories
-      </Heading>
-      <Box mb={8}>
+      <Box my={8}>
         <HStack justifyContent="center">
-          <Button>Categories</Button>
+          <Button bg={useColorModeValue('gray.300', 'gray.500')}>Categories</Button>
           <Button>Tags</Button>
         </HStack>
       </Box>
