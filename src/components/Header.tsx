@@ -29,29 +29,43 @@ const Header = () => {
 
   return (
     <>
-      <Flex margin="0 auto">
+      <Flex margin="0 auto" alignItems="center" my={5}>
         <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
         <Heading fontSize={{ base: '3xl', sm: '4xl' }}>Melon Sour</Heading>
+        <Flex dir="row" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
+          <Link href="/">
+            <PageHeading
+              fontWeight={currentPage == 'about' ? 'bold' : 'regular'}
+              as={currentPage == 'about' ? 'u' : ''}
+            >
+              About
+            </PageHeading>
+          </Link>
+          <Link href="/posts/1">
+            <PageHeading
+              fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}
+              as={currentPage == 'posts' ? 'u' : ''}
+            >
+              Posts
+            </PageHeading>
+          </Link>
+          <Link href="/projects">
+            <PageHeading
+              fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}
+              as={currentPage == 'projects' ? 'u' : ''}
+            >
+              Projects
+            </PageHeading>
+          </Link>
+        </Flex>
       </Flex>
-      <Flex
+      {/* <Flex
         w={{ base: '300px', sm: '350px' }}
         justifyContent="space-between"
         px={8}
         mx="auto"
         my={5}
-      >
-        <Link href="/">
-          <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>About</PageHeading>
-        </Link>
-        <Link href="/posts/1">
-          <PageHeading fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}>Posts</PageHeading>
-        </Link>
-        <Link href="/projects">
-          <PageHeading fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}>
-            Projects
-          </PageHeading>
-        </Link>
-      </Flex>
+      ></Flex> */}
       <Box
         className="underline"
         border="2.5px solid"

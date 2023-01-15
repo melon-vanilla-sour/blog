@@ -22,7 +22,7 @@ const MobileNavigation = () => {
     <>
       <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInRight">
         <ModalOverlay />
-        <ModalContent position="fixed" right="0px" marginTop="0px" height="100%" width="80%">
+        <ModalContent position="fixed" right="0px" marginTop="0px" height="100%" width="60%">
           <ModalHeader mx="auto">Go to Page</ModalHeader>
           <Box flexGrow={1}></Box>
           <Center>
