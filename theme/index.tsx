@@ -60,6 +60,9 @@ const overrides = {
         ...iconGrid,
         background: mode('white', 'gray.700')(props),
       },
+      '.code-block': {
+        borderRadius: 10,
+      },
     }),
   },
   fonts: {

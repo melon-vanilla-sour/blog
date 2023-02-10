@@ -134,7 +134,7 @@ const renderOptions = {
       // }, '')
 
       return (
-        <SyntaxHighlighter language={language} style={dracula} showLineNumbers>
+        <SyntaxHighlighter language={language} style={dracula} showLineNumbers class="code-block">
           {text}
         </SyntaxHighlighter>
       )
