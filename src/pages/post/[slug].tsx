@@ -8,7 +8,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import {
   Heading,
@@ -134,7 +134,12 @@ const renderOptions = {
       // }, '')
 
       return (
-        <SyntaxHighlighter language={language} style={dracula} showLineNumbers class="code-block">
+        <SyntaxHighlighter
+          language={language}
+          style={atomOneDarkReasonable}
+          showLineNumbers
+          class="code-block"
+        >
           {text}
         </SyntaxHighlighter>
       )
