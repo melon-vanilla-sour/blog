@@ -14,6 +14,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
           lineHeight="45px"
           textAlign="center"
           boxShadow="lg"
+          key={index}
         >
           <Link href={`/posts/${index + 1}`}>{(index + 1).toString()}</Link>
         </Box>

@@ -84,7 +84,9 @@ const overrides = {
       }),
     },
     Text: {
-      baseStyle: () => ({}),
+      baseStyle: () => ({
+        lineHeight: '1.6',
+      }),
     },
   },
 }

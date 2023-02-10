@@ -34,28 +34,25 @@ const Header = () => {
         <Heading fontSize={{ base: '3xl', sm: '4xl' }}>Melon Sour</Heading>
         <Flex dir="row" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
           <Link href="/">
-            <PageHeading
-              fontWeight={currentPage == 'about' ? 'bold' : 'regular'}
-              as={currentPage == 'about' ? 'u' : ''}
-            >
-              About
-            </PageHeading>
+            <a>
+              <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>
+                About
+              </PageHeading>
+            </a>
           </Link>
           <Link href="/posts/1">
-            <PageHeading
-              fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}
-              as={currentPage == 'posts' ? 'u' : ''}
-            >
-              Posts
-            </PageHeading>
+            <a>
+              <PageHeading fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}>
+                Posts
+              </PageHeading>
+            </a>
           </Link>
           <Link href="/projects">
-            <PageHeading
-              fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}
-              as={currentPage == 'projects' ? 'u' : ''}
-            >
-              Projects
-            </PageHeading>
+            <a>
+              <PageHeading fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}>
+                Projects
+              </PageHeading>
+            </a>
           </Link>
         </Flex>
       </Flex>

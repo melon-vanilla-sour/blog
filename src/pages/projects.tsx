@@ -14,8 +14,6 @@ import { BiWrench } from 'react-icons/bi'
 
 import { CardTextContainer } from '../components/Card'
 
-import holoview from '../../public/projects/holoview-thumbnail.png'
-
 function Projects() {
   return (
     <>
@@ -23,37 +21,35 @@ function Projects() {
         <GridItem>
           <Box className="card">
             <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
-              <a>
-                <Flex direction="column">
-                  <Box
-                    as={Image}
-                    src={holoview.src}
-                    alt="Post Thumbnail"
-                    position="relative"
-                    filter={'saturate(130%) brightness(110%)'}
-                    w="420px"
-                    h="240px"
-                    objectFit="cover"
-                  ></Box>
-                  <CardTextContainer>
-                    <Heading
-                      fontSize={{ base: 'md', md: 'lg' }}
-                      textAlign="start"
-                      // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
-                      minH="2.6em"
-                      noOfLines={2}
-                    >
-                      Holoview
-                    </Heading>
+              <Flex direction="column">
+                <Box
+                  as={Image}
+                  src={'projects/holoview-thumbnail.png'}
+                  alt="Post Thumbnail"
+                  position="relative"
+                  filter={'saturate(130%) brightness(110%)'}
+                  w="420px"
+                  h="240px"
+                  objectFit="cover"
+                ></Box>
+                <CardTextContainer>
+                  <Heading
+                    fontSize={{ base: 'md', md: 'lg' }}
+                    textAlign="start"
+                    // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                    minH="2.6em"
+                    noOfLines={2}
+                  >
+                    Holoview
+                  </Heading>
 
-                    <Flex alignItems="center">A page to watch Hololive VTubers</Flex>
-                    <Flex alignItems="center">
-                      <Icon as={BiWrench} marginEnd={2} />
-                      React, Chakra UI, Vercel
-                    </Flex>
-                  </CardTextContainer>
-                </Flex>
-              </a>
+                  <Flex alignItems="center">A page to watch Hololive VTubers</Flex>
+                  <Flex alignItems="center">
+                    <Icon as={BiWrench} marginEnd={2} />
+                    React, Chakra UI, Vercel
+                  </Flex>
+                </CardTextContainer>
+              </Flex>
             </a>
           </Box>
         </GridItem>
