@@ -8,7 +8,7 @@ const Pagination = ({ totalPages }: { totalPages: number }) => {
       {[...Array(totalPages)].map((page, index) => (
         <Box
           borderRadius="50%"
-          backgroundColor={useColorModeValue('white', 'gray.700')}
+          backgroundColor={useColorModeValue('white', 'whiteAlpha.200')}
           w="45px"
           h="45px"
           lineHeight="45px"

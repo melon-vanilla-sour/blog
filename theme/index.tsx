@@ -31,7 +31,7 @@ const overrides = {
   styles: {
     global: (props) => ({
       body: {
-        bg: mode('white', 'gray.800')(props),
+        bg: mode('white', 'blackAlpha.900')(props),
         overflow: 'scroll',
         fontSize: 'md',
       },
@@ -49,7 +49,7 @@ const overrides = {
         overflow: 'hidden',
         w: 'full',
         boxSizing: 'content-box',
-        bg: mode('white', 'gray.700')(props),
+        bg: mode('white', 'whiteAlpha.200')(props),
         _hover: {
           boxShadow: 'xs',
           opacity: '1',
@@ -58,7 +58,7 @@ const overrides = {
       },
       '.iconGrid': {
         ...iconGrid,
-        background: mode('white', 'gray.700')(props),
+        background: mode('white', 'whiteAlpha.200')(props),
       },
       '.code-block': {
         borderRadius: 10,
@@ -74,7 +74,7 @@ const overrides = {
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
         solid: (props) => ({
-          bg: mode('white', 'gray.700')(props),
+          bg: mode('white', 'whiteAlpha.200')(props),
           boxShadow: 'md',
         }),
       },

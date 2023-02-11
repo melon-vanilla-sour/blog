@@ -38,7 +38,7 @@ function Blog({ categories }) {
     <>
       <Box my={8}>
         <HStack justifyContent="center">
-          <Button bg={useColorModeValue('gray.300', 'gray.500')}>Categories</Button>
+          <Button bg={useColorModeValue('gray.300', 'whiteAlpha.200')}>Categories</Button>
           <Button>Tags</Button>
         </HStack>
       </Box>

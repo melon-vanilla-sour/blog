@@ -1,4 +1,14 @@
-import { Heading, Flex, Box, Image, chakra, useColorModeValue } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
+import {
+  Heading,
+  Flex,
+  Box,
+  Image,
+  chakra,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -10,6 +20,7 @@ const PageHeading = (props) => {
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
   const router = useRouter()
+  const { colorMode, toggleColorMode } = useColorMode()
   const pathName = () => {
     if (
       router.pathname.includes('post') ||
@@ -29,10 +40,10 @@ const Header = () => {
 
   return (
     <>
-      <Flex margin="0 auto" alignItems="center" my={5}>
+      <Flex margin="0 auto" alignItems="center" my={2}>
         <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
         <Heading fontSize={{ base: '3xl', sm: '4xl' }}>Melon Sour</Heading>
-        <Flex dir="row" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
+        <Flex dir="row" alignItems="center" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
           <Link href="/">
             <a>
               <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>
@@ -54,6 +65,15 @@ const Header = () => {
               </PageHeading>
             </a>
           </Link>
+          <IconButton
+            aria-label="Toggle Mode"
+            onClick={toggleColorMode}
+            boxShadow="none"
+            my={2}
+            ml={4}
+          >
+            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+          </IconButton>
         </Flex>
       </Flex>
       {/* <Flex
