@@ -42,7 +42,6 @@ const overrides = {
         ...glass,
       },
       '.card': {
-        paddingBottom: 2,
         boxShadow: 'md',
         transition: '0.2s ease-in-out',
         borderRadius: 'lg',

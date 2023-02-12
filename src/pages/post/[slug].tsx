@@ -19,8 +19,14 @@ import {
   Image,
   useColorModeValue,
   Link as ChakraLink,
+  TableContainer,
+  Tbody,
+  Table,
+  Td,
+  Tr,
 } from '@chakra-ui/react'
 import dayjs from 'dayjs'
+import Card from '../../components/Card'
 
 const client = buildClient()
 
@@ -74,6 +80,12 @@ const renderOptions = {
             <code>{node.data.target.fields.code}</code>
           </pre>
         )
+      } else if (node.data.target.sys.contentType.sys.id === 'post') {
+        return (
+          <Flex maxW="420px" mb={8} mx="auto">
+            <Card post={node.data.target} index={1}></Card>
+          </Flex>
+        )
       }
     },
 
@@ -113,7 +125,11 @@ const renderOptions = {
     },
     [INLINES.HYPERLINK]: (node, children) => {
       return (
-        <ChakraLink href={node.data.uri} color="green.500" fontWeight="semibold">
+        <ChakraLink
+          href={node.data.uri}
+          color={useColorModeValue('blue.500', 'blue.300')}
+          fontWeight="semibold"
+        >
           {node.content[0].value}
         </ChakraLink>
       )
@@ -147,11 +163,42 @@ const renderOptions = {
   },
 }
 
+const getHeadings = (post) => {
+  const headings: string[] = []
+  post.fields.content.content.map((block) => {
+    if (block.nodeType === 'heading-2') {
+      headings.push(block.content[0].value)
+    }
+  })
+  return headings
+}
+
+const TableOfContents = ({ headings }) => {
+  return (
+    <TableContainer>
+      <Table variant="simple">
+        <Tbody>
+          {headings.map((heading, index) => {
+            return (
+              <Tr>
+                <Td>
+                  <Text key={index}>{heading}</Text>
+                </Td>
+              </Tr>
+            )
+          })}
+        </Tbody>
+      </Table>
+    </TableContainer>
+  )
+}
+
 const Post = ({ post }) => {
   const router = useRouter()
   if (!router.isFallback && !post.fields.slug) {
     return <ErrorPage statusCode={404} />
   }
+  const headings: string[] = getHeadings(post)
   return (
     <>
       <Flex>
@@ -162,6 +209,7 @@ const Post = ({ post }) => {
           {dayjs(post.sys.createdAt).format('DD/MM/YYYY')}
         </Flex>
       </Flex>
+      {/* <TableOfContents headings={headings}></TableOfContents> */}
       <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>

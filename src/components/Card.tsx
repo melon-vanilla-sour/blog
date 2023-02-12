@@ -62,7 +62,7 @@ const Card = ({ post, index }) => {
                 {post.fields.title}
               </Heading>
 
-              <Flex alignItems="center" flexWrap="wrap" minH="2.6em">
+              <Flex alignItems="center" flexWrap="wrap" mt={1}>
                 <Icon as={BiFolderOpen} marginEnd={2} />
                 {capitalizeString(post.fields.category)}
                 <Box mx={2}></Box>
