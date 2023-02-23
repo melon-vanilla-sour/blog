@@ -4,7 +4,6 @@ import {
   Flex,
   Box,
   Image,
-  chakra,
   IconButton,
   useColorMode,
   useColorModeValue,
