@@ -19,10 +19,17 @@ const MobileNavigation = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <>
+    <Box>
       <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInRight">
         <ModalOverlay />
-        <ModalContent position="fixed" right="0px" marginTop="0px" height="100%" width="60%">
+        <ModalContent
+          bg={useColorModeValue('white', 'blackAlpha.800')}
+          position="fixed"
+          right="0px"
+          marginTop="0px"
+          height="100%"
+          width="60%"
+        >
           <ModalHeader mx="auto">Go to Page</ModalHeader>
           <Box flexGrow={1}></Box>
           <Center>
@@ -31,17 +38,17 @@ const MobileNavigation = () => {
             </IconButton>
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose} my={2}>
-            <Box my={2}>
+            <Box my={4}>
               <Link href="/">
                 <Text cursor="pointer">About</Text>
               </Link>
             </Box>
-            <Box my={2}>
+            <Box my={4}>
               <Link href="/posts/1">
                 <Text cursor="pointer">Posts</Text>
               </Link>
             </Box>
-            <Box my={2}>
+            <Box my={4}>
               <Link href="/projects">
                 <Text cursor="pointer">Projects</Text>
               </Link>
@@ -62,7 +69,7 @@ const MobileNavigation = () => {
       >
         <HamburgerIcon />
       </IconButton>
-    </>
+    </Box>
   )
 }
 
