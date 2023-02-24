@@ -45,6 +45,8 @@ const overrides = {
         boxShadow: 'md',
         transition: '0.2s ease-in-out',
         borderRadius: 'lg',
+        border: '1px solid',
+        borderColor: mode('blackAlpha.400', 'whiteAlpha.400')(props),
         overflow: 'hidden',
         w: 'full',
         boxSizing: 'content-box',
