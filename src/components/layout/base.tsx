@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import MobileNavigation from '../MobileNavigation'
 import Header from '../Header'
+import TopButton from '../TopButton'
 
 const Main = ({ children }) => {
   return (
@@ -32,6 +33,7 @@ const Main = ({ children }) => {
           {children}
         </SlideFade>
       </Flex>
+      <TopButton></TopButton>
       <MobileNavigation />
     </>
   )

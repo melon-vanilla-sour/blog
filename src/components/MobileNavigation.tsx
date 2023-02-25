@@ -63,8 +63,8 @@ const MobileNavigation = () => {
         aria-label="Toggle Navigation"
         onClick={onOpen}
         position="fixed"
-        bottom="50px"
-        right="20px"
+        bottom={4}
+        right={4}
         display={{ base: 'block', sm: 'none' }}
       >
         <HamburgerIcon />
