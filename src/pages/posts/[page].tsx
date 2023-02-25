@@ -57,7 +57,8 @@ function Posts({
           <Link href="/categories">
             <Button>Categories</Button>
           </Link>
-          <Button>Tags</Button>
+          <Button isDisabled={true}>Tags</Button>
+          <Button isDisabled={true}>Archives</Button>
         </HStack>
       </Box>
       <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
