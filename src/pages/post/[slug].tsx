@@ -206,6 +206,7 @@ const Post = ({ post }) => {
     return <ErrorPage statusCode={404} />
   }
   const headings: string[] = getHeadings(post)
+  const tags = post.fields.tags || []
   return (
     <>
       <Flex>
@@ -221,7 +222,7 @@ const Post = ({ post }) => {
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
-            <Text>{post.fields.tags.join(', ')}</Text>
+            <Text>{tags.join(', ')}</Text>
           </HStack>
         </Flex>
       </Flex>
