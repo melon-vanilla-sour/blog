@@ -3,6 +3,7 @@ import Link from 'next/link'
 import ErrorPage from 'next/error'
 
 import { buildClient } from '../../lib/contentful'
+import { capitalizeString } from '../../lib/utils'
 import { EntryCollection } from 'contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
@@ -24,7 +25,12 @@ import {
   Table,
   Td,
   Tr,
+  HStack,
+  Icon,
 } from '@chakra-ui/react'
+import { TbWriting } from 'react-icons/tb'
+import { BiFolderOpen } from 'react-icons/bi'
+import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
 import Card from '../../components/Card'
 
@@ -139,7 +145,8 @@ const renderOptions = {
   renderMark: {
     [MARKS.CODE]: (text) => {
       text = text.split('\n')
-      const language = text.shift() // コードブロックの1行目の言語指定をClassに利用後削除
+      // Parse first line as language then delete it
+      const language = text.shift()
       text = text.join('\n')
 
       // const value = text.reduce((acc, cur) => {
@@ -203,10 +210,19 @@ const Post = ({ post }) => {
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
-          <Heading size="md" textAlign="start">
+          <Heading size="md" textAlign="start" mb={1}>
             {post.fields.title}
           </Heading>
-          {dayjs(post.sys.createdAt).format('DD/MM/YYYY')}
+          <HStack>
+            <Icon as={BiFolderOpen} />
+            <Text>{capitalizeString(post.fields.category)}</Text>
+            <Icon as={TbWriting} />
+            <Text>{dayjs(post.sys.createdAt).format('DD/MM/YYYY')}</Text>
+          </HStack>
+          <HStack>
+            <Icon as={AiOutlineTag} />
+            <Text>{post.fields.tags.join(', ')}</Text>
+          </HStack>
         </Flex>
       </Flex>
       {/* <TableOfContents headings={headings}></TableOfContents> */}
