@@ -39,20 +39,25 @@ function Blog({ categories }) {
       <Box my={8}>
         <HStack justifyContent="center">
           <Button bg={useColorModeValue('gray.300', 'whiteAlpha.200')}>Categories</Button>
-          <Button>Tags</Button>
+          <Button isDisabled={true}>Tags</Button>
+          <Button isDisabled={true}>Archives</Button>
         </HStack>
       </Box>
-      <Grid templateColumns={{ base: 'repeat(4, 1fr)', sm: 'repeat(6, 1fr)' }} gap={6}>
+      <Grid
+        templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)' }}
+        gap={6}
+        mb={6}
+      >
         {categories &&
           categories.map((category) => (
             <Link href={`/categories/${category}`}>
-              <Button w={40}>{capitalizeString(category)}</Button>
+              <Button w="100%">{capitalizeString(category)}</Button>
             </Link>
           ))}
-        <Link href="/posts/1">
-          <Button w={40}>View all posts</Button>
-        </Link>
       </Grid>
+      <Link href="/posts/1">
+        <Button w={40}>View all posts</Button>
+      </Link>
     </>
   )
 }
