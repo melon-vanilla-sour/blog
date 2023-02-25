@@ -37,8 +37,8 @@ function HomePage({ posts }) {
             <TechIcon image="icons/react.svg" name="React" />
             <TechIcon image="icons/chakraui.svg" name="Chakra UI" />
             <TechIcon site="https://nodejs.org/en/" image="icons/nodedotjs.svg" name="Node.js" />
-            <TechIcon image="icons/ruby.svg" name="Ruby" />
-            <TechIcon image="icons/php.svg" name="PHP" />
+            {/* <TechIcon image="icons/ruby.svg" name="Ruby" />
+            <TechIcon image="icons/php.svg" name="PHP" /> */}
           </Grid>
         </Flex>
       </Box>
