@@ -88,7 +88,7 @@ const renderOptions = {
         )
       } else if (node.data.target.sys.contentType.sys.id === 'post') {
         return (
-          <Flex maxW="420px" mb={8} mx="auto">
+          <Flex mb={8} mx="auto">
             <Card post={node.data.target} index={1}></Card>
           </Flex>
         )
