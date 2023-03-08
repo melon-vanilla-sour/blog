@@ -26,7 +26,7 @@ const getThumbnailURI = (post) => {
   }
 }
 
-export const CardTextContainer = ({ children, backgroundImage, ...props }) => {
+export const CardTextContainer = ({ children, ...props }) => {
   return (
     <Flex
       flexDir="column"
@@ -36,13 +36,13 @@ export const CardTextContainer = ({ children, backgroundImage, ...props }) => {
       padding={3}
       w="full"
       position="relative"
-      _before={{
-        backgroundImage: backgroundImage,
-        backgroundSize: '100%',
-        filter: 'saturate(50%) brightness(50%)',
-        zIndex: '-1',
-        position: 'absolute',
-      }}
+      // _before={{
+      //   backgroundImage: backgroundImage,
+      //   backgroundSize: '100%',
+      //   filter: 'saturate(50%) brightness(50%)',
+      //   zIndex: '-1',
+      //   position: 'absolute',
+      // }}
       {...props}
     >
       {children}
@@ -74,7 +74,7 @@ const Card = ({ post, index }) => {
                   {createdAt.format('DD/MMM')}
                 </Text>
               </Flex>
-              <CardTextContainer backgroundImage={thumbnailURI}>
+              <CardTextContainer>
                 <Heading
                   fontSize={{ base: 'sm', sm: 'lg' }}
                   textAlign="start"
