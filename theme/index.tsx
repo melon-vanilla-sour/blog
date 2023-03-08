@@ -47,8 +47,8 @@ const overrides = {
         borderRadius: 'lg',
         border: '1px solid',
         borderColor: mode('blackAlpha.400', 'whiteAlpha.400')(props),
+        // height: 24,
         overflow: 'hidden',
-        w: 'full',
         boxSizing: 'content-box',
         bg: mode('white', 'whiteAlpha.200')(props),
         _hover: {

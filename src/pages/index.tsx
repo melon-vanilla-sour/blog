@@ -8,7 +8,7 @@ interface TechIconProps {
 
 const TechIcon = ({ site, image, name }: TechIconProps) => {
   return (
-    <Flex flexDir="column" w="80px">
+    <Flex flexDir="column">
       <a href={site}>
         <img src={image} />
       </a>

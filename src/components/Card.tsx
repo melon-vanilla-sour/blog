@@ -1,4 +1,14 @@
-import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, Image } from '@chakra-ui/react'
+import {
+  Heading,
+  Box,
+  useColorModeValue,
+  Text,
+  Flex,
+  Icon,
+  Spacer,
+  Image,
+  filter,
+} from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
@@ -16,15 +26,23 @@ const getThumbnailURI = (post) => {
   }
 }
 
-export const CardTextContainer = ({ children, ...props }) => {
+export const CardTextContainer = ({ children, backgroundImage, ...props }) => {
   return (
     <Flex
       flexDir="column"
       alignItems="start"
-      justifyContent="center"
+      justifyContent="space-around"
       display="flex"
-      flex={1}
       padding={3}
+      w="full"
+      position="relative"
+      _before={{
+        backgroundImage: backgroundImage,
+        backgroundSize: '100%',
+        filter: 'saturate(50%) brightness(50%)',
+        zIndex: '-1',
+        position: 'absolute',
+      }}
       {...props}
     >
       {children}
@@ -35,42 +53,64 @@ export const CardTextContainer = ({ children, ...props }) => {
 const Card = ({ post, index }) => {
   const createdAt = dayjs(post.sys.createdAt)
   const thumbnailURI = getThumbnailURI(post)
+  const tags = post.fields.tags || []
 
   return (
     <Box className="card">
       <Link href={`/post/${post.fields.slug}`}>
         <a>
-          <Flex direction="column">
-            <Box
-              as={Image}
+          <Flex h={{ base: '24', sm: '24' }}>
+            <Flex flex="40%">
+              <Flex
+                className="date"
+                align="center"
+                justify="center"
+                p={3}
+                borderRight="1px solid"
+                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+                minW={24}
+              >
+                <Text fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
+                  {createdAt.format('DD/MMM')}
+                </Text>
+              </Flex>
+              <CardTextContainer backgroundImage={thumbnailURI}>
+                <Heading
+                  fontSize={{ base: 'sm', sm: 'lg' }}
+                  textAlign="start"
+                  // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                  // minH="2.6em"
+                  noOfLines={2}
+                >
+                  {post.fields.title}
+                </Heading>
+
+                <Flex alignItems="center" flexWrap="wrap" mt={1}>
+                  <Icon as={BiFolderOpen} marginEnd={2} />
+                  <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
+                    {capitalizeString(post.fields.category)}
+                  </Text>
+                  <Box mx={2}></Box>
+
+                  {/* <Icon as={TbWriting} marginEnd={2} /> */}
+                  {/* <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}> */}
+                  {/* {tags.join(', ')} */}
+                  {/* </Text> */}
+                </Flex>
+              </CardTextContainer>
+            </Flex>
+
+            <Image
               src={thumbnailURI}
               alt="Post Thumbnail"
-              position="relative"
               filter={'saturate(130%) brightness(110%)'}
-              w="420px"
-              h="240px"
               objectFit="cover"
-            ></Box>
-            <CardTextContainer>
-              <Heading
-                fontSize={{ base: 'md', md: 'lg' }}
-                textAlign="start"
-                // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
-                minH="2.6em"
-                noOfLines={2}
-              >
-                {post.fields.title}
-              </Heading>
-
-              <Flex alignItems="center" flexWrap="wrap" mt={1}>
-                <Icon as={BiFolderOpen} marginEnd={2} />
-                {capitalizeString(post.fields.category)}
-                <Box mx={2}></Box>
-
-                <Icon as={TbWriting} marginEnd={2} />
-                {createdAt.format('DD/MM/YYYY')}
-              </Flex>
-            </CardTextContainer>
+              flex="1"
+              overflow="hidden"
+              borderLeft="1px solid"
+              borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+              display={{ base: 'none', sm: 'block' }}
+            ></Image>
           </Flex>
         </a>
       </Link>

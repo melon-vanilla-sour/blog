@@ -21,7 +21,7 @@ import Card from '../components/Card'
 //   }
 // }
 
-function Tags({ categories }) {
+function Tags({ tags }) {
   //   const filteredTags = []
   //   const filterCategories = (() => {
   //     // Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
