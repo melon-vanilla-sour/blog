@@ -61,10 +61,7 @@ function Posts({
           <Button isDisabled={true}>Archives</Button>
         </HStack>
       </Box>
-      <Grid
-        templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' }}
-        gap={{ base: '3', sm: '6' }}
-      >
+      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }}>
         {posts &&
           posts.map((post, index) => (
             <GridItem key={post.sys.id}>

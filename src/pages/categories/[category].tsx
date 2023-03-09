@@ -60,7 +60,7 @@ function Category({ category, posts }) {
   return (
     <>
       <Heading my={8}>{capitalizeString(category)}</Heading>
-      <Grid templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(1, 1fr)' }} gap={6}>
+      <Grid templateColumns="repeat(1, 1fr)" gap={6}>
         {posts &&
           posts.map((post, index) => (
             <GridItem key={post.sys.id}>

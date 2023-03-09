@@ -88,9 +88,9 @@ const renderOptions = {
         )
       } else if (node.data.target.sys.contentType.sys.id === 'post') {
         return (
-          <Flex mb={8} mx="auto">
+          <Box mb={8}>
             <Card post={node.data.target} index={1}></Card>
-          </Flex>
+          </Box>
         )
       }
     },
@@ -117,14 +117,14 @@ const renderOptions = {
       }
 
       return (
-        <Text pb={6} fontSize="md">
+        <Text pb={8} fontSize="md">
           {children}
         </Text>
       )
     },
     [BLOCKS.HEADING_2]: (node, children) => {
       return (
-        <Heading size="md" mb={2} textAlign="start">
+        <Heading size="md" mb={8} textAlign="start">
           {children}
         </Heading>
       )
