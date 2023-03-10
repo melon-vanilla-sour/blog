@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
+import Image from 'next/image'
 
 import { buildClient } from '../../lib/contentful'
 import { capitalizeString } from '../../lib/utils'
@@ -11,13 +12,15 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
+import { getPlaiceholder } from 'plaiceholder'
+
 import {
   Heading,
   Box,
   Text,
   Button,
   Flex,
-  Image,
+  // Image,
   useColorModeValue,
   Link as ChakraLink,
   TableContainer,
@@ -63,111 +66,137 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     // @ts-ignore
     return item.fields.slug == params.slug
   })
+  const plaiceholders = {}
+  await Promise.all(
+    // @ts-ignore
+    post.fields.content.content.map(async (content) => {
+      if (content.nodeType == 'embedded-asset-block') {
+        const { base64, img } = await getPlaiceholder(
+          'https://' + content.data.target.fields.file.url
+        )
+        plaiceholders[content.data.target.sys.id] = { ...img, blurDataURL: base64 }
+      }
+    })
+  )
   return {
     props: {
       post: post,
+      plaiceholders: plaiceholders,
     },
   }
 }
 
-const renderOptions = {
-  renderNode: {
-    [INLINES.EMBEDDED_ENTRY]: (node, children) => {
-      if (node.data.target.sys.contentType.sys.id === 'blogPost') {
-        return (
-          <a href={`/blog/${node.data.target.fields.slug}`}> {node.data.target.fields.title}</a>
-        )
-      }
-    },
-    [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-      if (node.data.target.sys.contentType.sys.id === 'codeBlock') {
-        return (
-          <pre>
-            <code>{node.data.target.fields.code}</code>
-          </pre>
-        )
-      } else if (node.data.target.sys.contentType.sys.id === 'post') {
-        return (
-          <Box mb={8}>
-            <Card post={node.data.target} index={1}></Card>
-          </Box>
-        )
-      }
-    },
+const renderOptions = (plaiceholders) => {
+  return {
+    renderNode: {
+      [INLINES.EMBEDDED_ENTRY]: (node, children) => {
+        if (node.data.target.sys.contentType.sys.id === 'blogPost') {
+          return (
+            <a href={`/blog/${node.data.target.fields.slug}`}> {node.data.target.fields.title}</a>
+          )
+        }
+      },
+      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
+        if (node.data.target.sys.contentType.sys.id === 'codeBlock') {
+          return (
+            <pre>
+              <code>{node.data.target.fields.code}</code>
+            </pre>
+          )
+        } else if (node.data.target.sys.contentType.sys.id === 'post') {
+          return (
+            <Box mb={8}>
+              <Card post={node.data.target} index={1}></Card>
+            </Box>
+          )
+        }
+      },
 
-    [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-      const imageWidth = node.data.target.fields.file.details.image.width
-      const imageHeight = node.data.target.fields.file.details.image.height
-      const maxHeight = '600px'
-      return (
-        <Flex mb={8} filter={'saturate(110%) brightness(110%)'} justifyContent="center">
-          <Image
-            src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
-            maxH={{ base: '350px', sm: '600px' }}
+      [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+        let { src, ...imageProps } = plaiceholders[node.data.target.sys.id]
+        // for some reason an extra // is appended to the image url
+        src = src.replace('//', '')
+        console.log(imageProps)
+        const imageWidth = node.data.target.fields.file.details.image.width
+        const imageHeight = node.data.target.fields.file.details.image.height
+        const maxHeight = '600px'
+        return (
+          <Flex
+            mb={8}
+            filter={'saturate(110%) brightness(110%)'}
+            justifyContent="center"
             borderRadius="10px"
-            // border="2px solid"
-            // borderColor={useColorModeValue('gray.700', 'gray.300')}
-          />
-        </Flex>
-      )
-    },
-    [BLOCKS.PARAGRAPH]: (node, children) => {
-      if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
-        return <Box pb={8}>{children} </Box>
-      }
+            overflow="hidden"
+          >
+            <Image {...imageProps} src={src} placeholder="blur" />
 
-      return (
-        <Text pb={8} fontSize="md">
-          {children}
-        </Text>
-      )
-    },
-    [BLOCKS.HEADING_2]: (node, children) => {
-      return (
-        <Heading size="md" mb={8} textAlign="start">
-          {children}
-        </Heading>
-      )
-    },
-    [INLINES.HYPERLINK]: (node, children) => {
-      return (
-        <ChakraLink
-          href={node.data.uri}
-          color={useColorModeValue('blue.500', 'blue.300')}
-          fontWeight="semibold"
-        >
-          {node.content[0].value}
-        </ChakraLink>
-      )
-    },
-  },
+            {/* <Image
+              src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
+              maxH={{ base: '350px', sm: `${maxHeight}` }}
+              borderRadius="10px" */}
+            {/* // border="2px solid" // borderColor={useColorModeValue('gray.700', 'gray.300')} */}
+            {/* /> */}
+          </Flex>
+        )
+      },
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
+          return <Box pb={8}>{children} </Box>
+        }
 
-  renderMark: {
-    [MARKS.CODE]: (text) => {
-      text = text.split('\n')
-      // Parse first line as language then delete it
-      const language = text.shift()
-      text = text.join('\n')
-
-      // const value = text.reduce((acc, cur) => {
-      //   if (typeof cur !== 'string' && cur.type === 'br') {
-      //     return acc + '\n'
-      //   }
-      //   return acc + cur
-      // }, '')
-
-      return (
-        <SyntaxHighlighter
-          language={language}
-          style={atomOneDarkReasonable}
-          showLineNumbers
-          class="code-block"
-        >
-          {text}
-        </SyntaxHighlighter>
-      )
+        return (
+          <Text pb={8} fontSize="md">
+            {children}
+          </Text>
+        )
+      },
+      [BLOCKS.HEADING_2]: (node, children) => {
+        return (
+          <Heading size="md" mb={8} textAlign="start">
+            {children}
+          </Heading>
+        )
+      },
+      [INLINES.HYPERLINK]: (node, children) => {
+        return (
+          <ChakraLink
+            href={node.data.uri}
+            color={useColorModeValue('blue.500', 'blue.300')}
+            fontWeight="semibold"
+          >
+            {node.content[0].value}
+          </ChakraLink>
+        )
+      },
     },
-  },
+
+    renderMark: {
+      [MARKS.CODE]: (text) => {
+        text = text.split('\n')
+        // Parse first line as language then delete it
+        const language = text.shift()
+        text = text.join('\n')
+
+        // const value = text.reduce((acc, cur) => {
+        //   if (typeof cur !== 'string' && cur.type === 'br') {
+        //     return acc + '\n'
+        //   }
+        //   return acc + cur
+        // }, '')
+
+        return (
+          <SyntaxHighlighter
+            language={language}
+            style={atomOneDarkReasonable}
+            showLineNumbers
+            class="code-block"
+          >
+            {text}
+          </SyntaxHighlighter>
+        )
+      },
+    },
+  }
 }
 
 const getHeadings = (post) => {
@@ -200,7 +229,7 @@ const TableOfContents = ({ headings }) => {
   )
 }
 
-const Post = ({ post }) => {
+const Post = ({ post, plaiceholders }) => {
   const router = useRouter()
   if (!router.isFallback && !post.fields.slug) {
     return <ErrorPage statusCode={404} />
@@ -227,7 +256,7 @@ const Post = ({ post }) => {
         </Flex>
       </Flex>
       {/* <TableOfContents headings={headings}></TableOfContents> */}
-      <div>{documentToReactComponents(post.fields.content, renderOptions)}</div>
+      <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>
