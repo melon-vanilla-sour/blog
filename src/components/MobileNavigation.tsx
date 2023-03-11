@@ -33,7 +33,13 @@ const MobileNavigation = () => {
           <ModalHeader mx="auto">Go to Page</ModalHeader>
           <Box flexGrow={1}></Box>
           <Center>
-            <IconButton aria-label="Toggle Mode" onClick={toggleColorMode} boxShadow="none" my={2}>
+            <IconButton
+              aria-label="Toggle Mode"
+              onClick={toggleColorMode}
+              boxShadow="none"
+              my={2}
+              bg={useColorModeValue('', '')}
+            >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </IconButton>
           </Center>
@@ -54,7 +60,13 @@ const MobileNavigation = () => {
               </Link>
             </Box>
           </Flex>
-          <IconButton aria-label="Close Navigation" boxShadow="none" py={2} onClick={onClose}>
+          <IconButton
+            aria-label="Close Navigation"
+            boxShadow="none"
+            py={2}
+            onClick={onClose}
+            bg={useColorModeValue('', '')}
+          >
             <CloseIcon></CloseIcon>
           </IconButton>
         </ModalContent>
@@ -66,6 +78,9 @@ const MobileNavigation = () => {
         bottom={4}
         right={4}
         display={{ base: 'block', sm: 'none' }}
+        bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
+        borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+        border="1px solid"
       >
         <HamburgerIcon />
       </IconButton>
