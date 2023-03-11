@@ -116,7 +116,6 @@ const renderOptions = (plaiceholders) => {
         let { src, ...imageProps } = plaiceholders[node.data.target.sys.id]
         // for some reason an extra // is appended to the image url
         src = src.replace('//', '')
-        console.log(imageProps)
         const imageWidth = node.data.target.fields.file.details.image.width
         const imageHeight = node.data.target.fields.file.details.image.height
         const maxHeight = '600px'
@@ -173,27 +172,36 @@ const renderOptions = (plaiceholders) => {
     renderMark: {
       [MARKS.CODE]: (text) => {
         text = text.split('\n')
-        // Parse first line as language then delete it
-        const language = text.shift()
-        text = text.join('\n')
+        console.log(text)
+        if (text.length != 1) {
+          // Parse first line as language then delete it
+          const language = text.shift()
+          text = text.join('\n')
 
-        // const value = text.reduce((acc, cur) => {
-        //   if (typeof cur !== 'string' && cur.type === 'br') {
-        //     return acc + '\n'
-        //   }
-        //   return acc + cur
-        // }, '')
+          // const value = text.reduce((acc, cur) => {
+          //   if (typeof cur !== 'string' && cur.type === 'br') {
+          //     return acc + '\n'
+          //   }
+          //   return acc + cur
+          // }, '')
 
-        return (
-          <SyntaxHighlighter
-            language={language}
-            style={atomOneDarkReasonable}
-            showLineNumbers
-            class="code-block"
-          >
-            {text}
-          </SyntaxHighlighter>
-        )
+          return (
+            <SyntaxHighlighter
+              language={language}
+              style={atomOneDarkReasonable}
+              showLineNumbers
+              class="code-block"
+            >
+              {text}
+            </SyntaxHighlighter>
+          )
+        } else {
+          return (
+            <Box px={1} bg={useColorModeValue('blackAlpha.300', 'gray.700')} as="code">
+              {text}
+            </Box>
+          )
+        }
       },
     },
   }
