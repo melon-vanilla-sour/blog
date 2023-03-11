@@ -68,7 +68,7 @@ const Card = ({ post, index }) => {
                 p={3}
                 borderRight="1px solid"
                 borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                minW={24}
+                minW={{ base: '20', sm: '24' }}
               >
                 <Text fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
                   {createdAt.format('DD/MMM')}
@@ -76,7 +76,7 @@ const Card = ({ post, index }) => {
               </Flex>
               <CardTextContainer>
                 <Heading
-                  fontSize={{ base: 'sm', sm: 'lg' }}
+                  fontSize={{ base: 'md', sm: 'lg' }}
                   textAlign="start"
                   // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
                   // minH="2.6em"
@@ -85,7 +85,7 @@ const Card = ({ post, index }) => {
                   {post.fields.title}
                 </Heading>
 
-                <Flex alignItems="center" flexWrap="wrap" mt={1}>
+                <Flex alignItems="center" mt={1}>
                   <Icon as={BiFolderOpen} marginEnd={2} />
                   <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
                     {capitalizeString(post.fields.category)}
