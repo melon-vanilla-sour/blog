@@ -128,7 +128,7 @@ const renderOptions = (plaiceholders) => {
             borderRadius="10px"
             overflow="hidden"
           >
-            <Image {...imageProps} src={src} placeholder="blur" />
+            <Image {...imageProps} src={src} placeholder="blur" priority="true" />
 
             {/* <Image
               src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
