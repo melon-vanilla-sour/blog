@@ -79,8 +79,8 @@ const MobileNavigation = () => {
         right={4}
         display={{ base: 'block', sm: 'none' }}
         bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
-        borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
         border="1px solid"
+        borderColor={useColorModeValue('blackAlpha.600', 'whiteAlpha.400')}
       >
         <HamburgerIcon />
       </IconButton>
