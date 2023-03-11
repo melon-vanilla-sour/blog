@@ -26,7 +26,7 @@ const getThumbnailURI = (post) => {
   }
 }
 
-export const CardTextContainer = ({ children, ...props }) => {
+export const CardTextContainer = ({ children, backgroundImage, ...props }) => {
   return (
     <Flex
       flexDir="column"
@@ -36,6 +36,7 @@ export const CardTextContainer = ({ children, ...props }) => {
       padding={3}
       w="full"
       position="relative"
+      // zIndex="-2"
       // _before={{
       //   backgroundImage: backgroundImage,
       //   backgroundSize: '100%',
@@ -74,7 +75,7 @@ const Card = ({ post, index }) => {
                   {createdAt.format('DD/MMM')}
                 </Text>
               </Flex>
-              <CardTextContainer>
+              <CardTextContainer backgroundImage={thumbnailURI}>
                 <Heading
                   fontSize={{ base: 'md', sm: 'lg' }}
                   textAlign="start"
