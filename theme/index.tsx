@@ -57,6 +57,9 @@ const overrides = {
           transition: '0.2s ease-in-out',
         },
       },
+      '.cardDate': {
+        caretColor: 'transparent',
+      },
       '.iconGrid': {
         ...iconGrid,
         background: mode('white', 'whiteAlpha.200')(props),

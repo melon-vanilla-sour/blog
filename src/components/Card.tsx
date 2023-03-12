@@ -71,7 +71,7 @@ const Card = ({ post, index }) => {
                 borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                 minW={{ base: '20', sm: '24' }}
               >
-                <Text fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
+                <Text className="cardDate" fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
                   {createdAt.format('DD/MMM')}
                 </Text>
               </Flex>
