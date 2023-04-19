@@ -11,6 +11,7 @@ import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { srcery } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { getPlaiceholder } from 'plaiceholder'
 
@@ -127,7 +128,12 @@ const renderOptions = (plaiceholders) => {
             borderRadius="10px"
             overflow="hidden"
           >
-            <Image {...imageProps} src={src} placeholder="blur" priority="true" />
+            <Image
+              {...imageProps}
+              src={`${src}?fm=webp&h=600`}
+              placeholder="blur"
+              priority="true"
+            />
 
             {/* <Image
               src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}

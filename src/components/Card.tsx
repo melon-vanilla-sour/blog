@@ -102,7 +102,7 @@ const Card = ({ post, index }) => {
             </Flex>
 
             <Image
-              src={thumbnailURI}
+              src={`${thumbnailURI}?fm=webp&h=200`}
               alt="Post Thumbnail"
               filter={'saturate(130%) brightness(110%)'}
               objectFit="cover"
