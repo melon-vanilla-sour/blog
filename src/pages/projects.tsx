@@ -24,7 +24,7 @@ function Projects() {
               <Flex direction="column">
                 <Box
                   as={Image}
-                  src={'projects/holoview-thumbnail.png'}
+                  src={'projects/holoview-thumbnail.png?fm=webp&h=600'}
                   alt="Post Thumbnail"
                   position="relative"
                   filter={'saturate(130%) brightness(110%)'}
