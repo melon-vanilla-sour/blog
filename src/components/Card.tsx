@@ -52,8 +52,8 @@ export const CardTextContainer = ({ children, ...props }) => {
 }
 
 const Card = ({ post, index }) => {
-  const createdAt = dayjs(post.sys.createdAt)
-  const thumbnailURI = getThumbnailURI(post)
+  const createdAt = dayjs(post.fields.created)
+  // const thumbnailURI = getThumbnailURI(post)
   const tags = post.fields.tags || []
 
   return (
@@ -102,7 +102,8 @@ const Card = ({ post, index }) => {
             </Flex>
 
             <Image
-              src={`${thumbnailURI}?fm=webp&h=200`}
+              // src={`${thumbnailURI}?fm=webp&h=200`}
+              src={'../favicon.ico?fm=webp&h=200'}
               alt="Post Thumbnail"
               filter={'saturate(130%) brightness(110%)'}
               objectFit="cover"

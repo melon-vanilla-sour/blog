@@ -2,16 +2,15 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Image from 'next/image'
+import ReactMarkdown from 'react-markdown'
 
 import { buildClient } from '../../lib/contentful'
-import { capitalizeString } from '../../lib/utils'
-import { EntryCollection } from 'contentful'
+import { capitalizeString, getImageUrls } from '../../lib/utils'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-import { srcery } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 
 import { getPlaiceholder } from 'plaiceholder'
 
@@ -21,7 +20,6 @@ import {
   Text,
   Button,
   Flex,
-  // Image,
   useColorModeValue,
   Link as ChakraLink,
   TableContainer,
@@ -42,7 +40,7 @@ const client = buildClient()
 
 const getPostEntries = async () => {
   const { items } = await client.getEntries({
-    content_type: 'post',
+    content_type: 'markdownPost',
   })
   return items
 }
@@ -68,15 +66,15 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     return item.fields.slug == params.slug
   })
   const plaiceholders = {}
+  // Regular expression to match the URL pattern without capturing the brackets
+  // (//images.ctfassets.net/vt3fzpmlfg71/4bS2qmHhXVIC6tHWKrPE8t/d22d9cbdd1bb9a3c37b6ccbf74ca246a/IMG_8570.JPG)
+  // global flag at the end ensures all matches
+
+  const imageURLs = getImageUrls(post.fields.body)
   await Promise.all(
-    // @ts-ignore
-    post.fields.content.content.map(async (content) => {
-      if (content.nodeType == 'embedded-asset-block') {
-        const { base64, img } = await getPlaiceholder(
-          'https://' + content.data.target.fields.file.url
-        )
-        plaiceholders[content.data.target.sys.id] = { ...img, blurDataURL: base64 }
-      }
+    imageURLs.map(async (imageURL, index) => {
+      const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
+      plaiceholders[index] = { ...img, blurDataURL: base64 }
     })
   )
   return {
@@ -155,13 +153,13 @@ const renderOptions = (plaiceholders) => {
           </Text>
         )
       },
-      [BLOCKS.HEADING_2]: (node, children) => {
-        return (
-          <Heading size="md" mb={8} textAlign="start">
-            {children}
-          </Heading>
-        )
-      },
+      // [BLOCKS.HEADING_2]: (node, children) => {
+      //   return (
+      //     <Heading size="md" mb={8} textAlign="start">
+      //       {children}
+      //     </Heading>
+      //   )
+      // },
       [INLINES.HYPERLINK]: (node, children) => {
         return (
           <ChakraLink
@@ -213,15 +211,15 @@ const renderOptions = (plaiceholders) => {
   }
 }
 
-const getHeadings = (post) => {
-  const headings: string[] = []
-  post.fields.content.content.map((block) => {
-    if (block.nodeType === 'heading-2') {
-      headings.push(block.content[0].value)
-    }
-  })
-  return headings
-}
+// const getHeadings = (post) => {
+//   const headings: string[] = []
+//   post.fields.content.content.map((block) => {
+//     if (block.nodeType === 'heading-2') {
+//       headings.push(block.content[0].value)
+//     }
+//   })
+//   return headings
+// }
 
 const TableOfContents = ({ headings }) => {
   return (
@@ -248,20 +246,56 @@ const Post = ({ post, plaiceholders }) => {
   if (!router.isFallback && !post.fields.slug) {
     return <ErrorPage statusCode={404} />
   }
-  const headings: string[] = getHeadings(post)
+  let imageIndex = 0
+  const markdownRenderer = {
+    p: ({ node, ...props }) => <Text pb={8} fontSize="md" {...props} />,
+    h2: ({ node, ...props }) => <Heading size="md" mb={8} textAlign="start" {...props} />,
+    a: ({ node, index, ...props }) => {
+      return (
+        <ChakraLink
+          color={useColorModeValue('blue.500', 'blue.300')}
+          fontWeight="semibold"
+          {...props}
+        />
+      )
+    },
+    img: ({ node, src, ...props }) => {
+      let { src: imgSrc, ...imageProps } = plaiceholders[imageIndex]
+      imageIndex += 1
+      return (
+        <Flex
+          mb={8}
+          filter={'saturate(110%) brightness(110%)'}
+          justifyContent="center"
+          borderRadius="10px"
+          overflow="hidden"
+        >
+          <Image
+            src={`${imgSrc}?fm=webp&h=600`}
+            {...imageProps}
+            priority={true}
+            placeholder="blur"
+            {...props}
+          />
+        </Flex>
+      )
+    },
+  }
+  console.log(post.fields.body)
+  // const headings: string[] = getHeadings(post)
   const tags = post.fields.tags || []
   return (
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
           <Heading size="md" textAlign="start" mb={1}>
-            {post.fields.title}
+            {post.fields.title}e{' '}
           </Heading>
           <HStack>
             <Icon as={BiFolderOpen} />
             <Text>{capitalizeString(post.fields.category)}</Text>
             <Icon as={TbWriting} />
-            <Text>{dayjs(post.sys.createdAt).format('DD/MM/YYYY')}</Text>
+            <Text>{dayjs(post.fields.created).format('DD/MM/YYYY')}</Text>
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
@@ -270,6 +304,7 @@ const Post = ({ post, plaiceholders }) => {
         </Flex>
       </Flex>
       {/* <TableOfContents headings={headings}></TableOfContents> */}
+      <ReactMarkdown components={markdownRenderer}>{post.fields.body}</ReactMarkdown>
       <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
@@ -277,5 +312,4 @@ const Post = ({ post, plaiceholders }) => {
     </>
   )
 }
-
 export default Post

@@ -9,8 +9,8 @@ const client = buildClient()
 
 const getPostEntries = async (options) => {
   const { items, total } = await client.getEntries({
-    content_type: 'post',
-    order: '-sys.createdAt',
+    content_type: 'markdownPost',
+    order: 'fields.created',
     ...options,
   })
   return { items, total }
@@ -40,7 +40,6 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
     props: { posts: items, totalPages: totalPages, currentPage: params.page },
   }
 }
-
 function Posts({
   posts,
   totalPages,

@@ -12,8 +12,8 @@ import Card from '../components/Card'
 
 // export const getStaticProps = async () => {
 //   const { items } = await client.getEntries({
-//     content_type: 'post',
-//     order: '-sys.createdAt',
+//     content_type: 'markdownPost',
+//     order: 'fields.created',
 //     select: 'fields.tags',
 //   })
 //   return {
