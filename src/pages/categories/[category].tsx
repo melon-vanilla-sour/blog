@@ -4,7 +4,8 @@ import Pagination from '../../components/Pagination'
 import { Heading, Button, Grid, GridItem } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { capitalizeString } from '../../lib/utils'
+import { capitalizeString, getImageUrls } from '../../lib/utils'
+import { getPlaiceholder } from 'plaiceholder'
 
 const client = buildClient()
 // const router = useRouter()
@@ -48,15 +49,25 @@ export const getStaticProps = async ({ params }) => {
     order: 'fields.created',
     'fields.category[in]': params.category,
   })
+
+  const placeholders = []
+  await Promise.all(
+    posts.map(async (item, index) => {
+      const imageUrls = getImageUrls(item.fields.body)
+      const { base64, img } = await getPlaiceholder(`https:${imageUrls[0]}`)
+      placeholders[index] = { ...img, blurDataURL: base64 }
+    })
+  )
   return {
     props: {
       category: params.category,
       posts: posts,
+      placeholders: placeholders,
     },
   }
 }
 
-function Category({ category, posts }) {
+function Category({ category, posts, placeholders }) {
   return (
     <>
       <Heading my={8}>{capitalizeString(category)}</Heading>
@@ -64,7 +75,7 @@ function Category({ category, posts }) {
         {posts &&
           posts.map((post, index) => (
             <GridItem key={post.sys.id}>
-              <Card post={post} index={index}></Card>
+              <Card post={post} index={index} thumbnail={placeholders[index]}></Card>
             </GridItem>
           ))}
         <Link href="/posts/1">

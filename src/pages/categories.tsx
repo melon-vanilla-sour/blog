@@ -5,11 +5,11 @@ import { capitalizeString } from '../lib/utils'
 
 const client = buildClient()
 
+// Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
 const removeEmptyFields = (categories) => {
   return [...categories].filter((category) => category.fields != null)
 }
 
-// Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
 const removeDuplicates = (categories) => {
   const array = []
   categories.map((category) => {

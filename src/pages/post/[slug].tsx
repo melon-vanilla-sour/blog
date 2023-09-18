@@ -2,10 +2,12 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Image from 'next/image'
+
 import ReactMarkdown from 'react-markdown'
+import remarkUnwrapImages from 'remark-unwrap-images'
 
 import { buildClient } from '../../lib/contentful'
-import { capitalizeString, getImageUrls } from '../../lib/utils'
+import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
@@ -66,9 +68,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     return item.fields.slug == params.slug
   })
   const plaiceholders = {}
-  // Regular expression to match the URL pattern without capturing the brackets
-  // (//images.ctfassets.net/vt3fzpmlfg71/4bS2qmHhXVIC6tHWKrPE8t/d22d9cbdd1bb9a3c37b6ccbf74ca246a/IMG_8570.JPG)
-  // global flag at the end ensures all matches
 
   const imageURLs = getImageUrls(post.fields.body)
   await Promise.all(
@@ -248,15 +247,21 @@ const Post = ({ post, plaiceholders }) => {
   }
   let imageIndex = 0
   const markdownRenderer = {
-    p: ({ node, ...props }) => <Text pb={8} fontSize="md" {...props} />,
+    p: ({ children, ...props }) => (
+      <Text pb={8} fontSize="md" {...props}>
+        {children}
+      </Text>
+    ),
     h2: ({ node, ...props }) => <Heading size="md" mb={8} textAlign="start" {...props} />,
-    a: ({ node, index, ...props }) => {
+    a: ({ node, href, ...props }) => {
       return (
         <ChakraLink
           color={useColorModeValue('blue.500', 'blue.300')}
           fontWeight="semibold"
+          target={isInternalLink(href) ? '_self' : '_blank'}
+          href={href}
           {...props}
-        />
+        ></ChakraLink>
       )
     },
     img: ({ node, src, ...props }) => {
@@ -264,11 +269,11 @@ const Post = ({ post, plaiceholders }) => {
       imageIndex += 1
       return (
         <Flex
-          mb={8}
           filter={'saturate(110%) brightness(110%)'}
           justifyContent="center"
           borderRadius="10px"
           overflow="hidden"
+          mb={8}
         >
           <Image
             src={`${imgSrc}?fm=webp&h=600`}
@@ -304,8 +309,10 @@ const Post = ({ post, plaiceholders }) => {
         </Flex>
       </Flex>
       {/* <TableOfContents headings={headings}></TableOfContents> */}
-      <ReactMarkdown components={markdownRenderer}>{post.fields.body}</ReactMarkdown>
-      <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div>
+      <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
+        {post.fields.body}
+      </ReactMarkdown>
+      {/* <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div> */}
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>

@@ -1,14 +1,5 @@
-import {
-  Heading,
-  Box,
-  useColorModeValue,
-  Text,
-  Flex,
-  Icon,
-  Spacer,
-  Image,
-  filter,
-} from '@chakra-ui/react'
+import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, filter } from '@chakra-ui/react'
+import Image from 'next/image'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
@@ -51,10 +42,11 @@ export const CardTextContainer = ({ children, ...props }) => {
   )
 }
 
-const Card = ({ post, index }) => {
+const Card = ({ post, thumbnail, index }) => {
   const createdAt = dayjs(post.fields.created)
   // const thumbnailURI = getThumbnailURI(post)
   const tags = post.fields.tags || []
+  let { src, ...imageProps } = thumbnail
 
   return (
     <Box className="card">
@@ -101,18 +93,23 @@ const Card = ({ post, index }) => {
               </CardTextContainer>
             </Flex>
 
-            <Image
-              // src={`${thumbnailURI}?fm=webp&h=200`}
-              src={'../favicon.ico?fm=webp&h=200'}
-              alt="Post Thumbnail"
-              filter={'saturate(130%) brightness(110%)'}
-              objectFit="cover"
+            <Flex
               flex="1"
-              overflow="hidden"
-              borderLeft="1px solid"
-              borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-              display={{ base: 'none', sm: 'block' }}
-            ></Image>
+              display={{ base: 'none', sm: 'flex' }}
+              filter={'saturate(130%) brightness(110%)'}
+            >
+              <Image
+                {...imageProps}
+                src={`${src}?fm=webp&w=260`}
+                alt="Post Thumbnail"
+                objectFit="cover"
+                overflow="hidden"
+                borderLeft="1px solid"
+                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+                placeholder="blur"
+                priority="true"
+              ></Image>
+            </Flex>
           </Flex>
         </a>
       </Link>
