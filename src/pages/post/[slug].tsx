@@ -11,8 +11,9 @@ import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+// import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { getPlaiceholder } from 'plaiceholder'
 
@@ -285,8 +286,31 @@ const Post = ({ post, plaiceholders }) => {
         </Flex>
       )
     },
+    code: ({ node, inline, className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <Box pb={8} borderRadius={10} overflow="hidden">
+          <SyntaxHighlighter
+            {...props}
+            children={String(children).replace(/\n$/, '')}
+            style={oneDark}
+            language={match[1]}
+            PreTag="div"
+          />
+        </Box>
+      ) : (
+        <Box
+          px={1}
+          bg={useColorModeValue('blackAlpha.300', 'gray.700')}
+          {...props}
+          className={className}
+          as="code"
+        >
+          {children}
+        </Box>
+      )
+    },
   }
-  console.log(post.fields.body)
   // const headings: string[] = getHeadings(post)
   const tags = post.fields.tags || []
   return (
@@ -312,7 +336,6 @@ const Post = ({ post, plaiceholders }) => {
       <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
         {post.fields.body}
       </ReactMarkdown>
-      {/* <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div> */}
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>
