@@ -8,11 +8,8 @@ import remarkUnwrapImages from 'remark-unwrap-images'
 
 import { buildClient } from '../../lib/contentful'
 import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-// import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { getPlaiceholder } from 'plaiceholder'
@@ -37,7 +34,6 @@ import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
-import Card from '../../components/Card'
 
 const client = buildClient()
 
@@ -84,142 +80,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     },
   }
 }
-
-const renderOptions = (plaiceholders) => {
-  return {
-    renderNode: {
-      [INLINES.EMBEDDED_ENTRY]: (node, children) => {
-        if (node.data.target.sys.contentType.sys.id === 'blogPost') {
-          return (
-            <a href={`/blog/${node.data.target.fields.slug}`}> {node.data.target.fields.title}</a>
-          )
-        }
-      },
-      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-        if (node.data.target.sys.contentType.sys.id === 'codeBlock') {
-          return (
-            <pre>
-              <code>{node.data.target.fields.code}</code>
-            </pre>
-          )
-        } else if (node.data.target.sys.contentType.sys.id === 'post') {
-          return (
-            <Box mb={8}>
-              <Card post={node.data.target} index={1}></Card>
-            </Box>
-          )
-        }
-      },
-
-      [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-        let { src, ...imageProps } = plaiceholders[node.data.target.sys.id]
-        // for some reason an extra // is appended to the image url
-        src = src.replace('//', '')
-        const imageWidth = node.data.target.fields.file.details.image.width
-        const imageHeight = node.data.target.fields.file.details.image.height
-        const maxHeight = '600px'
-        return (
-          <Flex
-            mb={8}
-            filter={'saturate(110%) brightness(110%)'}
-            justifyContent="center"
-            borderRadius="10px"
-            overflow="hidden"
-          >
-            <Image
-              {...imageProps}
-              src={`${src}?fm=webp&h=600`}
-              placeholder="blur"
-              priority="true"
-            />
-
-            {/* <Image
-              src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
-              maxH={{ base: '350px', sm: `${maxHeight}` }}
-              borderRadius="10px" */}
-            {/* // border="2px solid" // borderColor={useColorModeValue('gray.700', 'gray.300')} */}
-            {/* /> */}
-          </Flex>
-        )
-      },
-      [BLOCKS.PARAGRAPH]: (node, children) => {
-        if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
-          return <Box pb={8}>{children} </Box>
-        }
-
-        return (
-          <Text pb={8} fontSize="md">
-            {children}
-          </Text>
-        )
-      },
-      // [BLOCKS.HEADING_2]: (node, children) => {
-      //   return (
-      //     <Heading size="md" mb={8} textAlign="start">
-      //       {children}
-      //     </Heading>
-      //   )
-      // },
-      [INLINES.HYPERLINK]: (node, children) => {
-        return (
-          <ChakraLink
-            href={node.data.uri}
-            color={useColorModeValue('blue.500', 'blue.300')}
-            fontWeight="semibold"
-          >
-            {node.content[0].value}
-          </ChakraLink>
-        )
-      },
-    },
-
-    renderMark: {
-      [MARKS.CODE]: (text) => {
-        text = text.split('\n')
-        console.log(text)
-        if (text.length != 1) {
-          // Parse first line as language then delete it
-          const language = text.shift()
-          text = text.join('\n')
-
-          // const value = text.reduce((acc, cur) => {
-          //   if (typeof cur !== 'string' && cur.type === 'br') {
-          //     return acc + '\n'
-          //   }
-          //   return acc + cur
-          // }, '')
-
-          return (
-            <SyntaxHighlighter
-              language={language}
-              style={atomOneDarkReasonable}
-              showLineNumbers
-              class="code-block"
-            >
-              {text}
-            </SyntaxHighlighter>
-          )
-        } else {
-          return (
-            <Box px={1} bg={useColorModeValue('blackAlpha.300', 'gray.700')} as="code">
-              {text}
-            </Box>
-          )
-        }
-      },
-    },
-  }
-}
-
-// const getHeadings = (post) => {
-//   const headings: string[] = []
-//   post.fields.content.content.map((block) => {
-//     if (block.nodeType === 'heading-2') {
-//       headings.push(block.content[0].value)
-//     }
-//   })
-//   return headings
-// }
 
 const TableOfContents = ({ headings }) => {
   return (
@@ -311,7 +171,6 @@ const Post = ({ post, plaiceholders }) => {
       )
     },
   }
-  // const headings: string[] = getHeadings(post)
   const tags = post.fields.tags || []
   return (
     <>
@@ -332,7 +191,6 @@ const Post = ({ post, plaiceholders }) => {
           </HStack>
         </Flex>
       </Flex>
-      {/* <TableOfContents headings={headings}></TableOfContents> */}
       <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
         {post.fields.body}
       </ReactMarkdown>
