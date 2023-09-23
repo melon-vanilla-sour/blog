@@ -53,6 +53,7 @@ export const getStaticProps = async ({ params }) => {
   const placeholders = []
   await Promise.all(
     posts.map(async (item, index) => {
+      // @ts-ignore
       const imageUrls = getImageUrls(item.fields.body)
       if (!imageUrls) return
       const { base64, img } = await getPlaiceholder(`https:${imageUrls[0]}`)

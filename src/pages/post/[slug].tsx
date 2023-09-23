@@ -66,6 +66,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   })
   const plaiceholders = {}
 
+  // @ts-ignore
   const imageURLs = getImageUrls(post.fields.body)
   if (imageURLs) {
     await Promise.all(
