@@ -13,7 +13,7 @@ const client = buildClient()
 const getPostEntries = async (options) => {
   const { items, total } = await client.getEntries({
     content_type: 'markdownPost',
-    order: 'fields.created',
+    order: '-fields.created',
     ...options,
   })
   return { items, total }
@@ -43,6 +43,7 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
   await Promise.all(
     items.map(async (item, index) => {
       const imageUrls = getImageUrls(item.fields.body)
+      if (!imageUrls) return
       const { base64, img } = await getPlaiceholder(`https:${imageUrls[0]}`)
       placeholders[index] = { ...img, blurDataURL: base64 }
     })

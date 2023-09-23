@@ -46,7 +46,13 @@ const Card = ({ post, thumbnail, index }) => {
   const createdAt = dayjs(post.fields.created)
   // const thumbnailURI = getThumbnailURI(post)
   const tags = post.fields.tags || []
-  let { src, ...imageProps } = thumbnail
+
+  let src, imageProps
+  if (thumbnail) {
+    src = thumbnail.src
+    imageProps = { ...thumbnail }
+  }
+  src = `${src}?fm=webp&w=260`
 
   return (
     <Box className="card">
@@ -85,10 +91,10 @@ const Card = ({ post, thumbnail, index }) => {
                   </Text>
                   <Box mx={2}></Box>
 
-                  {/* <Icon as={TbWriting} marginEnd={2} /> */}
-                  {/* <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}> */}
-                  {/* {tags.join(', ')} */}
-                  {/* </Text> */}
+                  {/* <Icon as={TbWriting} marginEnd={2} />
+                  <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
+                    {tags.join(', ')}
+                  </Text> */}
                 </Flex>
               </CardTextContainer>
             </Flex>
@@ -97,18 +103,29 @@ const Card = ({ post, thumbnail, index }) => {
               flex="1"
               display={{ base: 'none', sm: 'flex' }}
               filter={'saturate(130%) brightness(110%)'}
+              borderLeft="1px solid"
+              borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
             >
-              <Image
-                {...imageProps}
-                src={`${src}?fm=webp&w=260`}
-                alt="Post Thumbnail"
-                objectFit="cover"
-                overflow="hidden"
-                borderLeft="1px solid"
-                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                placeholder="blur"
-                priority="true"
-              ></Image>
+              {thumbnail ? (
+                <Image
+                  {...imageProps}
+                  src={src}
+                  alt="Post Thumbnail"
+                  objectFit="cover"
+                  overflow="hidden"
+                  placeholder="blur"
+                  priority="true"
+                ></Image>
+              ) : (
+                <Image
+                  {...imageProps}
+                  src="/melon-sour.ico"
+                  alt="Post Thumbnail"
+                  objectFit="contain"
+                  layout="fill"
+                  priority="true"
+                ></Image>
+              )}
             </Flex>
           </Flex>
         </a>

@@ -67,12 +67,14 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   const plaiceholders = {}
 
   const imageURLs = getImageUrls(post.fields.body)
-  await Promise.all(
-    imageURLs.map(async (imageURL, index) => {
-      const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
-      plaiceholders[index] = { ...img, blurDataURL: base64 }
-    })
-  )
+  if (imageURLs) {
+    await Promise.all(
+      imageURLs.map(async (imageURL, index) => {
+        const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
+        plaiceholders[index] = { ...img, blurDataURL: base64 }
+      })
+    )
+  }
   return {
     props: {
       post: post,
@@ -153,7 +155,7 @@ const Post = ({ post, plaiceholders }) => {
           <SyntaxHighlighter
             {...props}
             children={String(children).replace(/\n$/, '')}
-            style={oneDark}
+            style={useColorModeValue(oneDark, oneDark)}
             language={match[1]}
             PreTag="div"
           />
@@ -177,7 +179,7 @@ const Post = ({ post, plaiceholders }) => {
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
           <Heading size="md" textAlign="start" mb={1}>
-            {post.fields.title}e{' '}
+            {post.fields.title}
           </Heading>
           <HStack>
             <Icon as={BiFolderOpen} />
