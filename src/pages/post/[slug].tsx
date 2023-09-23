@@ -194,6 +194,8 @@ const Post = ({ post, plaiceholders }) => {
           </HStack>
         </Flex>
       </Flex>
+      {/* 
+      // @ts-ignore */}
       <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
         {post.fields.body}
       </ReactMarkdown>
