@@ -29,7 +29,7 @@ const removeDuplicates = (categories) => {
 export const getStaticPaths = async () => {
   const { items: categories } = await client.getEntries({
     content_type: 'markdownPost',
-    order: 'fields.created',
+    order: '-fields.created',
     select: 'fields.category',
   })
   const nonEmptyCategories = removeEmptyFields(categories)
@@ -46,7 +46,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   const { items: posts } = await client.getEntries({
     content_type: 'markdownPost',
-    order: 'fields.created',
+    order: '-fields.created',
     'fields.category[in]': params.category,
   })
 

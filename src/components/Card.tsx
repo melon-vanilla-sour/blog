@@ -5,17 +5,8 @@ import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 // import Image from 'next/future/image'
 import dayjs from 'dayjs'
-import { getPlaiceholder } from 'plaiceholder'
 
 import { capitalizeString } from '../lib/utils'
-
-const getThumbnailURI = (post) => {
-  for (let node of post.fields.content.content) {
-    if (node.nodeType == 'embedded-asset-block') {
-      return `https:${node.data.target.fields.file.url}`
-    }
-  }
-}
 
 export const CardTextContainer = ({ children, ...props }) => {
   return (
