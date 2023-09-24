@@ -25,6 +25,8 @@ function HomePage({ posts }) {
       <Box my={8}>
         <Flex flexDir="column" alignItems="center">
           <Text>Hi I'm a Web Developer in Tokyo</Text>
+          {/* <Text>Contact me at melonvanillasour@gmail.com</Text> */}
+          <Text>I work a lot with the stack below</Text>
         </Flex>
         <Flex flexDir="column" alignItems="center">
           <Grid

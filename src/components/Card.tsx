@@ -1,14 +1,5 @@
-import {
-  Heading,
-  Box,
-  useColorModeValue,
-  Text,
-  Flex,
-  Icon,
-  Spacer,
-  Image,
-  filter,
-} from '@chakra-ui/react'
+import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, filter } from '@chakra-ui/react'
+import Image from 'next/image'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
@@ -51,10 +42,17 @@ export const CardTextContainer = ({ children, ...props }) => {
   )
 }
 
-const Card = ({ post, index }) => {
-  const createdAt = dayjs(post.sys.createdAt)
-  const thumbnailURI = getThumbnailURI(post)
+const Card = ({ post, thumbnail, index }) => {
+  const createdAt = dayjs(post.fields.created)
+  // const thumbnailURI = getThumbnailURI(post)
   const tags = post.fields.tags || []
+
+  let src, imageProps
+  if (thumbnail) {
+    src = thumbnail.src
+    imageProps = { ...thumbnail }
+  }
+  src = `${src}?fm=webp&w=260`
 
   return (
     <Box className="card">
@@ -93,25 +91,42 @@ const Card = ({ post, index }) => {
                   </Text>
                   <Box mx={2}></Box>
 
-                  {/* <Icon as={TbWriting} marginEnd={2} /> */}
-                  {/* <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}> */}
-                  {/* {tags.join(', ')} */}
-                  {/* </Text> */}
+                  {/* <Icon as={TbWriting} marginEnd={2} />
+                  <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
+                    {tags.join(', ')}
+                  </Text> */}
                 </Flex>
               </CardTextContainer>
             </Flex>
 
-            <Image
-              src={`${thumbnailURI}?fm=webp&h=200`}
-              alt="Post Thumbnail"
-              filter={'saturate(130%) brightness(110%)'}
-              objectFit="cover"
+            <Flex
               flex="1"
-              overflow="hidden"
+              display={{ base: 'none', sm: 'flex' }}
+              filter={'saturate(130%) brightness(110%)'}
               borderLeft="1px solid"
               borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-              display={{ base: 'none', sm: 'block' }}
-            ></Image>
+            >
+              {thumbnail ? (
+                <Image
+                  {...imageProps}
+                  src={src}
+                  alt="Post Thumbnail"
+                  objectFit="cover"
+                  overflow="hidden"
+                  placeholder="blur"
+                  priority="true"
+                ></Image>
+              ) : (
+                <Image
+                  {...imageProps}
+                  src="/melon-sour.ico"
+                  alt="Post Thumbnail"
+                  objectFit="contain"
+                  layout="fill"
+                  priority="true"
+                ></Image>
+              )}
+            </Flex>
           </Flex>
         </a>
       </Link>

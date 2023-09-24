@@ -3,15 +3,14 @@ import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Image from 'next/image'
 
-import { buildClient } from '../../lib/contentful'
-import { capitalizeString } from '../../lib/utils'
-import { EntryCollection } from 'contentful'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import ReactMarkdown from 'react-markdown'
+import remarkUnwrapImages from 'remark-unwrap-images'
 
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { atomOneDarkReasonable } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-import { srcery } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
+import { buildClient } from '../../lib/contentful'
+import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
+
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { getPlaiceholder } from 'plaiceholder'
 
@@ -21,7 +20,6 @@ import {
   Text,
   Button,
   Flex,
-  // Image,
   useColorModeValue,
   Link as ChakraLink,
   TableContainer,
@@ -36,13 +34,12 @@ import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
-import Card from '../../components/Card'
 
 const client = buildClient()
 
 const getPostEntries = async () => {
   const { items } = await client.getEntries({
-    content_type: 'post',
+    content_type: 'markdownPost',
   })
   return items
 }
@@ -68,159 +65,23 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     return item.fields.slug == params.slug
   })
   const plaiceholders = {}
-  await Promise.all(
-    // @ts-ignore
-    post.fields.content.content.map(async (content) => {
-      if (content.nodeType == 'embedded-asset-block') {
-        const { base64, img } = await getPlaiceholder(
-          'https://' + content.data.target.fields.file.url
-        )
-        plaiceholders[content.data.target.sys.id] = { ...img, blurDataURL: base64 }
-      }
-    })
-  )
+
+  // @ts-ignore
+  const imageURLs = getImageUrls(post.fields.body)
+  if (imageURLs) {
+    await Promise.all(
+      imageURLs.map(async (imageURL, index) => {
+        const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
+        plaiceholders[index] = { ...img, blurDataURL: base64 }
+      })
+    )
+  }
   return {
     props: {
       post: post,
       plaiceholders: plaiceholders,
     },
   }
-}
-
-const renderOptions = (plaiceholders) => {
-  return {
-    renderNode: {
-      [INLINES.EMBEDDED_ENTRY]: (node, children) => {
-        if (node.data.target.sys.contentType.sys.id === 'blogPost') {
-          return (
-            <a href={`/blog/${node.data.target.fields.slug}`}> {node.data.target.fields.title}</a>
-          )
-        }
-      },
-      [BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-        if (node.data.target.sys.contentType.sys.id === 'codeBlock') {
-          return (
-            <pre>
-              <code>{node.data.target.fields.code}</code>
-            </pre>
-          )
-        } else if (node.data.target.sys.contentType.sys.id === 'post') {
-          return (
-            <Box mb={8}>
-              <Card post={node.data.target} index={1}></Card>
-            </Box>
-          )
-        }
-      },
-
-      [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-        let { src, ...imageProps } = plaiceholders[node.data.target.sys.id]
-        // for some reason an extra // is appended to the image url
-        src = src.replace('//', '')
-        const imageWidth = node.data.target.fields.file.details.image.width
-        const imageHeight = node.data.target.fields.file.details.image.height
-        const maxHeight = '600px'
-        return (
-          <Flex
-            mb={8}
-            filter={'saturate(110%) brightness(110%)'}
-            justifyContent="center"
-            borderRadius="10px"
-            overflow="hidden"
-          >
-            <Image
-              {...imageProps}
-              src={`${src}?fm=webp&h=600`}
-              placeholder="blur"
-              priority="true"
-            />
-
-            {/* <Image
-              src={`https:${node.data.target.fields.file.url}?fm=webp&h=600`}
-              maxH={{ base: '350px', sm: `${maxHeight}` }}
-              borderRadius="10px" */}
-            {/* // border="2px solid" // borderColor={useColorModeValue('gray.700', 'gray.300')} */}
-            {/* /> */}
-          </Flex>
-        )
-      },
-      [BLOCKS.PARAGRAPH]: (node, children) => {
-        if (node.content.length === 1 && node.content[0].marks.find((x) => x.type === 'code')) {
-          return <Box pb={8}>{children} </Box>
-        }
-
-        return (
-          <Text pb={8} fontSize="md">
-            {children}
-          </Text>
-        )
-      },
-      [BLOCKS.HEADING_2]: (node, children) => {
-        return (
-          <Heading size="md" mb={8} textAlign="start">
-            {children}
-          </Heading>
-        )
-      },
-      [INLINES.HYPERLINK]: (node, children) => {
-        return (
-          <ChakraLink
-            href={node.data.uri}
-            color={useColorModeValue('blue.500', 'blue.300')}
-            fontWeight="semibold"
-          >
-            {node.content[0].value}
-          </ChakraLink>
-        )
-      },
-    },
-
-    renderMark: {
-      [MARKS.CODE]: (text) => {
-        text = text.split('\n')
-        console.log(text)
-        if (text.length != 1) {
-          // Parse first line as language then delete it
-          const language = text.shift()
-          text = text.join('\n')
-
-          // const value = text.reduce((acc, cur) => {
-          //   if (typeof cur !== 'string' && cur.type === 'br') {
-          //     return acc + '\n'
-          //   }
-          //   return acc + cur
-          // }, '')
-
-          return (
-            <SyntaxHighlighter
-              language={language}
-              style={atomOneDarkReasonable}
-              showLineNumbers
-              class="code-block"
-            >
-              {text}
-            </SyntaxHighlighter>
-          )
-        } else {
-          return (
-            <Box px={1} bg={useColorModeValue('blackAlpha.300', 'gray.700')} as="code">
-              {text}
-            </Box>
-          )
-        }
-      },
-    },
-  }
-}
-
-const getHeadings = (post) => {
-  const headings: string[] = []
-  post.fields.content.content.map((block) => {
-    if (block.nodeType === 'heading-2') {
-      headings.push(block.content[0].value)
-    }
-  })
-  return headings
 }
 
 const TableOfContents = ({ headings }) => {
@@ -248,7 +109,71 @@ const Post = ({ post, plaiceholders }) => {
   if (!router.isFallback && !post.fields.slug) {
     return <ErrorPage statusCode={404} />
   }
-  const headings: string[] = getHeadings(post)
+  let imageIndex = 0
+  const markdownRenderer = {
+    p: ({ children, ...props }) => (
+      <Text pb={8} fontSize="md" {...props}>
+        {children}
+      </Text>
+    ),
+    h2: ({ node, ...props }) => <Heading size="md" mb={8} textAlign="start" {...props} />,
+    a: ({ node, href, ...props }) => {
+      return (
+        <ChakraLink
+          color={useColorModeValue('blue.500', 'blue.300')}
+          fontWeight="semibold"
+          target={isInternalLink(href) ? '_self' : '_blank'}
+          href={href}
+          {...props}
+        ></ChakraLink>
+      )
+    },
+    img: ({ node, src, ...props }) => {
+      let { src: imgSrc, ...imageProps } = plaiceholders[imageIndex]
+      imageIndex += 1
+      return (
+        <Flex
+          filter={'saturate(110%) brightness(110%)'}
+          justifyContent="center"
+          borderRadius="10px"
+          overflow="hidden"
+          mb={8}
+        >
+          <Image
+            src={`${imgSrc}?fm=webp&h=600`}
+            {...imageProps}
+            priority={true}
+            placeholder="blur"
+            {...props}
+          />
+        </Flex>
+      )
+    },
+    code: ({ node, inline, className, children, ...props }) => {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <Box pb={8} borderRadius={10} overflow="hidden">
+          <SyntaxHighlighter
+            {...props}
+            children={String(children).replace(/\n$/, '')}
+            style={useColorModeValue(oneDark, oneDark)}
+            language={match[1]}
+            PreTag="div"
+          />
+        </Box>
+      ) : (
+        <Box
+          px={1}
+          bg={useColorModeValue('blackAlpha.300', 'gray.700')}
+          {...props}
+          className={className}
+          as="code"
+        >
+          {children}
+        </Box>
+      )
+    },
+  }
   const tags = post.fields.tags || []
   return (
     <>
@@ -261,7 +186,7 @@ const Post = ({ post, plaiceholders }) => {
             <Icon as={BiFolderOpen} />
             <Text>{capitalizeString(post.fields.category)}</Text>
             <Icon as={TbWriting} />
-            <Text>{dayjs(post.sys.createdAt).format('DD/MM/YYYY')}</Text>
+            <Text>{dayjs(post.fields.created).format('DD/MM/YYYY')}</Text>
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
@@ -269,13 +194,15 @@ const Post = ({ post, plaiceholders }) => {
           </HStack>
         </Flex>
       </Flex>
-      {/* <TableOfContents headings={headings}></TableOfContents> */}
-      <div>{documentToReactComponents(post.fields.content, renderOptions(plaiceholders))}</div>
+      {/* 
+      // @ts-ignore */}
+      <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
+        {post.fields.body}
+      </ReactMarkdown>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>
     </>
   )
 }
-
 export default Post
