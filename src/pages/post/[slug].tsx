@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import ReactMarkdown from 'react-markdown'
 import remarkUnwrapImages from 'remark-unwrap-images'
+import matter from 'gray-matter'
 
 import { buildClient } from '../../lib/contentful'
 import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
@@ -174,19 +175,23 @@ const Post = ({ post, plaiceholders }) => {
       )
     },
   }
-  const tags = post.fields.tags || []
+
+  const {
+    content,
+    data: { title = '', category = '', tags = [], created },
+  } = matter(post.fields.body)
   return (
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
           <Heading size="md" textAlign="start" mb={1}>
-            {post.fields.title}
+            {title}
           </Heading>
           <HStack>
             <Icon as={BiFolderOpen} />
-            <Text>{capitalizeString(post.fields.category)}</Text>
+            <Text>{capitalizeString(category)}</Text>
             <Icon as={TbWriting} />
-            <Text>{dayjs(post.fields.created).format('DD/MM/YYYY')}</Text>
+            <Text>{dayjs(created).format('DD/MM/YYYY')}</Text>
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
@@ -197,7 +202,7 @@ const Post = ({ post, plaiceholders }) => {
       {/* 
       // @ts-ignore */}
       <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
-        {post.fields.body}
+        {content}
       </ReactMarkdown>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
