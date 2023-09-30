@@ -23,7 +23,7 @@ const removeDuplicates = (categories) => {
 export const getStaticProps = async () => {
   const { items: categories } = await client.getEntries({
     content_type: 'markdownPost',
-    order: 'fields.created',
+    order: '-fields.created',
     select: 'fields.category',
   })
   const nonEmptyCategories = removeEmptyFields(categories)

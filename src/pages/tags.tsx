@@ -13,7 +13,7 @@ import Card from '../components/Card'
 // export const getStaticProps = async () => {
 //   const { items } = await client.getEntries({
 //     content_type: 'markdownPost',
-//     order: 'fields.created',
+//     order: '-fields.created',
 //     select: 'fields.tags',
 //   })
 //   return {
