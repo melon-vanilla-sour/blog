@@ -185,17 +185,17 @@ const Post = ({ post, plaiceholders }) => {
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
           <Heading size="md" textAlign="start" mb={1}>
-            {title}
+            {post.fields.title || title}
           </Heading>
           <HStack>
             <Icon as={BiFolderOpen} />
-            <Text>{capitalizeString(category)}</Text>
+            <Text>{capitalizeString(post.fields.category || category)}</Text>
             <Icon as={TbWriting} />
-            <Text>{dayjs(created).format('DD/MM/YYYY')}</Text>
+            <Text>{dayjs(post.fields.created || created).format('DD/MM/YYYY')}</Text>
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
-            <Text>{tags.join(', ')}</Text>
+            <Text>{(post.fields.tags || tags).join(', ')}</Text>
           </HStack>
         </Flex>
       </Flex>

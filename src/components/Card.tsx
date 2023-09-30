@@ -5,6 +5,7 @@ import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 // import Image from 'next/future/image'
 import dayjs from 'dayjs'
+import matter from 'gray-matter'
 
 import { capitalizeString } from '../lib/utils'
 
@@ -34,9 +35,7 @@ export const CardTextContainer = ({ children, ...props }) => {
 }
 
 const Card = ({ post, thumbnail, index }) => {
-  const createdAt = dayjs(post.fields.created)
   // const thumbnailURI = getThumbnailURI(post)
-  const tags = post.fields.tags || []
 
   let src, imageProps
   if (thumbnail) {
@@ -45,6 +44,10 @@ const Card = ({ post, thumbnail, index }) => {
   }
   src = `${src}?fm=webp&w=260`
 
+  const {
+    content,
+    data: { title = '', category = '', tags = [], created },
+  } = matter(post.fields.body)
   return (
     <Box className="card">
       <Link href={`/post/${post.fields.slug}`}>
@@ -61,7 +64,7 @@ const Card = ({ post, thumbnail, index }) => {
                 minW={{ base: '20', sm: '24' }}
               >
                 <Text className="cardDate" fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
-                  {createdAt.format('DD/MMM')}
+                  {dayjs(post.fields.created || created).format('DD/MMM')}
                 </Text>
               </Flex>
               <CardTextContainer>
@@ -72,13 +75,13 @@ const Card = ({ post, thumbnail, index }) => {
                   // minH="2.6em"
                   noOfLines={2}
                 >
-                  {post.fields.title}
+                  {post.fields.title || title}
                 </Heading>
 
                 <Flex alignItems="center" mt={1}>
                   <Icon as={BiFolderOpen} marginEnd={2} />
                   <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
-                    {capitalizeString(post.fields.category)}
+                    {capitalizeString(post.fields.category || category)}
                   </Text>
                   <Box mx={2}></Box>
 
