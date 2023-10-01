@@ -46,7 +46,7 @@ const MobileNavigation = () => {
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose} my={2}>
             <Box my={4}>
-              <Link href="/">
+              <Link href="/about">
                 <Text cursor="pointer">About</Text>
               </Link>
             </Box>

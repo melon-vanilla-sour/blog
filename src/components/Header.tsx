@@ -43,7 +43,7 @@ const Header = () => {
         <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
         <Heading fontSize={{ base: '3xl', sm: '4xl' }}>Melon Sour</Heading>
         <Flex dir="row" alignItems="center" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
-          <Link href="/">
+          <Link href="/about">
             <a>
               <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>
                 About
