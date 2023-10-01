@@ -29,6 +29,7 @@ const MobileNavigation = () => {
           marginTop="0px"
           height="100%"
           width="60%"
+          borderRadius="0"
         >
           <ModalHeader mx="auto">Go to Page</ModalHeader>
           <Box flexGrow={1}></Box>
@@ -45,7 +46,7 @@ const MobileNavigation = () => {
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose} my={2}>
             <Box my={4}>
-              <Link href="/">
+              <Link href="/about">
                 <Text cursor="pointer">About</Text>
               </Link>
             </Box>
@@ -66,6 +67,7 @@ const MobileNavigation = () => {
             py={2}
             onClick={onClose}
             bg={useColorModeValue('', '')}
+            borderRadius="0"
           >
             <CloseIcon></CloseIcon>
           </IconButton>
@@ -80,7 +82,7 @@ const MobileNavigation = () => {
         display={{ base: 'block', sm: 'none' }}
         bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
         border="1px solid"
-        borderColor={useColorModeValue('blackAlpha.600', 'whiteAlpha.400')}
+        borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
       >
         <HamburgerIcon />
       </IconButton>
