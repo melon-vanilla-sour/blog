@@ -129,6 +129,11 @@ const Post = ({ post, plaiceholders }) => {
         ></ChakraLink>
       )
     },
+    ul: ({ children, ...props }) => (
+      <Box pb={8} fontSize="md" {...props}>
+        {children}
+      </Box>
+    ),
     img: ({ node, src, ...props }) => {
       let { src: imgSrc, ...imageProps } = plaiceholders[imageIndex]
       imageIndex += 1
