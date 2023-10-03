@@ -37,7 +37,7 @@ function Projects() {
                     fontSize={{ base: 'md', md: 'lg' }}
                     textAlign="start"
                     // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
-                    minH="2.6em"
+                    // minH="2.6em"
                     noOfLines={2}
                   >
                     Holoview

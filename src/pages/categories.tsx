@@ -1,7 +1,20 @@
-import { Box, Button, Heading, HStack, Grid, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Grid,
+  useColorModeValue,
+  Flex,
+  GridItem,
+  Icon,
+  Image,
+} from '@chakra-ui/react'
 import { buildClient } from '../lib/contentful'
 import Link from 'next/link'
-import { capitalizeString } from '../lib/utils'
+import { capitalizeString, getImageUrls } from '../lib/utils'
+import { BiWrench } from 'react-icons/bi'
+import { CardTextContainer } from '../components/Card'
 
 const client = buildClient()
 
@@ -28,32 +41,57 @@ export const getStaticProps = async () => {
   })
   const nonEmptyCategories = removeEmptyFields(categories)
   const uniqueNonEmptyCategories = removeDuplicates(nonEmptyCategories)
+  const latestPostThumbnails = []
+  // Has to be sequential so thumbnails match category
+  for (const category of uniqueNonEmptyCategories) {
+    const { items: latestPost } = await client.getEntries({
+      content_type: 'markdownPost',
+      order: '-fields.created',
+      'fields.category': category,
+      limit: 1,
+    })
+    // @ts-ignore
+    const latestPostThumbnail = `https:${getImageUrls(latestPost[0].fields.body)[0]}`
+    latestPostThumbnails.push(latestPostThumbnail)
+  }
+
   return {
-    props: { categories: uniqueNonEmptyCategories },
+    props: { categories: uniqueNonEmptyCategories, latestPostThumbnails: latestPostThumbnails },
   }
 }
 
-function Blog({ categories }) {
+function Blog({ categories, latestPostThumbnails }) {
   return (
     <>
-      <Box my={8}>
-        <HStack justifyContent="center">
-          <Button bg={useColorModeValue('gray.300', 'whiteAlpha.200')}>Categories</Button>
-          <Button isDisabled={true}>Tags</Button>
-          <Button isDisabled={true}>Archives</Button>
-        </HStack>
-      </Box>
-      <Grid
-        templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)' }}
-        gap={6}
-        mb={6}
-      >
+      <Grid my={8} templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         {categories &&
-          categories.map((category) => (
-            <Link href={`/categories/${category}`}>
-              <Button w="100%">{capitalizeString(category)}</Button>
-            </Link>
-          ))}
+          categories.map((category, index) => {
+            return (
+              <GridItem>
+                <Box className="card" cursor="pointer">
+                  <Link href={`/categories/${category}`}>
+                    <Flex direction="column">
+                      <Box
+                        as={Image}
+                        src={latestPostThumbnails[index]}
+                        alt="Post Thumbnail"
+                        position="relative"
+                        filter={'saturate(130%) brightness(110%)'}
+                        w="420px"
+                        h="240px"
+                        objectFit="cover"
+                      ></Box>
+                      <CardTextContainer>
+                        <Heading fontSize={{ base: 'md', md: 'lg' }} textAlign="start">
+                          {capitalizeString(category)}
+                        </Heading>
+                      </CardTextContainer>
+                    </Flex>
+                  </Link>
+                </Box>
+              </GridItem>
+            )
+          })}
       </Grid>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
