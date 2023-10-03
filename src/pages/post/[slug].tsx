@@ -144,6 +144,7 @@ const Post = ({ post, plaiceholders }) => {
           borderRadius="10px"
           overflow="hidden"
           mb={8}
+          maxHeight="600px"
         >
           <Image
             src={`${imgSrc}?fm=webp&h=600`}
@@ -151,6 +152,8 @@ const Post = ({ post, plaiceholders }) => {
             priority={true}
             placeholder="blur"
             {...props}
+            style={{ borderRadius: '10px' }}
+            objectFit="contain"
           />
         </Flex>
       )
