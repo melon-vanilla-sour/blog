@@ -78,7 +78,7 @@ function Blog({ categories, latestPostThumbnails }) {
                         position="relative"
                         filter={'saturate(130%) brightness(110%)'}
                         w="420px"
-                        h="240px"
+                        h={{ base: '120px', sm: '240px' }}
                         objectFit="cover"
                       ></Box>
                       <CardTextContainer>
