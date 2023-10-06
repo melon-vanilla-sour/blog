@@ -69,7 +69,7 @@ const Card = ({ post, thumbnail, index }) => {
               </Flex>
               <CardTextContainer>
                 <Heading
-                  fontSize={{ base: 'md', sm: 'lg' }}
+                  fontSize={{ base: 'lg', sm: 'lg' }}
                   textAlign="start"
                   // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
                   // minH="2.6em"

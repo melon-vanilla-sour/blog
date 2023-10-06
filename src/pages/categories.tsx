@@ -78,11 +78,11 @@ function Blog({ categories, latestPostThumbnails }) {
                         position="relative"
                         filter={'saturate(130%) brightness(110%)'}
                         w="420px"
-                        h={{ base: '120px', sm: '240px' }}
+                        h={{ base: '160px', sm: '240px' }}
                         objectFit="cover"
                       ></Box>
                       <CardTextContainer>
-                        <Heading fontSize={{ base: 'md', md: 'lg' }} textAlign="start">
+                        <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start">
                           {capitalizeString(category)}
                         </Heading>
                       </CardTextContainer>
