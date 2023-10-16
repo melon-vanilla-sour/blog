@@ -42,7 +42,7 @@ const Card = ({ post, thumbnail, index }) => {
     src = thumbnail.src
     imageProps = { ...thumbnail }
   }
-  src = `${src}?fm=webp&w=260`
+  src = `${src}?fm=webp&w=260&q=100`
 
   const {
     content,

@@ -147,13 +147,14 @@ const Post = ({ post, plaiceholders }) => {
           maxHeight="600px"
         >
           <Image
-            src={`${imgSrc}?fm=webp&h=600`}
+            src={`${imgSrc}?fm=webp&h=600&q=100`}
             {...imageProps}
             priority={true}
             placeholder="blur"
             {...props}
             style={{ borderRadius: '10px' }}
             objectFit="contain"
+            quality={100}
           />
         </Flex>
       )
