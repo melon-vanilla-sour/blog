@@ -45,27 +45,27 @@ const MobileNavigation = () => {
             </IconButton>
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
-            <Box my={6}>
-              <Link href="/about">
+            <Link href="/about">
+              <Box my={6}>
                 <Text cursor="pointer" fontSize="lg">
                   About
                 </Text>
-              </Link>
-            </Box>
-            <Box my={6}>
-              <Link href="/posts/1">
+              </Box>
+            </Link>
+            <Link href="/posts/1">
+              <Box my={6}>
                 <Text cursor="pointer" fontSize="lg">
                   Posts
                 </Text>
-              </Link>
-            </Box>
-            <Box my={6}>
-              <Link href="/projects">
+              </Box>
+            </Link>
+            <Link href="/projects">
+              <Box my={6}>
                 <Text cursor="pointer" fontSize="lg">
                   Projects
                 </Text>
-              </Link>
-            </Box>
+              </Box>
+            </Link>
           </Flex>
           <IconButton
             aria-label="Close Navigation"
