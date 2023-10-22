@@ -38,7 +38,7 @@ function HomePage({ posts }) {
     <>
       <Box my={8}>
         <Flex flexDir="column" alignItems="center">
-          <Text>Hi I'm a Web Developer in Tokyo</Text>
+          <Text>Hi I'm a Software Engineer</Text>
           <Text>Contact me at melonvanillasour[at]gmail.com</Text>
         </Flex>
         <Flex flexDir="column" alignItems="center">
