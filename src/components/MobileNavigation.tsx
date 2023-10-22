@@ -38,33 +38,39 @@ const MobileNavigation = () => {
               aria-label="Toggle Mode"
               onClick={toggleColorMode}
               boxShadow="none"
-              my={2}
+              my={4}
               bg={useColorModeValue('', '')}
             >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </IconButton>
           </Center>
-          <Flex flexDir="column" alignItems="center" onClick={onClose} my={2}>
-            <Box my={4}>
+          <Flex flexDir="column" alignItems="center" onClick={onClose}>
+            <Box my={6}>
               <Link href="/about">
-                <Text cursor="pointer">About</Text>
+                <Text cursor="pointer" fontSize="lg">
+                  About
+                </Text>
               </Link>
             </Box>
-            <Box my={4}>
+            <Box my={6}>
               <Link href="/posts/1">
-                <Text cursor="pointer">Posts</Text>
+                <Text cursor="pointer" fontSize="lg">
+                  Posts
+                </Text>
               </Link>
             </Box>
-            <Box my={4}>
+            <Box my={6}>
               <Link href="/projects">
-                <Text cursor="pointer">Projects</Text>
+                <Text cursor="pointer" fontSize="lg">
+                  Projects
+                </Text>
               </Link>
             </Box>
           </Flex>
           <IconButton
             aria-label="Close Navigation"
             boxShadow="none"
-            py={2}
+            my={4}
             onClick={onClose}
             bg={useColorModeValue('', '')}
             borderRadius="0"
@@ -77,14 +83,16 @@ const MobileNavigation = () => {
         aria-label="Toggle Navigation"
         onClick={onOpen}
         position="fixed"
-        bottom={4}
-        right={4}
+        bottom={2}
+        right={2}
+        w={14}
+        h={14}
         display={{ base: 'block', sm: 'none' }}
         bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
         border="1px solid"
         borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
       >
-        <HamburgerIcon />
+        <HamburgerIcon color={useColorModeValue('black', 'white')} />
       </IconButton>
     </Box>
   )
