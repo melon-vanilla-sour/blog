@@ -40,30 +40,25 @@ const MobileNavigation = () => {
               boxShadow="none"
               my={4}
               bg={useColorModeValue('', '')}
+              w="full"
             >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </IconButton>
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
             <Link href="/about">
-              <Box my={6}>
-                <Text cursor="pointer" fontSize="lg">
-                  About
-                </Text>
+              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+                <Text fontSize="lg">About</Text>
               </Box>
             </Link>
             <Link href="/posts/1">
-              <Box my={6}>
-                <Text cursor="pointer" fontSize="lg">
-                  Posts
-                </Text>
+              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+                <Text fontSize="lg">Posts</Text>
               </Box>
             </Link>
             <Link href="/projects">
-              <Box my={6}>
-                <Text cursor="pointer" fontSize="lg">
-                  Projects
-                </Text>
+              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+                <Text fontSize="lg">Projects</Text>
               </Box>
             </Link>
           </Flex>
