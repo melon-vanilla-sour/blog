@@ -56,6 +56,7 @@ const overrides = {
           borderColor: mode('blackAlpha.400', 'whiteAlpha.600')(props),
           transition: '0.2s ease-in-out',
         },
+        cursor: 'pointer',
       },
       '.cardDate': {
         caretColor: 'transparent',

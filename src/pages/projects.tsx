@@ -9,6 +9,7 @@ import {
   Icon,
   Image,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { BiWrench } from 'react-icons/bi'
 // import Image from 'next/image'
 
@@ -52,6 +53,41 @@ function Projects() {
               </Flex>
             </a>
           </Box>
+        </GridItem>
+        <GridItem>
+          <Link href="/post/making-my-blog-with-next-js-vercel-and-contentful">
+            <Box className="card">
+              <Flex direction="column">
+                <Box
+                  as={Image}
+                  src={'projects/blog-thumbnail.png'}
+                  alt="Post Thumbnail"
+                  position="relative"
+                  filter={'saturate(130%) brightness(110%)'}
+                  w="420px"
+                  h="240px"
+                  objectFit="cover"
+                ></Box>
+                <CardTextContainer>
+                  <Heading
+                    fontSize={{ base: 'md', md: 'lg' }}
+                    textAlign="start"
+                    // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
+                    // minH="2.6em"
+                    noOfLines={2}
+                  >
+                    Blog
+                  </Heading>
+
+                  <Flex alignItems="center">A static generated blog</Flex>
+                  <Flex alignItems="center">
+                    <Icon as={BiWrench} marginEnd={2} />
+                    Next.js, Chakra UI, Contentful, Vercel
+                  </Flex>
+                </CardTextContainer>
+              </Flex>
+            </Box>
+          </Link>
         </GridItem>
       </Grid>
     </>
