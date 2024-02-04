@@ -7,9 +7,9 @@ module.exports = withPlaiceholder({
   async redirects() {
     return [
       {
-        source: '/', // リダイレクト元のURL
-        destination: '/posts/1', // リダイレクト先のURL
-        permanent: true, // 永続的なリダイレクトかのフラグ
+        source: '/',
+        destination: '/posts/1', 
+        permanent: true, 
       },
     ]
   },
