@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -28,6 +28,7 @@
     "framer-motion": "^6.2.8",
     "gray-matter": "^4.0.3",
     "next": "^12.1.0",
+    "next-mdx-remote": "^4.4.1",
     "plaiceholder": "^2.3.0",
     "pm2": "^5.2.0",
     "react": "^17.0.2",
