@@ -5,22 +5,23 @@ import Link from 'next/link'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 import { getImageUrls } from '../../lib/utils'
+import { fetchMarkdownFiles } from '../../lib/remoteMd'
 
 import { getPlaiceholder } from 'plaiceholder'
+import { MDXRemote } from 'next-mdx-remote'
+import matter from 'gray-matter'
 
-const client = buildClient()
 
-const getPostEntries = async (options) => {
-  const { items, total } = await client.getEntries({
-    content_type: 'markdownPost',
-    order: '-fields.created',
-    ...options,
-  })
-  return { items, total }
+const getSlugFromTitle = (title: string) => {
+  const lowercaseString = title.toLowerCase()
+  // Replace spaces with hyphens
+  const slug = lowercaseString.replace(/\s+/g, '-');
+  return slug
 }
 
 export const getStaticPaths = async () => {
-  const { total } = await getPostEntries({})
+  const markdownFiles = await fetchMarkdownFiles()
+  const total = markdownFiles.length
   const totalPages = Math.ceil(total / postsPerPage)
   const paths = []
   for (let page = 1; page <= totalPages; page++) {
@@ -34,28 +35,27 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: { page: number } }) => {
-  const { items, total } = await getPostEntries({
-    skip: (params.page - 1) * postsPerPage,
-    limit: postsPerPage,
-  })
+  const markdownFiles = await fetchMarkdownFiles()
+  const upperBound = params.page * postsPerPage
+  const lowerBound = upperBound - postsPerPage
+  const targetPostUrls = markdownFiles.slice(lowerBound, upperBound)
+  const total = markdownFiles.length
+  const totalPages = Math.ceil(total / postsPerPage)
+  const currentPage = params.page
 
-  const placeholders = []
-  await Promise.all(
-    items.map(async (item, index) => {
-      // @ts-ignore
-      const imageUrls = getImageUrls(item.fields.body)
-      if (!imageUrls) return
-      const { base64, img } = await getPlaiceholder(`https:${imageUrls[0]}`)
-      placeholders[index] = { ...img, blurDataURL: base64 }
+  const targetPosts = await Promise.allSettled(
+    targetPostUrls.map(async (url) => {
+      const res = await fetch(url.contentUrl)
+      const content = await res.text()
+      return content
     })
   )
-  const totalPages = Math.ceil(total / postsPerPage)
+
   return {
     props: {
-      posts: items,
-      totalPages: totalPages,
-      currentPage: params.page,
-      placeholders: placeholders,
+      posts: targetPosts,
+      totalPages,
+      currentPage
     },
   }
 }
@@ -64,11 +64,13 @@ function Posts({
   totalPages,
   currentPage,
   placeholders,
+  markdownFiles,
 }: {
   posts
   totalPages: number
   currentPage: number
   placeholders: any[]
+  markdownFiles: any[]
 }) {
   return (
     <>
@@ -83,11 +85,22 @@ function Posts({
       </Box>
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }}>
         {posts &&
-          posts.map((post, index) => (
-            <GridItem key={post.sys.id}>
-              <Card post={post} index={index} thumbnail={placeholders[index]}></Card>
-            </GridItem>
-          ))}
+          posts.map((post, index) => {
+            const {
+              content,
+              data: { title = '', category = '', tags = [], created },
+            } = matter(post.value)
+            const slug = getSlugFromTitle(title)
+
+            return (
+              <li key={slug}>
+                <Link href={`/post/[slug]`} as={`/post/${slug}`} >
+                  <a>{title}</a>
+                </Link>
+              </li>
+            )
+          })
+        }
       </Grid>
       <Pagination totalPages={totalPages}></Pagination>
     </>
