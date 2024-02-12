@@ -1,5 +1,12 @@
 export const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
+export const getSlugFromTitle = (title: string) => {
+  const lowercaseString = title.toLowerCase()
+  // Replace spaces with hyphens
+  const slug = lowercaseString.replace(/\s+/g, '-');
+  return slug
+}
+
 // Regular expression to match the URL pattern without capturing the brackets
 // (//images.ctfassets.net/vt3fzpmlfg71/4bS2qmHhXVIC6tHWKrPE8t/d22d9cbdd1bb9a3c37b6ccbf74ca246a/IMG_8570.JPG)
 // global flag at the end ensures all matches

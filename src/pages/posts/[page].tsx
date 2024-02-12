@@ -4,20 +4,13 @@ import Link from 'next/link'
 
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
-import { getImageUrls } from '../../lib/utils'
-import { fetchMarkdownFiles } from '../../lib/remoteMd'
+import { getImageUrls, getSlugFromTitle } from '../../lib/utils'
+import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
 
 import { getPlaiceholder } from 'plaiceholder'
 import { MDXRemote } from 'next-mdx-remote'
 import matter from 'gray-matter'
 
-
-const getSlugFromTitle = (title: string) => {
-  const lowercaseString = title.toLowerCase()
-  // Replace spaces with hyphens
-  const slug = lowercaseString.replace(/\s+/g, '-');
-  return slug
-}
 
 export const getStaticPaths = async () => {
   const markdownFiles = await fetchMarkdownFiles()
@@ -43,13 +36,7 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
   const totalPages = Math.ceil(total / postsPerPage)
   const currentPage = params.page
 
-  const targetPosts = await Promise.allSettled(
-    targetPostUrls.map(async (url) => {
-      const res = await fetch(url.contentUrl)
-      const content = await res.text()
-      return content
-    })
-  )
+  const targetPosts = await fetchMarkdownContent(targetPostUrls)
 
   return {
     props: {
@@ -72,12 +59,24 @@ function Posts({
   placeholders: any[]
   markdownFiles: any[]
 }) {
+  // filter out draft posts
+  posts = posts.filter((post, index) => {
+    const {
+      content,
+      data: { title = '', category = '', tags = [], created, draft = 'false' },
+    } = matter(post.value)
+    if (draft == 'true') {
+      return false
+    }
+    return true;
+  })
+
   return (
     <>
       <Box my={8}>
         <HStack justifyContent="center">
           <Link href="/categories">
-            <Button>Categories</Button>
+            <Button isDisabled={true}>Categories</Button>
           </Link>
           <Button isDisabled={true}>Tags</Button>
           <Button isDisabled={true}>Archives</Button>

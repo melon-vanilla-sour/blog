@@ -20,3 +20,14 @@ export const fetchMarkdownFiles = async (): Promise<MarkdownPost[]> => {
 
   return markdownFiles
 }
+
+export const fetchMarkdownContent = async (markdownFiles) => {
+  const posts = await Promise.allSettled(
+    markdownFiles.map(async (url) => {
+      const res = await fetch(url.contentUrl)
+      const content = await res.text()
+      return content
+    })
+  )
+  return posts
+}
