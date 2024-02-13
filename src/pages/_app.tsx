@@ -1,4 +1,5 @@
 import '@fontsource/open-sans/400.css'
+import '@fontsource/merriweather';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Main from '../components/layout/base'
 import { googleTagManagerId } from '../lib/utils'

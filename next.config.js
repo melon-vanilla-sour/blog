@@ -13,5 +13,4 @@ module.exports = withPlaiceholder({
       },
     ]
   },
-  experimental: { images: { allowFutureImage: true } },
 })

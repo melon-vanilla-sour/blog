@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
-// import Image from 'next/image'
 
 import ReactMarkdown from 'react-markdown'
 import remarkUnwrapImages from 'remark-unwrap-images'
@@ -82,6 +81,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   } = matter(post.value)
   const slug = getSlugFromTitle(title)
   const markdownSource = await serialize(content)
+  const createdString = dayjs(created).format('DD/MM/YYYY')
 
 
   // const items = await getPostEntries()
@@ -108,7 +108,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
       title: title,
       category: category,
       tags: tags,
-      created: created
+      created: createdString,
       // plaiceholders: plaiceholders,
     },
   }
@@ -163,6 +163,11 @@ const Post = ({ post, slug, title, category, tags, created }) => {
         {children}
       </Box>
     ),
+    ol: ({ children, ...props }) => (
+      <Box pb={8} fontSize="md" {...props}>
+        {children}
+      </Box>
+    ),
     img: ({ node, src, ...props }) => {
       return (
         <Flex
@@ -206,99 +211,23 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       )
     },
   }
-  // let imageIndex = 0
-  // const markdownRenderer = {
-  //   p: ({ children, ...props }) => (
-  //     <Text pb={8} fontSize="md" {...props}>
-  //       {children}
-  //     </Text>
-  //   ),
-  //   h2: ({ node, ...props }) => <Heading size="md" mb={8} textAlign="start" {...props} />,
-  //   a: ({ node, href, ...props }) => {
-  //     return (
-  //       <ChakraLink
-  //         color={useColorModeValue('blue.500', 'blue.300')}
-  //         fontWeight="semibold"
-  //         target={isInternalLink(href) ? '_self' : '_blank'}
-  //         href={href}
-  //         {...props}
-  //       ></ChakraLink>
-  //     )
-  //   },
-  //   ul: ({ children, ...props }) => (
-  //     <Box pb={8} fontSize="md" {...props}>
-  //       {children}
-  //     </Box>
-  //   ),
-  //   img: ({ node, src, ...props }) => {
-  //     let { src: imgSrc, ...imageProps } = plaiceholders[imageIndex]
-  //     imageIndex += 1
-  //     return (
-  //       <Flex
-  //         filter={'saturate(110%) brightness(110%)'}
-  //         justifyContent="center"
-  //         borderRadius="10px"
-  //         overflow="hidden"
-  //         mb={8}
-  //         maxHeight="600px"
-  //       >
-  //         <Image
-  //           src={`${imgSrc}?fm=webp&h=600&q=100`}
-  //           {...imageProps}
-  //           priority={true}
-  //           placeholder="blur"
-  //           {...props}
-  //           style={{ borderRadius: '10px' }}
-  //           objectFit="contain"
-  //           quality={100}
-  //         />
-  //       </Flex>
-  //     )
-  //   },
-  //   code: ({ node, inline, className, children, ...props }) => {
-  //     const match = /language-(\w+)/.exec(className || '')
-  //     return !inline && match ? (
-  //       <Box pb={8} borderRadius={10} overflow="hidden">
-  //         <SyntaxHighlighter
-  //           {...props}
-  //           children={String(children).replace(/\n$/, '')}
-  //           style={useColorModeValue(oneDark, oneDark)}
-  //           language={match[1]}
-  //           PreTag="div"
-  //         />
-  //       </Box>
-  //     ) : (
-  //       <Box
-  //         px={1}
-  //         bg={useColorModeValue('blackAlpha.300', 'gray.700')}
-  //         {...props}
-  //         className={className}
-  //         as="code"
-  //       >
-  //         {children}
-  //       </Box>
-  //     )
-  //   },
-  // }
-
 
   return (
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
-          <Heading size="md" textAlign="start" mb={1}>
+          {title && (<Heading size="md" textAlign="start" mb={1}>
             {title}
-          </Heading>
+          </Heading>)}
           <HStack>
             <Icon as={BiFolderOpen} />
-            <Text>{capitalizeString(category)}</Text>
+            {category && <Text>{capitalizeString(category)}</Text>}
             <Icon as={TbWriting} />
-            {created && (<Text>{dayjs(created).format('DD/MM/YYYY')}</Text>)}
-            {/* <Text>{dayjs(created).format('DD/MM/YYYY')}</Text> */}
+            {created && (<Text>{created}</Text>)}
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
-            <Text>{(tags).join(', ')}</Text>
+            {tags && <Text>{(tags).join(', ')}</Text>}
           </HStack>
         </Flex>
       </Flex>

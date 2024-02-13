@@ -20,6 +20,7 @@
     "@contentful/rich-text-types": "^15.12.1",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/merriweather": "^5.0.8",
     "@fontsource/open-sans": "^4.5.10",
     "@plaiceholder/next": "^2.5.0",
     "contentful": "^9.1.24",
