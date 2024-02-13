@@ -63,9 +63,9 @@ function Posts({
   posts = posts.filter((post, index) => {
     const {
       content,
-      data: { title = '', category = '', tags = [], created, draft = 'false' },
+      data: { title = '', category = '', tags = [], created, draft },
     } = matter(post.value)
-    if (draft == 'true') {
+    if (draft == true) {
       return false
     }
     return true;
