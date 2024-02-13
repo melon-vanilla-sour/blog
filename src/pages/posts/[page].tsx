@@ -28,7 +28,8 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: { page: number } }) => {
-  const markdownFiles = await fetchMarkdownFiles()
+  let markdownFiles = await fetchMarkdownFiles()
+  markdownFiles = markdownFiles.reverse()
   const upperBound = params.page * postsPerPage
   const lowerBound = upperBound - postsPerPage
   const targetPostUrls = markdownFiles.slice(lowerBound, upperBound)
