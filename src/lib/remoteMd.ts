@@ -5,7 +5,12 @@ type MarkdownPost = {
 
 export const fetchMarkdownFiles = async (): Promise<MarkdownPost[]> => {
   const repositoryUrl = `https://api.github.com/repos/${process.env.REPOSITORY_URL}/contents`
-  const response = await fetch(repositoryUrl)
+  const response = await fetch(repositoryUrl, {
+    headers: {
+      Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN
+        }`
+    }
+  })
   if (!response.ok) {
     throw new Error(`Failed to fetch repository: ${response.statusText}`)
   }
