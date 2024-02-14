@@ -43,7 +43,6 @@ export const getStaticPaths = async () => {
   const markdownFiles = await fetchMarkdownFiles()
   const posts = await fetchMarkdownContent(markdownFiles)
 
-
   const paths = posts.map((post) => {
     const {
       content,
@@ -80,7 +79,11 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     // @ts-ignore
   } = matter(post.value)
   const slug = getSlugFromTitle(title)
-  const markdownSource = await serialize(content)
+  const markdownSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [remarkUnwrapImages]
+    }
+  })
   const createdString = dayjs(created).format('DD/MM/YYYY')
 
 
@@ -212,6 +215,8 @@ const Post = ({ post, slug, title, category, tags, created }) => {
     },
   }
 
+  console.log(post)
+
   return (
     <>
       <Flex>
@@ -232,7 +237,6 @@ const Post = ({ post, slug, title, category, tags, created }) => {
         </Flex>
       </Flex>
       <Box fontFamily='Merriweather'>
-
         <MDXRemote {...post} components={components} />
       </Box>
       <Link href="/posts/1">
