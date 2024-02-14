@@ -231,7 +231,10 @@ const Post = ({ post, slug, title, category, tags, created }) => {
           </HStack>
         </Flex>
       </Flex>
-      <MDXRemote {...post} components={components} />
+      <Box fontFamily='Merriweather'>
+
+        <MDXRemote {...post} components={components} />
+      </Box>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>

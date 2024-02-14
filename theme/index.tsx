@@ -72,7 +72,7 @@ const overrides = {
   },
   fonts: {
     heading: 'Open Sans, sans-serif',
-    body: 'Merriweather, Open Sans, sans-serif',
+    body: 'Open Sans, sans-serif',
   },
   components: {
     Button: {
@@ -94,7 +94,6 @@ const overrides = {
     Text: {
       baseStyle: () => ({
         lineHeight: '1.8',
-        // letterSpacing: '0.12rem',
         wordSpacing: '0.06rem'
       }),
     },
