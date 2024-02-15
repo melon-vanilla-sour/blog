@@ -86,24 +86,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
 
-
-  // const items = await getPostEntries()
-  // const post = items.find((item) => {
-  // @ts-ignore
-  // return item.fields.slug == params.slug
-  // })
-  // const plaiceholders = {}
-
-  // @ts-ignore
-  // const imageURLs = getImageUrls(post.fields.body)
-  // if (imageURLs) {
-  //   await Promise.all(
-  //     imageURLs.map(async (imageURL, index) => {
-  //       const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
-  //       plaiceholders[index] = { ...img, blurDataURL: base64 }
-  //     })
-  //   )
-  // }
   return {
     props: {
       post: markdownSource,
@@ -116,26 +98,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     },
   }
 }
-
-// const TableOfContents = ({ headings }) => {
-//   return (
-//     <TableContainer>
-//       <Table variant="simple">
-//         <Tbody>
-//           {headings.map((heading, index) => {
-//             return (
-//               <Tr>
-//                 <Td>
-//                   <Text key={index}>{heading}</Text>
-//                 </Td>
-//               </Tr>
-//             )
-//           })}
-//         </Tbody>
-//       </Table>
-//     </TableContainer>
-//   )
-// }
 
 const Post = ({ post, slug, title, category, tags, created }) => {
   const router = useRouter()
@@ -179,6 +141,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
           borderRadius="10px"
           overflow="hidden"
           maxHeight="600px"
+          mb={8}
         >
           <Image
             src={src}
@@ -214,8 +177,6 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       )
     },
   }
-
-  console.log(post)
 
   return (
     <>

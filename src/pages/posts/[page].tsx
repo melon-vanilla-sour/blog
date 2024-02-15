@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
-import { getImageUrls, getSlugFromTitle } from '../../lib/utils'
+import { filterDraftPosts, getImageUrls, getSlugFromTitle } from '../../lib/utils'
 import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
 
 import { getPlaiceholder } from 'plaiceholder'
@@ -50,27 +50,11 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
 function Posts({
   posts,
   totalPages,
-  currentPage,
-  placeholders,
-  markdownFiles,
 }: {
   posts
   totalPages: number
-  currentPage: number
-  placeholders: any[]
-  markdownFiles: any[]
 }) {
-  // filter out draft posts
-  posts = posts.filter((post, index) => {
-    const {
-      content,
-      data: { title = '', category = '', tags = [], created, draft },
-    } = matter(post.value)
-    if (draft == true) {
-      return false
-    }
-    return true;
-  })
+  posts = filterDraftPosts(posts)
 
   return (
     <>
@@ -86,18 +70,10 @@ function Posts({
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }}>
         {posts &&
           posts.map((post, index) => {
-            const {
-              content,
-              data: { title = '', category = '', tags = [], created },
-            } = matter(post.value)
-            const slug = getSlugFromTitle(title)
-
             return (
-              <li key={slug}>
-                <Link href={`/post/[slug]`} as={`/post/${slug}`} >
-                  <a>{title}</a>
-                </Link>
-              </li>
+              <GridItem key={index}>
+                <Card post={post.value}></Card>
+              </GridItem>
             )
           })
         }
