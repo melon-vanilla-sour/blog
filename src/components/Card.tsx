@@ -2,7 +2,6 @@ import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, filter, Imag
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
-// import Image from 'next/future/image'
 import dayjs from 'dayjs'
 import matter from 'gray-matter'
 
@@ -95,21 +94,13 @@ const Card = ({ post }) => {
               // alignItems='center'
               justifyContent='center'
             >
-              {thumbnail ? (
-                <Image
-                  src={thumbnail}
-                  alt="Post Thumbnail"
-                  objectFit="cover"
-                  overflow="hidden"
-                  width='100%'
-                ></Image>
-              ) : (
-                <Image
-                  src="/melon-sour.ico"
-                  alt="Post Thumbnail"
-                  objectFit="contain"
-                ></Image>
-              )}
+              <Image
+                src={thumbnail ?? "/ogp.png"}
+                alt="Post Thumbnail"
+                objectFit="cover"
+                overflow="hidden"
+                width='100%'
+              ></Image>
             </Flex>
           </Flex>
         </a>

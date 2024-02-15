@@ -9,14 +9,6 @@ export const getSlugFromTitle = (title: string) => {
   return slug
 }
 
-// Regular expression to match the URL pattern without capturing the brackets
-// (//images.ctfassets.net/vt3fzpmlfg71/4bS2qmHhXVIC6tHWKrPE8t/d22d9cbdd1bb9a3c37b6ccbf74ca246a/IMG_8570.JPG)
-// global flag at the end ensures all matches
-// export const getImageUrls = (markdown) => {
-//   const pattern = /(?<=\()\/\/images\.ctfassets\.net\/[^\s]+(?=\))/g
-//   return markdown.match(pattern)
-// }
-
 export const getImageUrls = (markdown) => {
   const pattern = /(?<=\()https:\/\/melon-sour-blog-images\.s3\.amazonaws\.com\/[a-zA-Z0-9-.]+(?=\))/g
   return markdown.match(pattern)

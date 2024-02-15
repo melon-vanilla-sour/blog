@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 
-import ReactMarkdown from 'react-markdown'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
@@ -11,8 +10,6 @@ import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-
-import { getPlaiceholder } from 'plaiceholder'
 
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
@@ -25,11 +22,6 @@ import {
   Flex,
   useColorModeValue,
   Link as ChakraLink,
-  TableContainer,
-  Tbody,
-  Table,
-  Td,
-  Tr,
   HStack,
   Icon,
   Image

@@ -1,5 +1,5 @@
 import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
-import { buildClient, postsPerPage } from '../../lib/contentful'
+import { postsPerPage } from '../../lib/contentful'
 import Link from 'next/link'
 
 import Card from '../../components/Card'
@@ -71,7 +71,7 @@ function Posts({
         {posts &&
           posts.map((post, index) => {
             return (
-              <GridItem key={index}>
+              <GridItem key={post.value}>
                 <Card post={post.value}></Card>
               </GridItem>
             )
