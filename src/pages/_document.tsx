@@ -9,7 +9,7 @@ export default function Document() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:title" content="Melon Sour" />
         <meta property="og:url" content="https://www.melonsour.com" />
-        <meta property="og:image" content="https://www.melonsour.com/melon-sour.ico" />
+        <meta property="og:image" content="https://www.melonsour.com/ogp.png" />
       </Head>
       <body>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
