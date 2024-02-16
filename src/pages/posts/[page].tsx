@@ -59,13 +59,13 @@ function Posts({
   return (
     <>
       <Box my={8}>
-        <HStack justifyContent="center">
+        {/* <HStack justifyContent="center">
           <Link href="/categories">
             <Button isDisabled={true}>Categories</Button>
           </Link>
           <Button isDisabled={true}>Tags</Button>
           <Button isDisabled={true}>Archives</Button>
-        </HStack>
+        </HStack> */}
       </Box>
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }}>
         {posts &&
