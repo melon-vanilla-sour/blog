@@ -18,14 +18,6 @@ export const CardTextContainer = ({ children, ...props }) => {
       padding={3}
       w="full"
       position="relative"
-      // zIndex="-2"
-      // _before={{
-      //   backgroundImage: backgroundImage,
-      //   backgroundSize: '100%',
-      //   filter: 'saturate(50%) brightness(50%)',
-      //   zIndex: '-1',
-      //   position: 'absolute',
-      // }}
       {...props}
     >
       {children}
@@ -63,9 +55,6 @@ const Card = ({ post }) => {
                 <Heading
                   fontSize={{ base: 'lg', sm: 'lg' }}
                   textAlign="start"
-                // Don't want to cause height shift within 2 lines, somehow isn't 2.4em (1.2 * 2)
-                // minH="2.2em"
-                // noOfLines={2}
                 >
                   {title && title}
                 </Heading>
@@ -76,11 +65,6 @@ const Card = ({ post }) => {
                     {category && capitalizeString(category)}
                   </Text>
                   <Box mx={2}></Box>
-
-                  {/* <Icon as={TbWriting} marginEnd={2} />
-                  <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
-                    {tags.join(', ')}
-                  </Text> */}
                 </Flex>
               </CardTextContainer>
             </Flex>

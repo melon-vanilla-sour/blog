@@ -129,17 +129,14 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       return (
         <Flex
           filter={'saturate(110%) brightness(110%)'}
-          justifyContent="center"
-          borderRadius="10px"
-          overflow="hidden"
-          maxHeight="600px"
-          mb={8}
         >
           <Image
             src={src}
-            {...props}
             style={{ borderRadius: '10px' }}
             objectFit="contain"
+            maxH='600px'
+            mb={8}
+            mx='auto'
           />
         </Flex>
       )
