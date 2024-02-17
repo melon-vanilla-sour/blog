@@ -50,9 +50,11 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
 function Posts({
   posts,
   totalPages,
+  currentPage,
 }: {
   posts
   totalPages: number
+  currentPage: number
 }) {
   posts = filterDraftPosts(posts)
 
@@ -78,7 +80,7 @@ function Posts({
           })
         }
       </Grid>
-      <Pagination totalPages={totalPages}></Pagination>
+      <Pagination totalPages={totalPages} currentPage={currentPage}></Pagination>
     </>
   )
 }
