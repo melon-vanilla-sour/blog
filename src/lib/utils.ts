@@ -51,3 +51,11 @@ declare global {
     dataLayer: Record<string, unknown>[];
   }
 }
+
+export const doNotRender = (slug) => {
+  const secretPosts = ['holoview']
+  if (secretPosts.includes(slug)) {
+    return true
+  }
+  return false
+}

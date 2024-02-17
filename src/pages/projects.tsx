@@ -20,8 +20,8 @@ function Projects() {
     <>
       <Grid my={8} templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
         <GridItem>
-          <Box className="card">
-            <a href="https://holoview.vercel.app/" target="_blank" rel="noreferrer">
+          <Link href="/post/holoview">
+            <Box className="card">
               <Flex direction="column">
                 <Box
                   as={Image}
@@ -51,8 +51,8 @@ function Projects() {
                   </Flex>
                 </CardTextContainer>
               </Flex>
-            </a>
-          </Box>
+            </Box>
+          </Link>
         </GridItem>
         <GridItem>
           <Link href="/post/making-my-blog-with-nextjs-vercel-and-contentful">
