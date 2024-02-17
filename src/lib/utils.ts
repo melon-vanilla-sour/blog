@@ -3,7 +3,8 @@ import matter from "gray-matter";
 export const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export const getSlugFromTitle = (title: string) => {
-  const lowercaseString = title.toLowerCase()
+  let lowercaseString = title.toLowerCase()
+  lowercaseString = lowercaseString.replace(/[,.]/g, '')
   // Replace spaces with hyphens
   const slug = lowercaseString.replace(/\s+/g, '-');
   return slug
