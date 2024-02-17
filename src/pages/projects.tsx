@@ -55,7 +55,7 @@ function Projects() {
           </Box>
         </GridItem>
         <GridItem>
-          <Link href="/post/making-my-blog-with-next-js-vercel-and-contentful">
+          <Link href="/post/making-my-blog-with-nextjs-vercel-and-contentful">
             <Box className="card">
               <Flex direction="column">
                 <Box
