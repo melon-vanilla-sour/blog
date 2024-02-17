@@ -78,14 +78,15 @@ const MobileNavigation = () => {
         aria-label="Toggle Navigation"
         onClick={onOpen}
         position="fixed"
-        bottom={2}
-        right={2}
+        bottom={4}
+        right={4}
         w={14}
         h={14}
         display={{ base: 'block', sm: 'none' }}
         bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
         border="1px solid"
         borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
+        borderRadius='50%'
       >
         <HamburgerIcon color={useColorModeValue('black', 'white')} />
       </IconButton>
