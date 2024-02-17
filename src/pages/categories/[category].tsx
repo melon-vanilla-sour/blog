@@ -77,7 +77,7 @@ function Category({ category, posts, placeholders }) {
         {posts &&
           posts.map((post, index) => (
             <GridItem key={post.sys.id}>
-              <Card post={post} index={index} thumbnail={placeholders[index]}></Card>
+              {/* <Card post={post} index={index} thumbnail={placeholders[index]}></Card> */}
             </GridItem>
           ))}
         <Link href="/posts/1">
