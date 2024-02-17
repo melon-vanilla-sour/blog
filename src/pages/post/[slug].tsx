@@ -1,19 +1,18 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
-import Image from 'next/image'
 
-import ReactMarkdown from 'react-markdown'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
-import { buildClient } from '../../lib/contentful'
-import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
+import { capitalizeString, getImageUrls, getSlugFromTitle, isInternalLink } from '../../lib/utils'
+import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
-import { getPlaiceholder } from 'plaiceholder'
+import { serialize } from 'next-mdx-remote/serialize'
+import { MDXRemote } from 'next-mdx-remote'
 
 import {
   Heading,
@@ -23,34 +22,28 @@ import {
   Flex,
   useColorModeValue,
   Link as ChakraLink,
-  TableContainer,
-  Tbody,
-  Table,
-  Td,
-  Tr,
   HStack,
   Icon,
+  Image
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
 
-const client = buildClient()
-
-const getPostEntries = async () => {
-  const { items } = await client.getEntries({
-    content_type: 'markdownPost',
-  })
-  return items
-}
-
 export const getStaticPaths = async () => {
-  const items = await getPostEntries()
-  const paths = items.map((item) => {
-    return {
+  const markdownFiles = await fetchMarkdownFiles()
+  const posts = await fetchMarkdownContent(markdownFiles)
+
+  const paths = posts.map((post) => {
+    const {
+      content,
+      data: { title = '', category = '', tags = [], created },
       // @ts-ignore
-      params: { slug: item.fields.slug },
+    } = matter(post.value)
+    const slug = getSlugFromTitle(title)
+    return {
+      params: { slug: slug }
     }
   })
   return {
@@ -60,64 +53,57 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
-  const items = await getPostEntries()
-  const post = items.find((item) => {
-    // @ts-ignore
-    return item.fields.slug == params.slug
+  const markdownFiles = await fetchMarkdownFiles()
+  const posts = await fetchMarkdownContent(markdownFiles)
+  const post = posts.find((post) => {
+    const {
+      content,
+      data: { title = '', category = '', tags = [], created },
+      // @ts-ignore
+    } = matter(post.value)
+    const slug = getSlugFromTitle(title)
+    return slug == params.slug
   })
-  const plaiceholders = {}
 
-  // @ts-ignore
-  const imageURLs = getImageUrls(post.fields.body)
-  if (imageURLs) {
-    await Promise.all(
-      imageURLs.map(async (imageURL, index) => {
-        const { base64, img } = await getPlaiceholder(`https:${imageURL}`)
-        plaiceholders[index] = { ...img, blurDataURL: base64 }
-      })
-    )
-  }
+  const {
+    content,
+    data: { title = '', category = '', tags = [], created },
+    // @ts-ignore
+  } = matter(post.value)
+  const slug = getSlugFromTitle(title)
+  const markdownSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [remarkUnwrapImages]
+    }
+  })
+  const createdString = dayjs(created).format('DD/MM/YYYY')
+
   return {
     props: {
-      post: post,
-      plaiceholders: plaiceholders,
+      post: markdownSource,
+      slug: slug,
+      title: title,
+      category: category,
+      tags: tags,
+      created: createdString,
+      // plaiceholders: plaiceholders,
     },
   }
 }
 
-const TableOfContents = ({ headings }) => {
-  return (
-    <TableContainer>
-      <Table variant="simple">
-        <Tbody>
-          {headings.map((heading, index) => {
-            return (
-              <Tr>
-                <Td>
-                  <Text key={index}>{heading}</Text>
-                </Td>
-              </Tr>
-            )
-          })}
-        </Tbody>
-      </Table>
-    </TableContainer>
-  )
-}
-
-const Post = ({ post, plaiceholders }) => {
+const Post = ({ post, slug, title, category, tags, created }) => {
   const router = useRouter()
-  if (!router.isFallback && !post.fields.slug) {
+  if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
-  let imageIndex = 0
-  const markdownRenderer = {
+
+  const components = {
+    h2: (props) => <Heading size="md" mb={8} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
       <Text pb={8} fontSize="md" {...props}>
         {children}
       </Text>
     ),
-    h2: ({ node, ...props }) => <Heading size="md" mb={8} textAlign="start" {...props} />,
     a: ({ node, href, ...props }) => {
       return (
         <ChakraLink
@@ -134,27 +120,23 @@ const Post = ({ post, plaiceholders }) => {
         {children}
       </Box>
     ),
+    ol: ({ children, ...props }) => (
+      <Box pb={8} fontSize="md" {...props}>
+        {children}
+      </Box>
+    ),
     img: ({ node, src, ...props }) => {
-      let { src: imgSrc, ...imageProps } = plaiceholders[imageIndex]
-      imageIndex += 1
       return (
         <Flex
           filter={'saturate(110%) brightness(110%)'}
-          justifyContent="center"
-          borderRadius="10px"
-          overflow="hidden"
-          mb={8}
-          maxHeight="600px"
         >
           <Image
-            src={`${imgSrc}?fm=webp&h=600&q=100`}
-            {...imageProps}
-            priority={true}
-            placeholder="blur"
-            {...props}
+            src={src}
             style={{ borderRadius: '10px' }}
             objectFit="contain"
-            quality={100}
+            maxH='600px'
+            mb={8}
+            mx='auto'
           />
         </Flex>
       )
@@ -185,34 +167,28 @@ const Post = ({ post, plaiceholders }) => {
     },
   }
 
-  const {
-    content,
-    data: { title = '', category = '', tags = [], created },
-  } = matter(post.fields.body)
   return (
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
-          <Heading size="md" textAlign="start" mb={1}>
-            {post.fields.title || title}
-          </Heading>
+          {title && (<Heading size="md" textAlign="start" mb={1}>
+            {title}
+          </Heading>)}
           <HStack>
             <Icon as={BiFolderOpen} />
-            <Text>{capitalizeString(post.fields.category || category)}</Text>
+            {category && <Text>{capitalizeString(category)}</Text>}
             <Icon as={TbWriting} />
-            <Text>{dayjs(post.fields.created || created).format('DD/MM/YYYY')}</Text>
+            {created && (<Text>{created}</Text>)}
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
-            <Text>{(post.fields.tags || tags).join(', ')}</Text>
+            {tags && <Text>{(tags).join(', ')}</Text>}
           </HStack>
         </Flex>
       </Flex>
-      {/* 
-      // @ts-ignore */}
-      <ReactMarkdown components={markdownRenderer} remarkPlugins={[remarkUnwrapImages]} skipHtml>
-        {content}
-      </ReactMarkdown>
+      <Box fontFamily='Merriweather'>
+        <MDXRemote {...post} components={components} />
+      </Box>
       <Link href="/posts/1">
         <Button w={40}>View all posts</Button>
       </Link>

@@ -49,7 +49,7 @@ const overrides = {
         borderColor: mode('blackAlpha.400', 'whiteAlpha.400')(props),
         overflow: 'hidden',
         boxSizing: 'content-box',
-        bg: mode('white', 'whiteAlpha.200')(props),
+        bg: mode('white', 'whiteAlpha.50')(props),
         _hover: {
           boxShadow: 'xs',
           opacity: '1',
@@ -93,7 +93,8 @@ const overrides = {
     },
     Text: {
       baseStyle: () => ({
-        lineHeight: '1.6',
+        lineHeight: '1.8',
+        wordSpacing: '0.06rem'
       }),
     },
   },
