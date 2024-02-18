@@ -6,7 +6,7 @@ const Pagination = ({ totalPages, currentPage }: { totalPages: number, currentPa
   return (
     <Flex mt={8} justifyContent="center">
       {[...Array(totalPages)].map((page, index) => (
-        <Link href={`/posts/${index + 1}`}>
+        <Link href={`/posts/${index + 1}`} key={index}>
           <Box
             borderRadius="50%"
             backgroundColor={useColorModeValue('white', 'whiteAlpha.200')}

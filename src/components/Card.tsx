@@ -33,7 +33,7 @@ const Card = ({ post }) => {
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
   const slug = getSlugFromTitle(title)
   if (doNotRender(slug)) {
-    return (<></>)
+    return null
   } else {
     return (
       <Box className="card">
