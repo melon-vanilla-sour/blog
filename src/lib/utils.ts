@@ -4,6 +4,7 @@ export const capitalizeString = (string) => string.charAt(0).toUpperCase() + str
 
 export const getSlugFromTitle = (title: string) => {
   let lowercaseString = title.toLowerCase()
+  // remove commas and periods
   lowercaseString = lowercaseString.replace(/[,.]/g, '')
   // Replace spaces with hyphens
   const slug = lowercaseString.replace(/\s+/g, '-');

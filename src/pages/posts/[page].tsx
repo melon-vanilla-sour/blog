@@ -1,6 +1,5 @@
 import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
 import { postsPerPage } from '../../lib/contentful'
-import Link from 'next/link'
 
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
@@ -60,16 +59,16 @@ function Posts({
 
   return (
     <>
-      <Box my={8}>
-        {/* <HStack justifyContent="center">
+      {/* <Box my={8}>
+      <HStack justifyContent="center">
           <Link href="/categories">
             <Button isDisabled={true}>Categories</Button>
           </Link>
           <Button isDisabled={true}>Tags</Button>
           <Button isDisabled={true}>Archives</Button>
-        </HStack> */}
-      </Box>
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }}>
+        </HStack>
+      </Box> */}
+      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '6' }} my={2}>
         {posts &&
           posts.map((post, index) => {
             return (

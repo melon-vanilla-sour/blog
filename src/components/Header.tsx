@@ -75,13 +75,6 @@ const Header = () => {
           </IconButton>
         </Flex>
       </Flex>
-      {/* <Flex
-        w={{ base: '300px', sm: '350px' }}
-        justifyContent="space-between"
-        px={8}
-        mx="auto"
-        my={5}
-      ></Flex> */}
       <Box
         className="underline"
         border="2.5px solid"

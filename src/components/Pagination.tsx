@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Flex, Box, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Flex, Box, useColorModeValue } from '@chakra-ui/react'
 
 const Pagination = ({ totalPages, currentPage }: { totalPages: number, currentPage: number }) => {
   return (
