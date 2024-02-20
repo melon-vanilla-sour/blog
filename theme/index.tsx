@@ -92,9 +92,10 @@ const overrides = {
       }),
     },
     Text: {
-      baseStyle: () => ({
-        lineHeight: '1.8',
-        wordSpacing: '0.06rem'
+      baseStyle: (props) => ({
+        lineHeight: '2',
+        wordSpacing: '0.08rem',
+        color: mode('gray.800', 'gray.200')(props)
       }),
     },
   },
