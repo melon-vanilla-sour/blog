@@ -41,6 +41,9 @@ const MobileNavigation = () => {
               my={4}
               bg={useColorModeValue('', '')}
               w="full"
+              // remove gray outline on hover and after clicking
+              _hover={{}}
+              _active={{}}
             >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </IconButton>
@@ -69,6 +72,9 @@ const MobileNavigation = () => {
             onClick={onClose}
             bg={useColorModeValue('', '')}
             borderRadius="0"
+            // remove gray outline on hover and after clicking
+            _hover={{}}
+            _active={{}}
           >
             <CloseIcon></CloseIcon>
           </IconButton>
