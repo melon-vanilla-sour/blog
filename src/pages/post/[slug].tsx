@@ -100,7 +100,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
   const components = {
     h2: (props) => <Heading size="md" mb={8} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
-      <Text pb={8} fontSize="sm" {...props}>
+      <Text pb={8} fontSize="md" {...props}>
         {children}
       </Text>
     ),
@@ -116,12 +116,12 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       )
     },
     ul: ({ children, ...props }) => (
-      <Box pb={8} fontSize="sm" {...props}>
+      <Box pb={8} fontSize="md" {...props}>
         {children}
       </Box>
     ),
     ol: ({ children, ...props }) => (
-      <Box pb={8} fontSize="sm" {...props}>
+      <Box pb={8} fontSize="md" {...props}>
         {children}
       </Box>
     ),

@@ -83,8 +83,8 @@ const overrides = {
     },
     Text: {
       baseStyle: (props) => ({
-        lineHeight: '1.8',
-        // wordSpacing: '0.08rem',
+        lineHeight: '1.6',
+        wordSpacing: '0.06rem',
         color: mode('gray.800', 'gray.200')(props)
       }),
     },
