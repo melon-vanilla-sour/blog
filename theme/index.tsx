@@ -1,33 +1,17 @@
 import { extendTheme } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 
-const glass = {
-  bg: 'rgba( 255, 255, 255, 0.1 )',
-  backdropFilter: 'blur( 4px )',
-  border: '1px solid rgba( 255, 255, 255, 0.3 )',
-}
-
-const iconGrid = {
-  gap: 8,
-  maxW: 'lg',
-  padding: 8,
-  borderRadius: 'lg',
-  boxShadow: 'md',
-}
-
-const colors = {
-  brand: {
-    text: '#444444',
-    primary: '',
-    secondary: '#fff6e3',
-  },
-}
-
 // Theme Customization
 const overrides = {
   initialColorMode: 'light',
   useSystemColorMode: false,
-  colors: { ...colors },
+  colors: {
+    brand: {
+      text: '#444444',
+      primary: '',
+      secondary: '#fff6e3',
+    },
+  },
   styles: {
     global: (props) => ({
       body: {
@@ -39,7 +23,9 @@ const overrides = {
         fontSize: 'sm',
       },
       '.glass': {
-        ...glass,
+        bg: 'rgba( 255, 255, 255, 0.1 )',
+        backdropFilter: 'blur( 4px )',
+        border: '1px solid rgba( 255, 255, 255, 0.3 )',
       },
       '.card': {
         boxShadow: 'md',
@@ -62,7 +48,11 @@ const overrides = {
         caretColor: 'transparent',
       },
       '.iconGrid': {
-        ...iconGrid,
+        gap: 8,
+        maxW: 'lg',
+        padding: 8,
+        borderRadius: 'lg',
+        boxShadow: 'md',
         background: mode('white', 'whiteAlpha.200')(props),
       },
       '.code-block': {
@@ -93,8 +83,8 @@ const overrides = {
     },
     Text: {
       baseStyle: (props) => ({
-        lineHeight: '2',
-        wordSpacing: '0.08rem',
+        lineHeight: '1.8',
+        // wordSpacing: '0.08rem',
         color: mode('gray.800', 'gray.200')(props)
       }),
     },
