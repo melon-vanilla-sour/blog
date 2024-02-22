@@ -39,15 +39,15 @@ const Card = ({ post }) => {
       <Box className="card">
         <Link href={`/post/${slug}`}>
           <a>
-            <Flex h={{ base: '24', sm: '24' }}>
+            <Flex h={{ base: '28', sm: '28' }}>
               <Flex flex="40%">
                 <Flex
                   className="date"
                   align="center"
                   justify="center"
                   p={3}
-                  borderRight="1px solid"
-                  borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+                  // borderRight="1px solid"
+                  // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                   minW={{ base: '20', sm: '24' }}
                 >
                   <Text className="cardDate" fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
@@ -76,8 +76,8 @@ const Card = ({ post }) => {
                 flex="1"
                 display={{ base: 'none', sm: 'flex' }}
                 filter={'saturate(130%) brightness(110%)'}
-                borderLeft="1px solid"
-                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+                // borderLeft="1px solid"
+                // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                 justifyContent='center'
               >
                 <Image
