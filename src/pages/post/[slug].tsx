@@ -6,7 +6,7 @@ import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
 import { capitalizeString, getImageUrls, getSlugFromTitle, isInternalLink } from '../../lib/utils'
-import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
+import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -32,10 +32,9 @@ import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
 
 export const getStaticPaths = async () => {
-  const markdownFiles = await fetchMarkdownFiles()
-  const posts = await fetchMarkdownContent(markdownFiles)
+  let markdownContent = await getCachedContent()
 
-  const paths = posts.map((post) => {
+  const paths = markdownContent.map((post) => {
     const {
       content,
       data: { title = '', category = '', tags = [], created },
@@ -53,14 +52,10 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
-  const markdownFiles = await fetchMarkdownFiles()
-  const posts = await fetchMarkdownContent(markdownFiles)
-  const post = posts.find((post) => {
-    const {
-      content,
-      data: { title = '', category = '', tags = [], created },
-      // @ts-ignore
-    } = matter(post.value)
+  let markdownContent = await getCachedContent()
+
+  const post = markdownContent.find((post) => {
+    const { data: { title = '' } } = matter(post.value)
     const slug = getSlugFromTitle(title)
     return slug == params.slug
   })

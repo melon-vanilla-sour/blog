@@ -3,6 +3,8 @@ type MarkdownPost = {
   path: string,
 }
 
+let cachedData
+
 export const fetchMarkdownFiles = async (): Promise<MarkdownPost[]> => {
   const repositoryUrl = `https://api.github.com/repos/${process.env.REPOSITORY_URL}/contents`
   const response = await fetch(repositoryUrl, {
@@ -35,4 +37,13 @@ export const fetchMarkdownContent = async (markdownFiles) => {
     })
   )
   return posts
+}
+
+export const getCachedContent = async () => {
+  if (cachedData) return cachedData
+  const markdownFiles = await fetchMarkdownFiles()
+  let markdownContent = await fetchMarkdownContent(markdownFiles)
+  markdownContent = markdownContent.reverse()
+  cachedData = markdownContent
+  return cachedData
 }

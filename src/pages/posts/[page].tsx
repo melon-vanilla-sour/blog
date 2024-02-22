@@ -4,16 +4,16 @@ import { postsPerPage } from '../../lib/contentful'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 import { filterDraftPosts, getImageUrls, getSlugFromTitle } from '../../lib/utils'
-import { fetchMarkdownFiles, fetchMarkdownContent } from '../../lib/remoteMd'
+import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
 
 import { getPlaiceholder } from 'plaiceholder'
 import { MDXRemote } from 'next-mdx-remote'
 import matter from 'gray-matter'
 
-
 export const getStaticPaths = async () => {
-  const markdownFiles = await fetchMarkdownFiles()
-  const total = markdownFiles.length
+  let markdownContent = await getCachedContent()
+  markdownContent = filterDraftPosts(markdownContent)
+  const total = markdownContent.length
   const totalPages = Math.ceil(total / postsPerPage)
   const paths = []
   for (let page = 1; page <= totalPages; page++) {
@@ -27,16 +27,14 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params }: { params: { page: number } }) => {
-  let markdownFiles = await fetchMarkdownFiles()
-  markdownFiles = markdownFiles.reverse()
+  let markdownContent = await getCachedContent()
+  markdownContent = filterDraftPosts(markdownContent)
   const upperBound = params.page * postsPerPage
   const lowerBound = upperBound - postsPerPage
-  const targetPostUrls = markdownFiles.slice(lowerBound, upperBound)
-  const total = markdownFiles.length
+  const targetPosts = markdownContent.slice(lowerBound, upperBound)
+  const total = markdownContent.length
   const totalPages = Math.ceil(total / postsPerPage)
   const currentPage = params.page
-
-  const targetPosts = await fetchMarkdownContent(targetPostUrls)
 
   return {
     props: {
@@ -55,8 +53,6 @@ function Posts({
   totalPages: number
   currentPage: number
 }) {
-  posts = filterDraftPosts(posts)
-
   return (
     <>
       {/* <Box my={8}>
