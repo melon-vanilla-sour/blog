@@ -1,14 +1,12 @@
 import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
+import Link from 'next/link'
+
 import { postsPerPage } from '../../lib/contentful'
+import { filterDraftPosts } from '../../lib/utils'
+import { getCachedContent } from '../../lib/remoteMd'
 
-import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
-import { filterDraftPosts, getImageUrls, getSlugFromTitle } from '../../lib/utils'
-import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
-
-import { getPlaiceholder } from 'plaiceholder'
-import { MDXRemote } from 'next-mdx-remote'
-import matter from 'gray-matter'
+import Card from '../../components/Card'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -55,16 +53,16 @@ function Posts({
 }) {
   return (
     <>
-      {/* <Box my={8}>
-      <HStack justifyContent="center">
+      <Box my={4}>
+        <HStack justifyContent="center">
           <Link href="/categories">
-            <Button isDisabled={true}>Categories</Button>
+            <Button>Categories</Button>
           </Link>
           <Button isDisabled={true}>Tags</Button>
           <Button isDisabled={true}>Archives</Button>
         </HStack>
-      </Box> */}
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={8}>
+      </Box>
+      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
         {posts &&
           posts.map((post, index) => {
             return (

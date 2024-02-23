@@ -1,6 +1,7 @@
 import {
   Grid,
 } from '@chakra-ui/react'
+
 import MediumCard from '../components/MediumCard'
 
 function Projects() {

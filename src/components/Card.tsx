@@ -1,12 +1,10 @@
 import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, filter, Image } from '@chakra-ui/react'
-import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
-import { getImage } from 'plaiceholder/dist/get-image'
 
 export const CardTextContainer = ({ children, ...props }) => {
   return (
