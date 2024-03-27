@@ -11,7 +11,7 @@ export const CardTextContainer = ({ children, ...props }) => {
     <Flex
       flexDir="column"
       alignItems="start"
-      justifyContent="space-around"
+      justifyContent="space-evenly"
       display="flex"
       padding={3}
       w="full"
@@ -48,7 +48,7 @@ const Card = ({ post }) => {
                   // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                   minW={{ base: '20', sm: '24' }}
                 >
-                  <Text className="cardDate" fontSize={{ base: 'md', md: 'xl' }} fontWeight="bold">
+                  <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="bold">
                     {created && dayjs(created).format('DD/MMM')}
                   </Text>
                 </Flex>
@@ -62,7 +62,7 @@ const Card = ({ post }) => {
 
                   <Flex alignItems="center" mt={1}>
                     <Icon as={BiFolderOpen} marginEnd={2} />
-                    <Text noOfLines={1} fontSize={{ base: 'sm', md: 'lg' }}>
+                    <Text noOfLines={1} fontSize={{ base: 'lg', md: 'lg' }}>
                       {category && capitalizeString(category)}
                     </Text>
                     <Box mx={2}></Box>
