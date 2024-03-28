@@ -44,6 +44,8 @@ const MobileNavigation = () => {
               // remove gray outline on hover and after clicking
               _hover={{}}
               _active={{}}
+              // remove highlight on button when clicking on ios
+              style={{ WebkitTapHighlightColor: 'rgba(0,0,0,0)' }}
             >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </IconButton>
@@ -75,6 +77,8 @@ const MobileNavigation = () => {
             // remove gray outline on hover and after clicking
             _hover={{}}
             _active={{}}
+            // remove highlight on button when clicking on ios
+            style={{ WebkitTapHighlightColor: 'rgba(0,0,0,0)' }}
           >
             <CloseIcon></CloseIcon>
           </IconButton>
@@ -89,14 +93,14 @@ const MobileNavigation = () => {
         w={14}
         h={14}
         display={{ base: 'block', sm: 'none' }}
-        bg={useColorModeValue('whiteAlpha.800', 'blackAlpha.800')}
+        bg={useColorModeValue('white', 'blackAlpha.800')}
         border="1px solid"
         borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
         borderRadius='50%'
       >
         <HamburgerIcon color={useColorModeValue('black', 'white')} />
       </IconButton>
-    </Box>
+    </Box >
   )
 }
 
