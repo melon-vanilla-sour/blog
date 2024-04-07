@@ -15,7 +15,7 @@ const overrides = {
   styles: {
     global: (props) => ({
       body: {
-        bg: mode('white', 'blackAlpha.900')(props),
+        bg: mode('gray.50', 'blackAlpha.900')(props),
         overflow: 'scroll',
         fontSize: 'md',
       },
