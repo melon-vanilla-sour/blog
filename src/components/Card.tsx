@@ -46,7 +46,7 @@ const Card = ({ post }) => {
                   p={3}
                   // borderRight="1px solid"
                   // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                  minW={{ base: '20', sm: '24' }}
+                  minW={{ base: '24', sm: '24' }}
                 >
                   <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="bold">
                     {created && dayjs(created).format('DD/MMM')}
