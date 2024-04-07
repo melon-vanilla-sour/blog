@@ -31,7 +31,7 @@ const MobileNavigation = () => {
           width="60%"
           borderRadius="0"
         >
-          <ModalHeader mx="auto">Go to Page</ModalHeader>
+          {/* <ModalHeader mx="auto">Go to Page</ModalHeader> */}
           <Box flexGrow={1}></Box>
           <Center>
             <IconButton
@@ -52,18 +52,19 @@ const MobileNavigation = () => {
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
             <Link href="/about">
-              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg">About</Text>
+              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center"
+              >
+                <Text fontSize="lg" fontWeight='bold'>About</Text>
               </Box>
             </Link>
             <Link href="/posts/1">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg">Posts</Text>
+                <Text fontSize="lg" fontWeight='bold'>Posts</Text>
               </Box>
             </Link>
             <Link href="/projects">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg">Projects</Text>
+                <Text fontSize="lg" fontWeight='bold'>Projects</Text>
               </Box>
             </Link>
           </Flex>
