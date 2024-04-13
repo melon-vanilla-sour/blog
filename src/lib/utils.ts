@@ -46,6 +46,18 @@ export const filterDraftPosts = (posts) => {
   })
 }
 
+export const reorderByDate = (posts) => {
+  return posts.sort((postA, postB) => {
+    const {
+      data: { created: createdA },
+    } = matter(postA.value)
+    const {
+      data: { created: createdB },
+    } = matter(postB.value)
+    return createdA < createdB ? 1 : createdA > createdB ? -1 : 0
+  })
+}
+
 export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || '';
 declare global {
   interface Window {

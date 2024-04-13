@@ -2,7 +2,7 @@ import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import { postsPerPage } from '../../lib/contentful'
-import { filterDraftPosts } from '../../lib/utils'
+import { filterDraftPosts, reorderByDate } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
 import Pagination from '../../components/Pagination'
@@ -27,6 +27,7 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }: { params: { page: number } }) => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
+  markdownContent = reorderByDate(markdownContent)
   const upperBound = params.page * postsPerPage
   const lowerBound = upperBound - postsPerPage
   const targetPosts = markdownContent.slice(lowerBound, upperBound)
