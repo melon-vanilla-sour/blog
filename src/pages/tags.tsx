@@ -1,56 +1,63 @@
-import { Box, Button, Heading, HStack } from '@chakra-ui/react'
-import { buildClient } from '../lib/contentful'
+import {
+  Button,
+  Grid,
+} from '@chakra-ui/react'
+import matter from 'gray-matter'
 import Link from 'next/link'
 
-import { Center, SimpleGrid, VStack, Text } from '@chakra-ui/react'
+import { capitalizeString, filterDraftPosts } from '../lib/utils'
 
-import Base from '../components/layout/base'
-import Head from 'next/head'
-import Card from '../components/Card'
+import { getCachedContent } from '../lib/remoteMd'
 
-// const client = buildClient()
+export const getStaticProps = async () => {
+  let markdownContent = await getCachedContent()
+  markdownContent = filterDraftPosts(markdownContent)
+  const tags = []
+  markdownContent.map((post) => {
+    const { content, data: { tags: tagsInPost = [] } } = matter(post.value)
+    tagsInPost.forEach((tag) => {
+      const existingTag = tags.find((tagObject) => {
+        return tagObject['name'] === tag
+      })
+      if (existingTag) {
+        existingTag.count += 1
+      } else {
+        tags.push({ name: tag, count: 1 })
+      }
+    })
+  })
 
-// export const getStaticProps = async () => {
-//   const { items } = await client.getEntries({
-//     content_type: 'markdownPost',
-//     order: '-fields.created',
-//     select: 'fields.tags',
-//   })
-//   return {
-//     props: { categories: items },
-//   }
-// }
+  tags.sort((tagA, tagB) => {
+    return tagA.count < tagB.count ? 1 : tagA.count > tagB.count ? -1 : 0
+  })
+
+  return {
+    props: { tags: tags },
+  }
+}
 
 function Tags({ tags }) {
-  //   const filteredTags = []
-  //   const filterCategories = (() => {
-  //     // Since 'category' isn't a required field for post, some category entries don't have a 'fields' key
-  //     categories.filter((category) => {
-  //       category.fields != null
-  //     })
-
-  //     // Filter duplicates
-  //     categories.map((category) => {
-  //       if (!filteredTags.includes(category.fields.tags)) {
-  //         filteredTags.push(category.fields.tags)
-  //       }
-  //     })
-  //   })()
-
   return (
     <>
-      {/* <Heading mb="40px">Tags</Heading>
-      <Box mb={4}>
-        <HStack justifyContent="center">
-          <Button>Categories</Button>
-          <Button>Tags</Button>
-        </HStack>
-      </Box>
-      <VStack alignItems="start">
-        {filteredTags && filteredTags.map((tag) => <Text>{tag}</Text>)}
-      </VStack> */}
+      <Grid my={8} templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }} gap={4}>
+        {tags &&
+          tags.map((tag, index) => {
+            return (
+              <Link href={`/tags/${tag.name}`}>
+                <Button>
+                  {capitalizeString(tag.name)} ({tag.count})
+                </Button>
+              </Link>
+            )
+          })}
+      </Grid>
+      <Link href="/posts/1">
+        <Button w={40}>View all posts</Button>
+      </Link>
     </>
   )
 }
 
 export default Tags
+
+

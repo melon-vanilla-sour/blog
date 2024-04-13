@@ -59,7 +59,9 @@ function Posts({
           <Link href="/categories">
             <Button>Categories</Button>
           </Link>
-          <Button isDisabled={true}>Tags</Button>
+          <Link href="/tags">
+            <Button>Tags</Button>
+          </Link>
           <Button isDisabled={true}>Archives</Button>
         </HStack>
       </Box>
