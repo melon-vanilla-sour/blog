@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Grid,
 } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import Link from 'next/link'
@@ -13,9 +12,10 @@ import { getCachedContent } from '../lib/remoteMd'
 export const getStaticProps = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
+
   const tags = []
   markdownContent.map((post) => {
-    const { content, data: { tags: tagsInPost = [] } } = matter(post.value)
+    const { data: { tags: tagsInPost = [] } } = matter(post.value)
     tagsInPost.forEach((tag) => {
       const existingTag = tags.find((tagObject) => {
         return tagObject['name'] === tag
@@ -42,11 +42,11 @@ function Tags({ tags }) {
     <>
       <Box my={8}>
         {tags &&
-          tags.map((tag, index) => {
+          tags.map((tag) => {
             return (
-              <Box display='inline-block' py={2} px={2} key={tag.name}>
+              <Box display='inline-block' padding={{ base: 1, sm: 2 }} key={tag.name}>
                 <Link href={`/tags/${tag.name}`}>
-                  <Button>
+                  <Button fontSize={{ base: 'sm', sm: 'md' }} padding={2} fontWeight='bold'>
                     {capitalizeString(tag.name)} ({tag.count})
                   </Button>
                 </Link>
