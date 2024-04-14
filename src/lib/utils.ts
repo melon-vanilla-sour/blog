@@ -36,8 +36,7 @@ export const getPlaceholders = async (posts, getPlaiceholder) => {
 export const filterDraftPosts = (posts) => {
   return posts.filter((post) => {
     const {
-      content,
-      data: { title = '', category = '', tags = [], created, draft },
+      data: { draft },
     } = matter(post.value)
     if (draft == true) {
       return false

@@ -1,4 +1,4 @@
-import { Box, Button, Heading, HStack, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Button, HStack, Grid } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import { postsPerPage } from '../../lib/contentful'

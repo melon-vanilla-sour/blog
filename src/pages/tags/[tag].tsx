@@ -1,5 +1,5 @@
 
-import { Heading, Button, Grid, GridItem, HStack } from '@chakra-ui/react'
+import { Heading, Button, Grid, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import matter from 'gray-matter'
 
@@ -14,6 +14,7 @@ export const getStaticPaths = async () => {
   markdownContent = filterDraftPosts(markdownContent)
 
   const tags = []
+  // collect all unique tags
   markdownContent.map((post) => {
     const { data: { tags: tagsInPost = [] } } = matter(post.value)
     tagsInPost.forEach((tag) => {
@@ -49,13 +50,13 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-function Tag({ tag, posts, placeholders }) {
+function Tag({ posts }) {
   return (
     <>
       {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
         {posts &&
-          posts.map((post, index) => (
+          posts.map((post) => (
             <Card post={post.value} key={post.value}></Card>
           ))}
         <HStack>
