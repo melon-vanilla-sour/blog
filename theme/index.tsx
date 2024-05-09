@@ -43,6 +43,7 @@ const overrides = {
           transition: '0.2s ease-in-out',
         },
         cursor: 'pointer',
+        webkitTapHighlightColor: 'rgba(0,0,0,0)',
       },
       '.cardDate': {
         caretColor: 'transparent',
