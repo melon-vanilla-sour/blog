@@ -78,14 +78,15 @@ const overrides = {
     Heading: {
       baseStyle: () => ({
         textAlign: 'center',
-        fontWeight: 'bolder',
+        fontWeight: 'bold',
         caretColor: 'transparent',
       }),
     },
     Text: {
       baseStyle: (props) => ({
         lineHeight: '1.6',
-        color: mode('gray.800', 'gray.200')(props)
+        color: mode('gray.800', 'gray.200')(props),
+        fontWeight: '400'
       }),
     },
   },
