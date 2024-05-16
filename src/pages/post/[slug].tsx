@@ -181,7 +181,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
           </HStack>
         </Flex>
       </Flex>
-      <Box fontFamily='Open Sans'>
+      <Box fontFamily='Open Sans Variable'>
         <MDXRemote {...post} components={components} />
       </Box>
       <Link href="/posts/1">

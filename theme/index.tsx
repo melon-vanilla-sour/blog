@@ -62,8 +62,8 @@ const overrides = {
     }),
   },
   fonts: {
-    heading: 'Open Sans, sans-serif',
-    body: 'Open Sans, sans-serif',
+    heading: 'Open Sans Variable, sans-serif',
+    body: 'Open Sans Variable, sans-serif',
   },
   components: {
     Button: {
@@ -78,7 +78,7 @@ const overrides = {
     Heading: {
       baseStyle: () => ({
         textAlign: 'center',
-        fontWeight: 'bold',
+        fontWeight: 'semibold',
         caretColor: 'transparent',
       }),
     },

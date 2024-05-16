@@ -48,7 +48,7 @@ const Card = ({ post }) => {
                   // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                   minW={{ base: '24', sm: '24' }}
                 >
-                  <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="bold">
+                  <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="semibold">
                     {created && dayjs(created).format('DD/MMM')}
                   </Text>
                 </Flex>

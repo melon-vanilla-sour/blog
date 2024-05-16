@@ -45,21 +45,21 @@ const Header = () => {
         <Flex dir="row" alignItems="center" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
           <Link href="/about">
             <a>
-              <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'about' ? 'semibold' : 'regular'}>
                 About
               </PageHeading>
             </a>
           </Link>
           <Link href="/posts/1">
             <a>
-              <PageHeading fontWeight={currentPage == 'posts' ? 'bold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'posts' ? 'semibold' : 'regular'}>
                 Posts
               </PageHeading>
             </a>
           </Link>
           <Link href="/projects">
             <a>
-              <PageHeading fontWeight={currentPage == 'projects' ? 'bold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'projects' ? 'semibold' : 'regular'}>
                 Projects
               </PageHeading>
             </a>

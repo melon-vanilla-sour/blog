@@ -54,17 +54,17 @@ const MobileNavigation = () => {
             <Link href="/about">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center"
               >
-                <Text fontSize="lg" fontWeight='bold'>About</Text>
+                <Text fontSize="lg" fontWeight='semibold'>About</Text>
               </Box>
             </Link>
             <Link href="/posts/1">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight='bold'>Posts</Text>
+                <Text fontSize="lg" fontWeight='semibold'>Posts</Text>
               </Box>
             </Link>
             <Link href="/projects">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight='bold'>Projects</Text>
+                <Text fontSize="lg" fontWeight='semibold'>Projects</Text>
               </Box>
             </Link>
           </Flex>

@@ -46,7 +46,7 @@ function Tags({ tags }) {
             return (
               <Box display='inline-block' padding={{ base: 1, sm: 2 }} key={tag.name}>
                 <Link href={`/tags/${tag.name}`}>
-                  <Button fontSize={{ base: 'sm', sm: 'md' }} padding={2} fontWeight='bold'>
+                  <Button fontSize={{ base: 'sm', sm: 'md' }} padding={2} fontWeight='semibold'>
                     {capitalizeString(tag.name)} ({tag.count})
                   </Button>
                 </Link>
