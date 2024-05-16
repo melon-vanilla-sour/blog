@@ -114,7 +114,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       )
     },
     ul: ({ children, ...props }) => (
-      <List pb={6} fontSize="md" styleType='disc' {...props}>
+      <List pb={6} pl={4} fontSize="md" styleType='disc' {...props}>
         {children}
       </List>
     ),
@@ -173,7 +173,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
   return (
     <>
       <Flex>
-        <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={5}>
+        <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={4}>
           {title && (<Heading size="md" textAlign="start" mb={1}>
             {title}
           </Heading>)}
