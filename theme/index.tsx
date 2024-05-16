@@ -80,6 +80,7 @@ const overrides = {
         textAlign: 'center',
         fontWeight: 'semibold',
         caretColor: 'transparent',
+        letterSpacing: '-0.4px'
       }),
     },
     Text: {
