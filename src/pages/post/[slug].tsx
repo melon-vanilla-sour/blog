@@ -24,7 +24,9 @@ import {
   Link as ChakraLink,
   HStack,
   Icon,
-  Image
+  Image,
+  ListItem,
+  List
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
@@ -94,8 +96,9 @@ const Post = ({ post, slug, title, category, tags, created }) => {
 
   const components = {
     h2: (props) => <Heading size="md" mb={8} textAlign="start" {...props} />,
+    h3: (props) => <Heading size="sm" mb={8} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
-      <Text pb={8} fontSize="md" {...props}>
+      <Text pb={6} fontSize="md" {...props}>
         {children}
       </Text>
     ),
@@ -111,14 +114,19 @@ const Post = ({ post, slug, title, category, tags, created }) => {
       )
     },
     ul: ({ children, ...props }) => (
-      <Box pb={8} fontSize="md" {...props}>
+      <List pb={6} fontSize="md" styleType='disc' {...props}>
         {children}
-      </Box>
+      </List>
+    ),
+    li: ({ children, ...props }) => (
+      <ListItem mb={2} {...props}>
+        {children}
+      </ListItem>
     ),
     ol: ({ children, ...props }) => (
-      <Box pb={8} fontSize="md" {...props}>
+      <List pb={6} pl={4} fontSize="md" styleType='disc' {...props}>
         {children}
-      </Box>
+      </List>
     ),
     img: ({ node, src, ...props }) => {
       return (
@@ -139,7 +147,7 @@ const Post = ({ post, slug, title, category, tags, created }) => {
     code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
-        <Box pb={8} borderRadius={10} overflow="hidden">
+        <Box pb={6} borderRadius={10} overflow="hidden">
           <SyntaxHighlighter
             {...props}
             children={String(children).replace(/\n$/, '')}
