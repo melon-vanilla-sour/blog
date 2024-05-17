@@ -47,6 +47,7 @@ const Card = ({ post }) => {
                   // borderRight="1px solid"
                   // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                   minW={{ base: '24', sm: '24' }}
+                  display={{ base: 'none', sm: 'flex' }}
                 >
                   <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="semibold">
                     {created && dayjs(created).format('DD/MMM')}
@@ -72,10 +73,10 @@ const Card = ({ post }) => {
 
               <Flex
                 flex="1"
-                display={{ base: 'none', sm: 'flex' }}
+                display={{ base: 'flex', sm: 'flex' }}
                 filter={'saturate(130%) brightness(110%)'}
-                // borderLeft="1px solid"
-                // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+                borderLeft="1px solid"
+                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
                 justifyContent='center'
               >
                 <Image
