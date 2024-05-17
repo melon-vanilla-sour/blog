@@ -26,7 +26,8 @@ import {
   Icon,
   Image,
   ListItem,
-  List
+  List,
+  VStack
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
@@ -75,8 +76,16 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
 
+  const h2Regex = /^## (.*)$/gm;
+  const tableOfContents = []
+  let match;
+  while ((match = h2Regex.exec(content)) !== null) {
+    tableOfContents.push(match[1]);
+  }
+
   return {
     props: {
+      toc: tableOfContents,
       post: markdownSource,
       slug: slug,
       title: title,
@@ -88,14 +97,14 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   }
 }
 
-const Post = ({ post, slug, title, category, tags, created }) => {
+const Post = ({ toc, post, slug, title, category, tags, created }) => {
   const router = useRouter()
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
   }
 
   const components = {
-    h2: (props) => <Heading size="md" mb={8} textAlign="start" {...props} />,
+    h2: ({ children, ...props }) => <Heading size="md" id={children} mb={8} textAlign="start" {...props} >{children}</Heading>,
     h3: (props) => <Heading size="sm" mb={8} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
       <Text pb={6} fontSize="md" {...props}>
@@ -189,6 +198,16 @@ const Post = ({ post, slug, title, category, tags, created }) => {
           </HStack>
         </Flex>
       </Flex>
+      {toc.length > 0 &&
+        <Flex flexDir='column' mb={4} border='2px solid' borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')} borderRadius={8} py={4} px={6} width='fit-content'>
+          <Heading size='md' mb={2} textAlign='start'>Table of Contents</Heading>
+          <List fontSize="md" >
+            {toc.map((h2) => {
+              return <ListItem textDecoration='underline' mb={2}><Link href={`#${h2}`}>{h2}</Link></ListItem>
+            })}
+          </List>
+        </Flex>
+      }
       <Box fontFamily='Open Sans Variable'>
         <MDXRemote {...post} components={components} />
       </Box>
