@@ -38,7 +38,7 @@ export const getStaticProps = async () => {
 function categories({ categories, latestPostThumbnails }) {
   return (
     <>
-      <Grid my={8} templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
+      <Grid my={8} templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(2, 1fr)' }} gap={{ base: '3', sm: '6' }}>
         {categories &&
           categories.map((category, index) => {
             return (
@@ -52,14 +52,12 @@ function categories({ categories, latestPostThumbnails }) {
                       position="relative"
                       filter={'saturate(130%) brightness(110%)'}
                       w="420px"
-                      h={{ base: '160px', sm: '240px' }}
+                      h={{ base: '140px', sm: '240px' }}
                       objectFit="cover"
                     ></Box>
-                    <CardTextContainer>
-                      <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start">
-                        {capitalizeString(category)}
-                      </Heading>
-                    </CardTextContainer>
+                    <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start" p={2}>
+                      {capitalizeString(category)}
+                    </Heading>
                   </Flex>
                 </Link>
               </Box>
