@@ -5,7 +5,7 @@ import ErrorPage from 'next/error'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
-import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
+import { capitalizeString, filterDraftPosts, getImageUrls, isInternalLink } from '../../lib/utils'
 import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -36,6 +36,7 @@ import dayjs from 'dayjs'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
+  markdownContent = filterDraftPosts(markdownContent)
 
   const paths = markdownContent.map((post) => {
     const {
@@ -55,6 +56,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
   let markdownContent = await getCachedContent()
+  markdownContent = filterDraftPosts(markdownContent)
 
   const post = markdownContent.find((post) => {
     const { data: { slug = '' } } = matter(post.value)
