@@ -26,10 +26,9 @@ export const CardTextContainer = ({ children, ...props }) => {
 const Card = ({ post }) => {
   const {
     content,
-    data: { title = '', category = '', tags = [], created },
+    data: { title = '', slug = '', category = '', tags = [], created },
   } = matter(post)
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
-  const slug = getSlugFromTitle(title)
   if (doNotRender(slug)) {
     return null
   } else {

@@ -5,7 +5,7 @@ import ErrorPage from 'next/error'
 import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
-import { capitalizeString, getImageUrls, getSlugFromTitle, isInternalLink } from '../../lib/utils'
+import { capitalizeString, getImageUrls, isInternalLink } from '../../lib/utils'
 import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -40,10 +40,9 @@ export const getStaticPaths = async () => {
   const paths = markdownContent.map((post) => {
     const {
       content,
-      data: { title = '', category = '', tags = [], created },
+      data: { title = '', slug = '', category = '', tags = [], created },
       // @ts-ignore
     } = matter(post.value)
-    const slug = getSlugFromTitle(title)
     return {
       params: { slug: slug }
     }
@@ -58,17 +57,15 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   let markdownContent = await getCachedContent()
 
   const post = markdownContent.find((post) => {
-    const { data: { title = '' } } = matter(post.value)
-    const slug = getSlugFromTitle(title)
+    const { data: { slug = '' } } = matter(post.value)
     return slug == params.slug
   })
 
   const {
     content,
-    data: { title = '', category = '', tags = [], created },
+    data: { title = '', slug = '', category = '', tags = [], created },
     // @ts-ignore
   } = matter(post.value)
-  const slug = getSlugFromTitle(title)
   const markdownSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkUnwrapImages]
