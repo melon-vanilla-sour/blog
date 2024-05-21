@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Grid } from '@chakra-ui/react'
+import { Box, Button, HStack, Grid, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import { postsPerPage } from '../../lib/contentful'
@@ -39,7 +39,7 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
     props: {
       posts: targetPosts,
       totalPages,
-      currentPage
+      currentPage,
     },
   }
 }
@@ -55,24 +55,26 @@ function Posts({
   return (
     <>
       <Box my={4}>
-        <HStack justifyContent="center">
+        <Flex w="full" justify="space-between" gap={2}>
           <Link href="/categories">
-            <Button>Categories</Button>
+            <Button width="full">Categories</Button>
           </Link>
           <Link href="/tags">
-            <Button>Tags</Button>
+            <Button w="full">Tags</Button>
           </Link>
-          <Button isDisabled={true}>Archives</Button>
-        </HStack>
+          {/* <Button width="full" isDisabled={true}>
+            Recommended
+          </Button> */}
+          <Button w="full" isDisabled={true}>
+            Archives
+          </Button>
+        </Flex>
       </Box>
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
         {posts &&
           posts.map((post, index) => {
-            return (
-              <Card post={post.value} key={post.value}></Card>
-            )
-          })
-        }
+            return <Card post={post.value} key={post.value}></Card>
+          })}
       </Grid>
       <Pagination totalPages={totalPages} currentPage={currentPage}></Pagination>
     </>
