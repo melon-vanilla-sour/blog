@@ -1,4 +1,4 @@
-import matter from "gray-matter";
+import matter from 'gray-matter'
 
 export const capitalizeString = (string) => string.charAt(0).toUpperCase() + string.slice(1)
 
@@ -7,7 +7,7 @@ export const getSlugFromTitle = (title: string) => {
   // remove commas and periods
   lowercaseString = lowercaseString.replace(/[,.]/g, '')
   // Replace spaces with hyphens
-  const slug = lowercaseString.replace(/\s+/g, '-');
+  const slug = lowercaseString.replace(/\s+/g, '-')
   return slug
 }
 
@@ -42,7 +42,7 @@ export const filterDraftPosts = (posts) => {
     if (draft == true) {
       return false
     }
-    return true;
+    return true
   })
 }
 
@@ -58,10 +58,10 @@ export const reorderByDate = (posts) => {
   })
 }
 
-export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || '';
+export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || ''
 declare global {
   interface Window {
-    dataLayer: Record<string, unknown>[];
+    dataLayer: Record<string, unknown>[]
   }
 }
 

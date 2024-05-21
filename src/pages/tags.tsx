@@ -1,7 +1,4 @@
-import {
-  Box,
-  Button,
-} from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
@@ -15,7 +12,9 @@ export const getStaticProps = async () => {
 
   const tags = []
   markdownContent.map((post) => {
-    const { data: { tags: tagsInPost = [] } } = matter(post.value)
+    const {
+      data: { tags: tagsInPost = [] },
+    } = matter(post.value)
     tagsInPost.forEach((tag) => {
       const existingTag = tags.find((tagObject) => {
         return tagObject['name'] === tag
@@ -44,9 +43,9 @@ function Tags({ tags }) {
         {tags &&
           tags.map((tag) => {
             return (
-              <Box display='inline-block' padding={{ base: 1, sm: 2 }} key={tag.name}>
+              <Box display="inline-block" padding={{ base: 1, sm: 2 }} key={tag.name}>
                 <Link href={`/tags/${tag.name}`}>
-                  <Button fontSize={{ base: 'sm', sm: 'md' }} padding={2} fontWeight='semibold'>
+                  <Button fontSize={{ base: 'sm', sm: 'md' }} padding={2} fontWeight="semibold">
                     {capitalizeString(tag.name)} ({tag.count})
                   </Button>
                 </Link>
@@ -62,5 +61,3 @@ function Tags({ tags }) {
 }
 
 export default Tags
-
-

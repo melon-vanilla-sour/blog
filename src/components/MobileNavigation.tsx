@@ -52,19 +52,24 @@ const MobileNavigation = () => {
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
             <Link href="/about">
-              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center"
-              >
-                <Text fontSize="lg" fontWeight='semibold'>About</Text>
+              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+                <Text fontSize="lg" fontWeight="semibold">
+                  About
+                </Text>
               </Box>
             </Link>
             <Link href="/posts/1">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight='semibold'>Posts</Text>
+                <Text fontSize="lg" fontWeight="semibold">
+                  Posts
+                </Text>
               </Box>
             </Link>
             <Link href="/projects">
               <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight='semibold'>Projects</Text>
+                <Text fontSize="lg" fontWeight="semibold">
+                  Projects
+                </Text>
               </Box>
             </Link>
           </Flex>
@@ -97,11 +102,11 @@ const MobileNavigation = () => {
         bg={useColorModeValue('white', 'blackAlpha.800')}
         border="1px solid"
         borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
-        borderRadius='50%'
+        borderRadius="50%"
       >
         <HamburgerIcon color={useColorModeValue('black', 'white')} />
       </IconButton>
-    </Box >
+    </Box>
   )
 }
 

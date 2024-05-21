@@ -27,7 +27,7 @@ import {
   Image,
   ListItem,
   List,
-  VStack
+  VStack,
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
@@ -45,7 +45,7 @@ export const getStaticPaths = async () => {
       // @ts-ignore
     } = matter(post.value)
     return {
-      params: { slug: slug }
+      params: { slug: slug },
     }
   })
   return {
@@ -59,7 +59,9 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   markdownContent = filterDraftPosts(markdownContent)
 
   const post = markdownContent.find((post) => {
-    const { data: { slug = '' } } = matter(post.value)
+    const {
+      data: { slug = '' },
+    } = matter(post.value)
     return slug == params.slug
   })
 
@@ -70,16 +72,16 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   } = matter(post.value)
   const markdownSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkUnwrapImages]
-    }
+      remarkPlugins: [remarkUnwrapImages],
+    },
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
 
-  const h2Regex = /^## (.*)$/gm;
+  const h2Regex = /^## (.*)$/gm
   const tableOfContents = []
-  let match;
+  let match
   while ((match = h2Regex.exec(content)) !== null) {
-    tableOfContents.push(match[1]);
+    tableOfContents.push(match[1])
   }
 
   return {
@@ -103,7 +105,11 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
   }
 
   const components = {
-    h2: ({ children, ...props }) => <Heading size="md" id={children} mb={8} textAlign="start" {...props} >{children}</Heading>,
+    h2: ({ children, ...props }) => (
+      <Heading size="md" id={children} mb={8} textAlign="start" {...props}>
+        {children}
+      </Heading>
+    ),
     h3: (props) => <Heading size="sm" mb={8} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
       <Text pb={6} fontSize="md" {...props}>
@@ -122,7 +128,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
       )
     },
     ul: ({ children, ...props }) => (
-      <List pb={6} pl={4} fontSize="md" styleType='disc' {...props}>
+      <List pb={6} pl={4} fontSize="md" styleType="disc" {...props}>
         {children}
       </List>
     ),
@@ -132,22 +138,20 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
       </ListItem>
     ),
     ol: ({ children, ...props }) => (
-      <List pb={6} pl={4} fontSize="md" styleType='disc' {...props}>
+      <List pb={6} pl={4} fontSize="md" styleType="disc" {...props}>
         {children}
       </List>
     ),
     img: ({ node, src, ...props }) => {
       return (
-        <Flex
-          filter={'saturate(110%) brightness(110%)'}
-        >
+        <Flex filter={'saturate(110%) brightness(110%)'}>
           <Image
             src={src}
             style={{ borderRadius: '10px' }}
             objectFit="contain"
-            maxH='600px'
+            maxH="600px"
             mb={8}
-            mx='auto'
+            mx="auto"
           />
         </Flex>
       )
@@ -182,32 +186,49 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
     <>
       <Flex>
         <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={4}>
-          {title && (<Heading size="md" textAlign="start" mb={1}>
-            {title}
-          </Heading>)}
+          {title && (
+            <Heading size="md" textAlign="start" mb={1}>
+              {title}
+            </Heading>
+          )}
           <HStack>
             <Icon as={BiFolderOpen} />
             {category && <Text>{capitalizeString(category)}</Text>}
             <Icon as={TbWriting} />
-            {created && (<Text>{created}</Text>)}
+            {created && <Text>{created}</Text>}
           </HStack>
           <HStack>
             <Icon as={AiOutlineTag} />
-            {tags && <Text>{(tags).join(', ')}</Text>}
+            {tags && <Text>{tags.join(', ')}</Text>}
           </HStack>
         </Flex>
       </Flex>
-      {toc.length > 0 &&
-        <Flex flexDir='column' mb={4} border='2px solid' borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')} borderRadius={8} py={4} px={6} width='fit-content'>
-          <Heading size='md' mb={2} textAlign='start'>Table of Contents</Heading>
-          <List fontSize="md" >
+      {toc.length > 0 && (
+        <Flex
+          flexDir="column"
+          mb={4}
+          border="2px solid"
+          borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
+          borderRadius={8}
+          py={4}
+          px={6}
+          width="fit-content"
+        >
+          <Heading size="md" mb={2} textAlign="start">
+            Table of Contents
+          </Heading>
+          <List fontSize="md">
             {toc.map((h2) => {
-              return <ListItem textDecoration='underline' mb={2}><Link href={`#${h2}`}>{h2}</Link></ListItem>
+              return (
+                <ListItem textDecoration="underline" mb={2}>
+                  <Link href={`#${h2}`}>{h2}</Link>
+                </ListItem>
+              )
             })}
           </List>
         </Flex>
-      }
-      <Box fontFamily='Open Sans Variable'>
+      )}
+      <Box fontFamily="Open Sans Variable">
         <MDXRemote {...post} components={components} />
       </Box>
       <Link href="/posts/1">

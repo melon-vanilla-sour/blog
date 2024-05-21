@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Heading,
-  Grid,
-  Flex,
-  Image,
-} from '@chakra-ui/react'
+import { Box, Button, Heading, Grid, Flex, Image } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
@@ -20,7 +13,10 @@ export const getStaticProps = async () => {
   const categories = []
   const thumbnails = {}
   markdownContent.map((post) => {
-    const { content, data: { category = '' } } = matter(post.value)
+    const {
+      content,
+      data: { category = '' },
+    } = matter(post.value)
     if (category && !categories.includes(category)) {
       categories.push(category)
       thumbnails[category] = getImageUrls(content) ? getImageUrls(content)[0] : null
@@ -38,7 +34,11 @@ export const getStaticProps = async () => {
 function categories({ categories, latestPostThumbnails }) {
   return (
     <>
-      <Grid my={8} templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(2, 1fr)' }} gap={{ base: '3', sm: '6' }}>
+      <Grid
+        my={8}
+        templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(2, 1fr)' }}
+        gap={{ base: '3', sm: '6' }}
+      >
         {categories &&
           categories.map((category, index) => {
             return (
@@ -47,7 +47,7 @@ function categories({ categories, latestPostThumbnails }) {
                   <Flex direction="column">
                     <Box
                       as={Image}
-                      src={latestPostThumbnails[category] ?? "/ogp.png"}
+                      src={latestPostThumbnails[category] ?? '/ogp.png'}
                       alt="Post Thumbnail"
                       position="relative"
                       filter={'saturate(130%) brightness(110%)'}

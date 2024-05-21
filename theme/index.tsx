@@ -80,14 +80,14 @@ const overrides = {
         textAlign: 'center',
         fontWeight: 'semibold',
         caretColor: 'transparent',
-        letterSpacing: '-0.4px'
+        letterSpacing: '-0.4px',
       }),
     },
     Text: {
       baseStyle: (props) => ({
         lineHeight: '1.6',
         color: mode('gray.800', 'gray.200')(props),
-        fontWeight: '400'
+        fontWeight: '400',
       }),
     },
   },

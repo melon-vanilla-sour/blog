@@ -1,4 +1,3 @@
-
 import { Heading, Button, Grid, GridItem, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import matter from 'gray-matter'
@@ -15,7 +14,9 @@ export const getStaticPaths = async () => {
 
   const categories = []
   markdownContent.map((post) => {
-    const { data: { category = '' } } = matter(post.value)
+    const {
+      data: { category = '' },
+    } = matter(post.value)
     if (category && !categories.includes(category)) {
       categories.push(category)
     }
@@ -35,14 +36,16 @@ export const getStaticProps = async ({ params }) => {
   markdownContent = filterDraftPosts(markdownContent)
 
   markdownContent = markdownContent.filter((post) => {
-    const { data: { category = '' } } = matter(post.value)
+    const {
+      data: { category = '' },
+    } = matter(post.value)
     return category == params.category
   })
 
   return {
     props: {
       category: params.category,
-      posts: markdownContent
+      posts: markdownContent,
     },
   }
 }
@@ -52,10 +55,7 @@ function Category({ category, posts, placeholders }) {
     <>
       {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
       <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
-        {posts &&
-          posts.map((post, index) => (
-            <Card post={post.value} key={post.value}></Card>
-          ))}
+        {posts && posts.map((post, index) => <Card post={post.value} key={post.value}></Card>)}
         <HStack>
           <Link href="/posts/1">
             <Button w={40}>View all posts</Button>

@@ -1,4 +1,14 @@
-import { Heading, Box, useColorModeValue, Text, Flex, Icon, Spacer, filter, Image } from '@chakra-ui/react'
+import {
+  Heading,
+  Box,
+  useColorModeValue,
+  Text,
+  Flex,
+  Icon,
+  Spacer,
+  filter,
+  Image,
+} from '@chakra-ui/react'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 import dayjs from 'dayjs'
@@ -48,15 +58,16 @@ const Card = ({ post }) => {
                   minW={{ base: '24', sm: '24' }}
                   display={{ base: 'none', sm: 'flex' }}
                 >
-                  <Text className="cardDate" fontSize={{ base: 'xl', md: 'xl' }} fontWeight="semibold">
+                  <Text
+                    className="cardDate"
+                    fontSize={{ base: 'xl', md: 'xl' }}
+                    fontWeight="semibold"
+                  >
                     {created && dayjs(created).format('DD/MMM')}
                   </Text>
                 </Flex>
                 <CardTextContainer>
-                  <Heading
-                    fontSize={{ base: 'lg', sm: 'lg' }}
-                    textAlign="start"
-                  >
+                  <Heading fontSize={{ base: 'lg', sm: 'lg' }} textAlign="start">
                     {title && title}
                   </Heading>
 
@@ -76,14 +87,14 @@ const Card = ({ post }) => {
                 filter={'saturate(130%) brightness(110%)'}
                 borderLeft="1px solid"
                 borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                justifyContent='center'
+                justifyContent="center"
               >
                 <Image
-                  src={thumbnail ?? "/ogp.png"}
+                  src={thumbnail ?? '/ogp.png'}
                   alt="Post Thumbnail"
                   objectFit="cover"
                   overflow="hidden"
-                  width='100%'
+                  width="100%"
                 ></Image>
               </Flex>
             </Flex>
