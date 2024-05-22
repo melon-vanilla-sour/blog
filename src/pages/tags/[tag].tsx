@@ -57,7 +57,7 @@ function Tag({ posts }) {
   return (
     <>
       {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
+      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={6}>
         {posts && posts.map((post) => <Card post={post.value} key={post.value}></Card>)}
         <HStack>
           <Link href="/posts/1">

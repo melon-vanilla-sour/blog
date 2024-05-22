@@ -39,7 +39,7 @@ export const getStaticProps = async () => {
 function Tags({ tags }) {
   return (
     <>
-      <Box my={8}>
+      <Box my={6}>
         {tags &&
           tags.map((tag) => {
             return (
