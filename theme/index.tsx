@@ -54,7 +54,7 @@ const overrides = {
         padding: 8,
         borderRadius: 'lg',
         boxShadow: 'md',
-        background: mode('white', 'whiteAlpha.200')(props),
+        background: mode('white', 'whiteAlpha.50')(props),
       },
       '.code-block': {
         borderRadius: 10,
@@ -70,7 +70,7 @@ const overrides = {
       baseStyle: { _focus: { boxShadow: 'none' } },
       variants: {
         solid: (props) => ({
-          bg: mode('white', 'whiteAlpha.200')(props),
+          bg: mode('white', 'whiteAlpha.50')(props),
           boxShadow: 'md',
         }),
       },
