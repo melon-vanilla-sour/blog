@@ -28,7 +28,7 @@ const MobileNavigation = () => {
           right="0px"
           marginTop="0px"
           height="100%"
-          width="60%"
+          width="50%"
           borderRadius="0"
         >
           {/* <ModalHeader mx="auto">Go to Page</ModalHeader> */}
@@ -39,6 +39,7 @@ const MobileNavigation = () => {
               onClick={toggleColorMode}
               boxShadow="none"
               my={4}
+              size="lg"
               bg={useColorModeValue('', '')}
               w="full"
               // remove gray outline on hover and after clicking
@@ -52,21 +53,21 @@ const MobileNavigation = () => {
           </Center>
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
             <Link href="/about">
-              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
                 <Text fontSize="lg" fontWeight="semibold">
                   About
                 </Text>
               </Box>
             </Link>
             <Link href="/posts/1">
-              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
                 <Text fontSize="lg" fontWeight="semibold">
                   Posts
                 </Text>
               </Box>
             </Link>
             <Link href="/projects">
-              <Box py={6} cursor="pointer" w="full" h="full" textAlign="center">
+              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
                 <Text fontSize="lg" fontWeight="semibold">
                   Projects
                 </Text>
@@ -103,6 +104,7 @@ const MobileNavigation = () => {
         border="1px solid"
         borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
         borderRadius="50%"
+        boxShadow="lg"
       >
         <HamburgerIcon color={useColorModeValue('black', 'white')} />
       </IconButton>
