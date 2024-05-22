@@ -45,7 +45,7 @@ function HomePage({ posts }) {
           <Grid
             className="iconGrid"
             my={{ base: 4, sm: 6 }}
-            templateColumns={{ base: 'repeat(3, 1fr)', sm: 'repeat(5, 1fr)' }}
+            templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(5, 1fr)' }}
           >
             <svg viewBox="0 0 128 128" width="100%">
               <path
