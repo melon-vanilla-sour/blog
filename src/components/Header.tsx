@@ -13,7 +13,15 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 
 const PageHeading = (props) => {
-  return <Heading size="sm" cursor="pointer" {...props}></Heading>
+  return (
+    <Heading
+      size="sm"
+      cursor="pointer"
+      fontFamily="Pixelify Sans Variable"
+      fontSize="xl"
+      {...props}
+    ></Heading>
+  )
 }
 
 const Header = () => {
@@ -44,7 +52,7 @@ const Header = () => {
         <Heading fontSize={{ base: '4xl', sm: '5xl' }} fontFamily="Pixelify Sans Variable">
           MELON SOUR
         </Heading>
-        <Flex dir="row" alignItems="center" ml={20} gap={4} display={{ base: 'none', sm: 'flex' }}>
+        <Flex dir="row" alignItems="center" ml={8} gap={4} display={{ base: 'none', sm: 'flex' }}>
           <Link href="/about">
             <a>
               <PageHeading fontWeight={currentPage == 'about' ? 'semibold' : 'regular'}>

@@ -54,21 +54,21 @@ const MobileNavigation = () => {
           <Flex flexDir="column" alignItems="center" onClick={onClose}>
             <Link href="/about">
               <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight="semibold">
+                <Text fontSize="2xl" fontWeight="semibold" fontFamily="Pixelify Sans Variable">
                   About
                 </Text>
               </Box>
             </Link>
             <Link href="/posts/1">
               <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight="semibold">
+                <Text fontSize="2xl" fontWeight="semibold" fontFamily="Pixelify Sans Variable">
                   Posts
                 </Text>
               </Box>
             </Link>
             <Link href="/projects">
               <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text fontSize="lg" fontWeight="semibold">
+                <Text fontSize="2xl" fontWeight="semibold" fontFamily="Pixelify Sans Variable">
                   Projects
                 </Text>
               </Box>

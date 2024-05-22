@@ -57,15 +57,32 @@ function Posts({
       <Box my={4}>
         <Flex w="full" justify="space-between" gap={2}>
           <Link href="/categories">
-            <Button width="full">Categories</Button>
+            <Button
+              width="full"
+              fontFamily="Pixelify Sans Variable"
+              fontSize={{ base: 'lg', sm: 'xl' }}
+            >
+              Categories
+            </Button>
           </Link>
           <Link href="/tags">
-            <Button w="full">Tags</Button>
+            <Button
+              fontFamily="Pixelify Sans Variable"
+              fontSize={{ base: 'lg', sm: 'xl' }}
+              w="full"
+            >
+              Tags
+            </Button>
           </Link>
           {/* <Button width="full" isDisabled={true}>
             Recommended
           </Button> */}
-          <Button w="full" isDisabled={true}>
+          <Button
+            fontFamily="Pixelify Sans Variable"
+            fontSize={{ base: 'lg', sm: 'xl' }}
+            w="full"
+            isDisabled={true}
+          >
             Archives
           </Button>
         </Flex>
