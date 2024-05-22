@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Flex, Box, useColorModeValue } from '@chakra-ui/react'
 
-const Pagination = ({ totalPages, currentPage }: { totalPages: number, currentPage: number }) => {
+const Pagination = ({ totalPages, currentPage }: { totalPages: number; currentPage: number }) => {
   return (
     <Flex mt={8} justifyContent="center">
       {[...Array(totalPages)].map((page, index) => (
@@ -18,22 +18,25 @@ const Pagination = ({ totalPages, currentPage }: { totalPages: number, currentPa
             key={index}
             mx={2}
             style={{ caretColor: 'transparent' }}
-            border='1px solid'
-            borderColor={index + 1 == currentPage ? useColorModeValue('blackAlpha.400', 'whiteAlpha.600') : 'transparent'}
+            border="1px solid"
+            borderColor={
+              index + 1 == currentPage
+                ? useColorModeValue('blackAlpha.400', 'whiteAlpha.600')
+                : 'transparent'
+            }
             _hover={{
               boxShadow: 'xs',
               opacity: '1',
               borderColor: useColorModeValue('blackAlpha.400', 'whiteAlpha.600'),
               transition: '0.2s ease-in-out',
             }}
-            cursor='pointer'
+            cursor="pointer"
           >
             {(index + 1).toString()}
           </Box>
         </Link>
-      ))
-      }
-    </Flex >
+      ))}
+    </Flex>
   )
 }
 
