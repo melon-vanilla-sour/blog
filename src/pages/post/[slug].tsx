@@ -185,7 +185,13 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
   return (
     <>
       <Flex>
-        <Flex flexDir="column" borderLeft="4px solid" borderColor="brand.text" my={8} pl={4}>
+        <Flex
+          flexDir="column"
+          borderLeft="4px solid"
+          borderColor="brand.text"
+          my={{ base: '4', sm: '6' }}
+          pl={4}
+        >
           {title && (
             <Heading size="md" textAlign="start" mb={1}>
               {title}
