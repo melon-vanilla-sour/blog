@@ -106,13 +106,13 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
 
   const components = {
     h2: ({ children, ...props }) => (
-      <Heading size="md" id={children} mb={8} textAlign="start" {...props}>
+      <Heading size="md" id={children} mb={{ base: '4', sm: '6' }} textAlign="start" {...props}>
         {children}
       </Heading>
     ),
-    h3: (props) => <Heading size="sm" mb={8} textAlign="start" {...props} />,
+    h3: (props) => <Heading size="sm" mb={{ base: '4', sm: '6' }} textAlign="start" {...props} />,
     p: ({ children, ...props }) => (
-      <Text pb={6} fontSize="md" {...props}>
+      <Text pb={{ base: '4', sm: '6' }} fontSize="md" {...props}>
         {children}
       </Text>
     ),
@@ -128,7 +128,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
       )
     },
     ul: ({ children, ...props }) => (
-      <List pb={6} pl={4} fontSize="md" styleType="disc" {...props}>
+      <List pb={{ base: '4', sm: '6' }} pl={4} fontSize="md" styleType="disc" {...props}>
         {children}
       </List>
     ),
@@ -138,7 +138,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
       </ListItem>
     ),
     ol: ({ children, ...props }) => (
-      <List pb={6} pl={4} fontSize="md" styleType="disc" {...props}>
+      <List pb={{ base: '4', sm: '6' }} pl={4} fontSize="md" styleType="disc" {...props}>
         {children}
       </List>
     ),
@@ -150,7 +150,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
             style={{ borderRadius: '10px' }}
             objectFit="contain"
             maxH="600px"
-            mb={8}
+            mb={{ base: '4', sm: '6' }}
             mx="auto"
           />
         </Flex>
@@ -159,7 +159,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
     code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
-        <Box pb={6} borderRadius={10} overflow="hidden">
+        <Box pb={{ base: '4', sm: '6' }} borderRadius={10} overflow="hidden">
           <SyntaxHighlighter
             {...props}
             children={String(children).replace(/\n$/, '')}

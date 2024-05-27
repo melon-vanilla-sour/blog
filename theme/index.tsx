@@ -85,7 +85,7 @@ const overrides = {
     },
     Text: {
       baseStyle: (props) => ({
-        lineHeight: '1.6',
+        lineHeight: '1.3',
         color: mode('gray.800', 'gray.200')(props),
         fontWeight: '400',
       }),
