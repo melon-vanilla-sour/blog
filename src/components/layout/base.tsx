@@ -18,7 +18,7 @@ const Main = ({ children }) => {
       </Head>
       <Flex
         paddingTop={4}
-        paddingBottom={8}
+        paddingBottom={16}
         paddingX={{ base: 4, sm: 4 }}
         minH="calc(100vh)"
         display="flex"
