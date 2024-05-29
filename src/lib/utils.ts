@@ -11,6 +11,8 @@ export const getSlugFromTitle = (title: string) => {
   return slug
 }
 
+export const getFirstLines = (markdown: string) => {}
+
 export const getImageUrls = (markdown) => {
   // const pattern = /https:\/\/melon-sour-blog-images\.s3\.amazonaws\.com\/[a-zA-Z0-9-.]+/g
   const pattern = /https:\/\/d2pdw9m8ako0ty\.cloudfront\.net\/[a-zA-Z0-9-.]+/g

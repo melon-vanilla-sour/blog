@@ -9,12 +9,9 @@ const Main = ({ children }) => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="A blog about programming, games and tech" />
-        <meta name="author" content="Melon Sour" />
-        <meta property="og:type" content="website" />
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <title>Melon Sour</title>
+        <meta name="author" content="Melon Sour" />
+        <meta name="description" content="A blog about programming, games and tech" />
       </Head>
       <Flex
         paddingTop={4}

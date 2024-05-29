@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
+import Head from 'next/head'
+// import { Head } from 'next/document'
 
 import remarkUnwrapImages from 'remark-unwrap-images'
 import matter from 'gray-matter'
 
-import { capitalizeString, filterDraftPosts, getImageUrls, isInternalLink } from '../../lib/utils'
-import { fetchMarkdownFiles, fetchMarkdownContent, getCachedContent } from '../../lib/remoteMd'
+import { capitalizeString, filterDraftPosts, isInternalLink } from '../../lib/utils'
+import { getCachedContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -27,7 +29,6 @@ import {
   Image,
   ListItem,
   List,
-  VStack,
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
@@ -70,6 +71,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     data: { title = '', slug = '', category = '', tags = [], created },
     // @ts-ignore
   } = matter(post.value)
+  console.log(content)
   const markdownSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkUnwrapImages],
@@ -93,7 +95,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
       category: category,
       tags: tags,
       created: createdString,
-      // plaiceholders: plaiceholders,
     },
   }
 }
@@ -184,6 +185,10 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
 
   return (
     <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={`A post about ${tags}`} />
+      </Head>
       <Flex>
         <Flex
           flexDir="column"
@@ -217,7 +222,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
           borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
           borderRadius={8}
           py={4}
-          px={6}
+          px={4}
           width="fit-content"
         >
           <Heading size="md" mb={2} textAlign="start">
@@ -226,7 +231,7 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
           <List fontSize="md">
             {toc.map((h2) => {
               return (
-                <ListItem textDecoration="underline" mb={2}>
+                <ListItem textDecoration="underline" mb={2} key={h2}>
                   <Link href={`#${h2}`}>{h2}</Link>
                 </ListItem>
               )
