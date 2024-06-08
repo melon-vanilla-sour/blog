@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Grid, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
 
-import { postsPerPage } from '../../lib/contentful'
+import { postsPerPage } from '../../lib/remoteMd'
 import { filterDraftPosts, reorderByDate } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 

@@ -3,6 +3,8 @@ type MarkdownPost = {
   path: string
 }
 
+export const postsPerPage = 20
+
 let cachedData
 
 export const fetchMarkdownFiles = async (): Promise<MarkdownPost[]> => {
