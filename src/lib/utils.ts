@@ -37,6 +37,7 @@ export const getPlaceholders = async (posts, getPlaiceholder) => {
 }
 
 export const filterDraftPosts = (posts) => {
+  posts = reorderByDate(posts)
   return posts.filter((post) => {
     const {
       data: { draft },
