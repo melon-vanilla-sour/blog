@@ -37,7 +37,6 @@ export const getPlaceholders = async (posts, getPlaiceholder) => {
 }
 
 export const filterDraftPosts = (posts) => {
-  posts = reorderByDate(posts)
   return posts.filter((post) => {
     const {
       data: { draft },
@@ -57,7 +56,7 @@ export const reorderByDate = (posts) => {
     const {
       data: { created: createdB },
     } = matter(postB.value)
-    return createdA > createdB ? 1 : createdA > createdB ? -1 : 0
+    return new Date(createdB) - new Date(createdA)
   })
 }
 
