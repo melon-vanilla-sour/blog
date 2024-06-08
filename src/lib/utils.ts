@@ -56,7 +56,7 @@ export const reorderByDate = (posts) => {
     const {
       data: { created: createdB },
     } = matter(postB.value)
-    return new Date(createdB) - new Date(createdA)
+    return createdA < createdB ? 1 : createdA > createdB ? -1 : 0
   })
 }
 
