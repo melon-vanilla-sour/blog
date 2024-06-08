@@ -49,7 +49,10 @@ const Header = () => {
     <>
       <Flex margin="0 auto" alignItems="center" my={2}>
         <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
-        <Heading fontSize={{ base: '4xl', sm: '5xl' }} fontFamily="Pixelify Sans Variable">
+        <Heading
+          fontSize={{ base: '4xl', sm: '5xl' }}
+          fontFamily="Pixelify Sans Variable, Open Sans Variable, sans-serif"
+        >
           MELON SOUR
         </Heading>
         <Flex dir="row" alignItems="center" ml={8} gap={4} display={{ base: 'none', sm: 'flex' }}>
@@ -77,9 +80,13 @@ const Header = () => {
           <IconButton
             aria-label="Toggle Mode"
             onClick={toggleColorMode}
-            boxShadow="none"
+            boxShadow="md"
             my={2}
             ml={4}
+            _hover={{
+              boxShadow: 'xs',
+              transition: '0.2s ease-in-out',
+            }}
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </IconButton>
