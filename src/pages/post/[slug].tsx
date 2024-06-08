@@ -5,6 +5,7 @@ import Head from 'next/head'
 // import { Head } from 'next/document'
 
 import remarkUnwrapImages from 'remark-unwrap-images'
+import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter'
 
 import { capitalizeString, filterDraftPosts, isInternalLink } from '../../lib/utils'
@@ -29,6 +30,13 @@ import {
   Image,
   ListItem,
   List,
+  TableContainer,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
 } from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
@@ -74,7 +82,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   console.log(content)
   const markdownSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkUnwrapImages],
+      remarkPlugins: [remarkUnwrapImages, remarkGfm],
     },
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
@@ -181,6 +189,18 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
         </Box>
       )
     },
+    table: ({ children, ...props }) => (
+      <TableContainer pb={{ base: '5', sm: '6' }}>
+        <Table {...props} variant="simple">
+          {children}
+        </Table>
+      </TableContainer>
+    ),
+    thead: ({ children, ...props }) => <Thead {...props}>{children}</Thead>,
+    tbody: ({ children, ...props }) => <Tbody {...props}>{children}</Tbody>,
+    tr: ({ children, ...props }) => <Tr {...props}>{children}</Tr>,
+    th: ({ children, ...props }) => <Th {...props}>{children}</Th>,
+    td: ({ children, ...props }) => <Td {...props}>{children}</Td>,
   }
 
   return (
