@@ -79,7 +79,6 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     data: { title = '', slug = '', category = '', tags = [], created },
     // @ts-ignore
   } = matter(post.value)
-  console.log(content)
   const markdownSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkUnwrapImages, remarkGfm],
