@@ -6,6 +6,7 @@ import Head from 'next/head'
 
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkGfm from 'remark-gfm'
+import remarkGemoji from 'remark-gemoji'
 import matter from 'gray-matter'
 
 import { capitalizeString, filterDraftPosts, isInternalLink } from '../../lib/utils'
@@ -81,7 +82,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   } = matter(post.value)
   const markdownSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [remarkUnwrapImages, remarkGfm],
+      remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkGemoji],
     },
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
