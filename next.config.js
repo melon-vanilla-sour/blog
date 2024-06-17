@@ -1,6 +1,4 @@
-const { withPlaiceholder } = require('@plaiceholder/next')
-
-module.exports = withPlaiceholder({
+module.exports = {
   images: {
     domains: ['melon-sour-blog-images.s3.amazonaws.com'],
   },
@@ -13,4 +11,4 @@ module.exports = withPlaiceholder({
       },
     ]
   },
-})
+}
