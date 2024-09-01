@@ -234,31 +234,6 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
           </HStack>
         </Flex>
       </Flex>
-      {toc.length > 0 && (
-        <Flex
-          flexDir="column"
-          mb={4}
-          border="2px solid"
-          borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-          borderRadius={8}
-          py={4}
-          px={4}
-          width="fit-content"
-        >
-          <Heading size="md" mb={2} textAlign="start">
-            Table of Contents
-          </Heading>
-          <List fontSize="md">
-            {toc.map((h2) => {
-              return (
-                <ListItem textDecoration="underline" mb={2} key={h2}>
-                  <Link href={`#${h2}`}>{h2}</Link>
-                </ListItem>
-              )
-            })}
-          </List>
-        </Flex>
-      )}
       <Box fontFamily="Open Sans Variable">
         <MDXRemote {...post} components={components} />
       </Box>
