@@ -50,7 +50,7 @@ function categories({ categories, latestPostThumbnails }) {
                       src={latestPostThumbnails[category] ?? '/ogp.png'}
                       alt="Post Thumbnail"
                       position="relative"
-                      filter={'saturate(130%) brightness(110%)'}
+                      filter={'saturate(110%) brightness(110%)'}
                       w="420px"
                       h={{ base: '140px', sm: '240px' }}
                       objectFit="cover"
