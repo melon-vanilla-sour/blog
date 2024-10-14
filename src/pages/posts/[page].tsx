@@ -59,16 +59,16 @@ function Posts({
           <Link href="/categories">
             <Button
               width="full"
-              fontFamily="Pixelify Sans Variable"
-              fontSize={{ base: 'lg', sm: 'xl' }}
+              fontFamily="Open Sans Variable, sans-serif"
+              fontSize={{ base: 'md', sm: 'lg' }}
             >
               Categories
             </Button>
           </Link>
           <Link href="/tags">
             <Button
-              fontFamily="Pixelify Sans Variable"
-              fontSize={{ base: 'lg', sm: 'xl' }}
+              fontFamily="Open Sans Variable, sans-serif"
+              fontSize={{ base: 'md', sm: 'lg' }}
               w="full"
             >
               Tags
@@ -78,8 +78,8 @@ function Posts({
             Recommended
           </Button> */}
           <Button
-            fontFamily="Pixelify Sans Variable"
-            fontSize={{ base: 'lg', sm: 'xl' }}
+            fontFamily="Open Sans Variable, sans-serif"
+            fontSize={{ base: 'md', sm: 'lg' }}
             w="full"
             isDisabled={true}
           >

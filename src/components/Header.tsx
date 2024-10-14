@@ -17,8 +17,8 @@ const PageHeading = (props) => {
     <Heading
       size="sm"
       cursor="pointer"
-      fontFamily="Pixelify Sans Variable"
-      fontSize="xl"
+      fontFamily="Open Sans Variable, sans-serif"
+      fontSize="lg"
       {...props}
     ></Heading>
   )
@@ -47,32 +47,33 @@ const Header = () => {
 
   return (
     <>
-      <Flex margin="0 auto" alignItems="center" my={2}>
+      <Flex margin=" 0 auto" alignItems="center" justifyContent={'center'} my={2}>
         <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
         <Heading
           fontSize={{ base: '4xl', sm: '5xl' }}
-          fontFamily="Pixelify Sans Variable, Open Sans Variable, sans-serif"
+          fontFamily="Open Sans Variable, sans-serif"
+          letterSpacing="tighter"
         >
           MELON SOUR
         </Heading>
         <Flex dir="row" alignItems="center" ml={8} gap={4} display={{ base: 'none', sm: 'flex' }}>
           <Link href="/about">
             <a>
-              <PageHeading fontWeight={currentPage == 'about' ? 'semibold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'about' ? 'bold' : 'semibold'}>
                 About
               </PageHeading>
             </a>
           </Link>
           <Link href="/posts/1">
             <a>
-              <PageHeading fontWeight={currentPage == 'posts' ? 'semibold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'posts' ? 'bold' : 'semibold'}>
                 Posts
               </PageHeading>
             </a>
           </Link>
           <Link href="/projects">
             <a>
-              <PageHeading fontWeight={currentPage == 'projects' ? 'semibold' : 'regular'}>
+              <PageHeading fontWeight={currentPage == 'projects' ? 'bold' : 'semibold'}>
                 Projects
               </PageHeading>
             </a>
