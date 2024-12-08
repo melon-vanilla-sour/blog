@@ -9,7 +9,7 @@ import remarkGfm from 'remark-gfm'
 import remarkGemoji from 'remark-gemoji'
 import matter from 'gray-matter'
 
-import { capitalizeString, filterDraftPosts, isInternalLink } from '../../lib/utils'
+import { capitalizeString, filterDraftPosts, getImageUrls, isInternalLink } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -86,6 +86,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     },
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
+  const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
 
   const h2Regex = /^## (.*)$/gm
   const tableOfContents = []
@@ -103,11 +104,12 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
       category: category,
       tags: tags,
       created: createdString,
+      thumbnail: thumbnail,
     },
   }
 }
 
-const Post = ({ toc, post, slug, title, category, tags, created }) => {
+const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) => {
   const router = useRouter()
   if (!router.isFallback && !slug) {
     return <ErrorPage statusCode={404} />
@@ -208,6 +210,9 @@ const Post = ({ toc, post, slug, title, category, tags, created }) => {
       <Head>
         <title>{title}</title>
         <meta name="description" content={`A post about ${tags}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:url" content={`https://www.melonsour.com/${slug}`} />
+        <meta property="og:image" content={thumbnail} />
       </Head>
       <Flex>
         <Flex
