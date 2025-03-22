@@ -212,7 +212,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <meta name="description" content={`A post about ${tags}`} />
         <meta property="og:title" content={title} key="ogTitle" />
         <meta property="og:url" content={`https://www.melonsour.com/${slug}`} key="ogUrl" />
-        <meta property="og:image" content={thumbnail} key="ogImage" />
+        {thumbnail && <meta property="og:image" content={thumbnail} key="ogImage" />}
       </Head>
       <Flex>
         <Flex

@@ -37,16 +37,23 @@ function HomePage({ posts }) {
   return (
     <>
       <Box my={8}>
-        <Flex flexDir="column" alignItems="center">
+        <Flex
+          flexDir="column"
+          alignItems="flex-start"
+          my={{ base: 4, sm: 6 }}
+          padding={8}
+          borderRadius="lg"
+          maxW="lg"
+          boxShadow="md"
+          background={useColorModeValue('white', 'whiteAlpha.50')}
+          margin="0 auto"
+          gap={2}
+        >
           <Text>Hi I'm a Software Engineer</Text>
-          <Text>Contact me at melonvanillasour[at]gmail.com</Text>
-        </Flex>
-        <Flex flexDir="column" alignItems="center">
-          <Grid
-            className="iconGrid"
-            my={{ base: 4, sm: 6 }}
-            templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(5, 1fr)' }}
-          >
+          <Text>Email: melonvanillasour[at]gmail.com</Text>
+          <Text>Twitter: [at]melon_creamsour</Text>
+          <Text pb={2}>Languages I'm using:</Text>
+          <Grid templateColumns={{ base: 'repeat(5, 1fr)', sm: 'repeat(5, 1fr)' }} gap={6}>
             <svg viewBox="0 0 128 128" width="100%">
               <path
                 fill={useColorModeValue('#000', '#fff')}

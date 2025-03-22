@@ -48,14 +48,6 @@ const overrides = {
       '.cardDate': {
         caretColor: 'transparent',
       },
-      '.iconGrid': {
-        gap: 8,
-        maxW: 'lg',
-        padding: 8,
-        borderRadius: 'lg',
-        boxShadow: 'md',
-        background: mode('white', 'whiteAlpha.50')(props),
-      },
       '.code-block': {
         borderRadius: 10,
       },
