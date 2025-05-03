@@ -191,6 +191,13 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         </Box>
       )
     },
+    blockquote: ({ children, ...props }) => {
+      return (
+        <Box as="blockquote" px={8} {...props}>
+          {children}
+        </Box>
+      )
+    },
     table: ({ children, ...props }) => (
       <TableContainer pb={{ base: '5', sm: '6' }}>
         <Table {...props} variant="simple">
