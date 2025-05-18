@@ -61,10 +61,14 @@ function Tag({ posts }) {
         {posts && posts.map((post) => <Card post={post.value} key={post.value}></Card>)}
         <HStack>
           <Link href="/posts/1">
-            <Button w={40}>View all posts</Button>
+            <Button w={40} className="tab-focus-outline">
+              View all posts
+            </Button>
           </Link>
           <Link href="/tags">
-            <Button w={40}>View Tags</Button>
+            <Button w={40} className="tab-focus-outline">
+              View Tags
+            </Button>
           </Link>
         </HStack>
       </Grid>

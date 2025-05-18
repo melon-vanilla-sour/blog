@@ -58,7 +58,9 @@ function Category({ category, posts, placeholders }) {
         {posts && posts.map((post, index) => <Card post={post.value} key={post.value}></Card>)}
         <HStack>
           <Link href="/posts/1">
-            <Button w={40}>View all posts</Button>
+            <Button w={40} className="tab-focus-outline">
+              View all posts
+            </Button>
           </Link>
           <Link href="/categories">
             <Button w={40} className="tab-focus-outline">

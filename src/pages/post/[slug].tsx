@@ -251,7 +251,9 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <MDXRemote {...post} components={components} />
       </Box>
       <Link href="/posts/1">
-        <Button w={40}>View all posts</Button>
+        <Button w={40} className="tab-focus-outline">
+          View all posts
+        </Button>
       </Link>
     </>
   )

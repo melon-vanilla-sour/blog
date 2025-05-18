@@ -65,7 +65,9 @@ function categories({ categories, latestPostThumbnails }) {
           })}
       </Grid>
       <Link href="/posts/1">
-        <Button w={40}>View all posts</Button>
+        <Button w={40} className="tab-focus-outline">
+          View all posts
+        </Button>
       </Link>
     </>
   )
