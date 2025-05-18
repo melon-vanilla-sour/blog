@@ -153,11 +153,12 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         {children}
       </List>
     ),
-    img: ({ node, src, ...props }) => {
+    img: ({ node, src, alt, ...props }) => {
       return (
         <Flex filter={'saturate(110%) brightness(110%)'}>
           <Image
             src={src}
+            alt={alt}
             style={{ borderRadius: '10px' }}
             objectFit="contain"
             maxH="600px"
