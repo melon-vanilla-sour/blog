@@ -43,7 +43,7 @@ const Card = ({ post }) => {
     return null
   } else {
     return (
-      <Box className="card">
+      <Box className="card tab-focus-outline-nested">
         <Link href={`/post/${slug}`}>
           <a>
             <Flex h={{ base: '28', sm: '28' }}>

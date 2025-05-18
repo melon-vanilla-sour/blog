@@ -61,7 +61,9 @@ function Category({ category, posts, placeholders }) {
             <Button w={40}>View all posts</Button>
           </Link>
           <Link href="/categories">
-            <Button w={40}>View Categories</Button>
+            <Button w={40} className="tab-focus-outline">
+              View Categories
+            </Button>
           </Link>
         </HStack>
       </Grid>

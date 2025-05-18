@@ -58,15 +58,17 @@ function Posts({
         <Flex w="full" justify="space-between" gap={2}>
           <Link href="/categories">
             <Button
-              width="full"
+              className="tab-focus-outline"
               fontFamily="Open Sans Variable, sans-serif"
               fontSize={{ base: 'md', sm: 'lg' }}
+              w="full"
             >
               Categories
             </Button>
           </Link>
           <Link href="/tags">
             <Button
+              className="tab-focus-outline"
               fontFamily="Open Sans Variable, sans-serif"
               fontSize={{ base: 'md', sm: 'lg' }}
               w="full"
@@ -78,6 +80,7 @@ function Posts({
             Recommended
           </Button> */}
           <Button
+            className="tab-focus-outline"
             fontFamily="Open Sans Variable, sans-serif"
             fontSize={{ base: 'md', sm: 'lg' }}
             w="full"

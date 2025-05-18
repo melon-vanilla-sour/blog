@@ -46,6 +46,7 @@ function Tags({ tags }) {
               <Box display="inline-block" padding={{ base: 1, sm: 2 }} key={tag.name}>
                 <Link href={`/tags/${tag.name}`}>
                   <Button
+                    className="tab-focus-outline"
                     _hover={{
                       base: {}, // no hover effect on mobile
                       md: {
@@ -67,7 +68,9 @@ function Tags({ tags }) {
           })}
       </Box>
       <Link href="/posts/1">
-        <Button w={40}>View all posts</Button>
+        <Button w={40} className="tab-focus-outline">
+          View all posts
+        </Button>
       </Link>
     </>
   )

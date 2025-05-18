@@ -45,6 +45,19 @@ const overrides = {
         cursor: 'pointer',
         webkitTapHighlightColor: 'rgba(0,0,0,0)',
       },
+      // shows outline on focus when tabbing the inner Link with keyboard but not when clicking
+      '.tab-focus-outline-nested': {
+        '&:has(a:focus-visible)': {
+          outline: `2px solid ${mode('black', 'white')(props)}`,
+          outlineOffset: '2px',
+        },
+      },
+      '.tab-focus-outline': {
+        '&:focus-visible': {
+          outline: `2px solid ${mode('black', 'white')(props)}`,
+          outlineOffset: '2px',
+        },
+      },
       '.cardDate': {
         caretColor: 'transparent',
       },
