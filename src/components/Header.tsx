@@ -88,6 +88,7 @@ const Header = () => {
               boxShadow: 'xs',
               transition: '0.2s ease-in-out',
             }}
+            className="tab-focus-outline"
           >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </IconButton>
