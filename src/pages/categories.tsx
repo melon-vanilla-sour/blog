@@ -42,23 +42,26 @@ function categories({ categories, latestPostThumbnails }) {
         {categories &&
           categories.map((category, index) => {
             return (
-              <Box className="card" cursor="pointer" key={category}>
+              <Box className="card tab-focus-outline-nested" cursor="pointer" key={category}>
                 <Link href={`/categories/${category}`}>
-                  <Flex direction="column">
-                    <Box
-                      as={Image}
-                      src={latestPostThumbnails[category] ?? '/ogp.png'}
-                      alt="Post Thumbnail"
-                      position="relative"
-                      filter={'saturate(110%) brightness(110%)'}
-                      w="420px"
-                      h={{ base: '140px', sm: '240px' }}
-                      objectFit="cover"
-                    ></Box>
-                    <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start" p={2}>
-                      {capitalizeString(category)}
-                    </Heading>
-                  </Flex>
+                  <a>
+                    <Flex direction="column">
+                      <Box
+                        as={Image}
+                        src={latestPostThumbnails[category] ?? '/ogp.png'}
+                        alt="Post Thumbnail"
+                        position="relative"
+                        filter={'saturate(110%) brightness(110%)'}
+                        w="420px"
+                        h={{ base: '140px', sm: '240px' }}
+                        objectFit="cover"
+                        className="tab-focus-outline"
+                      ></Box>
+                      <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start" p={2}>
+                        {capitalizeString(category)}
+                      </Heading>
+                    </Flex>
+                  </a>
                 </Link>
               </Box>
             )
