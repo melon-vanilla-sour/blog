@@ -8,7 +8,7 @@ export const postsPerPage = 20
 let cachedData
 
 export const fetchMarkdownFiles = async (): Promise<MarkdownPost[]> => {
-  const repositoryUrl = `https://api.github.com/repos/${process.env.REPOSITORY_URL}/contents`
+  const repositoryUrl = `https://api.github.com/repos/${process.env.REPOSITORY_URL}/contents/posts`
   const response = await fetch(repositoryUrl, {
     headers: {
       Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
