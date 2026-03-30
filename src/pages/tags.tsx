@@ -2,58 +2,42 @@ import matter from 'gray-matter'
 import Link from 'next/link'
 
 import { capitalizeString, filterDraftPosts } from '../lib/utils'
-
 import { getCachedContent } from '../lib/remoteMd'
 
 export const getStaticProps = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
   const tags = []
   markdownContent.map((post) => {
-    const {
-      data: { tags: tagsInPost = [] },
-    } = matter(post.value)
+    const { data: { tags: tagsInPost = [] } } = matter(post.value)
     tagsInPost.forEach((tag) => {
-      const existingTag = tags.find((tagObject) => {
-        return tagObject['name'] === tag
-      })
-      if (existingTag) {
-        existingTag.count += 1
+      const existing = tags.find((t) => t.name === tag)
+      if (existing) {
+        existing.count += 1
       } else {
         tags.push({ name: tag, count: 1 })
       }
     })
   })
-
-  tags.sort((tagA, tagB) => {
-    return tagA.count < tagB.count ? 1 : tagA.count > tagB.count ? -1 : 0
-  })
-
-  return {
-    props: { tags: tags },
-  }
+  tags.sort((a, b) => (a.count < b.count ? 1 : a.count > b.count ? -1 : 0))
+  return { props: { tags } }
 }
 
 function Tags({ tags }) {
   return (
     <>
-      <div style={{ margin: '1.5rem 0' }}>
-        {tags &&
-          tags.map((tag) => {
-            return (
-              <div style={{ display: 'inline-block', padding: '0.5rem' }} key={tag.name}>
-                <Link href={`/tags/${tag.name}`}>
-                  <a className="tab-focus-outline" style={{ fontWeight: 600 }}>
-                    {capitalizeString(tag.name)} ({tag.count})
-                  </a>
-                </Link>
-              </div>
-            )
-          })}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {tags && tags.map((tag) => (
+          <Link href={`/tags/${tag.name}`} key={tag.name}>
+            <a className="tab-focus-outline border border-ctp-surface1 text-ctp-mauve hover:border-ctp-mauve hover:bg-ctp-surface0 px-2 py-0.5 text-xs transition-colors no-underline hover:no-underline">
+              {capitalizeString(tag.name)}
+              <span className="text-ctp-overlay0 ml-1">({tag.count})</span>
+            </a>
+          </Link>
+        ))}
       </div>
       <Link href="/posts/1">
-        <a className="tab-focus-outline">View all posts</a>
+        <a className="tui-btn tab-focus-outline no-underline hover:no-underline">← View all posts</a>
       </Link>
     </>
   )

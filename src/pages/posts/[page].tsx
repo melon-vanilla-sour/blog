@@ -16,11 +16,7 @@ export const getStaticPaths = async () => {
   for (let page = 1; page <= totalPages; page++) {
     paths.push({ params: { page: page.toString() } })
   }
-
-  return {
-    paths,
-    fallback: false,
-  }
+  return { paths, fallback: false }
 }
 
 export const getStaticProps = async ({ params }: { params: { page: number } }) => {
@@ -33,45 +29,27 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
   const total = markdownContent.length
   const totalPages = Math.ceil(total / postsPerPage)
   const currentPage = params.page
-
-  return {
-    props: {
-      posts: targetPosts,
-      totalPages,
-      currentPage,
-    },
-  }
+  return { props: { posts: targetPosts, totalPages, currentPage } }
 }
 
-function Posts({
-  posts,
-  totalPages,
-  currentPage,
-}: {
-  posts
-  totalPages: number
-  currentPage: number
-}) {
+function Posts({ posts, totalPages, currentPage }: { posts; totalPages: number; currentPage: number }) {
   return (
     <>
-      <div style={{ margin: '1rem 0' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem' }}>
-          <Link href="/categories">
-            <a className="tab-focus-outline" style={{ width: '100%', textAlign: 'center' }}>Categories</a>
-          </Link>
-          <Link href="/tags">
-            <a className="tab-focus-outline" style={{ width: '100%', textAlign: 'center' }}>Tags</a>
-          </Link>
-          <span style={{ width: '100%', textAlign: 'center', opacity: 0.5 }}>Archives</span>
-        </div>
+      <div className="flex gap-2 mb-4">
+        <Link href="/categories">
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center">Categories</a>
+        </Link>
+        <Link href="/tags">
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center">Tags</a>
+        </Link>
+        <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none">Archives</span>
       </div>
-      <div style={{ display: 'grid', gap: '0.75rem', margin: '1rem 0' }}>
-        {posts &&
-          posts.map((post, index) => {
-            return <Card post={post.value} key={post.value}></Card>
-          })}
+
+      <div className="flex flex-col gap-2">
+        {posts && posts.map((post) => <Card post={post.value} key={post.value} />)}
       </div>
-      <Pagination totalPages={totalPages} currentPage={currentPage}></Pagination>
+
+      <Pagination totalPages={totalPages} currentPage={currentPage} />
     </>
   )
 }

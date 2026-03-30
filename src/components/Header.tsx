@@ -24,25 +24,33 @@ const Header = () => {
     setCurrentPage(pathName())
   }, [router])
 
+  const navLink = (href: string, label: string, page: string) => (
+    <Link href={href}>
+      <a className={`px-3 py-1 text-sm transition-colors ${
+        currentPage === page
+          ? 'text-ctp-lavender'
+          : 'text-ctp-subtext0 hover:text-ctp-text'
+      }`}>
+        {label}
+      </a>
+    </Link>
+  )
+
   return (
-    <>
-      <div>
-        <img src="/melon-sour.ico" width="64" height="64" alt="Melon Sour logo" />
-        <h1>MELON SOUR</h1>
-        <nav>
-          <Link href="/about">
-            <a style={{ textDecoration: currentPage === 'about' ? 'underline' : 'none' }}>About</a>
-          </Link>
-          <Link href="/posts/1">
-            <a style={{ textDecoration: currentPage === 'posts' ? 'underline' : 'none' }}>Posts</a>
-          </Link>
-          <Link href="/projects">
-            <a style={{ textDecoration: currentPage === 'projects' ? 'underline' : 'none' }}>Projects</a>
-          </Link>
+    <header className="mb-6">
+      <div className="flex items-center py-2 gap-3">
+        <img src="/melon-sour.ico" width="32" height="32" alt="Melon Sour" />
+        <span className="text-lg font-bold tracking-tight text-ctp-text">MELON SOUR</span>
+        <nav className="ml-auto hidden sm:flex items-center">
+          {navLink('/about', 'About', 'about')}
+          <span className="text-ctp-surface2 select-none">│</span>
+          {navLink('/posts/1', 'Posts', 'posts')}
+          <span className="text-ctp-surface2 select-none">│</span>
+          {navLink('/projects', 'Projects', 'projects')}
         </nav>
       </div>
-      <hr />
-    </>
+      <div className="border-b border-ctp-surface1" />
+    </header>
   )
 }
 

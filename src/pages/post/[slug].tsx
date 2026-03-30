@@ -25,21 +25,11 @@ import dayjs from 'dayjs'
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
   const paths = markdownContent.map((post) => {
-    const {
-      content,
-      data: { title = '', slug = '', category = '', tags = [], created },
-      // @ts-ignore
-    } = matter(post.value)
-    return {
-      params: { slug: slug },
-    }
+    const { data: { slug = '' } } = matter(post.value)  // @ts-ignore
+    return { params: { slug } }
   })
-  return {
-    paths,
-    fallback: false,
-  }
+  return { paths, fallback: false }
 }
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
@@ -47,9 +37,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   markdownContent = filterDraftPosts(markdownContent)
 
   const post = markdownContent.find((post) => {
-    const {
-      data: { slug = '' },
-    } = matter(post.value)
+    const { data: { slug = '' } } = matter(post.value)
     return slug == params.slug
   })
 
@@ -58,10 +46,9 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
     data: { title = '', slug = '', category = '', tags = [], created },
     // @ts-ignore
   } = matter(post.value)
+
   const markdownSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkGemoji],
-    },
+    mdxOptions: { remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkGemoji] },
   })
   const createdString = dayjs(created).format('DD/MM/YYYY')
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
@@ -74,17 +61,40 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   }
 
   return {
-    props: {
-      toc: tableOfContents,
-      post: markdownSource,
-      slug: slug,
-      title: title,
-      category: category,
-      tags: tags,
-      created: createdString,
-      thumbnail: thumbnail,
+    props: { toc: tableOfContents, post: markdownSource, slug, title, category, tags, created: createdString, thumbnail },
+  }
+}
+
+// Custom code block with TUI-style language header
+const CodeBlock = ({ language, children, ...props }) => {
+  const codeStyle = {
+    ...oneDark,
+    'pre[class*="language-"]': {
+      ...oneDark['pre[class*="language-"]'],
+      margin: 0,
+      borderRadius: 0,
+      background: '#1e2030',
     },
   }
+  return (
+    <div className="mb-6">
+      <div className="flex items-center border border-b-0 border-ctp-surface1 bg-ctp-surface0 px-3 py-0.5">
+        <span className="text-ctp-surface1 mr-2 text-xs">┌</span>
+        <span className="text-ctp-green text-xs">{language}</span>
+        <span className="flex-1 mx-2 border-t border-ctp-surface1" />
+        <span className="text-ctp-surface1 text-xs">┐</span>
+      </div>
+      <SyntaxHighlighter
+        {...props}
+        style={codeStyle}
+        language={language}
+        PreTag="div"
+        customStyle={{ border: '1px solid #494d64', borderTop: 'none' }}
+      >
+        {String(children).replace(/\n$/, '')}
+      </SyntaxHighlighter>
+    </div>
+  )
 }
 
 const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) => {
@@ -95,81 +105,67 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <h2 id={children} style={{ marginBottom: '1.5rem', textAlign: 'start' }} {...props}>
+      <h2 id={String(children)} className="text-lg font-semibold text-ctp-text mb-5 mt-2 text-left" {...props}>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3 style={{ marginBottom: '1.5rem', textAlign: 'start' }} {...props}>{children}</h3>
+      <h3 className="text-base font-semibold text-ctp-text mb-4 mt-1 text-left" {...props}>{children}</h3>
     ),
     p: ({ children, ...props }) => (
-      <p style={{ paddingBottom: '1.5rem', fontSize: '1rem' }} {...props}>
-        {children}
-      </p>
+      <p className="text-ctp-subtext1 text-sm leading-relaxed mb-5" {...props}>{children}</p>
     ),
     a: ({ node, href, ...props }) => (
       <a
-        style={{ color: 'blue', fontWeight: 600 }}
+        className="text-ctp-sapphire hover:text-ctp-sky font-medium underline"
         target={isInternalLink(href) ? '_self' : '_blank'}
         href={href}
         {...props}
       />
     ),
     ul: ({ children, ...props }) => (
-      <ul style={{ paddingBottom: '1.5rem', paddingLeft: '1rem', fontSize: '1rem', listStyleType: 'disc' }} {...props}>
-        {children}
-      </ul>
+      <ul className="list-disc pl-5 mb-5 text-sm text-ctp-subtext1 space-y-1" {...props}>{children}</ul>
     ),
     li: ({ children, ...props }) => (
-      <li style={{ marginBottom: '0.5rem' }} {...props}>
-        {children}
-      </li>
+      <li className="leading-relaxed" {...props}>{children}</li>
     ),
     ol: ({ children, ...props }) => (
-      <ol style={{ paddingBottom: '1.5rem', paddingLeft: '1rem', fontSize: '1rem', listStyleType: 'decimal' }} {...props}>
-        {children}
-      </ol>
+      <ol className="list-decimal pl-5 mb-5 text-sm text-ctp-subtext1 space-y-1" {...props}>{children}</ol>
     ),
     img: ({ node, src, alt, ...props }) => (
       <img
         src={src}
         alt={alt}
-        style={{ borderRadius: '10px', objectFit: 'contain', maxHeight: '600px', marginBottom: '1.5rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+        className="max-h-[600px] object-contain mb-5 mx-auto block opacity-90"
+        {...props}
       />
     ),
     code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-        <div style={{ paddingBottom: '1.5rem', borderRadius: '10px', overflow: 'hidden' }}>
-          <SyntaxHighlighter
-            {...props}
-            children={String(children).replace(/\n$/, '')}
-            style={oneDark}
-            language={match[1]}
-            PreTag="div"
-          />
-        </div>
-      ) : (
-        <code style={{ padding: '0 0.25rem', background: 'rgba(0,0,0,0.1)' }} className={className} {...props}>
+      if (!inline && match) {
+        return <CodeBlock language={match[1]} {...props}>{children}</CodeBlock>
+      }
+      return (
+        <code className="bg-ctp-surface0 text-ctp-green text-xs px-1.5 py-0.5 font-mono" {...props}>
           {children}
         </code>
       )
     },
     blockquote: ({ children, ...props }) => (
-      <blockquote style={{ paddingLeft: '2rem', paddingRight: '2rem' }} {...props}>
+      <blockquote className="border-l-4 border-ctp-surface1 pl-4 text-ctp-subtext0 italic mb-5" {...props}>
         {children}
       </blockquote>
     ),
     table: ({ children, ...props }) => (
-      <div style={{ paddingBottom: '1.5rem', overflowX: 'auto' }}>
-        <table {...props}>{children}</table>
+      <div className="overflow-x-auto mb-5">
+        <table className="w-full border-collapse text-sm" {...props}>{children}</table>
       </div>
     ),
-    thead: ({ children, ...props }) => <thead {...props}>{children}</thead>,
+    thead: ({ children, ...props }) => <thead className="bg-ctp-surface0" {...props}>{children}</thead>,
     tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
-    tr: ({ children, ...props }) => <tr {...props}>{children}</tr>,
-    th: ({ children, ...props }) => <th {...props}>{children}</th>,
-    td: ({ children, ...props }) => <td {...props}>{children}</td>,
+    tr: ({ children, ...props }) => <tr className="border-b border-ctp-surface1" {...props}>{children}</tr>,
+    th: ({ children, ...props }) => <th className="border border-ctp-surface1 px-3 py-1.5 text-left text-xs uppercase tracking-wider text-ctp-subtext0" {...props}>{children}</th>,
+    td: ({ children, ...props }) => <td className="border border-ctp-surface1 px-3 py-1.5 text-xs text-ctp-subtext1" {...props}>{children}</td>,
   }
 
   return (
@@ -181,27 +177,38 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <meta property="og:url" content={`https://www.melonsour.com/${slug}`} key="ogUrl" />
         {thumbnail && <meta property="og:image" content={thumbnail} key="ogImage" />}
       </Head>
-      <div>
-        <div style={{ borderLeft: '4px solid', margin: '1.25rem 0', paddingLeft: '1rem' }}>
-          {title && <h2 style={{ textAlign: 'start', marginBottom: '0.25rem' }}>{title}</h2>}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+
+      {/* Post metadata block */}
+      <div className="border border-ctp-surface1 mb-6 p-4">
+        {title && <h1 className="text-base font-semibold text-ctp-text mb-3 text-left">{title}</h1>}
+        <div className="flex flex-wrap items-center gap-3 text-xs mb-1.5">
+          <span className="flex items-center gap-1 text-ctp-peach">
             <BiFolderOpen />
             {category && <span>{capitalizeString(category)}</span>}
+          </span>
+          <span className="text-ctp-surface2">│</span>
+          <span className="flex items-center gap-1 text-ctp-yellow">
             <TbWriting />
             {created && <span>{created}</span>}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <AiOutlineTag />
-            {tags && <span>{tags.join(', ')}</span>}
-          </div>
+          </span>
         </div>
+        {tags && tags.length > 0 && (
+          <div className="flex items-center gap-1 text-xs text-ctp-mauve">
+            <AiOutlineTag />
+            <span>{tags.join(', ')}</span>
+          </div>
+        )}
       </div>
-      <div>
+
+      <div className="text-sm leading-relaxed">
         <MDXRemote {...post} components={components} />
       </div>
-      <Link href="/posts/1">
-        <a className="tab-focus-outline">View all posts</a>
-      </Link>
+
+      <div className="mt-8 pt-4 border-t border-ctp-surface1">
+        <Link href="/posts/1">
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline">← View all posts</a>
+        </Link>
+      </div>
     </>
   )
 }

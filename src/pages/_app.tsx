@@ -1,6 +1,4 @@
-import '@fontsource-variable/open-sans'
-import '@fontsource/merriweather'
-import '@fontsource-variable/pixelify-sans'
+import '../styles/globals.css'
 import Main from '../components/layout/base'
 
 // google analytics

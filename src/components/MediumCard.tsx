@@ -7,23 +7,23 @@ function MediumCard({ link, imgSrc, name, description, stack }) {
   return (
     <div>
       <Link href={link}>
-        <a>
-          <div className="card tab-focus-outline">
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <a className="no-underline hover:no-underline">
+          <div className="card tab-focus-outline flex flex-col">
+            <div className="overflow-hidden border-b border-ctp-surface1">
               <img
                 src={imgSrc}
-                alt="Post Thumbnail"
-                style={{ width: '420px', height: '240px', objectFit: 'cover' }}
+                alt={name}
+                className="w-full h-52 object-cover opacity-80 hover:opacity-100 transition-opacity"
               />
-              <CardTextContainer>
-                <h2 style={{ fontSize: '1rem', textAlign: 'start' }}>{name}</h2>
-                <div style={{ display: 'flex', alignItems: 'center' }}>{description}</div>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <BiWrench style={{ marginRight: '0.5rem' }} />
-                  {stack.join(', ')}
-                </div>
-              </CardTextContainer>
             </div>
+            <CardTextContainer>
+              <h2 className="text-ctp-text text-sm font-medium">{name}</h2>
+              <p className="text-ctp-subtext0 text-xs">{description}</p>
+              <div className="flex items-center gap-1 text-ctp-overlay0 text-xs">
+                <BiWrench />
+                <span>{stack.join(', ')}</span>
+              </div>
+            </CardTextContainer>
           </div>
         </a>
       </Link>

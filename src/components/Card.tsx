@@ -5,9 +5,9 @@ import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
 
-export const CardTextContainer = ({ children, ...props }) => {
+export const CardTextContainer = ({ children, className = '', ...props }) => {
   return (
-    <div {...props}>
+    <div className={`flex flex-col justify-center p-3 gap-1.5 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -21,41 +21,42 @@ const Card = ({ post }) => {
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
   if (doNotRender(slug)) {
     return null
-  } else {
-    return (
-      <div className="card tab-focus-outline-nested">
-        <Link href={`/post/${slug}`}>
-          <a>
-            <div style={{ display: 'flex', height: '7rem' }}>
-              <div style={{ display: 'flex', flex: '0 0 40%' }}>
-                <div className="date" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.75rem', gap: '0.25rem', minWidth: '6rem' }}>
-                  <span className="cardDate" style={{ fontSize: '1.25rem', fontWeight: 600 }}>
-                    {created && dayjs(created).format('DD/MMM')}
-                  </span>
-                  <span>{created && dayjs(created).format('YYYY')}</span>
-                </div>
-                <CardTextContainer>
-                  <h2 style={{ fontSize: '1.125rem', textAlign: 'start' }}>{title && title}</h2>
-                  <div style={{ display: 'flex', alignItems: 'center', marginTop: '0.25rem' }}>
-                    <BiFolderOpen style={{ marginRight: '0.5rem' }} />
-                    <span>{category && capitalizeString(category)}</span>
-                  </div>
-                </CardTextContainer>
-              </div>
-
-              <div style={{ flex: 1, display: 'flex', borderLeft: '1px solid', justifyContent: 'center', overflow: 'hidden' }}>
-                <img
-                  src={thumbnail ?? '/ogp.png'}
-                  alt="Post Thumbnail"
-                  style={{ objectFit: 'cover', width: '100%' }}
-                />
-              </div>
-            </div>
-          </a>
-        </Link>
-      </div>
-    )
   }
+  return (
+    <div className="card tab-focus-outline-nested">
+      <Link href={`/post/${slug}`}>
+        <a className="flex h-28 no-underline hover:no-underline">
+          <div className="flex flex-[0_0_40%]">
+            <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ctp-surface1">
+              <span className="text-ctp-yellow font-semibold text-sm caretColor-transparent">
+                {created && dayjs(created).format('DD/MMM')}
+              </span>
+              <span className="text-ctp-subtext0 text-xs">
+                {created && dayjs(created).format('YYYY')}
+              </span>
+            </div>
+            <CardTextContainer>
+              <h2 className="text-ctp-text text-sm font-medium leading-snug line-clamp-2">
+                {title}
+              </h2>
+              <div className="flex items-center gap-1 text-ctp-peach text-xs">
+                <BiFolderOpen />
+                <span>{category && capitalizeString(category)}</span>
+              </div>
+            </CardTextContainer>
+          </div>
+
+          <div className="flex-1 border-l border-ctp-surface1 overflow-hidden">
+            <img
+              src={thumbnail ?? '/ogp.png'}
+              alt="Post Thumbnail"
+              className="w-full h-full object-cover opacity-80"
+            />
+          </div>
+        </a>
+      </Link>
+    </div>
+  )
 }
 
 export default Card

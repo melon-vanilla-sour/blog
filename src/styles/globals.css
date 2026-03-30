@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-ctp-base text-ctp-text font-mono overflow-y-scroll;
+  }
+  body {
+    @apply bg-ctp-base text-ctp-text font-mono;
+  }
+  a {
+    @apply text-ctp-sapphire hover:text-ctp-sky transition-colors;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-ctp-text font-semibold;
+  }
+  hr {
+    @apply border-ctp-surface1;
+  }
+  table {
+    @apply w-full border-collapse;
+  }
+  th {
+    @apply border border-ctp-surface1 px-3 py-1 text-left text-ctp-subtext0 text-xs uppercase tracking-wider;
+  }
+  td {
+    @apply border border-ctp-surface1 px-3 py-1 text-sm;
+  }
+  blockquote {
+    @apply border-l-4 border-ctp-surface1 pl-4 text-ctp-subtext0 italic;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+}
+
+@layer components {
+  .card {
+    @apply border border-ctp-surface1 hover:border-ctp-overlay0 transition-colors cursor-pointer overflow-hidden;
+  }
+  .tui-btn {
+    @apply border border-ctp-surface1 text-ctp-subtext0 hover:border-ctp-overlay0 hover:text-ctp-text px-3 py-1 transition-colors text-sm;
+  }
+  .tui-btn-active {
+    @apply border border-ctp-lavender text-ctp-lavender px-3 py-1 text-sm;
+  }
+  .tab-focus-outline:focus-visible {
+    @apply outline outline-2 outline-ctp-lavender outline-offset-2;
+  }
+  .tab-focus-outline-nested:has(a:focus-visible) {
+    @apply outline outline-2 outline-ctp-lavender outline-offset-2;
+  }
+}

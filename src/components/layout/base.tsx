@@ -11,7 +11,7 @@ const Main = ({ children }) => {
         <meta name="author" content="Melon Sour" />
         <meta name="description" content="A blog about programming, games and tech" />
       </Head>
-      <div>
+      <div className="max-w-[900px] mx-auto px-4 pt-4 pb-16 min-h-screen flex flex-col">
         <Header />
         {children}
       </div>

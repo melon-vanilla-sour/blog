@@ -5,49 +5,45 @@ const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <div className="sm:hidden">
       {isOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            right: 0,
-            width: '50%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            background: 'white',
-            zIndex: 100,
-          }}
-        >
-          <nav onClick={() => setIsOpen(false)}>
-            <Link href="/about">
-              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>About</a>
-            </Link>
-            <Link href="/posts/1">
-              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>Posts</a>
-            </Link>
-            <Link href="/projects">
-              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>Projects</a>
-            </Link>
-          </nav>
-          <button onClick={() => setIsOpen(false)} aria-label="Close Navigation">✕</button>
-        </div>
+        <>
+          <div
+            className="fixed inset-0 bg-ctp-crust/70 z-40"
+            onClick={() => setIsOpen(false)}
+          />
+          <div className="fixed top-0 right-0 h-full w-1/2 bg-ctp-surface0 border-l border-ctp-surface1 z-50 flex flex-col">
+            <nav className="flex flex-col flex-1 pt-8" onClick={() => setIsOpen(false)}>
+              <Link href="/about">
+                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
+                  About
+                </a>
+              </Link>
+              <Link href="/posts/1">
+                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
+                  Posts
+                </a>
+              </Link>
+              <Link href="/projects">
+                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
+                  Projects
+                </a>
+              </Link>
+            </nav>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-4 text-ctp-subtext0 hover:text-ctp-text text-sm border-t border-ctp-surface1 transition-colors"
+              aria-label="Close Navigation"
+            >
+              [ ✕ close ]
+            </button>
+          </div>
+        </>
       )}
       <button
         aria-label="Toggle Navigation"
         onClick={() => setIsOpen(true)}
-        style={{
-          position: 'fixed',
-          bottom: '1rem',
-          right: '1rem',
-          width: '3.5rem',
-          height: '3.5rem',
-          borderRadius: '50%',
-          border: '1px solid',
-          cursor: 'pointer',
-        }}
+        className="fixed bottom-4 right-4 w-10 h-10 border border-ctp-surface1 bg-ctp-surface0 text-ctp-subtext0 hover:text-ctp-text hover:border-ctp-overlay0 transition-colors text-lg"
       >
         ☰
       </button>
