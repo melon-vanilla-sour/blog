@@ -105,15 +105,15 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <h2 id={String(children)} className="text-lg font-semibold text-ctp-text mb-5 mt-2 text-left" {...props}>
+      <h2 id={String(children)} className="text-xl font-semibold text-ctp-text mb-5 mt-2 text-left" {...props}>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3 className="text-base font-semibold text-ctp-text mb-4 mt-1 text-left" {...props}>{children}</h3>
+      <h3 className="text-lg font-semibold text-ctp-text mb-4 mt-1 text-left" {...props}>{children}</h3>
     ),
     p: ({ children, ...props }) => (
-      <p className="text-ctp-subtext1 text-sm leading-relaxed mb-5" {...props}>{children}</p>
+      <p className="text-ctp-text text-base leading-relaxed mb-5" {...props}>{children}</p>
     ),
     a: ({ node, href, ...props }) => (
       <a
@@ -124,13 +124,13 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       />
     ),
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-5 mb-5 text-sm text-ctp-subtext1 space-y-1" {...props}>{children}</ul>
+      <ul className="list-disc pl-5 mb-5 text-base text-ctp-text space-y-1" {...props}>{children}</ul>
     ),
     li: ({ children, ...props }) => (
       <li className="leading-relaxed" {...props}>{children}</li>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-5 mb-5 text-sm text-ctp-subtext1 space-y-1" {...props}>{children}</ol>
+      <ol className="list-decimal pl-5 mb-5 text-base text-ctp-text space-y-1" {...props}>{children}</ol>
     ),
     img: ({ node, src, alt, ...props }) => (
       <img
@@ -180,7 +180,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
       {/* Post metadata block */}
       <div className="border border-ctp-surface1 mb-6 p-4">
-        {title && <h1 className="text-base font-semibold text-ctp-text mb-3 text-left">{title}</h1>}
+        {title && <h1 className="text-xl font-semibold text-ctp-text mb-3 text-left">{title}</h1>}
         <div className="flex flex-wrap items-center gap-3 text-xs mb-1.5">
           <span className="flex items-center gap-1 text-ctp-peach">
             <BiFolderOpen />

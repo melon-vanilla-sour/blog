@@ -28,18 +28,18 @@ const Card = ({ post }) => {
         <a className="flex h-28 no-underline hover:no-underline">
           <div className="flex flex-[0_0_70%]">
             <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ctp-surface1">
-              <span className="text-ctp-yellow font-semibold text-sm caretColor-transparent">
+              <span className="text-ctp-yellow font-semibold text-base caretColor-transparent">
                 {created && dayjs(created).format('DD/MMM')}
               </span>
-              <span className="text-ctp-subtext0 text-xs">
+              <span className="text-ctp-subtext0 text-sm">
                 {created && dayjs(created).format('YYYY')}
               </span>
             </div>
             <CardTextContainer>
-              <h2 className="text-ctp-text text-sm font-medium leading-snug line-clamp-2">
+              <h2 className="text-ctp-text text-base font-semibold leading-snug line-clamp-2">
                 {title}
               </h2>
-              <div className="flex items-center gap-1 text-ctp-peach text-xs">
+              <div className="flex items-center gap-1 text-ctp-peach text-sm">
                 <BiFolderOpen />
                 <span>{category && capitalizeString(category)}</span>
               </div>
@@ -50,7 +50,7 @@ const Card = ({ post }) => {
             <img
               src={thumbnail ?? '/ogp.png'}
               alt="Post Thumbnail"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover brightness-90"
             />
           </div>
         </a>
