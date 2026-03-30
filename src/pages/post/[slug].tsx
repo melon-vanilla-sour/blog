@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
-// import { Head } from 'next/document'
 
 import remarkUnwrapImages from 'remark-unwrap-images'
 import remarkGfm from 'remark-gfm'
@@ -18,27 +17,6 @@ import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 
-import {
-  Heading,
-  Box,
-  Text,
-  Button,
-  Flex,
-  useColorModeValue,
-  Link as ChakraLink,
-  HStack,
-  Icon,
-  Image,
-  ListItem,
-  List,
-  TableContainer,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-} from '@chakra-ui/react'
 import { TbWriting } from 'react-icons/tb'
 import { BiFolderOpen } from 'react-icons/bi'
 import { AiOutlineTag } from 'react-icons/ai'
@@ -117,100 +95,81 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <Heading size="md" id={children} mb={{ base: '5', sm: '6' }} textAlign="start" {...props}>
+      <h2 id={children} style={{ marginBottom: '1.5rem', textAlign: 'start' }} {...props}>
         {children}
-      </Heading>
+      </h2>
     ),
-    h3: (props) => <Heading size="sm" mb={{ base: '5', sm: '6' }} textAlign="start" {...props} />,
+    h3: ({ children, ...props }) => (
+      <h3 style={{ marginBottom: '1.5rem', textAlign: 'start' }} {...props}>{children}</h3>
+    ),
     p: ({ children, ...props }) => (
-      <Text pb={{ base: '5', sm: '6' }} fontSize="md" {...props}>
+      <p style={{ paddingBottom: '1.5rem', fontSize: '1rem' }} {...props}>
         {children}
-      </Text>
+      </p>
     ),
-    a: ({ node, href, ...props }) => {
-      return (
-        <ChakraLink
-          color={useColorModeValue('blue.500', 'blue.300')}
-          fontWeight="semibold"
-          target={isInternalLink(href) ? '_self' : '_blank'}
-          href={href}
-          {...props}
-        ></ChakraLink>
-      )
-    },
+    a: ({ node, href, ...props }) => (
+      <a
+        style={{ color: 'blue', fontWeight: 600 }}
+        target={isInternalLink(href) ? '_self' : '_blank'}
+        href={href}
+        {...props}
+      />
+    ),
     ul: ({ children, ...props }) => (
-      <List pb={{ base: '5', sm: '6' }} pl={4} fontSize="md" styleType="disc" {...props}>
+      <ul style={{ paddingBottom: '1.5rem', paddingLeft: '1rem', fontSize: '1rem', listStyleType: 'disc' }} {...props}>
         {children}
-      </List>
+      </ul>
     ),
     li: ({ children, ...props }) => (
-      <ListItem mb={2} {...props}>
+      <li style={{ marginBottom: '0.5rem' }} {...props}>
         {children}
-      </ListItem>
+      </li>
     ),
     ol: ({ children, ...props }) => (
-      <List pb={{ base: '5', sm: '6' }} pl={4} fontSize="md" styleType="disc" {...props}>
+      <ol style={{ paddingBottom: '1.5rem', paddingLeft: '1rem', fontSize: '1rem', listStyleType: 'decimal' }} {...props}>
         {children}
-      </List>
+      </ol>
     ),
-    img: ({ node, src, alt, ...props }) => {
-      return (
-        <Flex filter={'saturate(110%) brightness(110%)'}>
-          <Image
-            src={src}
-            alt={alt}
-            style={{ borderRadius: '10px' }}
-            objectFit="contain"
-            maxH="600px"
-            mb={{ base: '5', sm: '6' }}
-            mx="auto"
-          />
-        </Flex>
-      )
-    },
+    img: ({ node, src, alt, ...props }) => (
+      <img
+        src={src}
+        alt={alt}
+        style={{ borderRadius: '10px', objectFit: 'contain', maxHeight: '600px', marginBottom: '1.5rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+      />
+    ),
     code: ({ node, inline, className, children, ...props }) => {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
-        <Box pb={{ base: '5', sm: '6' }} borderRadius={10} overflow="hidden">
+        <div style={{ paddingBottom: '1.5rem', borderRadius: '10px', overflow: 'hidden' }}>
           <SyntaxHighlighter
             {...props}
             children={String(children).replace(/\n$/, '')}
-            style={useColorModeValue(oneDark, oneDark)}
+            style={oneDark}
             language={match[1]}
             PreTag="div"
           />
-        </Box>
+        </div>
       ) : (
-        <Box
-          px={1}
-          bg={useColorModeValue('blackAlpha.300', 'gray.700')}
-          {...props}
-          className={className}
-          as="code"
-        >
+        <code style={{ padding: '0 0.25rem', background: 'rgba(0,0,0,0.1)' }} className={className} {...props}>
           {children}
-        </Box>
+        </code>
       )
     },
-    blockquote: ({ children, ...props }) => {
-      return (
-        <Box as="blockquote" px={8} {...props}>
-          {children}
-        </Box>
-      )
-    },
-    table: ({ children, ...props }) => (
-      <TableContainer pb={{ base: '5', sm: '6' }}>
-        <Table {...props} variant="simple">
-          {children}
-        </Table>
-      </TableContainer>
+    blockquote: ({ children, ...props }) => (
+      <blockquote style={{ paddingLeft: '2rem', paddingRight: '2rem' }} {...props}>
+        {children}
+      </blockquote>
     ),
-    thead: ({ children, ...props }) => <Thead {...props}>{children}</Thead>,
-    tbody: ({ children, ...props }) => <Tbody {...props}>{children}</Tbody>,
-    tr: ({ children, ...props }) => <Tr {...props}>{children}</Tr>,
-    th: ({ children, ...props }) => <Th {...props}>{children}</Th>,
-    td: ({ children, ...props }) => <Td {...props}>{children}</Td>,
+    table: ({ children, ...props }) => (
+      <div style={{ paddingBottom: '1.5rem', overflowX: 'auto' }}>
+        <table {...props}>{children}</table>
+      </div>
+    ),
+    thead: ({ children, ...props }) => <thead {...props}>{children}</thead>,
+    tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
+    tr: ({ children, ...props }) => <tr {...props}>{children}</tr>,
+    th: ({ children, ...props }) => <th {...props}>{children}</th>,
+    td: ({ children, ...props }) => <td {...props}>{children}</td>,
   }
 
   return (
@@ -222,40 +181,29 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <meta property="og:url" content={`https://www.melonsour.com/${slug}`} key="ogUrl" />
         {thumbnail && <meta property="og:image" content={thumbnail} key="ogImage" />}
       </Head>
-      <Flex>
-        <Flex
-          flexDir="column"
-          borderLeft="4px solid"
-          borderColor="brand.text"
-          my={{ base: '5', sm: '6' }}
-          pl={4}
-        >
-          {title && (
-            <Heading size="md" textAlign="start" mb={1}>
-              {title}
-            </Heading>
-          )}
-          <HStack>
-            <Icon as={BiFolderOpen} />
-            {category && <Text>{capitalizeString(category)}</Text>}
-            <Icon as={TbWriting} />
-            {created && <Text>{created}</Text>}
-          </HStack>
-          <HStack>
-            <Icon as={AiOutlineTag} />
-            {tags && <Text>{tags.join(', ')}</Text>}
-          </HStack>
-        </Flex>
-      </Flex>
-      <Box fontFamily="Open Sans Variable">
+      <div>
+        <div style={{ borderLeft: '4px solid', margin: '1.25rem 0', paddingLeft: '1rem' }}>
+          {title && <h2 style={{ textAlign: 'start', marginBottom: '0.25rem' }}>{title}</h2>}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <BiFolderOpen />
+            {category && <span>{capitalizeString(category)}</span>}
+            <TbWriting />
+            {created && <span>{created}</span>}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <AiOutlineTag />
+            {tags && <span>{tags.join(', ')}</span>}
+          </div>
+        </div>
+      </div>
+      <div>
         <MDXRemote {...post} components={components} />
-      </Box>
+      </div>
       <Link href="/posts/1">
-        <Button w={40} className="tab-focus-outline">
-          View all posts
-        </Button>
+        <a className="tab-focus-outline">View all posts</a>
       </Link>
     </>
   )
 }
+
 export default Post

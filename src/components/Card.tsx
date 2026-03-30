@@ -1,14 +1,3 @@
-import {
-  Heading,
-  Box,
-  useColorModeValue,
-  Text,
-  Flex,
-  Icon,
-  Spacer,
-  filter,
-  Image,
-} from '@chakra-ui/react'
 import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 import dayjs from 'dayjs'
@@ -18,18 +7,9 @@ import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '.
 
 export const CardTextContainer = ({ children, ...props }) => {
   return (
-    <Flex
-      flexDir="column"
-      alignItems="start"
-      justifyContent="space-evenly"
-      display="flex"
-      padding={3}
-      w="full"
-      position="relative"
-      {...props}
-    >
+    <div {...props}>
       {children}
-    </Flex>
+    </div>
   )
 }
 
@@ -43,67 +23,37 @@ const Card = ({ post }) => {
     return null
   } else {
     return (
-      <Box className="card tab-focus-outline-nested">
+      <div className="card tab-focus-outline-nested">
         <Link href={`/post/${slug}`}>
           <a>
-            <Flex h={{ base: '28', sm: '28' }}>
-              <Flex flex="40%">
-                <Flex
-                  className="date"
-                  align="center"
-                  justify="center"
-                  p={3}
-                  gap={1}
-                  // borderRight="1px solid"
-                  // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                  minW={{ base: '24', sm: '24' }}
-                  display={{ base: 'none', sm: 'flex' }}
-                  flexDir="column"
-                >
-                  <Text
-                    className="cardDate"
-                    fontSize={{ base: 'xl', md: 'xl' }}
-                    fontWeight="semibold"
-                  >
+            <div style={{ display: 'flex', height: '7rem' }}>
+              <div style={{ display: 'flex', flex: '0 0 40%' }}>
+                <div className="date" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.75rem', gap: '0.25rem', minWidth: '6rem' }}>
+                  <span className="cardDate" style={{ fontSize: '1.25rem', fontWeight: 600 }}>
                     {created && dayjs(created).format('DD/MMM')}
-                  </Text>
-                  <Text>{created && dayjs(created).format('YYYY')}</Text>
-                </Flex>
+                  </span>
+                  <span>{created && dayjs(created).format('YYYY')}</span>
+                </div>
                 <CardTextContainer>
-                  <Heading fontSize={{ base: 'lg', sm: 'lg' }} textAlign="start">
-                    {title && title}
-                  </Heading>
-
-                  <Flex alignItems="center" mt={1}>
-                    <Icon as={BiFolderOpen} marginEnd={2} />
-                    <Text noOfLines={1} fontSize={{ base: 'lg', md: 'lg' }}>
-                      {category && capitalizeString(category)}
-                    </Text>
-                    <Box mx={2}></Box>
-                  </Flex>
+                  <h2 style={{ fontSize: '1.125rem', textAlign: 'start' }}>{title && title}</h2>
+                  <div style={{ display: 'flex', alignItems: 'center', marginTop: '0.25rem' }}>
+                    <BiFolderOpen style={{ marginRight: '0.5rem' }} />
+                    <span>{category && capitalizeString(category)}</span>
+                  </div>
                 </CardTextContainer>
-              </Flex>
+              </div>
 
-              <Flex
-                flex="1"
-                display={{ base: 'flex', sm: 'flex' }}
-                filter={'saturate(110%) brightness(110%)'}
-                borderLeft="1px solid"
-                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                justifyContent="center"
-              >
-                <Image
+              <div style={{ flex: 1, display: 'flex', borderLeft: '1px solid', justifyContent: 'center', overflow: 'hidden' }}>
+                <img
                   src={thumbnail ?? '/ogp.png'}
                   alt="Post Thumbnail"
-                  objectFit="cover"
-                  overflow="hidden"
-                  width="100%"
-                ></Image>
-              </Flex>
-            </Flex>
+                  style={{ objectFit: 'cover', width: '100%' }}
+                />
+              </div>
+            </div>
           </a>
         </Link>
-      </Box>
+      </div>
     )
   }
 }

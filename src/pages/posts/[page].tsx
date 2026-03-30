@@ -1,4 +1,3 @@
-import { Box, Button, HStack, Grid, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
 
 import { postsPerPage } from '../../lib/remoteMd'
@@ -43,6 +42,7 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
     },
   }
 }
+
 function Posts({
   posts,
   totalPages,
@@ -54,48 +54,23 @@ function Posts({
 }) {
   return (
     <>
-      <Box my={4}>
-        <Flex w="full" justify="space-between" gap={2}>
+      <div style={{ margin: '1rem 0' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.5rem' }}>
           <Link href="/categories">
-            <Button
-              className="tab-focus-outline"
-              fontFamily="Open Sans Variable, sans-serif"
-              fontSize={{ base: 'md', sm: 'lg' }}
-              w="full"
-            >
-              Categories
-            </Button>
+            <a className="tab-focus-outline" style={{ width: '100%', textAlign: 'center' }}>Categories</a>
           </Link>
           <Link href="/tags">
-            <Button
-              className="tab-focus-outline"
-              fontFamily="Open Sans Variable, sans-serif"
-              fontSize={{ base: 'md', sm: 'lg' }}
-              w="full"
-            >
-              Tags
-            </Button>
+            <a className="tab-focus-outline" style={{ width: '100%', textAlign: 'center' }}>Tags</a>
           </Link>
-          {/* <Button width="full" isDisabled={true}>
-            Recommended
-          </Button> */}
-          <Button
-            className="tab-focus-outline"
-            fontFamily="Open Sans Variable, sans-serif"
-            fontSize={{ base: 'md', sm: 'lg' }}
-            w="full"
-            isDisabled={true}
-          >
-            Archives
-          </Button>
-        </Flex>
-      </Box>
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={4}>
+          <span style={{ width: '100%', textAlign: 'center', opacity: 0.5 }}>Archives</span>
+        </div>
+      </div>
+      <div style={{ display: 'grid', gap: '0.75rem', margin: '1rem 0' }}>
         {posts &&
           posts.map((post, index) => {
             return <Card post={post.value} key={post.value}></Card>
           })}
-      </Grid>
+      </div>
       <Pagination totalPages={totalPages} currentPage={currentPage}></Pagination>
     </>
   )

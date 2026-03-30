@@ -1,4 +1,3 @@
-import { Heading, Button, Grid, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import matter from 'gray-matter'
 
@@ -6,14 +5,12 @@ import { filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
 import Card from '../../components/Card'
-import Pagination from '../../components/Pagination'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
 
   const tags = []
-  // collect all unique tags
   markdownContent.map((post) => {
     const {
       data: { tags: tagsInPost = [] },
@@ -34,6 +31,7 @@ export const getStaticPaths = async () => {
     fallback: false,
   }
 }
+
 export const getStaticProps = async ({ params }) => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
@@ -56,23 +54,17 @@ export const getStaticProps = async ({ params }) => {
 function Tag({ posts }) {
   return (
     <>
-      {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={6}>
+      <div style={{ display: 'grid', gap: '0.75rem', margin: '1.5rem 0' }}>
         {posts && posts.map((post) => <Card post={post.value} key={post.value}></Card>)}
-        <HStack>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Link href="/posts/1">
-            <Button w={40} className="tab-focus-outline">
-              View all posts
-            </Button>
+            <a className="tab-focus-outline">View all posts</a>
           </Link>
           <Link href="/tags">
-            <Button w={40} className="tab-focus-outline">
-              View Tags
-            </Button>
+            <a className="tab-focus-outline">View Tags</a>
           </Link>
-        </HStack>
-      </Grid>
-      {/* <Pagination></Pagination> */}
+        </div>
+      </div>
     </>
   )
 }

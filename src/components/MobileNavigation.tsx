@@ -1,126 +1,57 @@
-import { HamburgerIcon, SunIcon, MoonIcon, CloseIcon } from '@chakra-ui/icons'
-import {
-  Text,
-  Flex,
-  IconButton,
-  useColorMode,
-  useColorModeValue,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  useDisclosure,
-  Center,
-  Box,
-} from '@chakra-ui/react'
+import { useState } from 'react'
 import Link from 'next/link'
 
 const MobileNavigation = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <Box>
-      <Modal isOpen={isOpen} onClose={onClose} motionPreset="slideInRight">
-        <ModalOverlay />
-        <ModalContent
-          bg={useColorModeValue('white', 'blackAlpha.800')}
-          position="fixed"
-          right="0px"
-          marginTop="0px"
-          height="100%"
-          width="50%"
-          borderRadius="0"
+    <div>
+      {isOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            right: 0,
+            width: '50%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            background: 'white',
+            zIndex: 100,
+          }}
         >
-          {/* <ModalHeader mx="auto">Go to Page</ModalHeader> */}
-          <Box flexGrow={1}></Box>
-          <Center>
-            <IconButton
-              aria-label="Toggle Mode"
-              onClick={toggleColorMode}
-              boxShadow="none"
-              my={4}
-              size="lg"
-              bg={useColorModeValue('', '')}
-              w="full"
-              // remove gray outline on hover and after clicking
-              _hover={{}}
-              _active={{}}
-              // remove highlight on button when clicking on ios
-              style={{ WebkitTapHighlightColor: 'rgba(0,0,0,0)' }}
-            >
-              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            </IconButton>
-          </Center>
-          <Flex flexDir="column" alignItems="center" onClick={onClose}>
+          <nav onClick={() => setIsOpen(false)}>
             <Link href="/about">
-              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  fontFamily="Open Sans Variable, sans-serif"
-                >
-                  About
-                </Text>
-              </Box>
+              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>About</a>
             </Link>
             <Link href="/posts/1">
-              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  fontFamily="Open Sans Variable, sans-serif"
-                >
-                  Posts
-                </Text>
-              </Box>
+              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>Posts</a>
             </Link>
             <Link href="/projects">
-              <Box py={5} cursor="pointer" w="full" h="full" textAlign="center">
-                <Text
-                  fontSize="xl"
-                  fontWeight="semibold"
-                  fontFamily="Open Sans Variable, sans-serif"
-                >
-                  Projects
-                </Text>
-              </Box>
+              <a style={{ display: 'block', padding: '1.25rem', textAlign: 'center', fontSize: '1.25rem', fontWeight: 600 }}>Projects</a>
             </Link>
-          </Flex>
-          <IconButton
-            aria-label="Close Navigation"
-            boxShadow="none"
-            my={4}
-            onClick={onClose}
-            bg={useColorModeValue('', '')}
-            borderRadius="0"
-            // remove gray outline on hover and after clicking
-            _hover={{}}
-            _active={{}}
-            // remove highlight on button when clicking on ios
-            style={{ WebkitTapHighlightColor: 'rgba(0,0,0,0)' }}
-          >
-            <CloseIcon></CloseIcon>
-          </IconButton>
-        </ModalContent>
-      </Modal>
-      <IconButton
+          </nav>
+          <button onClick={() => setIsOpen(false)} aria-label="Close Navigation">✕</button>
+        </div>
+      )}
+      <button
         aria-label="Toggle Navigation"
-        onClick={onOpen}
-        position="fixed"
-        bottom={4}
-        right={4}
-        w={14}
-        h={14}
-        display={{ base: 'block', sm: 'none' }}
-        bg={useColorModeValue('white', 'blackAlpha.800')}
-        border="1px solid"
-        borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.300')}
-        borderRadius="50%"
-        boxShadow="lg"
+        onClick={() => setIsOpen(true)}
+        style={{
+          position: 'fixed',
+          bottom: '1rem',
+          right: '1rem',
+          width: '3.5rem',
+          height: '3.5rem',
+          borderRadius: '50%',
+          border: '1px solid',
+          cursor: 'pointer',
+        }}
       >
-        <HamburgerIcon color={useColorModeValue('black', 'white')} />
-      </IconButton>
-    </Box>
+        ☰
+      </button>
+    </div>
   )
 }
 

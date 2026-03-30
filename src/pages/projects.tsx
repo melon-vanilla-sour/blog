@@ -1,10 +1,8 @@
-import { Grid } from '@chakra-ui/react'
-
 import MediumCard from '../components/MediumCard'
 
 function Projects() {
   return (
-    <Grid my={8} templateColumns={{ base: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }} gap={6}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', margin: '2rem 0' }}>
       <MediumCard
         link="/post/holoview"
         imgSrc="projects/holoview-thumbnail.png?fm=webp&h=600"
@@ -26,7 +24,7 @@ function Projects() {
         description="An app that sorts and ranks Idols"
         stack={['Next.js', 'Docker', 'AWS', 'Chakra UI']}
       ></MediumCard>
-    </Grid>
+    </div>
   )
 }
 

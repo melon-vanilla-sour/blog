@@ -1,4 +1,3 @@
-import { Box, Icon, IconButton } from '@chakra-ui/react'
 import { BsArrowUpCircle } from 'react-icons/bs'
 
 const scrollToTop = () => {
@@ -7,17 +6,19 @@ const scrollToTop = () => {
 
 const TopButton = () => {
   return (
-    <Box onClick={scrollToTop}>
-      <IconButton
-        aria-label="Scroll To Top"
-        icon={<BsArrowUpCircle></BsArrowUpCircle>}
-        display={{ base: 'none', sm: 'flex' }}
-        position="fixed"
-        bottom={4}
-        right={4}
-        size="lg"
-      ></IconButton>
-    </Box>
+    <button
+      aria-label="Scroll To Top"
+      onClick={scrollToTop}
+      style={{
+        position: 'fixed',
+        bottom: '1rem',
+        right: '1rem',
+        fontSize: '1.5rem',
+        cursor: 'pointer',
+      }}
+    >
+      <BsArrowUpCircle />
+    </button>
   )
 }
 

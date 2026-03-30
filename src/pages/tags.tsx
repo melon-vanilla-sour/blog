@@ -1,4 +1,3 @@
-import { Box, Button } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
@@ -39,38 +38,22 @@ export const getStaticProps = async () => {
 function Tags({ tags }) {
   return (
     <>
-      <Box my={6}>
+      <div style={{ margin: '1.5rem 0' }}>
         {tags &&
           tags.map((tag) => {
             return (
-              <Box display="inline-block" padding={{ base: 1, sm: 2 }} key={tag.name}>
+              <div style={{ display: 'inline-block', padding: '0.5rem' }} key={tag.name}>
                 <Link href={`/tags/${tag.name}`}>
-                  <Button
-                    className="tab-focus-outline"
-                    _hover={{
-                      base: {}, // no hover effect on mobile
-                      md: {
-                        boxShadow: 'xs',
-                        opacity: '1',
-                        // borderColor: mode('blackAlpha.400', 'whiteAlpha.600')(props),
-                        transition: '0.2s ease-in-out',
-                      },
-                    }}
-                    fontSize={{ base: 'sm', sm: 'md' }}
-                    padding={2}
-                    fontWeight="semibold"
-                  >
+                  <a className="tab-focus-outline" style={{ fontWeight: 600 }}>
                     {capitalizeString(tag.name)} ({tag.count})
-                  </Button>
+                  </a>
                 </Link>
-              </Box>
+              </div>
             )
           })}
-      </Box>
+      </div>
       <Link href="/posts/1">
-        <Button w={40} className="tab-focus-outline">
-          View all posts
-        </Button>
+        <a className="tab-focus-outline">View all posts</a>
       </Link>
     </>
   )

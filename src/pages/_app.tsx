@@ -1,7 +1,6 @@
 import '@fontsource-variable/open-sans'
 import '@fontsource/merriweather'
 import '@fontsource-variable/pixelify-sans'
-import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import Main from '../components/layout/base'
 
 // google analytics
@@ -11,8 +10,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { GA_TRACKING_ID, pageview } from '../lib/gtag'
-
-import theme from '../../theme'
 
 import Head from 'next/head'
 
@@ -30,7 +27,7 @@ export default function MyApp({ Component, pageProps }) {
   }, [router.events])
 
   return (
-    <ChakraProvider theme={theme}>
+    <>
       <Head>
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="og:title" content="Melon Sour" key="ogTitle" />
@@ -61,6 +58,6 @@ export default function MyApp({ Component, pageProps }) {
         {/* <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} /> */}
         <Component {...pageProps} />
       </Main>
-    </ChakraProvider>
+    </>
   )
 }

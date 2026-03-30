@@ -1,10 +1,8 @@
-import { Box, Button, Heading, Grid, Flex, Image } from '@chakra-ui/react'
 import matter from 'gray-matter'
 import Link from 'next/link'
 
 import { capitalizeString, filterDraftPosts, getImageUrls } from '../lib/utils'
 
-import { CardTextContainer } from '../components/Card'
 import { getCachedContent } from '../lib/remoteMd'
 
 export const getStaticProps = async () => {
@@ -21,7 +19,6 @@ export const getStaticProps = async () => {
       categories.push(category)
       thumbnails[category] = getImageUrls(content) ? getImageUrls(content)[0] : null
     } else if (category && thumbnails[category] == null) {
-      // if latest post doesn't have any images to use as a thumbnail override with images in next post
       thumbnails[category] = getImageUrls(content) ? getImageUrls(content)[0] : null
     }
   })
@@ -34,43 +31,31 @@ export const getStaticProps = async () => {
 function categories({ categories, latestPostThumbnails }) {
   return (
     <>
-      <Grid
-        my={8}
-        templateColumns={{ base: 'repeat(2, 1fr)', sm: 'repeat(2, 1fr)' }}
-        gap={{ base: '3', sm: '6' }}
-      >
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', margin: '2rem 0' }}>
         {categories &&
           categories.map((category, index) => {
             return (
-              <Box className="card tab-focus-outline-nested" cursor="pointer" key={category}>
+              <div className="card tab-focus-outline-nested" key={category}>
                 <Link href={`/categories/${category}`}>
                   <a>
-                    <Flex direction="column">
-                      <Box
-                        as={Image}
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <img
                         src={latestPostThumbnails[category] ?? '/ogp.png'}
                         alt="Post Thumbnail"
-                        position="relative"
-                        filter={'saturate(110%) brightness(110%)'}
-                        w="420px"
-                        h={{ base: '140px', sm: '240px' }}
-                        objectFit="cover"
-                        className="tab-focus-outline"
-                      ></Box>
-                      <Heading fontSize={{ base: 'lg', md: 'lg' }} textAlign="start" p={2}>
+                        style={{ width: '420px', height: '240px', objectFit: 'cover' }}
+                      />
+                      <h2 style={{ fontSize: '1.125rem', textAlign: 'start', padding: '0.5rem' }}>
                         {capitalizeString(category)}
-                      </Heading>
-                    </Flex>
+                      </h2>
+                    </div>
                   </a>
                 </Link>
-              </Box>
+              </div>
             )
           })}
-      </Grid>
+      </div>
       <Link href="/posts/1">
-        <Button w={40} className="tab-focus-outline">
-          View all posts
-        </Button>
+        <a className="tab-focus-outline">View all posts</a>
       </Link>
     </>
   )
