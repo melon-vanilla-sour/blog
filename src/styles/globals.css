@@ -29,7 +29,7 @@
   --color-ctp-flamingo:  #f0c6c6;
   --color-ctp-rosewater: #f4dbd6;
 
-  --font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-mono: Hack, "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Catppuccin Latte — light mode overrides */
@@ -68,6 +68,7 @@
   }
   body {
     @apply bg-ctp-base text-ctp-text font-mono;
+    line-height: 1.65;
   }
   a {
     @apply text-ctp-sapphire hover:text-ctp-sky transition-colors;
