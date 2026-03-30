@@ -26,7 +26,7 @@ const Card = ({ post }) => {
     <div className="card tab-focus-outline-nested">
       <Link href={`/post/${slug}`}>
         <a className="flex h-28 no-underline hover:no-underline">
-          <div className="flex flex-[0_0_40%]">
+          <div className="flex flex-[0_0_70%]">
             <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ctp-surface1">
               <span className="text-ctp-yellow font-semibold text-sm caretColor-transparent">
                 {created && dayjs(created).format('DD/MMM')}
