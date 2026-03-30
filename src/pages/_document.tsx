@@ -8,6 +8,7 @@ export default function Document() {
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}` }} />
         <Main />
         <NextScript />
       </body>

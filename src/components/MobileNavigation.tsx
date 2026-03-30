@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import Link from 'next/link'
+import { useTheme } from '../lib/useTheme'
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { isLight, toggle } = useTheme()
 
   return (
     <div className="sm:hidden">
@@ -30,6 +32,13 @@ const MobileNavigation = () => {
                 </a>
               </Link>
             </nav>
+            <button
+              onClick={toggle}
+              className="px-6 py-3 text-ctp-subtext0 hover:text-ctp-text text-sm border-t border-ctp-surface1 transition-colors text-left"
+              aria-label="Toggle light/dark mode"
+            >
+              {isLight ? '☾ dark mode' : '☀ light mode'}
+            </button>
             <button
               onClick={() => setIsOpen(false)}
               className="p-4 text-ctp-subtext0 hover:text-ctp-text text-sm border-t border-ctp-surface1 transition-colors"

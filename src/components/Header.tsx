@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import { useTheme } from '../lib/useTheme'
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
   const router = useRouter()
+  const { isLight, toggle } = useTheme()
 
   const pathName = () => {
     if (
@@ -47,6 +49,14 @@ const Header = () => {
           {navLink('/posts/1', 'Posts', 'posts')}
           <span className="text-ctp-surface2 select-none">│</span>
           {navLink('/projects', 'Projects', 'projects')}
+          <span className="text-ctp-surface2 select-none">│</span>
+          <button
+            onClick={toggle}
+            className="px-3 py-1 text-sm text-ctp-subtext0 hover:text-ctp-text transition-colors tab-focus-outline"
+            aria-label="Toggle light/dark mode"
+          >
+            {isLight ? '☾' : '☀'}
+          </button>
         </nav>
       </div>
       <div className="border-b border-ctp-surface1" />
