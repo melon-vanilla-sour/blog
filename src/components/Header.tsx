@@ -28,7 +28,7 @@ const Header = () => {
 
   const navLink = (href: string, label: string, page: string) => (
     <Link href={href}>
-      <a className={`px-3 py-1 text-sm transition-colors ${
+      <a className={`px-3 py-1 text-base transition-colors ${
         currentPage === page
           ? 'text-ctp-lavender'
           : 'text-ctp-subtext0 hover:text-ctp-text'
@@ -42,7 +42,7 @@ const Header = () => {
     <header className="mb-6">
       <div className="flex items-center py-2 gap-3">
         <img src="/melon-sour.ico" width="32" height="32" alt="Melon Sour" />
-        <span className="text-lg font-bold tracking-tight text-ctp-text">MELON SOUR</span>
+        <span className="text-xl font-bold tracking-tight text-ctp-text">MELON SOUR</span>
         <nav className="ml-auto hidden sm:flex items-center">
           {navLink('/about', 'About', 'about')}
           <span className="text-ctp-surface2 select-none">│</span>

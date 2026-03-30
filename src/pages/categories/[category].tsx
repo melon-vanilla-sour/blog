@@ -30,7 +30,7 @@ export const getStaticProps = async ({ params }) => {
 function Category({ category, posts }) {
   return (
     <>
-      <h2 className="text-ctp-peach text-sm font-medium mb-4">
+      <h2 className="text-ctp-peach text-base font-medium mb-4">
         <span className="text-ctp-surface2">category /</span> {capitalizeString(category)}
       </h2>
       <div className="flex flex-col gap-2 mb-6">

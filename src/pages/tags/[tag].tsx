@@ -30,7 +30,7 @@ export const getStaticProps = async ({ params }) => {
 function Tag({ tag, posts }) {
   return (
     <>
-      <h2 className="text-ctp-mauve text-sm font-medium mb-4">
+      <h2 className="text-ctp-mauve text-base font-medium mb-4">
         <span className="text-ctp-surface2">tag /</span> {capitalizeString(tag)}
       </h2>
       <div className="flex flex-col gap-2 mb-6">
