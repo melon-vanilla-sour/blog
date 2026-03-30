@@ -113,7 +113,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       <h3 className="text-lg font-semibold text-ctp-text mb-4 mt-1 text-left" {...props}>{children}</h3>
     ),
     p: ({ children, ...props }) => (
-      <p className="text-ctp-text text-base leading-relaxed mb-5" {...props}>{children}</p>
+      <p className="text-ctp-text text-sm leading-relaxed mb-5" {...props}>{children}</p>
     ),
     a: ({ node, href, ...props }) => (
       <a
@@ -124,13 +124,13 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       />
     ),
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-5 mb-5 text-base text-ctp-text space-y-1" {...props}>{children}</ul>
+      <ul className="list-disc pl-5 mb-5 text-sm text-ctp-text space-y-1" {...props}>{children}</ul>
     ),
     li: ({ children, ...props }) => (
       <li className="leading-relaxed" {...props}>{children}</li>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-5 mb-5 text-base text-ctp-text space-y-1" {...props}>{children}</ol>
+      <ol className="list-decimal pl-5 mb-5 text-sm text-ctp-text space-y-1" {...props}>{children}</ol>
     ),
     img: ({ node, src, alt, ...props }) => (
       <img
