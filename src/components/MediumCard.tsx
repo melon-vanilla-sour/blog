@@ -13,7 +13,7 @@ function MediumCard({ link, imgSrc, name, description, stack }) {
               <img
                 src={imgSrc}
                 alt={name}
-                className="w-full h-52 object-cover opacity-80 hover:opacity-100 transition-opacity"
+                className="w-full h-52 object-cover"
               />
             </div>
             <CardTextContainer>

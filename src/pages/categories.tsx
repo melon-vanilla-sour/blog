@@ -34,7 +34,7 @@ function Categories({ categories, latestPostThumbnails }) {
                     <img
                       src={latestPostThumbnails[category] ?? '/ogp.png'}
                       alt={category}
-                      className="w-full h-full object-cover opacity-80"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="px-3 py-2">

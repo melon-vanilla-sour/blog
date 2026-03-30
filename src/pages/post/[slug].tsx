@@ -136,7 +136,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       <img
         src={src}
         alt={alt}
-        className="max-h-[600px] object-contain mb-5 mx-auto block opacity-90"
+        className="max-h-[600px] object-contain mb-5 mx-auto block"
         {...props}
       />
     ),

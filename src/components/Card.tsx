@@ -50,7 +50,7 @@ const Card = ({ post }) => {
             <img
               src={thumbnail ?? '/ogp.png'}
               alt="Post Thumbnail"
-              className="w-full h-full object-cover opacity-80"
+              className="w-full h-full object-cover"
             />
           </div>
         </a>
