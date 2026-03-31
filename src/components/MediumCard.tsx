@@ -13,7 +13,7 @@ function MediumCard({ link, imgSrc, name, description, stack }) {
               <img
                 src={imgSrc}
                 alt={name}
-                className="w-full h-52 object-cover"
+                className="w-full h-52 object-cover saturate-[1.1]"
               />
             </div>
             <CardTextContainer>

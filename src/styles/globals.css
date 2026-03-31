@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Commit Mono";
+  src: url("https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@1.143/src/fonts/fontlab/CommitMonoV142-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Catppuccin Macchiato */
   --color-ctp-crust:     #181926;
@@ -29,8 +37,8 @@
   --color-ctp-flamingo:  #f0c6c6;
   --color-ctp-rosewater: #f4dbd6;
 
-  --font-sans: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: Hack, "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-sans: "Open Sans", system-ui, sans-serif;
+  --font-mono: "Commit Mono", Hack, "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Catppuccin Latte — light mode overrides */
