@@ -50,7 +50,7 @@ const Card = ({ post }) => {
             <img
               src={thumbnail ?? '/ogp.png'}
               alt="Post Thumbnail"
-              className="w-full h-full object-cover brightness-90 saturate-[1.1]"
+              className="w-full h-full object-cover"
             />
           </div>
         </a>
