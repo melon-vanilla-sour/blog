@@ -75,6 +75,10 @@ const CodeBlock = ({ language, children, ...props }) => {
       borderRadius: 0,
       background: '#1e2030',
     },
+    'code[class*="language-"]': {
+      ...oneDark['code[class*="language-"]'],
+      background: '#1e2030',
+    },
   }
   return (
     <div className="mb-6">
@@ -105,12 +109,12 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <h2 id={String(children)} className="text-xl font-semibold text-ctp-text mb-5 mt-6 text-left" {...props}>
+      <h2 id={String(children)} className="text-xl font-semibold text-ctp-blue mb-5 mt-6 text-left" {...props}>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3 className="text-lg font-semibold text-ctp-text mb-4 mt-4 text-left" {...props}>{children}</h3>
+      <h3 className="text-lg font-semibold text-ctp-blue mb-4 mt-4 text-left" {...props}>{children}</h3>
     ),
     p: ({ children, ...props }) => (
       <p className="text-ctp-text text-sm leading-relaxed mb-5" {...props}>{children}</p>
@@ -146,7 +150,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         return <CodeBlock language={match[1]} {...props}>{children}</CodeBlock>
       }
       return (
-        <code className="bg-ctp-surface0 text-ctp-green text-xs px-1.5 py-0.5 font-mono" {...props}>
+        <code className="inline-code text-ctp-green text-xs px-1.5 py-0.5 font-mono" {...props}>
           {children}
         </code>
       )

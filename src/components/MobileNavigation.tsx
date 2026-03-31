@@ -15,7 +15,7 @@ const MobileNavigation = () => {
             onClick={() => setIsOpen(false)}
           />
           <div className="fixed top-0 right-0 h-full w-1/2 bg-ctp-surface0 border-l border-ctp-surface1 z-50 flex flex-col">
-            <nav className="flex flex-col flex-1 pt-8" onClick={() => setIsOpen(false)}>
+            <nav className="flex flex-col flex-1 justify-center" onClick={() => setIsOpen(false)}>
               <Link href="/about">
                 <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
                   About

@@ -122,6 +122,12 @@
     @apply outline-2 outline-ctp-lavender outline-offset-2;
     outline-style: solid;
   }
+  .inline-code {
+    @apply bg-ctp-surface0;
+  }
+  .light .inline-code {
+    @apply bg-ctp-mantle;
+  }
   .tab-focus-outline-nested:has(a:focus-visible) {
     @apply outline-2 outline-ctp-lavender outline-offset-2;
     outline-style: solid;
