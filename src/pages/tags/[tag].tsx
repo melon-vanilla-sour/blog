@@ -33,7 +33,7 @@ function Tag({ tag, posts }) {
       <h2 className="text-ctp-mauve text-base font-medium mb-4">
         <span className="text-ctp-surface2">tag /</span> {capitalizeString(tag)}
       </h2>
-      <div className="flex flex-col gap-2 mb-6">
+      <div className="flex flex-col gap-3 mb-6">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} />)}
       </div>
       <div className="flex gap-2">

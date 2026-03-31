@@ -45,7 +45,7 @@ function Posts({ posts, totalPages, currentPage }: { posts; totalPages: number; 
         <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none">Archives</span>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} />)}
       </div>
 

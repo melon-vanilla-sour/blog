@@ -37,7 +37,7 @@ function Categories({ categories, latestPostThumbnails }) {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="px-3 py-2">
+                  <div className="px-3 py-3">
                     <h2 className="text-ctp-peach text-sm font-medium">{capitalizeString(category)}</h2>
                   </div>
                 </div>
