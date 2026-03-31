@@ -42,7 +42,7 @@ const Header = () => {
     <header className="mb-6">
       <div className="flex items-center py-2 gap-3">
         <img src="/melon-sour.ico" width="32" height="32" alt="Melon Sour" />
-        <span className="text-xl font-bold tracking-tight text-ctp-text">MELON SOUR</span>
+        <span className="text-2xl font-bold tracking-tight text-ctp-text">MELON SOUR</span>
         <nav className="ml-auto hidden sm:flex items-center">
           {navLink('/about', 'About', 'about')}
           <span className="text-ctp-surface2 select-none">│</span>

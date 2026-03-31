@@ -23,7 +23,7 @@ const Card = ({ post }) => {
     return null
   }
   return (
-    <div className="card tab-focus-outline-nested">
+    <div className="card tab-focus-outline-nested group">
       <Link href={`/post/${slug}`}>
         <a className="flex h-28 no-underline hover:no-underline">
           <div className="flex flex-[0_0_70%]">

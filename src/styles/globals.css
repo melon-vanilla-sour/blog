@@ -6,14 +6,14 @@
   --color-ctp-mantle:    #1e2030;
   --color-ctp-base:      #24273a;
   --color-ctp-surface0:  #363a4f;
-  --color-ctp-surface1:  #494d64;
-  --color-ctp-surface2:  #5b6078;
-  --color-ctp-overlay0:  #6e738d;
-  --color-ctp-overlay1:  #8087a2;
-  --color-ctp-overlay2:  #939ab7;
-  --color-ctp-subtext0:  #a5adcb;
-  --color-ctp-subtext1:  #b8c0e0;
-  --color-ctp-text:      #cad3f5;
+  --color-ctp-surface1:  #5a5f78;
+  --color-ctp-surface2:  #6e7388;
+  --color-ctp-overlay0:  #8087a2;
+  --color-ctp-overlay1:  #9098b2;
+  --color-ctp-overlay2:  #a0a8c0;
+  --color-ctp-subtext0:  #b8bdd8;
+  --color-ctp-subtext1:  #cdd3ee;
+  --color-ctp-text:      #eceef8;
   --color-ctp-lavender:  #b7bdf8;
   --color-ctp-blue:      #8aadf4;
   --color-ctp-sapphire:  #7dc4e4;
@@ -29,6 +29,7 @@
   --color-ctp-flamingo:  #f0c6c6;
   --color-ctp-rosewater: #f4dbd6;
 
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
   --font-mono: Hack, "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
@@ -38,14 +39,14 @@
   --color-ctp-mantle:    #e6e9ef;
   --color-ctp-base:      #eff1f5;
   --color-ctp-surface0:  #ccd0da;
-  --color-ctp-surface1:  #bcc0cc;
-  --color-ctp-surface2:  #acb0be;
-  --color-ctp-overlay0:  #9ca0b0;
-  --color-ctp-overlay1:  #8c8fa1;
-  --color-ctp-overlay2:  #7c7f93;
-  --color-ctp-subtext0:  #6c6f85;
-  --color-ctp-subtext1:  #5c5f77;
-  --color-ctp-text:      #4c4f69;
+  --color-ctp-surface1:  #9099aa;
+  --color-ctp-surface2:  #808898;
+  --color-ctp-overlay0:  #707888;
+  --color-ctp-overlay1:  #606878;
+  --color-ctp-overlay2:  #505868;
+  --color-ctp-subtext0:  #404858;
+  --color-ctp-subtext1:  #303848;
+  --color-ctp-text:      #1a1c28;
   --color-ctp-lavender:  #7287fd;
   --color-ctp-blue:      #1e66f5;
   --color-ctp-sapphire:  #209fb5;
@@ -64,10 +65,10 @@
 
 @layer base {
   html {
-    @apply bg-ctp-base text-ctp-text font-mono overflow-y-scroll;
+    @apply bg-ctp-base text-ctp-text font-sans overflow-y-scroll;
   }
   body {
-    @apply bg-ctp-base text-ctp-text font-mono;
+    @apply bg-ctp-base text-ctp-text font-sans;
     line-height: 1.65;
   }
   a {
@@ -101,7 +102,7 @@
 
 @layer components {
   .card {
-    @apply border border-ctp-surface1 hover:border-ctp-overlay0 transition-colors cursor-pointer overflow-hidden;
+    @apply border border-ctp-surface1 hover:border-ctp-lavender transition-colors cursor-pointer overflow-hidden;
   }
   .tui-btn {
     @apply border border-ctp-surface1 text-ctp-subtext0 hover:border-ctp-overlay0 hover:text-ctp-text px-3 py-1 transition-colors text-sm;
