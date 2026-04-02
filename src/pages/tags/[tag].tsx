@@ -34,7 +34,7 @@ function Tag({ tag, posts }) {
         <span className="text-ctp-surface2">tag /</span> {capitalizeString(tag)}
       </h2>
       <div className="flex flex-col gap-3 mb-6">
-        {posts && posts.map((post) => <Card post={post.value} key={post.value} />)}
+        {posts && posts.map((post, i) => <Card post={post.value} key={post.value} index={i} />)}
       </div>
       <div className="flex gap-2">
         <Link href="/posts/1">

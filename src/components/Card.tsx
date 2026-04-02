@@ -5,6 +5,15 @@ import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
 
+export const SPECTRUM = [
+  '--color-ctp-rosewater', '--color-ctp-flamingo', '--color-ctp-pink',
+  '--color-ctp-mauve',     '--color-ctp-red',      '--color-ctp-maroon',
+  '--color-ctp-peach',     '--color-ctp-yellow',   '--color-ctp-green',
+  '--color-ctp-teal',      '--color-ctp-sky',       '--color-ctp-sapphire',
+  '--color-ctp-blue',      '--color-ctp-lavender',
+]
+
+
 export const CardTextContainer = ({ children, className = '', ...props }) => {
   return (
     <div className={`flex flex-col justify-center p-3 gap-1.5 ${className}`} {...props}>
@@ -13,7 +22,7 @@ export const CardTextContainer = ({ children, className = '', ...props }) => {
   )
 }
 
-const Card = ({ post }) => {
+const Card = ({ post, index = 0 }) => {
   const {
     content,
     data: { title = '', slug = '', category = '', tags = [], created },
@@ -22,10 +31,15 @@ const Card = ({ post }) => {
   if (doNotRender(slug)) {
     return null
   }
+  const accentColor = `var(${SPECTRUM[index % SPECTRUM.length]})`
   return (
     <div className="card tab-focus-outline-nested group">
       <Link href={`/post/${slug}`}>
         <a className="flex h-28 no-underline hover:no-underline">
+          <div
+            className="w-1 shrink-0"
+            style={{ backgroundColor: accentColor }}
+          />
           <div className="flex flex-[0_0_70%]">
             <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ctp-surface1">
               <span className="text-ctp-yellow font-semibold text-base caretColor-transparent">

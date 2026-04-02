@@ -46,7 +46,7 @@ function Posts({ posts, totalPages, currentPage }: { posts; totalPages: number; 
       </div>
 
       <div className="flex flex-col gap-3">
-        {posts && posts.map((post) => <Card post={post.value} key={post.value} />)}
+        {posts && posts.map((post, i) => <Card post={post.value} key={post.value} index={i} />)}
       </div>
 
       <Pagination totalPages={totalPages} currentPage={currentPage} />
