@@ -14,9 +14,9 @@ const SPECTRUM = [
 ]
 
 export const buildCategoryColorMap = (posts: { value: string }[]): Record<string, string> => {
-  const categories = [...new Set(
+  const categories = Array.from(new Set(
     posts.map(p => matter(p.value).data.category ?? '').filter(Boolean)
-  )].sort()
+  )).sort()
   return Object.fromEntries(
     categories.map((cat, i) => [cat, `var(${SPECTRUM[i % SPECTRUM.length]})`])
   )
