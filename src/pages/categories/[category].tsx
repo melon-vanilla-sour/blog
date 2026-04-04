@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import { capitalizeString, filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
-import Card from '../../components/Card'
+import Card, { buildCategoryColorMap } from '../../components/Card'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -20,21 +20,22 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async ({ params }) => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
+  const colorMap = buildCategoryColorMap(markdownContent)
   markdownContent = markdownContent.filter((post) => {
     const { data: { category = '' } } = matter(post.value)
     return category == params.category
   })
-  return { props: { category: params.category, posts: markdownContent } }
+  return { props: { category: params.category, posts: markdownContent, colorMap } }
 }
 
-function Category({ category, posts }) {
+function Category({ category, posts, colorMap }) {
   return (
     <>
       <h2 className="text-ctp-peach text-base font-medium mb-4">
         <span className="text-ctp-surface2">category /</span> {capitalizeString(category)}
       </h2>
       <div className="flex flex-col gap-3 mb-6">
-        {posts && posts.map((post, i) => <Card post={post.value} key={post.value} index={i} />)}
+        {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
       </div>
       <div className="flex gap-2">
         <Link href="/posts/1">

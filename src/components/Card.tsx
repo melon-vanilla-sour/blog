@@ -5,14 +5,22 @@ import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
 
-export const SPECTRUM = [
-  '--color-ctp-rosewater', '--color-ctp-flamingo', '--color-ctp-pink',
-  '--color-ctp-mauve',     '--color-ctp-red',      '--color-ctp-maroon',
-  '--color-ctp-peach',     '--color-ctp-yellow',   '--color-ctp-green',
-  '--color-ctp-teal',      '--color-ctp-sky',       '--color-ctp-sapphire',
-  '--color-ctp-blue',      '--color-ctp-lavender',
+const SPECTRUM = [
+  '--color-ctp-green',     '--color-ctp-red',       '--color-ctp-teal',
+  '--color-ctp-peach',     '--color-ctp-blue',      '--color-ctp-yellow',
+  '--color-ctp-mauve',     '--color-ctp-flamingo',  '--color-ctp-sky',
+  '--color-ctp-maroon',    '--color-ctp-lavender',  '--color-ctp-rosewater',
+  '--color-ctp-sapphire',  '--color-ctp-pink',
 ]
 
+export const buildCategoryColorMap = (posts: { value: string }[]): Record<string, string> => {
+  const categories = [...new Set(
+    posts.map(p => matter(p.value).data.category ?? '').filter(Boolean)
+  )].sort()
+  return Object.fromEntries(
+    categories.map((cat, i) => [cat, `var(${SPECTRUM[i % SPECTRUM.length]})`])
+  )
+}
 
 export const CardTextContainer = ({ children, className = '', ...props }) => {
   return (
@@ -22,7 +30,7 @@ export const CardTextContainer = ({ children, className = '', ...props }) => {
   )
 }
 
-const Card = ({ post, index = 0 }) => {
+const Card = ({ post, colorMap = {} }: { post: string, colorMap?: Record<string, string> }) => {
   const {
     content,
     data: { title = '', slug = '', category = '', tags = [], created },
@@ -31,7 +39,7 @@ const Card = ({ post, index = 0 }) => {
   if (doNotRender(slug)) {
     return null
   }
-  const accentColor = `var(${SPECTRUM[index % SPECTRUM.length]})`
+  const accentColor = colorMap[category] ?? 'var(--color-ctp-surface1)'
   return (
     <div className="card tab-focus-outline-nested group">
       <Link href={`/post/${slug}`}>
