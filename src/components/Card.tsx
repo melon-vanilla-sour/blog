@@ -5,6 +5,8 @@ import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
 
+export const SHOW_CATEGORY_ACCENT = false
+
 const SPECTRUM = [
   '--color-ctp-green',     '--color-ctp-red',       '--color-ctp-teal',
   '--color-ctp-peach',     '--color-ctp-blue',      '--color-ctp-yellow',
@@ -44,10 +46,9 @@ const Card = ({ post, colorMap = {} }: { post: string, colorMap?: Record<string,
     <div className="card tab-focus-outline-nested group">
       <Link href={`/post/${slug}`}>
         <a className="flex h-28 no-underline hover:no-underline">
-          <div
-            className="w-1 shrink-0"
-            style={{ backgroundColor: accentColor }}
-          />
+          {SHOW_CATEGORY_ACCENT && (
+            <div className="w-1 shrink-0" style={{ backgroundColor: accentColor }} />
+          )}
           <div className="flex flex-[0_0_70%]">
             <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ctp-surface1">
               <span className="text-ctp-yellow font-semibold text-base caretColor-transparent">

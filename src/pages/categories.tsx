@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { capitalizeString, filterDraftPosts, getImageUrls } from '../lib/utils'
 import { getCachedContent } from '../lib/remoteMd'
-import { buildCategoryColorMap } from '../components/Card'
+import { buildCategoryColorMap, SHOW_CATEGORY_ACCENT } from '../components/Card'
 
 export const getStaticProps = async () => {
   let markdownContent = await getCachedContent()
@@ -32,7 +32,9 @@ function Categories({ categories, latestPostThumbnails, colorMap }) {
             <Link href={`/categories/${category}`}>
               <a className="no-underline hover:no-underline">
                 <div className="flex">
-                  <div className="w-1 shrink-0" style={{ backgroundColor: colorMap[category] }} />
+                  {SHOW_CATEGORY_ACCENT && (
+                    <div className="w-1 shrink-0" style={{ backgroundColor: colorMap[category] }} />
+                  )}
                   <div className="flex flex-col flex-1">
                   <div className="overflow-hidden border-b border-ctp-surface1 h-36 sm:h-52">
                     <img
