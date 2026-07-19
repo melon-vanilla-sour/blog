@@ -1,3 +1,4 @@
+import '@fontsource/archivo-black'
 import '../styles/globals.css'
 import Main from '../components/layout/base'
 

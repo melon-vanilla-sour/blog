@@ -5,6 +5,7 @@ import { capitalizeString, filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
 import Card, { buildCategoryColorMap } from '../../components/Card'
+import { Jp, Label } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -31,18 +32,21 @@ export const getStaticProps = async ({ params }) => {
 function Tag({ tag, posts, colorMap }) {
   return (
     <>
-      <h2 className="text-ctp-mauve text-base font-medium mb-4">
-        <span className="text-ctp-surface2">tag /</span> {capitalizeString(tag)}
-      </h2>
+      <div className="flex items-baseline gap-3 mb-4">
+        <h1 className="display-heading text-3xl sm:text-4xl">{capitalizeString(tag)}</h1>
+        <Jp>／ タグ</Jp>
+        <Label variant="ink">TAG</Label>
+        <span aria-hidden="true" className="ml-auto text-xs text-ink-4 tracking-wider select-none">N={posts.length}</span>
+      </div>
       <div className="flex flex-col gap-3 mb-6">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
       </div>
       <div className="flex gap-2">
         <Link href="/posts/1">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline">← All posts</a>
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">← All posts</a>
         </Link>
         <Link href="/tags">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline">Tags</a>
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">Tags</a>
         </Link>
       </div>
     </>

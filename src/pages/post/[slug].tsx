@@ -17,10 +17,9 @@ import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote } from 'next-mdx-remote'
 
-import { TbWriting } from 'react-icons/tb'
-import { BiFolderOpen } from 'react-icons/bi'
-import { AiOutlineTag } from 'react-icons/ai'
 import dayjs from 'dayjs'
+
+import { Barcode, Jp } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -50,7 +49,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   const markdownSource = await serialize(content, {
     mdxOptions: { remarkPlugins: [remarkUnwrapImages, remarkGfm, remarkGemoji] },
   })
-  const createdString = dayjs(created).format('DD/MM/YYYY')
+  const createdString = dayjs(created).format('YYYY-MM-DD')
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
 
   const h2Regex = /^## (.*)$/gm
@@ -73,27 +72,27 @@ const CodeBlock = ({ language, children, ...props }) => {
       ...oneDark['pre[class*="language-"]'],
       margin: 0,
       borderRadius: 0,
-      background: '#1e2030',
+      background: '#141414',
     },
     'code[class*="language-"]': {
       ...oneDark['code[class*="language-"]'],
-      background: '#1e2030',
+      background: '#141414',
     },
   }
   return (
     <div className="mb-6">
-      <div className="flex items-center border border-b-0 border-ctp-surface1 bg-ctp-surface0 px-3 py-0.5">
-        <span className="text-ctp-surface1 mr-2 text-xs">┌</span>
-        <span className="text-ctp-green text-xs">{language}</span>
-        <span className="flex-1 mx-2 border-t border-ctp-surface1" />
-        <span className="text-ctp-surface1 text-xs">┐</span>
+      <div className="flex items-center border border-b-0 border-ink-2 bg-ink-1 px-3 py-0.5">
+        <span className="text-ink-3 mr-2 text-xs select-none" aria-hidden="true">┌</span>
+        <span className="text-ink-4 text-xs uppercase tracking-widest">{language}</span>
+        <span className="flex-1 mx-2 border-t border-ink-2" aria-hidden="true" />
+        <span className="text-ink-3 text-xs select-none" aria-hidden="true">┐</span>
       </div>
       <SyntaxHighlighter
         {...props}
         style={codeStyle}
         language={language}
         PreTag="div"
-        customStyle={{ border: '1px solid #494d64', borderTop: 'none' }}
+        customStyle={{ border: '1px solid var(--color-ink-2)', borderTop: 'none' }}
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
@@ -109,32 +108,36 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <h2 id={String(children)} className="text-xl font-semibold text-ctp-blue mb-5 mt-6 text-left" {...props}>
+      <h2 id={String(children)} className="text-lg font-semibold text-ink-6 mb-5 mt-6 text-left" {...props}>
+        <span className="text-ink-3 select-none" aria-hidden="true">## </span>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3 className="text-lg font-semibold text-ctp-blue mb-4 mt-4 text-left" {...props}>{children}</h3>
+      <h3 className="text-base font-semibold text-ink-6 mb-4 mt-4 text-left" {...props}>
+        <span className="text-ink-3 select-none" aria-hidden="true">### </span>
+        {children}
+      </h3>
     ),
     p: ({ children, ...props }) => (
-      <p className="text-ctp-text text-sm leading-relaxed mb-5" {...props}>{children}</p>
+      <p className="text-ink-5 text-sm leading-relaxed mb-5" {...props}>{children}</p>
     ),
     a: ({ node, href, ...props }) => (
       <a
-        className="text-ctp-sapphire hover:text-ctp-sky font-medium underline"
+        className="text-ink-6 hover:text-ink-4 font-medium underline"
         target={isInternalLink(href) ? '_self' : '_blank'}
         href={href}
         {...props}
       />
     ),
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-5 mb-5 text-sm text-ctp-text space-y-1" {...props}>{children}</ul>
+      <ul className="list-disc pl-5 mb-5 text-sm text-ink-5 space-y-1" {...props}>{children}</ul>
     ),
     li: ({ children, ...props }) => (
       <li className="leading-relaxed" {...props}>{children}</li>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-5 mb-5 text-sm text-ctp-text space-y-1" {...props}>{children}</ol>
+      <ol className="list-decimal pl-5 mb-5 text-sm text-ink-5 space-y-1" {...props}>{children}</ol>
     ),
     img: ({ node, src, alt, ...props }) => (
       <img
@@ -150,13 +153,13 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         return <CodeBlock language={match[1]} {...props}>{children}</CodeBlock>
       }
       return (
-        <code className="inline-code text-ctp-green text-xs px-1.5 py-0.5 font-mono" {...props}>
+        <code className="inline-code text-ink-6 text-xs px-1.5 py-0.5 font-mono" {...props}>
           {children}
         </code>
       )
     },
     blockquote: ({ children, ...props }) => (
-      <blockquote className="border-l-4 border-ctp-surface1 pl-4 text-ctp-subtext0 italic mb-5" {...props}>
+      <blockquote className="border-l-4 border-ink-2 pl-4 text-ink-4 italic mb-5" {...props}>
         {children}
       </blockquote>
     ),
@@ -165,11 +168,11 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <table className="w-full border-collapse text-sm" {...props}>{children}</table>
       </div>
     ),
-    thead: ({ children, ...props }) => <thead className="bg-ctp-surface0" {...props}>{children}</thead>,
+    thead: ({ children, ...props }) => <thead className="bg-ink-1" {...props}>{children}</thead>,
     tbody: ({ children, ...props }) => <tbody {...props}>{children}</tbody>,
-    tr: ({ children, ...props }) => <tr className="border-b border-ctp-surface1" {...props}>{children}</tr>,
-    th: ({ children, ...props }) => <th className="border border-ctp-surface1 px-3 py-1.5 text-left text-xs uppercase tracking-wider text-ctp-subtext0" {...props}>{children}</th>,
-    td: ({ children, ...props }) => <td className="border border-ctp-surface1 px-3 py-1.5 text-xs text-ctp-subtext1" {...props}>{children}</td>,
+    tr: ({ children, ...props }) => <tr className="border-b border-ink-2" {...props}>{children}</tr>,
+    th: ({ children, ...props }) => <th className="border border-ink-2 px-3 py-1.5 text-left text-xs uppercase tracking-wider text-ink-4" {...props}>{children}</th>,
+    td: ({ children, ...props }) => <td className="border border-ink-2 px-3 py-1.5 text-xs text-ink-5" {...props}>{children}</td>,
   }
 
   return (
@@ -182,35 +185,41 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         {thumbnail && <meta property="og:image" content={thumbnail} key="ogImage" />}
       </Head>
 
-      {/* Post metadata block */}
-      <div className="border border-ctp-surface1 mb-6 p-4">
-        {title && <h1 className="text-xl font-semibold text-ctp-text mb-3 text-left">{title}</h1>}
-        <div className="flex flex-wrap items-center gap-3 text-xs mb-1.5">
-          <span className="flex items-center gap-1 text-ctp-peach">
-            <BiFolderOpen />
-            {category && <span>{capitalizeString(category)}</span>}
-          </span>
-          <span className="text-ctp-surface2">│</span>
-          <span className="flex items-center gap-1 text-ctp-yellow">
-            <TbWriting />
-            {created && <span>{created}</span>}
-          </span>
+      {/* Title + metadata strip */}
+      <div className="mb-6">
+        {title && <h1 className="display-heading text-3xl sm:text-5xl leading-tight mb-4">{title}</h1>}
+        <div className="border border-ink-2 px-3 py-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-4">
+          <span>DATE {created}</span>
+          <span className="text-ink-3 select-none" aria-hidden="true">│</span>
+          {category && (
+            <Link href={`/categories/${category}`}>
+              <a className="text-ink-4 hover:text-ink-6 no-underline uppercase">CAT {capitalizeString(category)}</a>
+            </Link>
+          )}
+          {tags && tags.length > 0 && (
+            <>
+              <span className="text-ink-3 select-none" aria-hidden="true">│</span>
+              <span className="uppercase">TAGS [{tags.join(', ')}]</span>
+            </>
+          )}
+          <Barcode seed={slug} className="ml-auto hidden sm:inline-flex" />
         </div>
-        {tags && tags.length > 0 && (
-          <div className="flex items-center gap-1 text-xs text-ctp-mauve">
-            <AiOutlineTag />
-            <span>{tags.join(', ')}</span>
-          </div>
-        )}
       </div>
 
       <div className="text-sm leading-relaxed">
         <MDXRemote {...post} components={components} />
       </div>
 
-      <div className="mt-8 pt-4 border-t border-ctp-surface1">
+      {/* End-of-article marker */}
+      <div className="mt-8 flex items-center gap-3 text-xs text-ink-4">
+        <Barcode seed={`${slug}-eof`} />
+        <span aria-hidden="true" className="tracking-widest select-none">EOF ▪ 終</span>
+        <span className="flex-1 border-t border-ink-2" aria-hidden="true" />
+      </div>
+
+      <div className="mt-4 pt-4">
         <Link href="/posts/1">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline">← View all posts</a>
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">← View all posts</a>
         </Link>
       </div>
     </>

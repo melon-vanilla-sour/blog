@@ -6,6 +6,7 @@ import { getCachedContent } from '../../lib/remoteMd'
 
 import Pagination from '../../components/Pagination'
 import Card, { buildCategoryColorMap } from '../../components/Card'
+import { Jp } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -30,20 +31,26 @@ export const getStaticProps = async ({ params }: { params: { page: number } }) =
   const total = markdownContent.length
   const totalPages = Math.ceil(total / postsPerPage)
   const currentPage = params.page
-  return { props: { posts: targetPosts, totalPages, currentPage, colorMap } }
+  return { props: { posts: targetPosts, totalPages, currentPage, total, colorMap } }
 }
 
-function Posts({ posts, totalPages, currentPage, colorMap }: { posts; totalPages: number; currentPage: number; colorMap: Record<string, string> }) {
+function Posts({ posts, totalPages, currentPage, total, colorMap }: { posts; totalPages: number; currentPage: number; total: number; colorMap: Record<string, string> }) {
   return (
     <>
+      <div className="flex items-baseline gap-3 mb-4">
+        <h1 className="display-heading text-4xl sm:text-5xl">Posts</h1>
+        <Jp>／ 投稿</Jp>
+        <span aria-hidden="true" className="ml-auto text-xs text-ink-4 tracking-wider select-none">N={total}</span>
+      </div>
+
       <div className="flex gap-2 mb-4">
         <Link href="/categories">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center">Categories</a>
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center uppercase tracking-widest text-xs leading-6">Categories</a>
         </Link>
         <Link href="/tags">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center">Tags</a>
+          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center uppercase tracking-widest text-xs leading-6">Tags</a>
         </Link>
-        <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none">Archives</span>
+        <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none uppercase tracking-widest text-xs leading-6">Archives</span>
       </div>
 
       <div className="flex flex-col gap-3">

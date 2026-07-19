@@ -1,50 +1,48 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useTheme } from '../lib/useTheme'
+import { Jp } from './deco'
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { isLight, toggle } = useTheme()
+
+  const navLink = (href: string, label: string, jp: string) => (
+    <Link href={href}>
+      <a className="flex items-baseline justify-between px-6 py-4 text-ink-4 hover:text-ink-6 hover:bg-ink-1 border-b border-ink-2 text-sm uppercase tracking-widest transition-colors no-underline hover:no-underline">
+        {label}
+        <Jp>{jp}</Jp>
+      </a>
+    </Link>
+  )
 
   return (
     <div className="sm:hidden">
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 bg-ctp-crust/70 z-40"
+            className="fixed inset-0 bg-ink-0/80 z-40"
             onClick={() => setIsOpen(false)}
           />
-          <div className="fixed top-0 right-0 h-full w-1/2 bg-ctp-surface0 border-l border-ctp-surface1 z-50 flex flex-col">
+          <div className="fixed top-0 right-0 h-full w-3/5 bg-ink-1 border-l border-ink-2 z-50 flex flex-col">
             <nav className="flex flex-col flex-1 justify-center" onClick={() => setIsOpen(false)}>
-              <Link href="/about">
-                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
-                  About
-                </a>
-              </Link>
-              <Link href="/posts/1">
-                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
-                  Posts
-                </a>
-              </Link>
-              <Link href="/projects">
-                <a className="block px-6 py-4 text-ctp-subtext0 hover:text-ctp-text hover:bg-ctp-surface1 border-b border-ctp-surface1 text-sm transition-colors">
-                  Projects
-                </a>
-              </Link>
+              {navLink('/about', 'About', '自己紹介')}
+              {navLink('/posts/1', 'Posts', '投稿')}
+              {navLink('/projects', 'Projects', '案件')}
             </nav>
             <button
               onClick={toggle}
-              className="px-6 py-3 text-ctp-subtext0 hover:text-ctp-text text-sm border-t border-ctp-surface1 transition-colors text-left"
+              className="px-6 py-3 text-ink-4 hover:text-ink-6 text-xs tracking-widest border-t border-ink-2 transition-colors text-left"
               aria-label="Toggle light/dark mode"
             >
-              {isLight ? '☾ dark mode' : '☀ light mode'}
+              {isLight ? '[DARK MODE]' : '[LIGHT MODE]'}
             </button>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-4 text-ctp-subtext0 hover:text-ctp-text text-sm border-t border-ctp-surface1 transition-colors"
+              className="p-4 text-ink-4 hover:text-ink-6 text-xs tracking-widest border-t border-ink-2 transition-colors"
               aria-label="Close Navigation"
             >
-              [ ✕ close ]
+              [ ✕ CLOSE ]
             </button>
           </div>
         </>
@@ -52,7 +50,7 @@ const MobileNavigation = () => {
       <button
         aria-label="Toggle Navigation"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 w-10 h-10 border border-ctp-surface1 bg-ctp-surface0 text-ctp-subtext0 hover:text-ctp-text hover:border-ctp-overlay0 transition-colors text-lg"
+        className="fixed bottom-4 right-4 w-10 h-10 border border-ink-2 bg-ink-1 text-ink-4 hover:text-ink-6 hover:border-ink-3 transition-colors text-lg"
       >
         ☰
       </button>

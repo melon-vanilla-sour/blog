@@ -9,62 +9,63 @@
 }
 
 @theme {
-  /* Catppuccin Macchiato */
-  --color-ctp-crust:     #181926;
-  --color-ctp-mantle:    #1e2030;
-  --color-ctp-base:      #24273a;
-  --color-ctp-surface0:  #363a4f;
-  --color-ctp-surface1:  #5a5f78;
-  --color-ctp-surface2:  #6e7388;
-  --color-ctp-overlay0:  #8087a2;
-  --color-ctp-overlay1:  #9098b2;
-  --color-ctp-overlay2:  #a0a8c0;
-  --color-ctp-subtext0:  #b8bdd8;
-  --color-ctp-subtext1:  #cdd3ee;
-  --color-ctp-text:      #eceef8;
-  --color-ctp-lavender:  #b7bdf8;
-  --color-ctp-blue:      #8aadf4;
-  --color-ctp-sapphire:  #7dc4e4;
-  --color-ctp-sky:       #91d7e3;
-  --color-ctp-teal:      #8bd5ca;
-  --color-ctp-green:     #a6da95;
-  --color-ctp-yellow:    #eed49f;
-  --color-ctp-peach:     #f5a97f;
-  --color-ctp-maroon:    #ee99a0;
+  /* Terminal-Industrial ink ramp — see docs/design-overhaul.md §3.1 */
+  --color-ink-0: #121212; /* page background */
+  --color-ink-1: #1b1b1b; /* raised surface */
+  --color-ink-2: #2a2a2a; /* borders default */
+  --color-ink-3: #525252; /* borders hover / muted UI */
+  --color-ink-4: #8a8a8a; /* secondary text, ephemera */
+  --color-ink-5: #b8b8b4; /* body text */
+  --color-ink-6: #e6e6e2; /* headings, primary text */
+  /* Accent retired to monochrome: accent elements render as inverted ink blocks */
+  --color-accent: #e6e6e2;
+  --color-accent-ink: #121212;
+
+  /* Catppuccin Macchiato accent spectrum — sparing highlight layer only
+     (category labels, calibration strip). See doc §7 2026-07-19 amendment. */
   --color-ctp-red:       #ed8796;
+  --color-ctp-maroon:    #ee99a0;
+  --color-ctp-peach:     #f5a97f;
+  --color-ctp-yellow:    #eed49f;
+  --color-ctp-green:     #a6da95;
+  --color-ctp-teal:      #8bd5ca;
+  --color-ctp-sky:       #91d7e3;
+  --color-ctp-sapphire:  #7dc4e4;
+  --color-ctp-blue:      #8aadf4;
+  --color-ctp-lavender:  #b7bdf8;
   --color-ctp-mauve:     #c6a0f6;
   --color-ctp-pink:      #f5bde6;
   --color-ctp-flamingo:  #f0c6c6;
   --color-ctp-rosewater: #f4dbd6;
 
-  --font-sans: "Open Sans", system-ui, sans-serif;
-  --font-mono: "Commit Mono", Hack, "JetBrains Mono", "Cascadia Code", "Fira Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-display: "Archivo Black", "Arial Black", system-ui, sans-serif;
+  --font-mono: "Commit Mono", "JetBrains Mono", "Cascadia Code", Menlo, Monaco, Consolas, "Hiragino Kaku Gothic ProN", "Noto Sans JP", monospace;
+  --font-sans: system-ui, sans-serif;
 }
 
-/* Catppuccin Latte — light mode overrides */
+/* Light mode — inverted ink ramp, same signal accent */
 .light {
-  --color-ctp-crust:     #dce0e8;
-  --color-ctp-mantle:    #e6e9ef;
-  --color-ctp-base:      #eff1f5;
-  --color-ctp-surface0:  #ccd0da;
-  --color-ctp-surface1:  #9099aa;
-  --color-ctp-surface2:  #808898;
-  --color-ctp-overlay0:  #707888;
-  --color-ctp-overlay1:  #606878;
-  --color-ctp-overlay2:  #505868;
-  --color-ctp-subtext0:  #404858;
-  --color-ctp-subtext1:  #303848;
-  --color-ctp-text:      #1a1c28;
-  --color-ctp-lavender:  #7287fd;
-  --color-ctp-blue:      #1e66f5;
-  --color-ctp-sapphire:  #209fb5;
-  --color-ctp-sky:       #04a5e5;
-  --color-ctp-teal:      #179299;
-  --color-ctp-green:     #40a02b;
-  --color-ctp-yellow:    #df8e1d;
-  --color-ctp-peach:     #fe640b;
-  --color-ctp-maroon:    #e64553;
+  --color-ink-0: #f4f4f2;
+  --color-ink-1: #eae9e5;
+  --color-ink-2: #d4d3cf;
+  --color-ink-3: #a3a3a0;
+  --color-ink-4: #6b6b68;
+  --color-ink-5: #333330;
+  --color-ink-6: #111111;
+  --color-accent: #111111;
+  --color-accent-ink: #f4f4f2;
+
+  /* Catppuccin Latte accent spectrum */
   --color-ctp-red:       #d20f39;
+  --color-ctp-maroon:    #e64553;
+  --color-ctp-peach:     #fe640b;
+  --color-ctp-yellow:    #df8e1d;
+  --color-ctp-green:     #40a02b;
+  --color-ctp-teal:      #179299;
+  --color-ctp-sky:       #04a5e5;
+  --color-ctp-sapphire:  #209fb5;
+  --color-ctp-blue:      #1e66f5;
+  --color-ctp-lavender:  #7287fd;
   --color-ctp-mauve:     #8839ef;
   --color-ctp-pink:      #ea76cb;
   --color-ctp-flamingo:  #dd7878;
@@ -73,32 +74,32 @@
 
 @layer base {
   html {
-    @apply bg-ctp-base text-ctp-text font-sans overflow-y-scroll;
+    @apply bg-ink-0 text-ink-5 font-mono overflow-y-scroll;
   }
   body {
-    @apply bg-ctp-base text-ctp-text font-sans;
+    @apply bg-ink-0 text-ink-5 font-mono;
     line-height: 1.65;
   }
   a {
-    @apply text-ctp-sapphire hover:text-ctp-sky transition-colors;
+    @apply text-ink-6 hover:text-ink-4 underline transition-colors;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply text-ctp-text font-semibold;
+    @apply text-ink-6 font-semibold;
   }
   hr {
-    @apply border-ctp-surface1;
+    @apply border-ink-2;
   }
   table {
     @apply w-full border-collapse;
   }
   th {
-    @apply border border-ctp-surface1 px-3 py-1 text-left text-ctp-subtext0 text-xs uppercase tracking-wider;
+    @apply border border-ink-2 px-3 py-1 text-left text-ink-4 text-xs uppercase tracking-wider;
   }
   td {
-    @apply border border-ctp-surface1 px-3 py-1 text-sm;
+    @apply border border-ink-2 px-3 py-1 text-sm;
   }
   blockquote {
-    @apply border-l-4 border-ctp-surface1 pl-4 text-ctp-subtext0 italic;
+    @apply border-l-4 border-ink-2 pl-4 text-ink-4 italic;
   }
   ul {
     @apply list-disc;
@@ -110,26 +111,29 @@
 
 @layer components {
   .card {
-    @apply border border-ctp-surface1 hover:border-ctp-lavender transition-colors cursor-pointer overflow-hidden;
+    @apply border border-ink-2 hover:border-ink-4 transition-colors cursor-pointer overflow-hidden;
   }
   .tui-btn {
-    @apply border border-ctp-surface1 text-ctp-subtext0 hover:border-ctp-overlay0 hover:text-ctp-text px-3 py-1 transition-colors text-sm;
+    @apply border border-ink-2 text-ink-4 hover:border-ink-3 hover:text-ink-6 px-3 py-1 transition-colors text-sm;
   }
   .tui-btn-active {
-    @apply border border-ctp-lavender text-ctp-lavender px-3 py-1 text-sm;
+    @apply bg-accent text-accent-ink px-3 py-1 text-sm font-semibold;
+  }
+  .display-heading {
+    @apply font-display font-normal uppercase tracking-tight text-ink-6;
   }
   .tab-focus-outline:focus-visible {
-    @apply outline-2 outline-ctp-lavender outline-offset-2;
+    @apply outline-2 outline-accent outline-offset-2;
     outline-style: solid;
   }
   .inline-code {
-    @apply bg-ctp-surface0;
+    @apply bg-ink-1;
   }
   .light .inline-code {
-    @apply bg-ctp-mantle;
+    @apply bg-ink-1;
   }
   .tab-focus-outline-nested:has(a:focus-visible) {
-    @apply outline-2 outline-ctp-lavender outline-offset-2;
+    @apply outline-2 outline-accent outline-offset-2;
     outline-style: solid;
   }
 }
