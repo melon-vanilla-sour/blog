@@ -44,36 +44,35 @@ const Card = ({ post, colorMap = {} }: { post: string; colorMap?: Record<string,
     return null
   }
   return (
-    <div className="card tab-focus-outline-nested group">
+    <div className="tab-focus-outline-nested border-b border-ink-2">
       <Link href={`/post/${slug}`}>
-        <a className="flex h-28 no-underline hover:no-underline">
-          <div className="flex flex-[0_0_70%]">
-            <div className="hidden sm:flex flex-col items-center justify-center p-3 gap-0.5 min-w-[5.5rem] border-r border-ink-2">
-              <span className="text-ink-6 font-semibold text-base uppercase">
-                {created && dayjs(created).format('DD MMM')}
-              </span>
-              <span className="text-ink-4 text-sm">
-                {created && dayjs(created).format('YYYY')}
-              </span>
-            </div>
-            <CardTextContainer>
-              <h2 className="text-ink-6 text-base font-semibold leading-snug line-clamp-2">
-                {title}
-              </h2>
-              <div>
-                {category && (
-                  <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
-                    {capitalizeString(category)}
-                  </Label>
-                )}
-              </div>
-            </CardTextContainer>
+        <a className="group flex items-center gap-4 py-5 px-2 no-underline hover:no-underline">
+          <div className="hidden sm:flex flex-col w-[5.5rem] shrink-0 gap-0.5">
+            <span className="text-ink-6 font-semibold text-base uppercase">
+              {created && dayjs(created).format('DD MMM')}
+            </span>
+            <span className="text-ink-4 text-sm">
+              {created && dayjs(created).format('YYYY')}
+            </span>
           </div>
 
-          <div className="flex-1 border-l border-ink-2 overflow-hidden">
+          <div className="flex flex-col flex-1 gap-2 min-w-0">
+            <h2 className="text-ink-6 text-lg sm:text-xl font-semibold leading-snug line-clamp-2 group-hover:underline">
+              {title}
+            </h2>
+            <div>
+              {category && (
+                <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
+                  {capitalizeString(category)}
+                </Label>
+              )}
+            </div>
+          </div>
+
+          <div className="w-28 sm:w-40 aspect-[3/2] shrink-0 overflow-hidden">
             <img
               src={thumbnail ?? '/ogp.png'}
-              alt="Post Thumbnail"
+              alt=""
               className="w-full h-full object-cover brightness-90 saturate-[1.1]"
             />
           </div>

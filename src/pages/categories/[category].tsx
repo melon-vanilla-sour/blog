@@ -38,7 +38,7 @@ function Category({ category, posts, colorMap }) {
         <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>CAT</Label>
         <span aria-hidden="true" className="ml-auto text-xs text-ink-4 tracking-wider select-none">N={posts.length}</span>
       </div>
-      <div className="flex flex-col gap-3 mb-6">
+      <div className="flex flex-col border-t border-ink-2 mb-6">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
       </div>
       <div className="flex gap-2">

@@ -53,7 +53,7 @@ function Posts({ posts, totalPages, currentPage, total, colorMap }: { posts; tot
         <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none uppercase tracking-widest text-xs leading-6">Archives</span>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col border-t border-ink-2">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
       </div>
 
