@@ -39,8 +39,10 @@
   --color-ctp-rosewater: #f4dbd6;
 
   --font-display: "Archivo Black", "Arial Black", system-ui, sans-serif;
+  /* Mono retained for actual code (inline code, syntax-highlighted blocks) only */
   --font-mono: "Commit Mono", "JetBrains Mono", "Cascadia Code", Menlo, Monaco, Consolas, "Hiragino Kaku Gothic ProN", "Noto Sans JP", monospace;
-  --font-sans: system-ui, sans-serif;
+  /* Site-wide default outside code and display headings */
+  --font-sans: "Open Sans Variable", "Open Sans", system-ui, sans-serif;
 }
 
 /* Light mode — inverted ink ramp, same signal accent */
@@ -74,11 +76,12 @@
 
 @layer base {
   html {
-    @apply bg-ink-0 text-ink-5 font-mono overflow-y-scroll;
+    @apply bg-ink-0 text-ink-5 font-sans overflow-y-scroll;
   }
   body {
-    @apply bg-ink-0 text-ink-5 font-mono;
+    @apply bg-ink-0 text-ink-5 font-sans;
     line-height: 1.65;
+    letter-spacing: -0.012em;
   }
   a {
     @apply text-ink-6 hover:text-ink-4 underline transition-colors;
@@ -121,6 +124,9 @@
   }
   .display-heading {
     @apply font-display font-normal uppercase tracking-tight text-ink-6;
+  }
+  .prose-tight {
+    letter-spacing: -0.015em;
   }
   .tab-focus-outline:focus-visible {
     @apply outline-2 outline-accent outline-offset-2;

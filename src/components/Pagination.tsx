@@ -16,7 +16,7 @@ const Pagination = ({ totalPages, currentPage }: { totalPages: number; currentPa
     )
 
   return (
-    <div className="flex justify-center items-center gap-2 mt-8 font-mono">
+    <div className="flex justify-center items-center gap-2 mt-8">
       {edgeLink('« PREV', current - 1, current > 1)}
       {[...Array(totalPages)].map((_, index) => {
         const page = index + 1

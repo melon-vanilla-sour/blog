@@ -1,4 +1,5 @@
 import '@fontsource/archivo-black'
+import '@fontsource-variable/open-sans'
 import '../styles/globals.css'
 import Main from '../components/layout/base'
 

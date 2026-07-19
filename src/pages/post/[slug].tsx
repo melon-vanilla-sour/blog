@@ -73,15 +73,17 @@ const CodeBlock = ({ language, children, ...props }) => {
       margin: 0,
       borderRadius: 0,
       background: '#141414',
+      fontFamily: 'var(--font-mono)',
     },
     'code[class*="language-"]': {
       ...oneDark['code[class*="language-"]'],
       background: '#141414',
+      fontFamily: 'var(--font-mono)',
     },
   }
   return (
     <div className="mb-6">
-      <div className="flex items-center border border-b-0 border-ink-2 bg-ink-1 px-3 py-0.5">
+      <div className="flex items-center border border-b-0 border-ink-2 bg-ink-1 px-3 py-0.5 font-mono">
         <span className="text-ink-3 mr-2 text-xs select-none" aria-hidden="true">┌</span>
         <span className="text-ink-4 text-xs uppercase tracking-widest">{language}</span>
         <span className="flex-1 mx-2 border-t border-ink-2" aria-hidden="true" />
@@ -92,7 +94,7 @@ const CodeBlock = ({ language, children, ...props }) => {
         style={codeStyle}
         language={language}
         PreTag="div"
-        customStyle={{ border: '1px solid var(--color-ink-2)', borderTop: 'none' }}
+        customStyle={{ border: '1px solid var(--color-ink-2)', borderTop: 'none', fontFamily: 'var(--font-mono)' }}
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
@@ -108,19 +110,19 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
 
   const components = {
     h2: ({ children, ...props }) => (
-      <h2 id={String(children)} className="text-lg font-semibold text-ink-6 mb-5 mt-6 text-left" {...props}>
+      <h2 id={String(children)} className="prose-tight text-xl font-bold text-ink-6 mb-5 mt-6 text-left" {...props}>
         <span className="text-ink-3 select-none" aria-hidden="true">## </span>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
-      <h3 className="text-base font-semibold text-ink-6 mb-4 mt-4 text-left" {...props}>
+      <h3 className="prose-tight text-lg font-bold text-ink-6 mb-4 mt-4 text-left" {...props}>
         <span className="text-ink-3 select-none" aria-hidden="true">### </span>
         {children}
       </h3>
     ),
     p: ({ children, ...props }) => (
-      <p className="text-ink-5 text-sm leading-relaxed mb-5" {...props}>{children}</p>
+      <p className="prose-tight text-ink-5 text-base leading-relaxed mb-5" {...props}>{children}</p>
     ),
     a: ({ node, href, ...props }) => (
       <a
@@ -131,13 +133,13 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       />
     ),
     ul: ({ children, ...props }) => (
-      <ul className="list-disc pl-5 mb-5 text-sm text-ink-5 space-y-1" {...props}>{children}</ul>
+      <ul className="prose-tight list-disc pl-5 mb-5 text-base text-ink-5 space-y-1" {...props}>{children}</ul>
     ),
     li: ({ children, ...props }) => (
       <li className="leading-relaxed" {...props}>{children}</li>
     ),
     ol: ({ children, ...props }) => (
-      <ol className="list-decimal pl-5 mb-5 text-sm text-ink-5 space-y-1" {...props}>{children}</ol>
+      <ol className="prose-tight list-decimal pl-5 mb-5 text-base text-ink-5 space-y-1" {...props}>{children}</ol>
     ),
     img: ({ node, src, alt, ...props }) => (
       <img
@@ -159,7 +161,7 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
       )
     },
     blockquote: ({ children, ...props }) => (
-      <blockquote className="border-l-4 border-ink-2 pl-4 text-ink-4 italic mb-5" {...props}>
+      <blockquote className="prose-tight border-l-4 border-ink-2 pl-4 text-ink-4 italic mb-5" {...props}>
         {children}
       </blockquote>
     ),

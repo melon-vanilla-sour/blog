@@ -36,7 +36,7 @@ export const Label = ({ children, variant = 'outline', className = '', style }: 
     ink: 'bg-ink-6 text-ink-0',
   }
   return (
-    <span className={`inline-block px-1.5 text-xs font-mono uppercase tracking-widest ${variants[variant]} ${className}`} style={style}>
+    <span className={`inline-block px-1.5 text-xs uppercase tracking-widest ${variants[variant]} ${className}`} style={style}>
       {children}
     </span>
   )
@@ -64,7 +64,7 @@ export const Rule = ({ char = '─', className = '' }: { char?: string; classNam
 export const Telemetry = ({ items, className = '' }: { items?: string[]; className?: string }) => {
   const line = (items ?? ['SYS:OK', 'MELON-SOUR/V2', `BUILD ${new Date().getFullYear()}`]).join(' ▪ ')
   return (
-    <span aria-hidden="true" className={`text-xs font-mono text-ink-4 tracking-wider select-none ${className}`}>
+    <span aria-hidden="true" className={`text-xs text-ink-4 tracking-wider select-none ${className}`}>
       {line}
     </span>
   )
