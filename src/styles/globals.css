@@ -10,16 +10,17 @@
 
 @theme {
   /* Terminal-Industrial ink ramp — see docs/design-overhaul.md §3.1 */
-  --color-ink-0: #121212; /* page background */
-  --color-ink-1: #1b1b1b; /* raised surface */
-  --color-ink-2: #2a2a2a; /* borders default */
-  --color-ink-3: #525252; /* borders hover / muted UI */
-  --color-ink-4: #8a8a8a; /* secondary text, ephemera */
-  --color-ink-5: #b8b8b4; /* body text */
-  --color-ink-6: #e6e6e2; /* headings, primary text */
+  /* Dark ramp retinted to Catppuccin Macchiato's blue-tinted neutrals */
+  --color-ink-0: #24273a; /* page background (ctp base) */
+  --color-ink-1: #363a4f; /* raised surface (ctp surface0) */
+  --color-ink-2: #494d64; /* borders default (ctp surface1) */
+  --color-ink-3: #6e738d; /* borders hover / muted UI (ctp overlay0) */
+  --color-ink-4: #939ab7; /* secondary text, ephemera (ctp overlay2) */
+  --color-ink-5: #b8c0e0; /* body text (ctp subtext1) */
+  --color-ink-6: #cad3f5; /* headings, primary text (ctp text) */
   /* Accent retired to monochrome: accent elements render as inverted ink blocks */
-  --color-accent: #e6e6e2;
-  --color-accent-ink: #121212;
+  --color-accent: #cad3f5;
+  --color-accent-ink: #24273a;
 
   /* Catppuccin Macchiato accent spectrum — sparing highlight layer only
      (category labels, calibration strip). See doc §7 2026-07-19 amendment. */

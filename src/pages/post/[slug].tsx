@@ -72,12 +72,12 @@ const CodeBlock = ({ language, children, ...props }) => {
       ...oneDark['pre[class*="language-"]'],
       margin: 0,
       borderRadius: 0,
-      background: '#141414',
+      background: '#1e2030',
       fontFamily: 'var(--font-mono)',
     },
     'code[class*="language-"]': {
       ...oneDark['code[class*="language-"]'],
-      background: '#141414',
+      background: '#1e2030',
       fontFamily: 'var(--font-mono)',
     },
   }
