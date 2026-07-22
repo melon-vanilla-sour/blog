@@ -9,21 +9,22 @@
 }
 
 @theme {
-  /* Terminal-Industrial ink ramp — see docs/design-overhaul.md §3.1 */
-  /* Dark ramp retinted to Catppuccin Macchiato's blue-tinted neutrals */
-  --color-ink-0: #24273a; /* page background (ctp base) */
-  --color-ink-1: #363a4f; /* raised surface (ctp surface0) */
-  --color-ink-2: #494d64; /* borders default (ctp surface1) */
-  --color-ink-3: #6e738d; /* borders hover / muted UI (ctp overlay0) */
-  --color-ink-4: #939ab7; /* secondary text, ephemera (ctp overlay2) */
-  --color-ink-5: #b8c0e0; /* body text (ctp subtext1) */
-  --color-ink-6: #cad3f5; /* headings, primary text (ctp text) */
-  /* Accent retired to monochrome: accent elements render as inverted ink blocks */
-  --color-accent: #cad3f5;
-  --color-accent-ink: #24273a;
+  /* Minimal-editorial ink ramp — see docs/design-papermod.md §4 */
+  /* Dark ramp is a true neutral gray (PaperMod-style), no color cast */
+  --color-ink-0: #171717; /* page background */
+  --color-ink-1: #262626; /* raised surface */
+  --color-ink-2: #404040; /* borders default */
+  --color-ink-3: #525252; /* borders hover / muted UI */
+  --color-ink-4: #a3a3a3; /* secondary text, ephemera */
+  --color-ink-5: #d4d4d4; /* body text */
+  --color-ink-6: #f5f5f5; /* headings, primary text */
+  /* Accent = ctp-blue (doc §7 decision, 2026-07-23). Referenced via var() so
+     it tracks the ctp-blue redefinition in .light automatically. */
+  --color-accent: var(--color-ctp-blue);
+  --color-accent-ink: var(--color-ink-0);
 
-  /* Catppuccin Macchiato accent spectrum — sparing highlight layer only
-     (category labels, calibration strip). See doc §7 2026-07-19 amendment. */
+  /* Catppuccin Macchiato spectrum — sparing multi-hue highlight layer for
+     category/tag chips only (doc §7 decision, 2026-07-23: kept, not retired). */
   --color-ctp-red:       #ed8796;
   --color-ctp-maroon:    #ee99a0;
   --color-ctp-peach:     #f5a97f;
@@ -55,8 +56,8 @@
   --color-ink-4: #6b6b68;
   --color-ink-5: #333330;
   --color-ink-6: #111111;
-  --color-accent: #111111;
-  --color-accent-ink: #f4f4f2;
+  /* --color-accent / --color-accent-ink not redefined here — they resolve
+     via var() against the ctp-blue/ink-0 values redefined below. */
 
   /* Catppuccin Latte accent spectrum */
   --color-ctp-red:       #d20f39;
@@ -117,11 +118,8 @@
   .card {
     @apply border border-ink-2 hover:border-ink-4 transition-colors cursor-pointer overflow-hidden;
   }
-  .tui-btn {
-    @apply border border-ink-2 text-ink-4 hover:border-ink-3 hover:text-ink-6 px-3 py-1 transition-colors text-sm;
-  }
-  .tui-btn-active {
-    @apply bg-accent text-accent-ink px-3 py-1 text-sm font-semibold;
+  .btn {
+    @apply border border-ink-2 text-ink-4 hover:border-ink-3 hover:bg-ink-1 hover:text-ink-6 px-3 py-1.5 transition-colors text-sm;
   }
   .display-heading {
     @apply font-display font-normal uppercase tracking-tight text-ink-6;
@@ -134,9 +132,6 @@
     outline-style: solid;
   }
   .inline-code {
-    @apply bg-ink-1;
-  }
-  .light .inline-code {
     @apply bg-ink-1;
   }
   .tab-focus-outline-nested:has(a:focus-visible) {

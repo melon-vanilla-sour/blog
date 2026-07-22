@@ -19,7 +19,7 @@ import { MDXRemote } from 'next-mdx-remote'
 
 import dayjs from 'dayjs'
 
-import { Barcode, Jp } from '../../components/deco'
+import { Tag } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -64,7 +64,7 @@ export const getStaticProps = async ({ params }: { params: { slug: string } }) =
   }
 }
 
-// Custom code block with TUI-style language header
+// Custom code block with a small language tab header
 const CodeBlock = ({ language, children, ...props }) => {
   const codeStyle = {
     ...oneDark,
@@ -72,29 +72,26 @@ const CodeBlock = ({ language, children, ...props }) => {
       ...oneDark['pre[class*="language-"]'],
       margin: 0,
       borderRadius: 0,
-      background: '#1e2030',
+      background: '#141414',
       fontFamily: 'var(--font-mono)',
     },
     'code[class*="language-"]': {
       ...oneDark['code[class*="language-"]'],
-      background: '#1e2030',
+      background: '#141414',
       fontFamily: 'var(--font-mono)',
     },
   }
   return (
-    <div className="mb-6">
-      <div className="flex items-center border border-b-0 border-ink-2 bg-ink-1 px-3 py-0.5 font-mono">
-        <span className="text-ink-3 mr-2 text-xs select-none" aria-hidden="true">┌</span>
-        <span className="text-ink-4 text-xs uppercase tracking-widest">{language}</span>
-        <span className="flex-1 mx-2 border-t border-ink-2" aria-hidden="true" />
-        <span className="text-ink-3 text-xs select-none" aria-hidden="true">┐</span>
+    <div className="mb-6 overflow-hidden border border-ink-2">
+      <div className="flex items-center bg-ink-1 px-3 py-1.5">
+        <span className="text-ink-4 text-xs uppercase tracking-wide">{language}</span>
       </div>
       <SyntaxHighlighter
         {...props}
         style={codeStyle}
         language={language}
         PreTag="div"
-        customStyle={{ border: '1px solid var(--color-ink-2)', borderTop: 'none', fontFamily: 'var(--font-mono)' }}
+        customStyle={{ border: 'none', borderRadius: 0, margin: 0, fontFamily: 'var(--font-mono)' }}
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
@@ -111,13 +108,11 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
   const components = {
     h2: ({ children, ...props }) => (
       <h2 id={String(children)} className="prose-tight text-xl font-bold text-ink-6 mb-5 mt-6 text-left" {...props}>
-        <span className="text-ink-3 select-none" aria-hidden="true">## </span>
         {children}
       </h2>
     ),
     h3: ({ children, ...props }) => (
       <h3 className="prose-tight text-lg font-bold text-ink-6 mb-4 mt-4 text-left" {...props}>
-        <span className="text-ink-3 select-none" aria-hidden="true">### </span>
         {children}
       </h3>
     ),
@@ -187,24 +182,26 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         {thumbnail && <meta property="og:image" content={thumbnail} key="ogImage" />}
       </Head>
 
-      {/* Title + metadata strip */}
-      <div className="mb-6">
-        {title && <h1 className="display-heading text-3xl sm:text-5xl leading-tight mb-4">{title}</h1>}
-        <div className="border border-ink-2 px-3 py-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-4">
-          <span>DATE {created}</span>
-          <span className="text-ink-3 select-none" aria-hidden="true">│</span>
+      {/* Title + metadata */}
+      <div className="mb-8">
+        {title && <h1 className="display-heading text-3xl sm:text-5xl leading-tight mb-3">{title}</h1>}
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm text-ink-4">
+          <span>{created}</span>
           {category && (
-            <Link href={`/categories/${category}`}>
-              <a className="text-ink-4 hover:text-ink-6 no-underline uppercase">CAT {capitalizeString(category)}</a>
-            </Link>
-          )}
-          {tags && tags.length > 0 && (
             <>
-              <span className="text-ink-3 select-none" aria-hidden="true">│</span>
-              <span className="uppercase">TAGS [{tags.join(', ')}]</span>
+              <span aria-hidden="true">·</span>
+              <Link href={`/categories/${category}`}>
+                <a className="text-ink-4 hover:text-ink-6 no-underline">{capitalizeString(category)}</a>
+              </Link>
             </>
           )}
-          <Barcode seed={slug} className="ml-auto hidden sm:inline-flex" />
+          {tags && tags.length > 0 && (
+            <span className="flex flex-wrap gap-1.5 ml-1">
+              {tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </span>
+          )}
         </div>
       </div>
 
@@ -212,16 +209,9 @@ const Post = ({ toc, post, slug, title, category, tags, created, thumbnail }) =>
         <MDXRemote {...post} components={components} />
       </div>
 
-      {/* End-of-article marker */}
-      <div className="mt-8 flex items-center gap-3 text-xs text-ink-4">
-        <Barcode seed={`${slug}-eof`} />
-        <span aria-hidden="true" className="tracking-widest select-none">EOF ▪ 終</span>
-        <span className="flex-1 border-t border-ink-2" aria-hidden="true" />
-      </div>
-
-      <div className="mt-4 pt-4">
+      <div className="mt-8 pt-6 border-t border-ink-2">
         <Link href="/posts/1">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">← View all posts</a>
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">← View all posts</a>
         </Link>
       </div>
     </>

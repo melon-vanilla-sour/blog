@@ -1,6 +1,7 @@
 .next
 .vscode
 .env
+*.tsbuildinfo
 
 node_modules
 trace

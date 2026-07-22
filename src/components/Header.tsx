@@ -2,7 +2,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import { useTheme } from '../lib/useTheme'
-import { Jp } from './deco'
+
+const SunIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="w-5 h-5">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+)
+
+const MoonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
+)
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
@@ -29,10 +41,10 @@ const Header = () => {
 
   const navLink = (href: string, label: string, page: string) => (
     <Link href={href}>
-      <a className={`px-3 py-1 text-sm uppercase tracking-widest transition-colors no-underline hover:no-underline ${
+      <a className={`px-3 py-1.5 text-sm transition-colors no-underline hover:no-underline ${
         currentPage === page
-          ? 'bg-accent text-accent-ink font-semibold'
-          : 'text-ink-4 hover:text-ink-6'
+          ? 'text-ink-6 font-semibold underline underline-offset-4'
+          : 'text-ink-4 hover:text-ink-6 hover:bg-ink-1'
       }`}>
         {label}
       </a>
@@ -43,26 +55,17 @@ const Header = () => {
     <header className="mb-6">
       <div className="flex items-center py-2 gap-3">
         <img src="/melon-sour.png" width="32" height="32" alt="Melon Sour" />
-        <div className="flex flex-col">
-          <span className="display-heading text-2xl leading-none">MELON SOUR</span>
-          <span className="flex gap-2 items-baseline">
-            <Jp>メロンサワー</Jp>
-            <span aria-hidden="true" className="text-[10px] text-ink-3 tracking-widest select-none">V2.0</span>
-          </span>
-        </div>
-        <nav className="ml-auto hidden sm:flex items-center">
+        <span className="display-heading text-2xl leading-none">MELON SOUR</span>
+        <nav className="ml-auto hidden sm:flex items-center gap-1">
           {navLink('/about', 'About', 'about')}
-          <span className="text-ink-3 select-none" aria-hidden="true">│</span>
           {navLink('/posts/1', 'Posts', 'posts')}
-          <span className="text-ink-3 select-none" aria-hidden="true">│</span>
           {navLink('/projects', 'Projects', 'projects')}
-          <span className="text-ink-3 select-none" aria-hidden="true">│</span>
           <button
             onClick={toggle}
-            className="px-3 py-1 text-xs text-ink-4 hover:text-ink-6 tracking-widest transition-colors tab-focus-outline"
+            className="ml-1 p-1.5 text-ink-4 hover:text-ink-6 hover:bg-ink-1 transition-colors tab-focus-outline"
             aria-label="Toggle light/dark mode"
           >
-            {isLight ? '[DARK]' : '[LIGHT]'}
+            {isLight ? <MoonIcon /> : <SunIcon />}
           </button>
         </nav>
       </div>

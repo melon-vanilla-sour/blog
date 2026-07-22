@@ -2,17 +2,13 @@ import Head from 'next/head'
 
 import MobileNavigation from '../MobileNavigation'
 import Header from '../Header'
-import { Barcode, Rule, Telemetry } from '../deco'
+import { Rule } from '../deco'
 
 const Footer = () => (
-  <footer className="mt-auto pt-16">
+  <footer className="mt-auto pt-16 pb-6">
     <Rule />
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3">
-      <Telemetry />
-      <span className="ml-auto flex items-center gap-4">
-        <Barcode seed="melon-sour-footer" />
-        <span className="text-xs text-ink-4">© Melon Sour</span>
-      </span>
+    <div className="flex items-center py-4 text-sm text-ink-4">
+      <span>© Melon Sour</span>
     </div>
   </footer>
 )

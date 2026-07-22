@@ -1,13 +1,10 @@
 import MediumCard from '../components/MediumCard'
-import { Jp } from '../components/deco'
 
 function Projects() {
   return (
     <>
-      <div className="flex items-baseline gap-3 mt-4 mb-4">
-        <h1 className="display-heading text-4xl sm:text-5xl">Projects</h1>
-        <Jp>／ 案件</Jp>
-      </div>
+      <h1 className="display-heading text-4xl sm:text-5xl mt-4 mb-2">Projects</h1>
+      <p className="text-ink-4 mb-6">Things I've built and shipped.</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <MediumCard
           link="/post/holoview"

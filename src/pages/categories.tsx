@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { capitalizeString, filterDraftPosts, getImageUrls } from '../lib/utils'
 import { getCachedContent } from '../lib/remoteMd'
 import { buildCategoryColorMap } from '../components/Card'
-import { Jp, Label } from '../components/deco'
+import { Tag } from '../components/deco'
 
 export const getStaticProps = async () => {
   let markdownContent = await getCachedContent()
@@ -27,11 +27,8 @@ export const getStaticProps = async () => {
 function Categories({ categories, latestPostThumbnails, colorMap }) {
   return (
     <>
-      <div className="flex items-baseline gap-3 mb-4">
-        <h1 className="display-heading text-4xl sm:text-5xl">Categories</h1>
-        <Jp>／ 分類</Jp>
-      </div>
-      <div className="grid grid-cols-2 gap-3 mb-6">
+      <h1 className="display-heading text-4xl sm:text-5xl mb-4">Categories</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
         {categories && categories.map((category) => (
           <div className="card tab-focus-outline-nested group" key={category}>
             <Link href={`/categories/${category}`}>
@@ -45,9 +42,9 @@ function Categories({ categories, latestPostThumbnails, colorMap }) {
                     />
                   </div>
                   <div className="px-3 py-3">
-                    <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
+                    <Tag style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
                       {capitalizeString(category)}
-                    </Label>
+                    </Tag>
                   </div>
                 </div>
               </a>
@@ -56,7 +53,7 @@ function Categories({ categories, latestPostThumbnails, colorMap }) {
         ))}
       </div>
       <Link href="/posts/1">
-        <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">← View all posts</a>
+        <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">← View all posts</a>
       </Link>
     </>
   )

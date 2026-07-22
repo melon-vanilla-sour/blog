@@ -3,11 +3,11 @@ import dayjs from 'dayjs'
 import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
-import { Label } from './deco'
+import { Tag } from './deco'
 
 /*
  * Catppuccin spectrum highlight layer: each category gets a stable accent
- * color, applied only to small label text/borders (doc §7 2026-07-19).
+ * color, applied only to small chip text/borders (doc §7 2026-07-23).
  */
 const SPECTRUM = [
   '--color-ctp-green',     '--color-ctp-red',       '--color-ctp-teal',
@@ -46,9 +46,9 @@ const Card = ({ post, colorMap = {} }: { post: string; colorMap?: Record<string,
   return (
     <div className="tab-focus-outline-nested border-b border-ink-2">
       <Link href={`/post/${slug}`}>
-        <a className="group flex items-center gap-4 py-5 px-2 no-underline hover:no-underline">
+        <a className="group flex items-center gap-4 py-5 px-2 -mx-2 no-underline hover:no-underline hover:bg-ink-1 transition-colors">
           <div className="hidden sm:flex flex-col w-[5.5rem] shrink-0 gap-0.5">
-            <span className="text-ink-6 font-semibold text-base uppercase">
+            <span className="text-ink-6 font-semibold text-base">
               {created && dayjs(created).format('DD MMM')}
             </span>
             <span className="text-ink-4 text-sm">
@@ -62,9 +62,9 @@ const Card = ({ post, colorMap = {} }: { post: string; colorMap?: Record<string,
             </h2>
             <div>
               {category && (
-                <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
+                <Tag style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
                   {capitalizeString(category)}
-                </Label>
+                </Tag>
               )}
             </div>
           </div>

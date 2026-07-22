@@ -5,7 +5,7 @@ import { capitalizeString, filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
 import Card, { buildCategoryColorMap } from '../../components/Card'
-import { Jp, Label } from '../../components/deco'
+import { Tag } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -32,21 +32,20 @@ export const getStaticProps = async ({ params }) => {
 function Category({ category, posts, colorMap }) {
   return (
     <>
-      <div className="flex items-baseline gap-3 mb-4">
+      <div className="flex items-center gap-3 mb-4">
         <h1 className="display-heading text-3xl sm:text-4xl">{capitalizeString(category)}</h1>
-        <Jp>／ 分類</Jp>
-        <Label style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>CAT</Label>
-        <span aria-hidden="true" className="ml-auto text-xs text-ink-4 tracking-wider select-none">N={posts.length}</span>
+        <Tag style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>Category</Tag>
+        <span className="ml-auto text-sm text-ink-4">{posts.length} posts</span>
       </div>
       <div className="flex flex-col border-t border-ink-2 mb-6">
         {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
       </div>
       <div className="flex gap-2">
         <Link href="/posts/1">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">← All posts</a>
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">← All posts</a>
         </Link>
         <Link href="/categories">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline uppercase tracking-widest text-xs">Categories</a>
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">Categories</a>
         </Link>
       </div>
     </>

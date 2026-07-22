@@ -6,7 +6,6 @@ import { getCachedContent } from '../../lib/remoteMd'
 
 import Pagination from '../../components/Pagination'
 import Card, { buildCategoryColorMap } from '../../components/Card'
-import { Jp } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
@@ -39,18 +38,16 @@ function Posts({ posts, totalPages, currentPage, total, colorMap }: { posts; tot
     <>
       <div className="flex items-baseline gap-3 mb-4">
         <h1 className="display-heading text-4xl sm:text-5xl">Posts</h1>
-        <Jp>／ 投稿</Jp>
-        <span aria-hidden="true" className="ml-auto text-xs text-ink-4 tracking-wider select-none">N={total}</span>
+        <span className="ml-auto text-sm text-ink-4">{total} posts</span>
       </div>
 
       <div className="flex gap-2 mb-4">
         <Link href="/categories">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center uppercase tracking-widest text-xs leading-6">Categories</a>
+          <a className="btn tab-focus-outline no-underline hover:no-underline flex-1 text-center text-sm">Categories</a>
         </Link>
         <Link href="/tags">
-          <a className="tui-btn tab-focus-outline no-underline hover:no-underline flex-1 text-center uppercase tracking-widest text-xs leading-6">Tags</a>
+          <a className="btn tab-focus-outline no-underline hover:no-underline flex-1 text-center text-sm">Tags</a>
         </Link>
-        <span className="tui-btn flex-1 text-center opacity-40 cursor-not-allowed select-none uppercase tracking-widest text-xs leading-6">Archives</span>
       </div>
 
       <div className="flex flex-col border-t border-ink-2">
