@@ -8,14 +8,14 @@ function Projects() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <MediumCard
           link="/post/holoview"
-          imgSrc="projects/holoview-thumbnail.png?fm=webp&h=600"
+          imgSrc="/projects/holoview-thumbnail.png?fm=webp&h=600"
           name="Holoview"
           description="A page to watch Hololive VTubers"
           stack={['React', 'Chakra UI', 'Vercel']}
         />
         <MediumCard
           link="/post/nextjs-contentful-blog"
-          imgSrc="projects/blog-thumbnail.png"
+          imgSrc="/projects/blog-thumbnail.png"
           name="Blog"
           description="A static generated blog"
           stack={['Next.js', 'Chakra UI', 'Contentful', 'Vercel']}
