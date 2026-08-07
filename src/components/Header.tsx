@@ -1,33 +1,26 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import {
-  Heading,
-  Flex,
-  Box,
-  Image,
-  IconButton,
-  useColorMode,
-  useColorModeValue,
-} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import { useTheme } from '../lib/useTheme'
 
-const PageHeading = (props) => {
-  return (
-    <Heading
-      size="sm"
-      cursor="pointer"
-      fontFamily="Open Sans Variable, sans-serif"
-      fontSize="lg"
-      {...props}
-    ></Heading>
-  )
-}
+const SunIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" className="w-5 h-5">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+)
+
+const MoonIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+  </svg>
+)
 
 const Header = () => {
   const [currentPage, setCurrentPage] = useState('')
   const router = useRouter()
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { isLight, toggle } = useTheme()
+
   const pathName = () => {
     if (
       router.pathname.includes('post') ||
@@ -41,66 +34,43 @@ const Header = () => {
     }
     return 'about'
   }
+
   useEffect(() => {
     setCurrentPage(pathName())
   }, [router])
 
+  const navLink = (href: string, label: string, page: string) => (
+    <Link href={href}>
+      <a className={`px-3 py-1.5 text-sm transition-colors no-underline hover:no-underline ${
+        currentPage === page
+          ? 'text-ink-6 font-semibold underline underline-offset-4'
+          : 'text-ink-4 hover:text-ink-6 hover:bg-ink-1'
+      }`}>
+        {label}
+      </a>
+    </Link>
+  )
+
   return (
-    <>
-      <Flex margin=" 0 auto" alignItems="center" justifyContent={'center'} my={2}>
-        <Image src="/melon-sour.ico" w="64px" h="64px" mr={4}></Image>
-        <Heading
-          fontSize={{ base: '4xl', sm: '5xl' }}
-          fontFamily="Open Sans Variable, sans-serif"
-          letterSpacing="tighter"
-        >
-          MELON SOUR
-        </Heading>
-        <Flex dir="row" alignItems="center" ml={8} gap={4} display={{ base: 'none', sm: 'flex' }}>
-          <Link href="/about">
-            <a>
-              <PageHeading textDecoration={currentPage == 'about' ? 'underline' : 'none'}>
-                About
-              </PageHeading>
-            </a>
-          </Link>
-          <Link href="/posts/1">
-            <a>
-              <PageHeading textDecoration={currentPage == 'posts' ? 'underline' : 'none'}>
-                Posts
-              </PageHeading>
-            </a>
-          </Link>
-          <Link href="/projects">
-            <a>
-              <PageHeading textDecoration={currentPage == 'projects' ? 'underline' : 'none'}>
-                Projects
-              </PageHeading>
-            </a>
-          </Link>
-          <IconButton
-            aria-label="Toggle Mode"
-            onClick={toggleColorMode}
-            boxShadow="md"
-            my={2}
-            ml={4}
-            _hover={{
-              boxShadow: 'xs',
-              transition: '0.2s ease-in-out',
-            }}
-            className="tab-focus-outline"
+    <header className="mb-6">
+      <div className="flex items-center py-2 gap-3">
+        <img src="/melon-sour.png" width="32" height="32" alt="Melon Sour" />
+        <span className="display-heading text-2xl leading-none">MELON SOUR</span>
+        <nav className="ml-auto hidden sm:flex items-center gap-1">
+          {navLink('/about', 'About', 'about')}
+          {navLink('/posts/1', 'Posts', 'posts')}
+          {navLink('/projects', 'Projects', 'projects')}
+          <button
+            onClick={toggle}
+            className="ml-1 p-1.5 text-ink-4 hover:text-ink-6 hover:bg-ink-1 transition-colors tab-focus-outline"
+            aria-label="Toggle light/dark mode"
           >
-            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          </IconButton>
-        </Flex>
-      </Flex>
-      <Box
-        className="underline"
-        border="2.5px solid"
-        borderColor={useColorModeValue('brand.text', 'white')}
-        bg={useColorModeValue('brand.text', 'white')}
-      ></Box>
-    </>
+            {isLight ? <MoonIcon /> : <SunIcon />}
+          </button>
+        </nav>
+      </div>
+      <div className="border-b border-ink-2" />
+    </header>
   )
 }
 

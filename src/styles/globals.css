@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Commit Mono";
+  src: url("https://cdn.jsdelivr.net/gh/eigilnikolajsen/commit-mono@1.143/src/fonts/fontlab/CommitMonoV142-VF.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Minimal-editorial ink ramp — see docs/design-papermod.md §4 */
+  /* Dark ramp is a true neutral gray (PaperMod-style), no color cast */
+  --color-ink-0: #171717; /* page background */
+  --color-ink-1: #262626; /* raised surface */
+  --color-ink-2: #404040; /* borders default */
+  --color-ink-3: #525252; /* borders hover / muted UI */
+  --color-ink-4: #a3a3a3; /* secondary text, ephemera */
+  --color-ink-5: #d4d4d4; /* body text */
+  --color-ink-6: #f5f5f5; /* headings, primary text */
+  /* Accent = ctp-blue (doc §7 decision, 2026-07-23). Referenced via var() so
+     it tracks the ctp-blue redefinition in .light automatically. */
+  --color-accent: var(--color-ctp-blue);
+  --color-accent-ink: var(--color-ink-0);
+
+  /* Catppuccin Macchiato spectrum — sparing multi-hue highlight layer for
+     category/tag chips only (doc §7 decision, 2026-07-23: kept, not retired). */
+  --color-ctp-red:       #ed8796;
+  --color-ctp-maroon:    #ee99a0;
+  --color-ctp-peach:     #f5a97f;
+  --color-ctp-yellow:    #eed49f;
+  --color-ctp-green:     #a6da95;
+  --color-ctp-teal:      #8bd5ca;
+  --color-ctp-sky:       #91d7e3;
+  --color-ctp-sapphire:  #7dc4e4;
+  --color-ctp-blue:      #8aadf4;
+  --color-ctp-lavender:  #b7bdf8;
+  --color-ctp-mauve:     #c6a0f6;
+  --color-ctp-pink:      #f5bde6;
+  --color-ctp-flamingo:  #f0c6c6;
+  --color-ctp-rosewater: #f4dbd6;
+
+  --font-display: "Archivo Black", "Arial Black", system-ui, sans-serif;
+  /* Mono retained for actual code (inline code, syntax-highlighted blocks) only */
+  --font-mono: "Commit Mono", "JetBrains Mono", "Cascadia Code", Menlo, Monaco, Consolas, "Hiragino Kaku Gothic ProN", "Noto Sans JP", monospace;
+  /* Site-wide default outside code and display headings */
+  --font-sans: "Open Sans Variable", "Open Sans", system-ui, sans-serif;
+}
+
+/* Light mode — inverted ink ramp, same signal accent */
+.light {
+  --color-ink-0: #f4f4f2;
+  --color-ink-1: #eae9e5;
+  --color-ink-2: #d4d3cf;
+  --color-ink-3: #a3a3a0;
+  --color-ink-4: #6b6b68;
+  --color-ink-5: #333330;
+  --color-ink-6: #111111;
+  /* --color-accent / --color-accent-ink not redefined here — they resolve
+     via var() against the ctp-blue/ink-0 values redefined below. */
+
+  /* Catppuccin Latte accent spectrum */
+  --color-ctp-red:       #d20f39;
+  --color-ctp-maroon:    #e64553;
+  --color-ctp-peach:     #fe640b;
+  --color-ctp-yellow:    #df8e1d;
+  --color-ctp-green:     #40a02b;
+  --color-ctp-teal:      #179299;
+  --color-ctp-sky:       #04a5e5;
+  --color-ctp-sapphire:  #209fb5;
+  --color-ctp-blue:      #1e66f5;
+  --color-ctp-lavender:  #7287fd;
+  --color-ctp-mauve:     #8839ef;
+  --color-ctp-pink:      #ea76cb;
+  --color-ctp-flamingo:  #dd7878;
+  --color-ctp-rosewater: #dc8a78;
+}
+
+@layer base {
+  html {
+    @apply bg-ink-0 text-ink-5 font-sans overflow-y-scroll;
+  }
+  body {
+    @apply bg-ink-0 text-ink-5 font-sans;
+    line-height: 1.65;
+    letter-spacing: -0.012em;
+  }
+  a {
+    @apply text-ink-6 hover:text-ink-4 underline transition-colors;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-ink-6 font-semibold;
+  }
+  hr {
+    @apply border-ink-2;
+  }
+  table {
+    @apply w-full border-collapse;
+  }
+  th {
+    @apply border border-ink-2 px-3 py-1 text-left text-ink-4 text-xs uppercase tracking-wider;
+  }
+  td {
+    @apply border border-ink-2 px-3 py-1 text-sm;
+  }
+  blockquote {
+    @apply border-l-4 border-ink-2 pl-4 text-ink-4 italic;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+}
+
+@layer components {
+  .card {
+    @apply border border-ink-2 hover:border-ink-4 transition-colors cursor-pointer overflow-hidden;
+  }
+  .btn {
+    @apply border border-ink-2 text-ink-4 hover:border-ink-3 hover:bg-ink-1 hover:text-ink-6 px-3 py-1.5 transition-colors text-sm;
+  }
+  .display-heading {
+    @apply font-display font-normal uppercase tracking-tight text-ink-6;
+  }
+  .prose-tight {
+    letter-spacing: -0.015em;
+  }
+  .tab-focus-outline:focus-visible {
+    @apply outline-2 outline-accent outline-offset-2;
+    outline-style: solid;
+  }
+  .inline-code {
+    @apply bg-ink-1;
+  }
+  .tab-focus-outline-nested:has(a:focus-visible) {
+    @apply outline-2 outline-accent outline-offset-2;
+    outline-style: solid;
+  }
+}

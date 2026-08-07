@@ -1,9 +1,17 @@
-import { Box, SlideFade, useColorModeValue, Flex } from '@chakra-ui/react'
 import Head from 'next/head'
 
 import MobileNavigation from '../MobileNavigation'
 import Header from '../Header'
-import TopButton from '../TopButton'
+import { Rule } from '../deco'
+
+const Footer = () => (
+  <footer className="mt-auto pt-16 pb-6">
+    <Rule />
+    <div className="flex items-center py-4 text-sm text-ink-4">
+      <span>© Melon Sour</span>
+    </div>
+  </footer>
+)
 
 const Main = ({ children }) => {
   return (
@@ -13,24 +21,11 @@ const Main = ({ children }) => {
         <meta name="author" content="Melon Sour" />
         <meta name="description" content="A blog about programming, games and tech" />
       </Head>
-      <Flex
-        paddingTop={4}
-        paddingBottom={16}
-        paddingX={{ base: 4, sm: 4 }}
-        minH="calc(100vh)"
-        display="flex"
-        flexDirection="column"
-        borderRadius="md"
-        maxWidth="900"
-        margin="0 auto"
-        overflow="hidden"
-      >
+      <div className="max-w-[900px] mx-auto px-4 pt-4 pb-24 sm:pb-8 min-h-screen flex flex-col">
         <Header />
-        <SlideFade in={true} offsetY="20px">
-          {children}
-        </SlideFade>
-      </Flex>
-      {/* <TopButton></TopButton> */}
+        {children}
+        <Footer />
+      </div>
       <MobileNavigation />
     </>
   )

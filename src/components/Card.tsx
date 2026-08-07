@@ -1,39 +1,40 @@
-import {
-  Heading,
-  Box,
-  useColorModeValue,
-  Text,
-  Flex,
-  Icon,
-  Spacer,
-  filter,
-  Image,
-} from '@chakra-ui/react'
-import { BiFolderOpen } from 'react-icons/bi'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import matter from 'gray-matter'
 
 import { capitalizeString, doNotRender, getImageUrls, getSlugFromTitle } from '../lib/utils'
+import { Tag } from './deco'
 
-export const CardTextContainer = ({ children, ...props }) => {
-  return (
-    <Flex
-      flexDir="column"
-      alignItems="start"
-      justifyContent="space-evenly"
-      display="flex"
-      padding={3}
-      w="full"
-      position="relative"
-      {...props}
-    >
-      {children}
-    </Flex>
+/*
+ * Catppuccin spectrum highlight layer: each category gets a stable accent
+ * color, applied only to small chip text/borders (doc §7 2026-07-23).
+ */
+const SPECTRUM = [
+  '--color-ctp-green',     '--color-ctp-red',       '--color-ctp-teal',
+  '--color-ctp-peach',     '--color-ctp-blue',      '--color-ctp-yellow',
+  '--color-ctp-mauve',     '--color-ctp-flamingo',  '--color-ctp-sky',
+  '--color-ctp-maroon',    '--color-ctp-lavender',  '--color-ctp-rosewater',
+  '--color-ctp-sapphire',  '--color-ctp-pink',
+]
+
+export const buildCategoryColorMap = (posts: { value: string }[]): Record<string, string> => {
+  const categories = Array.from(new Set(
+    posts.map(p => matter(p.value).data.category ?? '').filter(Boolean)
+  )).sort()
+  return Object.fromEntries(
+    categories.map((cat, i) => [cat, `var(${SPECTRUM[i % SPECTRUM.length]})`])
   )
 }
 
-const Card = ({ post }) => {
+export const CardTextContainer = ({ children, className = '', ...props }) => {
+  return (
+    <div className={`flex flex-col justify-center p-3 gap-1.5 ${className}`} {...props}>
+      {children}
+    </div>
+  )
+}
+
+const Card = ({ post, colorMap = {} }: { post: string; colorMap?: Record<string, string> }) => {
   const {
     content,
     data: { title = '', slug = '', category = '', tags = [], created },
@@ -41,71 +42,44 @@ const Card = ({ post }) => {
   const thumbnail = getImageUrls(content) ? getImageUrls(content)[0] : null
   if (doNotRender(slug)) {
     return null
-  } else {
-    return (
-      <Box className="card tab-focus-outline-nested">
-        <Link href={`/post/${slug}`}>
-          <a>
-            <Flex h={{ base: '28', sm: '28' }}>
-              <Flex flex="40%">
-                <Flex
-                  className="date"
-                  align="center"
-                  justify="center"
-                  p={3}
-                  gap={1}
-                  // borderRight="1px solid"
-                  // borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                  minW={{ base: '24', sm: '24' }}
-                  display={{ base: 'none', sm: 'flex' }}
-                  flexDir="column"
-                >
-                  <Text
-                    className="cardDate"
-                    fontSize={{ base: 'xl', md: 'xl' }}
-                    fontWeight="semibold"
-                  >
-                    {created && dayjs(created).format('DD/MMM')}
-                  </Text>
-                  <Text>{created && dayjs(created).format('YYYY')}</Text>
-                </Flex>
-                <CardTextContainer>
-                  <Heading fontSize={{ base: 'lg', sm: 'lg' }} textAlign="start">
-                    {title && title}
-                  </Heading>
-
-                  <Flex alignItems="center" mt={1}>
-                    <Icon as={BiFolderOpen} marginEnd={2} />
-                    <Text noOfLines={1} fontSize={{ base: 'lg', md: 'lg' }}>
-                      {category && capitalizeString(category)}
-                    </Text>
-                    <Box mx={2}></Box>
-                  </Flex>
-                </CardTextContainer>
-              </Flex>
-
-              <Flex
-                flex="1"
-                display={{ base: 'flex', sm: 'flex' }}
-                filter={'saturate(110%) brightness(110%)'}
-                borderLeft="1px solid"
-                borderColor={useColorModeValue('blackAlpha.400', 'whiteAlpha.400')}
-                justifyContent="center"
-              >
-                <Image
-                  src={thumbnail ?? '/ogp.png'}
-                  alt="Post Thumbnail"
-                  objectFit="cover"
-                  overflow="hidden"
-                  width="100%"
-                ></Image>
-              </Flex>
-            </Flex>
-          </a>
-        </Link>
-      </Box>
-    )
   }
+  return (
+    <div className="tab-focus-outline-nested border-b border-ink-2">
+      <Link href={`/post/${slug}`}>
+        <a className="group flex items-center gap-4 py-5 px-2 -mx-2 no-underline hover:no-underline hover:bg-ink-1 transition-colors">
+          <div className="hidden sm:flex flex-col w-[5.5rem] shrink-0 gap-0.5">
+            <span className="text-ink-6 font-semibold text-base">
+              {created && dayjs(created).format('DD MMM')}
+            </span>
+            <span className="text-ink-4 text-sm">
+              {created && dayjs(created).format('YYYY')}
+            </span>
+          </div>
+
+          <div className="flex flex-col flex-1 gap-2 min-w-0">
+            <h2 className="text-ink-6 text-lg sm:text-xl font-semibold leading-snug line-clamp-2 group-hover:underline">
+              {title}
+            </h2>
+            <div>
+              {category && (
+                <Tag style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>
+                  {capitalizeString(category)}
+                </Tag>
+              )}
+            </div>
+          </div>
+
+          <div className="w-28 sm:w-40 aspect-[3/2] shrink-0 overflow-hidden">
+            <img
+              src={thumbnail ?? '/ogp.png'}
+              alt=""
+              className="w-full h-full object-cover brightness-90 saturate-[1.1]"
+            />
+          </div>
+        </a>
+      </Link>
+    </div>
+  )
 }
 
 export default Card

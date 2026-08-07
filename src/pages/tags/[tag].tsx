@@ -1,78 +1,53 @@
-import { Heading, Button, Grid, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import matter from 'gray-matter'
 
-import { filterDraftPosts } from '../../lib/utils'
+import { capitalizeString, filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
-import Card from '../../components/Card'
-import Pagination from '../../components/Pagination'
+import Card, { buildCategoryColorMap } from '../../components/Card'
+import { Tag as Chip } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
   const tags = []
-  // collect all unique tags
   markdownContent.map((post) => {
-    const {
-      data: { tags: tagsInPost = [] },
-    } = matter(post.value)
-    tagsInPost.forEach((tag) => {
-      if (!tags.includes(tag)) {
-        tags.push(tag)
-      }
-    })
+    const { data: { tags: tagsInPost = [] } } = matter(post.value)
+    tagsInPost.forEach((tag) => { if (!tags.includes(tag)) tags.push(tag) })
   })
-
-  const paths = []
-  tags.map((tag) => {
-    paths.push({ params: { tag: tag } })
-  })
-  return {
-    paths,
-    fallback: false,
-  }
+  return { paths: tags.map((tag) => ({ params: { tag } })), fallback: false }
 }
+
 export const getStaticProps = async ({ params }) => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
+  const colorMap = buildCategoryColorMap(markdownContent)
   markdownContent = markdownContent.filter((post) => {
-    const {
-      data: { tags: tagsInPost = [] },
-    } = matter(post.value)
+    const { data: { tags: tagsInPost = [] } } = matter(post.value)
     return tagsInPost.includes(params.tag)
   })
-
-  return {
-    props: {
-      tag: params.tag,
-      posts: markdownContent,
-    },
-  }
+  return { props: { tag: params.tag, posts: markdownContent, colorMap } }
 }
 
-function Tag({ posts }) {
+function Tag({ tag, posts, colorMap }) {
   return (
     <>
-      {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={6}>
-        {posts && posts.map((post) => <Card post={post.value} key={post.value}></Card>)}
-        <HStack>
-          <Link href="/posts/1">
-            <Button w={40} className="tab-focus-outline">
-              View all posts
-            </Button>
-          </Link>
-          <Link href="/tags">
-            <Button w={40} className="tab-focus-outline">
-              View Tags
-            </Button>
-          </Link>
-        </HStack>
-      </Grid>
-      {/* <Pagination></Pagination> */}
+      <div className="flex items-center gap-3 mb-4">
+        <h1 className="display-heading text-3xl sm:text-4xl">{capitalizeString(tag)}</h1>
+        <Chip variant="solid">Tag</Chip>
+        <span className="ml-auto text-sm text-ink-4">{posts.length} posts</span>
+      </div>
+      <div className="flex flex-col border-t border-ink-2 mb-6">
+        {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
+      </div>
+      <div className="flex gap-2">
+        <Link href="/posts/1">
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">← All posts</a>
+        </Link>
+        <Link href="/tags">
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">Tags</a>
+        </Link>
+      </div>
     </>
   )
 }

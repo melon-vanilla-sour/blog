@@ -1,75 +1,53 @@
-import { Heading, Button, Grid, GridItem, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import matter from 'gray-matter'
 
-import { filterDraftPosts } from '../../lib/utils'
+import { capitalizeString, filterDraftPosts } from '../../lib/utils'
 import { getCachedContent } from '../../lib/remoteMd'
 
-import Card from '../../components/Card'
-import Pagination from '../../components/Pagination'
+import Card, { buildCategoryColorMap } from '../../components/Card'
+import { Tag } from '../../components/deco'
 
 export const getStaticPaths = async () => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
   const categories = []
   markdownContent.map((post) => {
-    const {
-      data: { category = '' },
-    } = matter(post.value)
-    if (category && !categories.includes(category)) {
-      categories.push(category)
-    }
+    const { data: { category = '' } } = matter(post.value)
+    if (category && !categories.includes(category)) categories.push(category)
   })
-
-  const paths = []
-  categories.map((category) => {
-    paths.push({ params: { category: category } })
-  })
-  return {
-    paths,
-    fallback: false,
-  }
+  return { paths: categories.map((category) => ({ params: { category } })), fallback: false }
 }
+
 export const getStaticProps = async ({ params }) => {
   let markdownContent = await getCachedContent()
   markdownContent = filterDraftPosts(markdownContent)
-
+  const colorMap = buildCategoryColorMap(markdownContent)
   markdownContent = markdownContent.filter((post) => {
-    const {
-      data: { category = '' },
-    } = matter(post.value)
+    const { data: { category = '' } } = matter(post.value)
     return category == params.category
   })
-
-  return {
-    props: {
-      category: params.category,
-      posts: markdownContent,
-    },
-  }
+  return { props: { category: params.category, posts: markdownContent, colorMap } }
 }
 
-function Category({ category, posts, placeholders }) {
+function Category({ category, posts, colorMap }) {
   return (
     <>
-      {/* <Heading size='lg' my={6}>{capitalizeString(category)}</Heading> */}
-      <Grid templateColumns="repeat(1, 1fr)" gap={{ base: '3', sm: '4' }} my={6}>
-        {posts && posts.map((post, index) => <Card post={post.value} key={post.value}></Card>)}
-        <HStack>
-          <Link href="/posts/1">
-            <Button w={40} className="tab-focus-outline">
-              View all posts
-            </Button>
-          </Link>
-          <Link href="/categories">
-            <Button w={40} className="tab-focus-outline">
-              View Categories
-            </Button>
-          </Link>
-        </HStack>
-      </Grid>
-      {/* <Pagination></Pagination> */}
+      <div className="flex items-center gap-3 mb-4">
+        <h1 className="display-heading text-3xl sm:text-4xl">{capitalizeString(category)}</h1>
+        <Tag style={colorMap[category] ? { color: colorMap[category], borderColor: colorMap[category] } : undefined}>Category</Tag>
+        <span className="ml-auto text-sm text-ink-4">{posts.length} posts</span>
+      </div>
+      <div className="flex flex-col border-t border-ink-2 mb-6">
+        {posts && posts.map((post) => <Card post={post.value} key={post.value} colorMap={colorMap} />)}
+      </div>
+      <div className="flex gap-2">
+        <Link href="/posts/1">
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">← All posts</a>
+        </Link>
+        <Link href="/categories">
+          <a className="btn tab-focus-outline no-underline hover:no-underline text-sm">Categories</a>
+        </Link>
+      </div>
     </>
   )
 }
