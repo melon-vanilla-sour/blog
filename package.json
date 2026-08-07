@@ -9,7 +9,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "prod": "next build && next start"
+    "prod": "next build && next start",
+    "pages:build": "next build && next-sitemap && next export"
   },
   "keywords": [],
   "author": "",
