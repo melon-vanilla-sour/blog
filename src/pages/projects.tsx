@@ -22,7 +22,7 @@ function Projects() {
         />
         <MediumCard
           link="/post/idol-sort"
-          imgSrc="https://d2pdw9m8ako0ty.cloudfront.net/20240531-idolsort.jpeg"
+          imgSrc="https://images.melonsour.com/20240531-idolsort.jpeg"
           name="Idol Sort"
           description="An app that sorts and ranks Idols"
           stack={['Next.js', 'Docker', 'AWS', 'Chakra UI']}
